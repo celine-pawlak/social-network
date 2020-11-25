@@ -9,7 +9,7 @@ class Conversation
     private $_id;
     private $_idCreator;
     private $_name;
-
+    
     public function id()
     {
         return $this->_id;
