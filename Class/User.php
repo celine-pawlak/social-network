@@ -14,13 +14,13 @@ class User extends Database
     private $_date_birth;
     private $_hobbies = [];
     private $_technologies = [];
-    private $db;
+    private $_db;
 
     public function __construct()
     {
         parent::__construct();
         $db = new Database();
-        $this->db = $db->getPDO();
+        $this->_db = $db->getPDO();
     }
 
 
