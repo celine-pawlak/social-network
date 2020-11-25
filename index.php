@@ -2,6 +2,7 @@
 
 define('ROOT', getcwd());
 session_start();
+// Autoloader des Controller
 require ROOT . '/Autoloader.php';
 App\Autoloader::register();
 

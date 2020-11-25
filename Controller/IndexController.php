@@ -14,13 +14,12 @@ class IndexController extends AppController
     }
 
     public function index(){
-        echo 'coucou';
         // Si connecte
         //  Action fil d'actualite
 
         // Si non connecte
         // Action connexion
-
+        $this->render('index.connexion');
     }
 
     public function fildactualite(){
