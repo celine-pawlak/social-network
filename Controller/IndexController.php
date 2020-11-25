@@ -15,7 +15,7 @@ class IndexController extends AppController
 
     public function index(){
         // Si connecte
-        //  Action fil d'actualite
+        // Action fil d'actualite
 
         // Si non connecte
         // Action connexion
