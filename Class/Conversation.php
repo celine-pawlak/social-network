@@ -19,4 +19,8 @@ class Conversation
   public function name() {
     return $this->_name;
   }
+
+  public function setName($name){
+    $this->_name = $name;
+  }
 }
