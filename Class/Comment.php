@@ -4,19 +4,18 @@
 namespace App\Database;
 
 
-class Comment extends Database
+class Comment extends Post
 {
     private $_id;
     private $_content;
-    private $_creation_date;
-    private $_user_id;
+    private $_creationDate;
+    private $_userId;
     private $_db;
 
     public function __construct()
     {
         parent::__construct();
-        $db = new Database();
-        $this->_db = $db->getPDO();
+        $this->_db = parent::getPDO();
     }
 
     public function showComment()
@@ -39,14 +38,14 @@ class Comment extends Database
         return $this->_content;
     }
 
-    public function creation_date()
+    public function creationDate()
     {
-        return $this->_creation_date;
+        return $this->_creationDate;
     }
 
-    public function user_id()
+    public function userId()
     {
-        return $this->_user_id;
+        return $this->_userId;
     }
 
     public function setContent($content)

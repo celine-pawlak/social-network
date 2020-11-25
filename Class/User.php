@@ -19,8 +19,7 @@ class User extends Database
     public function __construct()
     {
         parent::__construct();
-        $db = new Database();
-        $this->_db = $db->getPDO();
+        $this->_db = parent::getPDO();
     }
 
 
