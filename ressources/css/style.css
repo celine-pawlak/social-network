@@ -220,10 +220,20 @@
   font-size: 30px !important;
 }
 #seeProfil > .row > .col > h2{
-  font-size: 20px !important;
+  font-size: 18px !important;
+}
+#info_border{
+  border-right: 2px solid #88C1D0;
+  padding-right:10%;
+}
+#presentation_profile{
+  padding:3%;
+}
+.information_profile{
+  margin:5% 0;
 }
 .information_profile > h2{
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 .cover_img{
   background-image: url("../img/sunset.jpg");
@@ -233,4 +243,5 @@
 .profile_img{
   width:200px;
   height:200px;
+  margin-bottom: 5%;
 }
