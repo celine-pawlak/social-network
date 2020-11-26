@@ -10,4 +10,8 @@ class ProfilController extends AppController
     {
         parent::__construct();
     }
+
+    public function profil(){
+        $this->render('profil.seeProfil');
+    }
 }
