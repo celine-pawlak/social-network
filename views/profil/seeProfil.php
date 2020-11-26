@@ -34,11 +34,25 @@
     </div>
   </div>
   <div class="row">
-    <div class="col s12 m12">
-      <h2> Créer une publication </h2>
+    <div class="col s10 m10 offset-m1">
+      <form class="post_profile p-2 background-lighter-grey z-depth-1" action="seeProfil.php" method="post">
+        <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
+      </form>
     </div>
   </div>
 
-Afficher toutes les publications (class Post)
+  <div class="row">
+    <div class="col s10 m10 offset-m1">
+      <div class="col s1 m1">
+        <img class="circle miniature_img" src="ressources/img/talin.jpg" alt="Photo de profil">
+        <p>Nom Prénom</p>
+      </div>
+      <div class="col s8 m8 offset-m1 z-depth-1 background-lighter-grey">
+        Ici apparaîtront les publications de l'utilisateur
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
