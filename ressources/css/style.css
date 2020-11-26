@@ -8,6 +8,11 @@
     background-color: #FFFFFF;
 }
 
+.background-lighter-grey{
+  background-color: #F9F9F9;
+  border-radius: 20px;
+}
+
 .yellow-text {
     color: #FFCA4B;
 }
