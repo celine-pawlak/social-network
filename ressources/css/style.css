@@ -222,8 +222,15 @@
 #seeProfil > .row > .col > h2{
   font-size: 20px !important;
 }
+.information_profile > h2{
+  font-size: 20px !important;
+}
+.cover_img{
+  background-image: url("../img/sunset.jpg");
+  width: 100%;
+  height:250px;
+}
 .profile_img{
-  border-radius: 50%;
   width:200px;
   height:200px;
 }
