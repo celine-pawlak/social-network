@@ -222,3 +222,8 @@
 #seeProfil > .row > .col > h2{
   font-size: 20px !important;
 }
+.profile_img{
+  border-radius: 50%;
+  width:200px;
+  height:200px;
+}
