@@ -1,29 +1,32 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<?php
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="ressources/JS/inscription.js"></script>
+define('ROOT', getcwd());
+session_start();
+// Autoloader des Controller
+require ROOT . '/Autoloader.php';
+App\Autoloader::register();
 
-    <title>Accueil</title>
-</head>
-<body>
-    <!-- header -->
+$url = '';
+if (isset($_GET['url'])) {
+$url = explode('/', $_GET['url']);
+}
 
-    <?php include 'views/inscription.php'; ?>
+if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
+    $controller = '\App\Controller\IndexController';
+    $action = 'index';
+} elseif ($url[0] == 'profil') {
+    $action = 'profil';
+    $controller = '\App\Controller\ProfilController';
+}elseif ($url[0] == 'wall') {
+    $action = 'wall';
+    $controller = '\App\Controller\ProfilController';
+}elseif ($url[0] == 'messagerie') {
+    $action = 'messagerie';
+    $controller = '\App\Controller\MessagerieController';
+}elseif ($url[0] == 'messagerie/create') {
+    $action = 'creermessagerie';
+    $controller = '\App\Controller\MessagerieController';
+}
 
-    <?php // include 'views/connexion.php'; ?>
-
-
-
-
-    <!-- footer -->
-</body>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</html>
+$controller = new $controller;
+$controller->$action();

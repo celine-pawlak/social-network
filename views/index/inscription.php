@@ -1,0 +1,1 @@
+<p>Ceci est le HTML de l'inscription</p>
