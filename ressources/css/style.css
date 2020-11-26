@@ -1,0 +1,216 @@
+/* THEME COLORS */
+
+.background-blue-grey {
+    background-color: #88C1D0;
+}
+
+.background-white {
+    background-color: #FFFFFF;
+}
+
+.yellow-text {
+    color: #FFCA4B;
+}
+
+.light-grey-text {
+    color: #888B97;
+}
+
+.blue-text {
+    color: #275FA0 !important;
+}
+
+/* MARGINS AND PADDINGS */
+.m-05 {
+    margin: 0.5rem;
+}
+
+.m-1 {
+    margin: 1rem;
+}
+
+.mx-1 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.my-05 {
+    margin-bottom: 0.5rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.my-1 {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.ml-3 {
+    margin-left: 3rem;
+}
+
+.p-05 {
+    padding: 0.5rem;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.p-2 {
+    padding: 2rem;
+}
+
+.p-3 {
+    padding: 3rem;
+}
+
+.px-05 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.px-1 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.py-05 {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+
+.py-1 {
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.pb-05 {
+    padding-bottom: 0.5rem;
+}
+
+
+/* BORDERS */
+.border-radius-50px {
+    border-radius: 50px;
+}
+
+.border-radius-70px {
+    border-radius: 70px;
+}
+
+.border-radius-100 {
+    border-radius: 100%;
+}
+
+.border-bot-blue {
+    border-bottom: 1px solid #275FA0;
+}
+
+/* DISPLAYS */
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-row-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-items-flexend {
+    align-items: flex-end;
+}
+
+.justify-content-spacearound {
+    justify-content: space-around;
+}
+
+.justify-content-spacebetween {
+    justify-content: space-between;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.self-align-flexend {
+    align-self: flex-end;
+}
+
+/* HEIGHTS AND WIDTHS */
+
+.max-width-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.min-height-70vh {
+    min-height: 70vh;
+}
+
+.h-100{
+    height: 100%;
+}
+
+.h-70vh{
+    height: 70vh;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+.w-200px {
+    width: 200px;
+}
+
+.overflow-scroll-y{
+    overflow-y: scroll;
+}
+
+/* TEXTS */
+
+.bold-text {
+    font-weight: bold;
+}
+
+/*INHERITS*/
+
+.button-inherit {
+    background-color: inherit;
+    border: inherit;
+}
+
+.button-inherit:focus {
+    outline: inherit;
+    background-color: inherit !important;
+}
+
+.input-inherit {
+    border-bottom: inherit !important;
+}
+
+.input-inherit:focus {
+    border-bottom: inherit !important;
+    box-shadow: none !important;
+}
+
+/* CUSTOM */
+
+
+
+

@@ -13,6 +13,10 @@ class MessagerieController extends AppController
         parent::__construct();
     }
 
+    public function messagerie(){
+        $this->render('messagerie.messagerie');
+    }
+
 
 
 }
