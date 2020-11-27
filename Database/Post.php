@@ -9,7 +9,7 @@ class Post extends Database
     private $_id;
     private $_content;
     private $_creationDate;
-    private $_idUser;
+    private $_idUser = 1; // Valeur temporaire à remplacer
     private $_db;
 
     public function __construct()
@@ -18,9 +18,10 @@ class Post extends Database
         $this->_db = parent::getPDO();
     }
 
-    public function addPost()
+    public function addPost($content, $creation_date, $idUser)
     {
-
+      $query = $this->db->prepare("INSERT INTO post(content, creation_date, users_id) VALUES (?, NOW(), ?)");
+      $query->execute([$content, $creation_date, $this->idUser]);
     }
 
     public function showPost()
