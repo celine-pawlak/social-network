@@ -14,7 +14,7 @@ $url = explode('/', $_GET['url']);
 if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
     $controller = '\App\Controller\IndexController';
     $action = 'index';
-} elseif ($url[0] == 'profil' || $url[0] == 'profil.php') {
+} elseif ($url[0] == 'profil' || $url[0] == 'profil.php' || $url[0] == 'seeProfil.php') {
     $action = 'profil';
     $controller = '\App\Controller\ProfilController';
 }elseif ($url[0] == 'wall') {
