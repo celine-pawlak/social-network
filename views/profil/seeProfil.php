@@ -1,3 +1,9 @@
+<?php
+if(isset($_POST['post'])){
+  echo "test";
+}
+ ?>
+
 <div class="cover_img"></div>
 
 
@@ -37,6 +43,7 @@
     <div class="col s10 m10 offset-m1">
       <form class="post_profile p-2 background-lighter-grey z-depth-1" action="seeProfil.php" method="post">
         <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
+        <button class="btn-floating waves-effect waves-light" type="submit" name="button"><i class="material-icons">send</i></button>
       </form>
     </div>
   </div>
