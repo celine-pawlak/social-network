@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Database\Post;
 
 class ProfilController extends AppController
 {
