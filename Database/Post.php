@@ -18,15 +18,18 @@ class Post extends Database
         $this->_db = parent::getPDO();
     }
 
-    public function addPost($content, $creation_date, $idUser)
+    public function addPost($content)
     {
-      $query = $this->db->prepare("INSERT INTO post(content, creation_date, users_id) VALUES (?, NOW(), ?)");
-      $query->execute([$content, $creation_date, $this->idUser]);
+      $query = $this->_db->prepare("INSERT INTO post(content, creation_date, users_id) VALUES (?, NOW(), ?)");
+      $query->execute([$content, $this->_idUser]);
     }
 
-    public function showPost()
+    public function getAllPosts()
     {
+      $query = $this->_db->prepare("SELECT * FROM post WHERE users_id = ?");
+      $query->execute([$this->_idUser]);
 
+      return $query->fetchAll();
     }
 
     /**
