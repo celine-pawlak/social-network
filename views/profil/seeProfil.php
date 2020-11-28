@@ -1,9 +1,3 @@
-<?php
-if(isset($_POST['post'])){
-  echo "test";
-}
- ?>
-
 <div class="cover_img"></div>
 
 
@@ -41,7 +35,7 @@ if(isset($_POST['post'])){
   </div>
   <div class="row">
     <div class="col s10 m10 offset-m1">
-      <form class="post_profile p-2 background-lighter-grey z-depth-1" action="seeProfil.php" method="post">
+      <form class="post_profile p-2 background-lighter-grey z-depth-1" action="addPostForm" method="post">
         <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
         <button class="btn-floating waves-effect waves-light" type="submit" name="button"><i class="material-icons">send</i></button>
       </form>
@@ -55,7 +49,12 @@ if(isset($_POST['post'])){
         <p>Nom Prénom</p>
       </div>
       <div class="col s8 m8 offset-m1 z-depth-1 background-lighter-grey">
-        Ici apparaîtront les publications de l'utilisateur
+
+        <?php foreach($posts as $post): ?>
+
+          <?= $post["content"] ?> <br>
+
+        <?php endforeach; ?>
       </div>
 
     </div>
