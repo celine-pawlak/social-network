@@ -35,7 +35,7 @@
   </div>
   <div class="row">
     <div class="col s10 m10 offset-m1">
-      <form class="post_profile p-2 background-lighter-grey z-depth-1" action="addPostForm" method="post">
+      <form class="post_profile p-2 background-lighter-grey z-depth-1" action="" method="post">
         <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
         <button class="btn-floating waves-effect waves-light" type="submit" name="button"><i class="material-icons">send</i></button>
       </form>
