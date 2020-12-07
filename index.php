@@ -10,7 +10,12 @@ $url = '';
 if (isset($_GET['url'])) {
 $url = explode('/', $_GET['url']);
 }
-
+var_dump($url);
+if(isset($_POST['action']) && $_POST['action']=='getmoji')
+    {
+        $controller = '\App\Controller\IndexController';
+        $action = 'fildactualite';
+    }
 if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
     $action = 'index';
     $controller = '\App\Controller\IndexController';
@@ -27,10 +32,6 @@ if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'inde
     $action = 'creermessagerie';
     $controller = '\App\Controller\MessagerieController';
 }
-if(isset($_POST['action']) && $_POST['action']=='getmoji')
-    {
-        $controller = '\App\Controller\IndexController';
-        $action = 'fildactualite';
-    }
+
 $controller = new $controller;
 $controller->$action();

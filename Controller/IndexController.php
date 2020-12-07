@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Database\Reaction;
 
 class IndexController extends AppController
@@ -16,6 +15,7 @@ class IndexController extends AppController
 
     public function index(){        
         // Si connecte   
+        
         // Action fil d'actualite
         $this->render('index.wall');        
       
@@ -35,6 +35,10 @@ class IndexController extends AppController
                 // var_dump($reaction->getEmoji());
             // }
     }
+    public function test()
+        {
+            echo 'test';
+        }
 
 }
 
