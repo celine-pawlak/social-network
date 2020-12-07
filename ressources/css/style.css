@@ -249,12 +249,18 @@
   width:60px;
   height:60px;
 }
-.post_profile > textarea{
+.form_profile > textarea{
   border: none;
 }
 textarea:focus{
   outline: none;
 }
-.post_profile > ::placeholder{
+.form_profile > ::placeholder{
   color:#888B97;
+}
+.post_profile{
+  background-color: white;
+  border-radius: 20px;
+  width:80%;
+  margin: 5% auto;
 }

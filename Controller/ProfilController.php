@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Database\Post;
+use App\Database\User;
 
 class ProfilController extends AppController
 {
@@ -14,6 +15,7 @@ class ProfilController extends AppController
 
     public function profil(){
       $posts = new Post;
+      $infosUser = new User;
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts()]);
     }

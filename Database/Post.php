@@ -26,7 +26,7 @@ class Post extends Database
 
     public function getAllPosts()
     {
-      $query = $this->_db->prepare("SELECT * FROM post WHERE users_id = ?");
+      $query = $this->_db->prepare("SELECT * FROM post JOIN users on post.users_id = users.id ");
       $query->execute([$this->_idUser]);
 
       return $query->fetchAll();

@@ -35,7 +35,7 @@
   </div>
   <div class="row">
     <div class="col s10 m10 offset-m1">
-      <form class="post_profile p-2 background-lighter-grey z-depth-1" action="" method="post">
+      <form class="form_profile p-2 background-lighter-grey z-depth-1" action="addPostForm" method="post">
         <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
         <button class="btn-floating waves-effect waves-light" type="submit" name="button"><i class="material-icons">send</i></button>
       </form>
@@ -44,18 +44,20 @@
 
   <div class="row">
     <div class="col s10 m10 offset-m1">
-      <div class="col s1 m1">
-        <img class="circle miniature_img" src="ressources/img/talin.jpg" alt="Photo de profil">
-        <p>Nom Prénom</p>
-      </div>
-      <div class="col s8 m8 offset-m1 z-depth-1 background-lighter-grey">
+
+
 
         <?php foreach($posts as $post): ?>
 
-          <?= $post["content"] ?> <br>
-
+          <div class="col s1 m1">
+            <img class="circle miniature_img" src="ressources/img/talin.jpg" alt="Photo de profil">
+            <p><?= $post["last_name"] . " " .$post["first_name"] ?></p>
+          </div>
+          <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
+            <p class="post_profile p-1 z-depth-1"> <?= $post["content"] ?> </p>
+          </div>
         <?php endforeach; ?>
-      </div>
+
 
     </div>
 
