@@ -14,10 +14,11 @@ class IndexController extends AppController
         parent::__construct();
     }
 
-    public function index(){
-        // Si connecte    
+    public function index(){        
+        // Si connecte   
         // Action fil d'actualite
         $this->render('index.wall');        
+      
         // Si non connecte
         // Action connexion
         // $this->render('index.connexion');
@@ -36,3 +37,5 @@ class IndexController extends AppController
     }
 
 }
+
+

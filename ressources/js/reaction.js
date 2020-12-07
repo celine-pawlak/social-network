@@ -1,5 +1,5 @@
 $(function()
-    {
+    {        
         $.ajax(
             {
                 url : 'App/Controller/IndexController.php',
