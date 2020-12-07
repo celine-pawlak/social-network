@@ -9,7 +9,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="ressources/css/style.css">
+    <link rel="stylesheet" href="ressources/css/form_co_ins.css">
     <!-- ICONS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/68f3afb94b.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

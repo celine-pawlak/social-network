@@ -30,3 +30,5 @@ if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'inde
 
 $controller = new $controller;
 $controller->$action();
+
+App\Autoloader::register();
