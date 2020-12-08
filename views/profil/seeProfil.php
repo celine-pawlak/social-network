@@ -57,7 +57,7 @@
             <p><?= $post["last_name"] . " " .$post["first_name"] ?></p>
           </div>
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
-            <p id="<?= $post['0'] ?>" class="post post_profile p-1 z-depth-1"> <?= $post["content"] ?> </p>
+            <p id="<?= "post_" . $post['0'] ?>" class="post post_profile p-1 z-depth-1"> <?= $post["content"] ?> </p>
           </div>
         <?php endforeach; ?>
 
