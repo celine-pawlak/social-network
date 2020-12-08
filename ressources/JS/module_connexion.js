@@ -2,9 +2,9 @@ $(document).ready(function(){
     $('#inscription').click(function(){
         $('main').html('');
         $.post(
-            '../PHP/changement_index.php',
+            'App/Controller/IndexController',
             {
-                url : 'inscription'
+                action : 'inscription'
             },
             function(data){
                 if(data == 'Sucess'){
