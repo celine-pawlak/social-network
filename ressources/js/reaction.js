@@ -1,5 +1,5 @@
 $(function()
-    {                          
+    {          
         $('.react').click(function()
             {
                 // let id_bloc = $(this).attr('id');
@@ -14,7 +14,7 @@ $(function()
                 $('#react_bloc').remove();
             })
     });
-
+    
     function getMoji(id_bloc, bloc)
         {            
             $.ajax(
