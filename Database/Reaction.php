@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Database;
-
+use \PDO;
 class Reaction extends Database
     {
         private $_db;
@@ -22,14 +22,16 @@ class Reaction extends Database
             }
         public function getEmoji()
             {      
-                $emoji =['like' =>'👍', 'adore' => '❤️', 'bravo' => ' 👏'];            
-                // $requete = $this->_db->query("SELECT * FROM reacts");
-                // $getEmoji = $requete->fetchAll();                
+                // $emoji =['like' =>'👍', 'adore' => '❤️', 'bravo' => ' 👏'];            
+                $requete = $this->_db->query("SELECT * FROM reacts");
+                $emoji = $requete->fetchAll(PDO::FETCH_ASSOC);                
                 return json_encode($emoji);                
             }
-        public function insertEmoji()
+        public function insertEmoji($id_user, $id_react, $id_bloc, $bloc)
             {
-                echo 'insérer';
+                $nom_bloc = $bloc.'_id';
+                $requete = $this->_db->prepare("INSERT INTO users_reacts (users_id, reacts_id, $nom_bloc) VALUES (?, ?, ?)");
+                $requete->execute([$id_user, $id_react, $id_bloc]);
             }
     }
 
