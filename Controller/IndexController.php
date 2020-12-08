@@ -39,11 +39,12 @@ class IndexController extends AppController
                 }
         }
     public function insertEmoji()
-        {
+        {            
             if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
                 {                
+                    $id_react = $_POST['id_react'];
                     $reaction = new Reaction;
-                    echo $reaction->insertEmoji();
+                    echo $reaction->insertEmoji($id_react);
                 }
         }
 
