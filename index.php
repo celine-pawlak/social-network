@@ -8,33 +8,31 @@ App\Autoloader::register();
 
 $url = '';
 if (isset($_GET['url'])) {
-$url = explode('/', $_GET['url']);
+    $url = explode('/', $_GET['url']);
 }
-if(isset($_POST['action']) && $_POST['action']=='getmoji')
-    {
-        $controller = '\App\Controller\IndexController';
-        $action = 'getEmoji';
+
+if ($url[0] == 'App' && $url[1] == 'Controller') {
+    if (isset($_POST['action'])) {
+        $controller = "'\App\Controller\\'+$url[3]";
+        $action = $_POST['action'];
     }
-else if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
-    {
+} else {
+    if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
+        $action = 'index';
         $controller = '\App\Controller\IndexController';
-        $action = 'insertEmoji';
+    } elseif ($url[0] == 'profil') {
+        $action = 'profil';
+        $controller = '\App\Controller\ProfilController';
+    } elseif ($url[0] == 'wall') {
+        $action = 'wall';
+        $controller = '\App\Controller\ProfilController';
+    } elseif ($url[0] == 'messagerie') {
+        $action = 'messagerie';
+        $controller = '\App\Controller\MessagerieController';
+    } elseif ($url[0] == 'messagerie/create') {
+        $action = 'creermessagerie';
+        $controller = '\App\Controller\MessagerieController';
     }
-if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
-    $action = 'index';
-    $controller = '\App\Controller\IndexController';
-} elseif ($url[0] == 'profil') {
-    $action = 'profil';
-    $controller = '\App\Controller\ProfilController';
-}elseif ($url[0] == 'wall') {
-    $action = 'wall';
-    $controller = '\App\Controller\ProfilController';
-}elseif ($url[0] == 'messagerie') {
-    $action = 'messagerie';
-    $controller = '\App\Controller\MessagerieController';
-}elseif ($url[0] == 'messagerie/create') {
-    $action = 'creermessagerie';
-    $controller = '\App\Controller\MessagerieController';
 }
 
 $controller = new $controller;
