@@ -3,6 +3,7 @@
 
 namespace App\Database;
 
+use \PDO;
 
 class Conversation extends Database
 {
@@ -38,7 +39,7 @@ class Conversation extends Database
             GROUP BY users_conversations.conversations_id
             ORDER BY messages.creation_date DESC");
         $query->execute([':userId' => $id_user]);
-        return $query->fetchAll();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function usersFromConversationInformations($id_conversation){
@@ -49,7 +50,7 @@ class Conversation extends Database
         WHERE users_conversations.conversations_id = :conversationId
         ORDER BY users.first_name");
         $query->execute(['conversationId' => $id_conversation]);
-        return $query->fetchAll();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function id()

@@ -1,17 +1,16 @@
-<?= var_dump($allconversations[0]['users_informations']) ?>
-
 <div class="max-width-content">
     <button id="create_conversation" class="ml-3 button-inherit"><i class="fas fa-plus-circle yellow-text"></i> Créer
         une conversation
     </button>
     <div class="flex-row justify-content-spacearound">
         <section id="all_conversations" class="overflow-scroll-y grey lighten-4 card border-radius-70px p-2 m-1 h-70vh">
-            <?php foreach ($allconversations as $conversation): ?>
+            <?php foreach ($allconversationsInformations as $conversationInformations) : ?>
                 <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                    <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
+                    <img class="border-radius-100 mx-auto w-30 m-05"
+                         src="ressources/img/<?= $conversationInformations['image'] ?>">
                     <div class="flex-column">
-                        <span class="bold-text"></span> <!-- Afficher nom des utilsateurs -->
-                        <span class="light-grey-text"><?= $conversation['message_content'] ?></span>
+                        <span class="bold-text"><?= $conversationInformations['name'] ?></span>
+                        <span class="light-grey-text"><?= $conversationInformations['last_message'] ?></span>
                     </div>
                 </article>
             <?php endforeach; ?>

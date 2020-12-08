@@ -10,6 +10,7 @@ class AppController
 
     public function __construct()
     {
+        session_start();
         $this->viewPath = ROOT . '/views/';
     }
 
