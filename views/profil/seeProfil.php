@@ -52,12 +52,15 @@
   <div class="row">
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
+          <?php //var_dump($post); ?>
           <div class="col s1 m1">
-            <img class="circle miniature_img" src="ressources/img/talin.jpg" alt="Photo de profil">
+            <img class="circle miniature_img" src="<?= "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
             <p><?= $post["last_name"] . " " .$post["first_name"] ?></p>
           </div>
+
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
-            <p id="<?= "post_" . $post['0'] ?>" class="post post_profile p-1 z-depth-1"> <?= $post["content"] ?> </p>
+            <p><?= $post['12'] ?> </p>
+            <p id="<?= "posts_" . $post['0'] ?>" class="post post_profile p-1 z-depth-1"> <?= $post["content"] ?> </p>
           </div>
         <?php endforeach; ?>
 
