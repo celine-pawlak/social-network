@@ -10,7 +10,7 @@ if (isset($_GET['url'])) {
     $url = explode('/', $_GET['url']);
 }
 
-if ($url[0] == 'App' && $url[1] == 'Controller') {
+if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     if (isset($_POST['action'])) {
         $controller = '\App\Controller\\'.$url[2];
         $action = $_POST['action'];
