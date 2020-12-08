@@ -24,6 +24,7 @@ class Conversation extends Database
      * @param $id_user
      * @return array
      */
+
     public function allConversationsWithLastMessageSent($id_user)
     {
         $query = $this->_db->prepare("

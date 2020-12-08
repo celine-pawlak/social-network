@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Database\Conversation;
+use App\Database\Message;
 
 class MessagerieController extends AppController
 {
@@ -17,14 +18,32 @@ class MessagerieController extends AppController
     public function messagerie()
     {
         $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+
+        $allconversationsInformations = null;
+        $last_messages = null;
         $conversations = new Conversation;
-        // Récupérations de toutes les conversations de l'utilisateur
+
         $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);
-        // Assigne à chaque conversation les infos nécessaires des utilisateurs participants
         foreach ($allconversations as $key => $conversation) {
             $allconversations[$key]['users_informations'] = $conversations->usersFromConversationInformations($conversation['conversation_id']);
         }
-        // TRI DES INFORMATIONS DE CONVERSATIONS A AFFICHER
+        $allconversationsInformations = $this->getConversationsInformations($allconversations, $idUser);
+
+        if ($allconversationsInformations != null){
+            $id_conversation = $allconversations[0]['conversation_id'];
+            if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])){
+                $id_conversation = $_POST['seeConversation'];
+            }
+            $messages = new Message();
+            $last_messages = $messages->getAllMessagesFromConversation($id_conversation);
+        }
+
+        $this->render('messagerie.messagerie', compact('allconversationsInformations', 'last_messages', 'idUser'));
+    }
+
+    public function getConversationsInformations($allconversations, $idUser)
+    {
+        $allconversationsInformations = [];
         foreach ($allconversations as $conversation) {
             $image_conversation = 'default_conversation_image.png';
             $name_conversation = 'default';
@@ -38,13 +57,12 @@ class MessagerieController extends AppController
                     $name_conversation = $conversation['name'];
                 } else {
                     $name_conversation = '';
-                    for ($i = 0; $i < count($conversation['users_informations']); $i++){
+                    for ($i = 0; $i < count($conversation['users_informations']); $i++) {
                         $name_conversation .= $conversation['users_informations'][$i]['first_name'] . ' ' . $conversation['users_informations'][$i]['last_name'];
-                        if ($i != (count($conversation['users_informations']) - 1)){
+                        if ($i != (count($conversation['users_informations']) - 1)) {
                             $name_conversation .= ', ';
                         }
                     }
-
                 }
             } else {
                 foreach ($conversation['users_informations'] as $user_information) {
@@ -57,16 +75,14 @@ class MessagerieController extends AppController
                 }
             }
             $allconversationsInformations[] = [
-                'name' => strlen($name_conversation) > 30 ? substr($name_conversation, 0, 30).'...' : $name_conversation,
+                'name' => strlen($name_conversation) > 30 ? substr($name_conversation, 0, 30) . '...' : $name_conversation,
                 'creator_id' => $conversation['creator_id'],
                 'image' => $image_conversation,
-                'last_message' => $conversation['message_content']
+                'last_message' => $conversation['message_content'],
+                'conversation_id' => $conversation['conversation_id'],
             ];
         }
-
-        //Récupérer la dernière conversation en cours
-
-        $this->render('messagerie.messagerie', compact('allconversationsInformations'));
+        return $allconversationsInformations;
     }
 
 
