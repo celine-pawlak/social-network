@@ -2,6 +2,16 @@
 
 namespace App\Controller;
 
+if (isset($_POST['action']) && !empty($_POST['action'])) {
+    $blop = $_POST['action'];
+    $test = new IndexController;
+    switch ($blop) {
+        case 'getemoji' :
+            $test->fildactualite();
+            break;
+    }
+}
+
 
 class IndexController extends AppController
 {
@@ -13,7 +23,8 @@ class IndexController extends AppController
         parent::__construct();
     }
 
-    public function index(){
+    public function index()
+    {
         // Si connecte
         // Action fil d'actualite
 
@@ -22,7 +33,9 @@ class IndexController extends AppController
         $this->render('index.connexion');
     }
 
-    public function fildactualite(){
+    public function fildactualite()
+    {
+        echo 'test';
 
     }
 

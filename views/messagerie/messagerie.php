@@ -1,65 +1,20 @@
+<?= var_dump($allconversations[0]['users_informations']) ?>
+
 <div class="max-width-content">
     <button id="create_conversation" class="ml-3 button-inherit"><i class="fas fa-plus-circle yellow-text"></i> Créer
         une conversation
     </button>
     <div class="flex-row justify-content-spacearound">
         <section id="all_conversations" class="overflow-scroll-y grey lighten-4 card border-radius-70px p-2 m-1 h-70vh">
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
-            <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
-                <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
-                <div class="flex-column">
-                    <span class="bold-text">Perceval</span>
-                    <span class="light-grey-text">On en...</span>
-                </div>
-            </article>
+            <?php foreach ($allconversations as $conversation): ?>
+                <article class="flex-row align-items-center py-05 border-bot-blue w-200px">
+                    <img class="border-radius-100 mx-auto w-30 m-05" src="ressources/img/perceval.jpg">
+                    <div class="flex-column">
+                        <span class="bold-text"></span> <!-- Afficher nom des utilsateurs -->
+                        <span class="light-grey-text"><?= $conversation['message_content'] ?></span>
+                    </div>
+                </article>
+            <?php endforeach; ?>
         </section>
         <section id="current_conversation"
                  class="grey lighten-4 card border-radius-70px flex-1 m-1 p-2 h-70vh">
