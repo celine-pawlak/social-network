@@ -49,7 +49,6 @@ class ProfilController extends AppController
       $posts = new Post;
 
       $hobbies->addHobbies([$_POST["hobby1"], $_POST["hobby2"],$_POST["hobby3"]]);
-       echo "hobby1";
 
     }
 

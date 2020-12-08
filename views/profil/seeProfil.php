@@ -27,7 +27,7 @@
       </div>
       <div class="information_profile">
         <h2 class="blue-text bold-text"> Hobbies </h2>
-        <form class="form_hobbies" action="addHobbies" method="post">
+        <form class="form_hobbies" id = "form_hobbies" method="post">
           <ul>
             <li><input type="text" name="hobby1" value="<?= $hobbies["hobby1"] ?>"></input></li>
             <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>
