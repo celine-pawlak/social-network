@@ -43,8 +43,9 @@ class IndexController extends AppController
             if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
                 {                
                     $id_react = $_POST['id_react'];
+                    $id_bloc = $_POST['id_bloc'];
                     $reaction = new Reaction;
-                    echo $reaction->insertEmoji($id_react);
+                    $reaction->insertEmoji($id_react, $id_bloc);
                 }
         }
 
