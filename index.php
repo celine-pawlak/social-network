@@ -10,11 +10,15 @@ $url = '';
 if (isset($_GET['url'])) {
 $url = explode('/', $_GET['url']);
 }
-var_dump($url);
 if(isset($_POST['action']) && $_POST['action']=='getmoji')
     {
         $controller = '\App\Controller\IndexController';
-        $action = 'fildactualite';
+        $action = 'getEmoji';
+    }
+else if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
+    {
+        $controller = '\App\Controller\IndexController';
+        $action = 'insertEmoji';
     }
 if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
     $action = 'index';

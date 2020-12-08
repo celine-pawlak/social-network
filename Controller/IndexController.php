@@ -14,8 +14,7 @@ class IndexController extends AppController
     }
 
     public function index(){        
-        // Si connecte   
-        
+        // Si connecte           
         // Action fil d'actualite
         $this->render('index.wall');        
       
@@ -25,19 +24,23 @@ class IndexController extends AppController
     }
 
     public function fildactualite(){    
-        echo 'tototupu';
-        // $reaction = new Reaction;
-        // return $reaction->getEmoji();
-        // if(isset($_POST['action']) && $_POST['action']=='getmoji')
-        //     {
-        //         echo 'tot';
-                // $reaction = new Reaction;
-                // var_dump($reaction->getEmoji());
-            // }
+        
     }
-    public function test()
+    public function getEmoji()
+        {                  
+        if(isset($_POST['action']) && $_POST['action']=='getmoji')
+            {                
+                $reaction = new Reaction;
+                echo $reaction->getEmoji();
+            }
+        }
+    public function insertEmoji()
         {
-            echo 'test';
+            if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
+                {                
+                    $reaction = new Reaction;
+                    echo $reaction->insertEmoji();
+                }
         }
 
 }

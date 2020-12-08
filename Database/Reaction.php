@@ -21,11 +21,15 @@ class Reaction extends Database
 
             }
         public function getEmoji()
-            {                
-                $requete = $this->_db->query("SELECT * FROM reacts");
-                $getEmoji = $requete->fetchAll();
-                return $getEmoji;
-                // echo json_encode($getEmoji);
+            {      
+                $emoji =['like' =>'👍', 'adore' => '❤️', 'bravo' => ' 👏'];            
+                // $requete = $this->_db->query("SELECT * FROM reacts");
+                // $getEmoji = $requete->fetchAll();                
+                return json_encode($emoji);                
+            }
+        public function insertEmoji()
+            {
+                echo 'insérer';
             }
     }
 
