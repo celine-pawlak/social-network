@@ -33,20 +33,24 @@ class User extends Database
       // pour chaque hobby dans $hobbies
       foreach($hobbies as $hobby) {
         // s'il n'existe dans la table hobby, on le créé
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM hobbies WHERE name = '?'")->execute([$hobby]);
-        var_dump($query);
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM hobbies WHERE name = ?");
+        $query->execute([$hobby]);
+
         if($query->fetchColumn() == 0) {
-          $this->_db->prepare("INSERT INTO hobbies(name) VALUES (?)")->execute([$hobby]);
+          $query = $this->_db->prepare("INSERT INTO hobbies(name) VALUES (?)");
+          $query->execute([$hobby]);
         }
 
       }
 
       // on efface tous les attachements entre l'utilisateur et les hobby (DELETE FROM users_hobbies WHERE users_id = ?)
-      $this->_db->prepare("DELETE FROM users_hobbies WHERE users_id = ?")->execute([$this->_db]);
+      $query = $this->_db->prepare("DELETE FROM users_hobbies WHERE users_id = ?");
+      $query->execute([$this->_id]);
 
       // on ajoute trois attachements entre les hobby et l'user
       foreach($hobbies as $hobby) {
-        $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name = ?))")->execute([$this->_id, $hobby]);
+        $query= $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name = ?))");
+        $query->execute([$this->_id, $hobby]);
       }
 
     }
