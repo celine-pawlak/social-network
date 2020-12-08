@@ -21,7 +21,6 @@ class ProfilController extends AppController
     }
 
     public function addPostForm() {
-      echo "test";
       // Si un formulaire a été envoyé, on ajoute la publication
       if(isset($_POST["post"])) {
         $post = new Post;
@@ -32,6 +31,27 @@ class ProfilController extends AppController
       // On affiche le profil
       $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts()]);
 
+    }
+
+    public function addHobbies(){
+      if(isset($_POST['hobby1'])){
+        $hobbies = new User;
+        $posts = new Post;
+
+        $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts(), "hobby" => $hobbies->addHobbies($_POST["hobby1"])]);
+      }
+      if(isset($_POST['hobby2'])){
+        $hobbies = new User;
+        $posts = new Post;
+
+        $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts(), "hobby" => $hobbies->addHobbies($_POST["hobby2"])]);
+      }
+      if(isset($_POST['hobby2'])){
+        $hobbies = new User;
+        $posts = new Post;
+
+        $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts(), "hobby" => $hobbies->addHobbies($_POST["hobby3"])]);
+      }
     }
 
 }

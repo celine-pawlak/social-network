@@ -27,11 +27,11 @@
       </div>
       <div class="information_profile">
         <h2 class="blue-text bold-text"> Hobbies </h2>
-        <form class="form_hobbies" action="#" method="post">
+        <form class="form_hobbies" action="addHobbies" method="post">
           <ul>
-            <li><input type="text" name="" value=""></input></li>
-            <li><input type="text" name="" value=""></input></li>
-            <li><input type="text" name="" value=""></input></li>
+            <li><input type="text" name="hobby1" value=""></input></li>
+            <li><input type="text" name="hobby2" value=""></input></li>
+            <li><input type="text" name="hobby3" value=""></input></li>
           </ul>
           <button type="submit" name="button">Submit</button>
         </form>

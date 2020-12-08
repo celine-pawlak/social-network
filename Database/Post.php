@@ -24,16 +24,6 @@ class Post extends Database
       $query->execute([$content, $this->_idUser]);
     }
 
-    public function addHobbies($content){
-      // Doit insérer le hobby dans la table s'il n'existe pas déjà
-      // Faire une requête qui cherche si $content est déjà dans la table hobby1
-      // Si le résultat est 0, insérer dans la table
-      $query = $this->_db->prepare("INSERT INTO hobbies(name) VALUES (?)");
-      $query->execute([$content, $this->_idUser]);
-
-      // Doit associer l'id de l'utilisateur à l'id du hobby dans la table de liaison user_hobby
-    }
-
     public function getAllPosts()
     {
       $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM post JOIN users on post.users_id = users.id ORDER BY post.id DESC");
