@@ -1,4 +1,3 @@
-
 <div class="row">
     <form id="form_connexion" class="col s4 offset-s4 card">
         <div class="row">
