@@ -1,6 +1,6 @@
-<main>
+<?php if(isset($_SESSION['login']) && !empty($_SESSION['login'])){ ?>
     <div class="row container">
-        <form class="col s3">
+        <form id="form_inscription" class="col s4 offset-s4 card">
             <div class="row">
                 <div class="input-field col s12">
                     <input id="email" type="email" class="validate">
@@ -31,4 +31,6 @@
             </div>
         </form>
     </div>
-</main>
+<?php } else{
+    header('Location: http://localhost/social-network/index');
+} ?>

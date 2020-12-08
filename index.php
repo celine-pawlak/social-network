@@ -14,6 +14,9 @@ $url = explode('/', $_GET['url']);
 if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
     $controller = '\App\Controller\IndexController';
     $action = 'index';
+} elseif ($url[0] == 'inscription') {
+    $action = 'inscription';
+    $controller = '\App\Controller\IndexController';
 } elseif ($url[0] == 'profil') {
     $action = 'profil';
     $controller = '\App\Controller\ProfilController';
