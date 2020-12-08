@@ -2,15 +2,7 @@
 
 namespace App\Controller;
 
-if (isset($_POST['action']) && !empty($_POST['action'])) {
-    $blop = $_POST['action'];
-    $test = new IndexController;
-    switch ($blop) {
-        case 'getemoji' :
-            $test->fildactualite();
-            break;
-    }
-}
+use App\Database\Reaction;
 
 
 class IndexController extends AppController
@@ -27,16 +19,34 @@ class IndexController extends AppController
     {
         // Si connecte
         // Action fil d'actualite
-
+        $this->render('index.wall');        
+      
         // Si non connecte
         // Action connexion
-        $this->render('index.connexion');
+        // $this->render('index.connexion');
     }
 
-    public function fildactualite()
-    {
-        echo 'test';
+    public function fildactualite(){    
+        
 
     }
+    public function getEmoji()
+        {                  
+        if(isset($_POST['action']) && $_POST['action']=='getmoji')
+            {                
+                $reaction = new Reaction;
+                echo $reaction->getEmoji();
+            }
+        }
+    public function insertEmoji()
+        {
+            if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
+                {                
+                    $reaction = new Reaction;
+                    echo $reaction->insertEmoji();
+                }
+        }
 
 }
+
+
