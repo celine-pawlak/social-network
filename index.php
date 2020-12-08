@@ -29,6 +29,9 @@ if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'inde
 } elseif($url[0] == "addPostForm") {
   $action = "addPostForm";
   $controller = '\App\Controller\ProfilController';
+} elseif($url[0] == "addHobbies") {
+  $action = "addHobbies";
+  $controller = '\App\Controller\ProfilController';
 }
 
 $controller = new $controller;
