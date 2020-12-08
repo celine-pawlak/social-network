@@ -17,7 +17,10 @@ class ProfilController extends AppController
       $posts = new Post;
       $infosUser = new User;
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
-      $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts()]);
+      $this->render('profil.seeProfil', [
+        "posts" => $posts->getAllPosts(),
+        "hobbies" => $infosUser->getHobbies()
+      ]);
     }
 
     public function addPostForm() {
@@ -29,29 +32,25 @@ class ProfilController extends AppController
 
       $posts = new Post;
       // On affiche le profil
-      $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts()]);
+      $this->render('profil.seeProfil', [
+        "posts" => $posts->getAllPosts(),
+        "hobbies" => [
+          "hobby1" => "blabla",
+          "hobby2" => "ploufplouf",
+          "hobby3" => "toctoc"
+        ]
+      ]);
 
     }
 
     public function addHobbies(){
-      if(isset($_POST['hobby1'])){
-        $hobbies = new User;
-        $posts = new Post;
 
-        $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts(), "hobby" => $hobbies->addHobbies($_POST["hobby1"])]);
-      }
-      if(isset($_POST['hobby2'])){
-        $hobbies = new User;
-        $posts = new Post;
+      $hobbies = new User;
+      $posts = new Post;
 
-        $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts(), "hobby" => $hobbies->addHobbies($_POST["hobby2"])]);
-      }
-      if(isset($_POST['hobby2'])){
-        $hobbies = new User;
-        $posts = new Post;
+      $hobbies->addHobbies([$_POST["hobby1"], $_POST["hobby2"],$_POST["hobby3"]]);
+       echo "hobby1";
 
-        $this->render('profil.seeProfil', ["posts" => $posts->getAllPosts(), "hobby" => $hobbies->addHobbies($_POST["hobby3"])]);
-      }
     }
 
 }

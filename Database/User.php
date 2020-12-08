@@ -29,14 +29,37 @@ class User extends Database
       return $query->fetchAll();
     }
 
-    public function addHobbies($content){
-      // Doit insérer le hobby dans la table s'il n'existe pas déjà
-      // Faire une requête qui cherche si $content est déjà dans la table hobby1
-      // Si le résultat est 0, insérer dans la table
-      $query = $this->_db->prepare("INSERT INTO hobbies(name) VALUES (?)");
-      $query->execute([$content]);
+    public function addHobbies($hobbies){
+      // pour chaque hobby dans $hobbies
+      foreach($hobbies as $hobby) {
+        // s'il n'existe dans la table hobby, on le créé
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM hobbies WHERE name = '?'")->execute([$hobby]);
+        var_dump($query);
+        if($query->fetchColumn() == 0) {
+          $this->_db->prepare("INSERT INTO hobbies(name) VALUES (?)")->execute([$hobby]);
+        }
 
-      // Doit associer l'id de l'utilisateur à l'id du hobby dans la table de liaison user_hobby
+      }
+
+      // on efface tous les attachements entre l'utilisateur et les hobby (DELETE FROM users_hobbies WHERE users_id = ?)
+      $this->_db->prepare("DELETE FROM users_hobbies WHERE users_id = ?")->execute([$this->_db]);
+
+      // on ajoute trois attachements entre les hobby et l'user
+      foreach($hobbies as $hobby) {
+        $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name = ?))")->execute([$this->_id, $hobby]);
+      }
+
+    }
+
+    public function getHobbies(){
+      $query = $this->_db->prepare("SELECT * FROM users_hobbies JOIN hobbies ON users_hobbies.hobbies_id = hobbies.id WHERE users_id = ?");
+      $query->execute([$this->_id]);
+      $data = $query->fetchAll();
+      return [
+        "hobby1" => $data[0]["name"],
+        "hobby2" => $data[1]["name"],
+        "hobby3" => $data[2]["name"]
+      ];
     }
 
 
