@@ -17,6 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="ressources/js/script.js"></script>
     <script src="ressources/js/ajaxHobby.js"></script>
+    <script src="ressources/js/reacts.js"></script>
 
 </head>
 <body>

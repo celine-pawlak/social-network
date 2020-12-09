@@ -264,3 +264,7 @@ textarea:focus{
   width:80%;
   margin: 5% auto;
 }
+
+.checked{
+  color: #FFCA4B;
+}
