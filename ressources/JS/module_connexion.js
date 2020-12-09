@@ -1,18 +1,18 @@
 $(document).ready(function(){
-    $('#inscription').click(function(){
-        $('main').html('');
+    $('#page_inscription').click(function(){
         $.post(
             'App/Controller/IndexController',
             {
                 action : 'inscription'
             },
             function(data){
-                if(data == 'Sucess'){
-                    console.log('page inscription');
-                } else{
+                console.log(data);
+                if(data == ''){
                     console.log('Failed');
+                } else{
+                    $('body').html(data);
                 }
             }
-        )
-    })
+        );
+    });
 })

@@ -18,6 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="ressources/js/script.js"></script>
     <script src="ressources/js/reaction.js"></script>
+    <script src="ressources/js/module_connexion.js"></script>
 </head>
 <body>
 <header>

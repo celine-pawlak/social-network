@@ -30,13 +30,26 @@ class IndexController extends AppController
         $this->render('index.inscription');
     }
 
+    public function insertUser(){
+        if(isset($_POST['email']) && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['birthday']) && isset($_POST['password']) && $_POST['cofirmation_password']) {
+            $email = $_POST['email'];
+            $prenom = $_POST['first_name'];
+            $nom = $_POST['last_name'];
+            $birthday = $_POST['birthday'];
+            $password = $_POST['password']
+            $conf_pw = $_POST['confirmation_password'];
+        }
+
+        return 'Success';
+    }
+
     public function fildactualite(){
 
     }
     public function getEmoji()
-        {                  
+        {
             if(isset($_POST['action']) && $_POST['action']=='getmoji')
-                {                
+                {
                     $reaction = new Reaction;
                     echo $reaction->getEmoji();
                 }
@@ -44,12 +57,11 @@ class IndexController extends AppController
     public function insertEmoji()
         {
             if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
-                {                
+                {
                     $reaction = new Reaction;
                     echo $reaction->insertEmoji();
                 }
         }
-
 }
 
 

@@ -16,7 +16,7 @@
             <button id="submit_ins" class="btn waves-effect waves-light col s6 offset-s3" type="submit" name="action">Se Connecter
                 <i class="material-icons right">send</i>
             </button>
-            <p class="col s8 offset-s5">Pas encore inscrit ? <span id="inscription">Cliquez Ici</span></p>
+            <p class="col s8 offset-s5">Pas encore inscrit ? <span id="page_inscription">Cliquez Ici</span></p>
         </div>
     </form>
 </div>
