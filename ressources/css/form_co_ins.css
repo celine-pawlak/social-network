@@ -1,4 +1,5 @@
-#form_connexion{
+#form_connexion,
+#form_inscription{
     border-radius: 15px !important;
     padding-top: 3% !important;
     padding-bottom: 3% !important;
@@ -19,4 +20,14 @@ input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]){
     border-bottom: 1px solid #88C1D0 !important;
     box-shadow: 0 1px 0 0 #88C1D0 !important;
+}
+
+.column{
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+#page_inscription,
+#page_connexion{
+    cursor: pointer;
 }
