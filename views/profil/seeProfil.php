@@ -60,7 +60,18 @@
 
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
             <p><?= $post['12'] ?> </p>
-            <p id="<?= "posts_" . $post['0'] ?>" class="post post_profile p-1 z-depth-1"> <?= $post["content"] ?> </p>
+            <div class="post post_profile p-1 z-depth-1">
+              <p class="right-align">
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-thumbs-up"></i>
+                <i class="fas fa-laugh-squint"></i>
+                <i class="fas fa-sign-language"></i>
+              </p>
+              <p id="<?= "posts_" . $post['0'] ?>" class="">
+                <?= $post["content"] ?>
+              </p>
+            </div>
+
           </div>
         <?php endforeach; ?>
 
