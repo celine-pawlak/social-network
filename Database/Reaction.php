@@ -14,7 +14,7 @@ class Reaction extends Database
             }    
         public function getReaction()
             {
-
+                
             }
         public function getEmoji()
             {                            
