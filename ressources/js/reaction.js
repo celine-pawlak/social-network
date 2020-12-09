@@ -23,8 +23,7 @@ $(function()
                     type : 'post',
                     data : {action : 'getEmoji'},
                     success : (data) =>
-                        {                             
-                            console.log(data)                           ;
+                        {                                                         
                             let test = JSON.parse(data);                               
                             $('#'+bloc+'_'+id_bloc).append('<aside id="react_bloc"></aside>');                                                                          
                             $.map(test, function (a)
