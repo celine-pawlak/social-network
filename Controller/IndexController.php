@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Database\Reaction;
-
+use App\Database\User;
 
 class IndexController extends AppController
 {
@@ -31,21 +31,35 @@ class IndexController extends AppController
     }
 
     public function insertUser(){
-        if(isset($_POST['email']) && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['birthday']) && isset($_POST['password']) && $_POST['cofirmation_password']) {
-            $email = $_POST['email'];
+        if(isset($_POST['mail']) && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['birthday']) && isset($_POST['password']) && isset($_POST['confirmation_password'])) {
+
+            $mail = $_POST['mail'];
             $prenom = $_POST['first_name'];
             $nom = $_POST['last_name'];
             $birthday = $_POST['birthday'];
-            $password = $_POST['password']
+            $password = $_POST['password'];
             $conf_pw = $_POST['confirmation_password'];
+
+            $user = new User;
+
+            if ($user->isExist($mail) == true) {
+                if($user->isSamepassword($password, $conf_pw) == true) {
+                    $user->inscription($mail, $prenom, $nom, $birthday, $password);
+                    echo 'Success';
+                } else {
+                    array_push($this->errors, 'Les mots de passe ne sont pas identiques');
+                }
+            } else {
+                array_push($this->errors, 'Login déjà existant');
+            }
+
+        } else {
+            array_push($this->errors, 'Informations incomplètes');
         }
-
-        return 'Success';
+        $erreurs_str = implode(",", $this->errors);
+        echo $erreurs_str;
     }
 
-    public function fildactualite(){
-
-    }
     public function getEmoji()
         {
             if(isset($_POST['action']) && $_POST['action']=='getmoji')

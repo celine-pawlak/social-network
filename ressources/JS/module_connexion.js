@@ -6,7 +6,7 @@ $(document).ready(function(){
                 action : 'inscription'
             },
             function(data){
-                console.log(data);
+
                 if(data == ''){
                     console.log('Failed');
                 } else{

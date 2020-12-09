@@ -36,11 +36,11 @@
                 </div>
             </div>
             <div class='column'>
-            <button id="submit_ins" class="btn waves-effect waves-light col s6 offset-s3" type="submit" name="action">S'inscrire
-                <i class="material-icons right">send</i>
-            </button>
-            <p class="col s8 offset-s5">Déjà inscrit ? <span id="page_connexion">Cliquez Ici</span></p>
-        </div>
+                <button id="submit_ins" class="btn waves-effect waves-light col s6 offset-s3" type="submit">S'inscrire
+                    <i class="material-icons right">send</i>
+                </button>
+                <p class="col s8 offset-s5">Déjà inscrit ? <span id="page_connexion">Cliquez Ici</span></p>
+            </div>
         </form>
     </div>
 <?php } else{
