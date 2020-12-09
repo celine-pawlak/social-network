@@ -11,18 +11,13 @@ class Reaction extends Database
                 parent::__construct();
                 $db = new Database();
                 $this->_db = $db->getPDO();
-            }
-        public function setReaction()
-            {
-
-            }
+            }    
         public function getReaction()
             {
 
             }
         public function getEmoji()
-            {      
-                // $emoji =['like' =>'👍', 'adore' => '❤️', 'bravo' => ' 👏'];            
+            {                            
                 $requete = $this->_db->query("SELECT * FROM reacts");
                 $emoji = $requete->fetchAll(PDO::FETCH_ASSOC);                
                 return json_encode($emoji);                
