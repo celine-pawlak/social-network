@@ -42,7 +42,7 @@ class IndexController extends AppController
         {            
             $id_user = 3; //A modifier par l'id de l'utilisateur
             if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
-                {                
+                {                                   
                     $id_react = $_POST['id_react'];
                     $id_bloc = $_POST['id_bloc'];
                     $bloc = $_POST['bloc'];
