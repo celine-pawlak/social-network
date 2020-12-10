@@ -14,15 +14,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/68f3afb94b.js" crossorigin="anonymous"></script>
     <!-- JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="ressources/js/script.js"></script>
     <script src="ressources/js/reaction.js"></script>
     <script src="ressources/js/module_connexion.js"></script>
 </head>
 <body>
-<header>
-    <p>Ceci est le header</p>
+<header class="flex-row justify-content-spacebetween">
+    <?php include 'header.php'; ?>
 </header>
 <main>
     <?= $content ?>

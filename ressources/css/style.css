@@ -93,6 +93,9 @@
 .border-radius-50px {
     border-radius: 50px;
 }
+.border-radius-50 {
+    border-radius: 50%;
+}
 
 .border-radius-70px {
     border-radius: 70px;
@@ -172,6 +175,9 @@
 
 .w-30 {
     width: 30%;
+}
+.w-3vw {
+    width: 3vw;
 }
 
 .w-200px {
