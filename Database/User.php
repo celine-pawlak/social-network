@@ -21,6 +21,20 @@ class User extends Database
         $this->_db = parent::getPDO();
     }
 
+    public function connexion($mail, $password){
+        $query = $this->_db->prepare("SELECT * FROM users WHERE mail = ?");
+        $query->execute([$mail]);
+        $thisUser = $query->fetch();
+
+        $_SESSION['user'] = $thisUser;
+        $tab_session = [];
+
+        array_push($tab_session, 'connecté');
+        array_push($tab_session, $thisUser);
+
+        return $tab_session;
+    }
+
     public function inscription($mail, $prenom, $nom, $birthday, $password){
         $first_name = ucfirst(strtolower($prenom));
         $last_name = ucfirst(strtolower($nom));
@@ -47,6 +61,20 @@ class User extends Database
 
     public function isSamepassword($password, $conf_pw){
         if($password == $conf_pw){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isGoodpassword($mail, $password){
+        $query = $this->_db->prepare("SELECT password FROM users WHERE mail = ?");
+        $query->execute([$mail]);
+        $result = $query->fetch();
+
+        $db_password = $result['password'];
+
+        if(password_verify($password, $db_password) == true) {
             return true;
         } else {
             return false;

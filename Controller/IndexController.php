@@ -60,6 +60,34 @@ class IndexController extends AppController
         echo $erreurs_str;
     }
 
+    public function seConnecter(){
+        if(isset($_POST['mail']) && isset($_POST['password'])) {
+            $mail = $_POST['mail'];
+            $password = $_POST['password'];
+
+            $user = new User;
+
+            if($user->isExist($mail) == false){
+                if($user->isGoodpassword($password) == true){
+                    $user->connexion($mail, $password);
+                    if($tab_session[0] == 'connecté') {
+                        $user_session = json_encode($tab_session);
+                        return $user_session;
+                    } else {
+                        array_push($this->errors, 'Vous n\'etes pas connecté');
+                    }
+                } else {
+                    array_push($this->errors, 'Le mot de passe entré ne correspond pas à nos données');
+                }
+            } else {
+                array_push($this->errors, 'Cet email est inconnu');
+            }
+
+        } else {
+            array_push($this->errors, 'Informations incomplètes');
+        }
+    }
+
     public function getEmoji()
         {
             if(isset($_POST['action']) && $_POST['action']=='getmoji')

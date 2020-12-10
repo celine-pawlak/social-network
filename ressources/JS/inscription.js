@@ -20,7 +20,7 @@ $(document).ready(function(){
                 console.log(data);
                 if(data == 'Success') {
                     console.log('success');
-                    // pageConnexion();
+                    pageConnexion();
                 } else {
                     console.log('Failed ajax');
                 }
