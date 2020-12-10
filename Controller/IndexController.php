@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Database\Reaction;
+use App\Database\User;
 
 
 class IndexController extends AppController
@@ -23,7 +24,7 @@ class IndexController extends AppController
 
         // Si non connecte
         // Action connexion
-        $this->render('index.connexion');
+        // $this->render('index.connexion');
     }
 
     public function inscription(){
@@ -48,7 +49,7 @@ class IndexController extends AppController
     }
     public function getEmoji()
         {
-            if(isset($_POST['action']) && $_POST['action']=='getmoji')
+            if(isset($_POST['action']) && $_POST['action']=='getEmoji')
                 {
                     $reaction = new Reaction;
                     echo $reaction->getEmoji();
@@ -64,6 +65,14 @@ class IndexController extends AppController
                     $bloc = $_POST['bloc'];
                     $reaction = new Reaction;
                     $reaction->insertEmoji($id_user, $id_react, $id_bloc, $bloc);
+                }
+        }
+    public function search()
+        {            
+            if(isset($_POST['action']) && $_POST['action']=='search')
+                {
+                    $auto = new User;
+                    echo $auto->search();
                 }
         }
 }

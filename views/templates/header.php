@@ -11,9 +11,12 @@
     </div>
 </div>
 <div id="profil_header">
+    <!-- A changer par le bon chemin (bdd) -->
     <img src="ressources/img/avatar.jpg" alt="photo de profil" class="border-radius-50 w-3vw">
+    <!-- Mettre plus grand le chevron -->
     <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="fas fa-chevron-down"></i></a>
     <ul id='dropdown1' class='dropdown-content'>
+        <!-- Changer les liens -->
         <li><a href="#!">Profil</a></li>
         <li><a href="#!">Messagerie</a></li>
         <li class="divider" tabindex="-1"></li>

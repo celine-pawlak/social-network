@@ -3,6 +3,8 @@
 
 namespace App\Database;
 
+use PDO;
+
 class User extends Database
 {
     private $_id;
@@ -22,6 +24,11 @@ class User extends Database
         $this->_db = parent::getPDO();
     }
 
-
+    public function search()
+        {
+            $requete = $this->_db->query("SELECT first_name, last_name FROM users");
+            $tableau = $requete->fetchAll(PDO::FETCH_ASSOC);
+            return json_encode($tableau);
+        }
 
 }

@@ -1,16 +1,26 @@
 $(function ()
-    {
+    {                  
         // Dropdown header
         $('.dropdown-trigger').dropdown();
-        // Search bar header
-        // A modifier avec les personnes inscrites
-        $(document).ready(function(){
-            $('input.autocomplete').autocomplete({
-              data: {
-                "Apple": null,
-                "Microsoft": null,
-                "Google": 'https://placehold.it/250x250'
-              },
-            });
+        // Search bar header                      
+        $.ajax(
+          {
+              url : 'App/Controller/IndexController',
+              type : 'post',
+              data : {action : 'search'},              
+              success: (response) =>
+                {                                    
+                  var products = JSON.parse(response);
+                  var dataProducts = {};
+                  for (var i = 0; i < products.length; i++) 
+                    {
+                      dataProducts[products[i].first_name + ' ' + products[i].last_name] = dataProducts[products[i].picture_profil];
+                    }
+                  console.log(dataProducts);
+                  $('input.autocomplete').autocomplete(
+                    {
+                    data: dataProducts,
+                    });      
+                },            
           });
     });
