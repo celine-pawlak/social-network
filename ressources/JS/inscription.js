@@ -1,6 +1,7 @@
 $(document).ready(function(){
+    // S'inscrire
     $('#submit_ins').click(function(e){
-        e.prenventDefault();
+        e.preventDefault();
 
         $.post(
             'App/Controller/IndexController',
@@ -11,29 +12,36 @@ $(document).ready(function(){
                 last_name : $('#last_name').val(),
                 birthday : $('#birthday').val(),
                 password : $('#password').val(),
-                confirmation_password : $('#conf_')
+                confirmation_password : $('#conf_password').val()
             },
-            function(date){
-
+            function(data){
+                console.log(data);
+                if(data == 'Success') {
+                    console.log('success');
+                    pageConnexion();
+                } else {
+                    console.log('Failed ajax');
+                }
             }
         );
     });
 
     // retour page de connexion
-    $('#page_connexion').click(function(){
-        $.post(
-            'App/Controller/IndexController',
-            {
-                action : 'index'
-            },
-            function(data){
-                console.log(data);
-                if(data == ''){
-                    console.log('Failed');
-                } else{
-                    $('body').html(data);
-                }
-            }
-        );
-    });
+    $('#page_connexion').click(pageConnexion);
 });
+
+function pageConnexion(){
+    $.post(
+        'App/Controller/IndexController',
+        {
+            action : 'index'
+        },
+        function(data){
+            if(data == ''){
+                console.log('Failed');
+            } else{
+                $('body').html(data);
+            }
+        }
+    );
+}
