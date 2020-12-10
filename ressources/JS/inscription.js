@@ -1,6 +1,4 @@
 $(document).ready(function(){
-
-
     // S'inscrire
     $('#submit_ins').click(function(e){
         e.preventDefault();

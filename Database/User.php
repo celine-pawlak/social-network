@@ -22,7 +22,7 @@ class User extends Database
     }
 
     public function connexion($mail, $password){
-        $query = $this->_db->prepare("SELECT * FROM users WHERE mail = ?");
+        $query = $this->_db->prepare("SELECT id, mail, last_name, first_name, picture_profil, picture_cover, date_birth FROM users WHERE mail = ?");
         $query->execute([$mail]);
         $thisUser = $query->fetch();
 

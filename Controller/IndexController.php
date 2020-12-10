@@ -17,13 +17,11 @@ class IndexController extends AppController
 
     public function index()
     {
-        // Si connecte
-        // Action fil d'actualite
-        // $this->render('index.wall');
-
-        // Si non connecte
-        // Action connexion
-        $this->render('index.connexion');
+        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+            $this->render('index.wall');
+        } else {
+            $this->render('index.connexion');
+        }
     }
 
     public function inscription(){
@@ -68,11 +66,13 @@ class IndexController extends AppController
             $user = new User;
 
             if($user->isExist($mail) == false){
-                if($user->isGoodpassword($password) == true){
-                    $user->connexion($mail, $password);
-                    if($tab_session[0] == 'connecté') {
-                        $user_session = json_encode($tab_session);
-                        return $user_session;
+                if($user->isGoodpassword($mail, $password) == true){
+                    $return = $user->connexion($mail, $password);
+
+                    if($return[0] == 'connecté') {
+                        $user_session = json_encode($return);
+
+                        echo $user_session;
                     } else {
                         array_push($this->errors, 'Vous n\'etes pas connecté');
                     }

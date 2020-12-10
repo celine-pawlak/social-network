@@ -3,7 +3,7 @@ $(document).ready(function(){
         e.preventDefault();
 
         $.post(
-            'App/Controller/IndexController.php',
+            'App/Controller/IndexController',
             {
                 action : 'seConnecter',
                 mail : $('#email').val(),
@@ -12,8 +12,20 @@ $(document).ready(function(){
             function(data){
                 console.log(data);
                 var user = JSON.parse(data);
+                console.log(user);
                 if(user[0] == 'connecté') {
-                    localStorage.setItem()
+                    console.log('cest good jonny');
+
+                    localStorage.setItem('id', user[1]['id']);
+                    localStorage.setItem('mail', user[1]['mail']);
+                    localStorage.setItem('last_name', user[1]['last_name']);
+                    localStorage.setItem('first_name', user[1]['first_name']);
+                    localStorage.setItem('picture_profil', user[1]['picture_profil']);
+                    localStorage.setItem('picture_cover', user[1]['picture_cover']);
+                    localStorage.setItem('date_birth', user[1]['date_birth']);
+
+                    // changement de view "fil d'actualité"
+                    
                 } else {
                     console.log('erreur lors de la connexion');
                 }
