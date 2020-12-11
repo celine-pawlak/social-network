@@ -13,4 +13,19 @@ $(function() {
     })
 
   })
+
+  $("#form_tech").submit(function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "addTechnologies",
+      type: "POST",
+      data: {
+        tech1: $("input[name=tech1]").val(),
+        tech2: $("input[name=tech2]").val(),
+        tech3: $("input[name=tech3]").val()
+      }
+    })
+
+  })
 })
