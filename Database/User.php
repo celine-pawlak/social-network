@@ -91,6 +91,10 @@ class User extends Database
       $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
       $query->execute([$this->_id]);
       $data = $query->fetchAll();
-      return $data;
+      return [
+        "tech1" => $data[0]["name"],
+        "tech2" => $data[1]["name"],
+        "tech3" => $data[2]["name"]
+      ];
     }
 }

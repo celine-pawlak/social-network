@@ -36,12 +36,7 @@ class ProfilController extends AppController
       $posts = new Post;
       // On affiche le profil
       $this->render('profil.seeProfil', [
-        "posts" => $posts->getAllPosts(),
-        "hobbies" => [
-          "hobby1" => "blabla",
-          "hobby2" => "ploufplouf",
-          "hobby3" => "toctoc"
-        ]
+        "posts" => $posts->getAllPosts()
       ]);
 
     }
