@@ -18,7 +18,7 @@
     <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
       <div class="information_profile" id="info_border">
         <h2 class="blue-text bold-text"> Technologies </h2>
-        <form class="form_tech" action="#" method="post">
+        <form class="form_tech" id="form_tech" method="post">
           <ul>
             <li><input type="text" name="tech1" value=""></input></li>
             <li><input type="text" name="tech2" value=""></input></li>
@@ -27,9 +27,10 @@
           <button type="submit" name="button">Submit</button>
         </form>
       </div>
+
       <div class="information_profile">
         <h2 class="blue-text bold-text"> Hobbies </h2>
-        <form class="form_hobbies" id = "form_hobbies" method="post">
+        <form class="form_hobbies" id="form_hobbies" method="post">
           <ul>
             <li><input type="text" name="hobby1" value="<?= $hobbies["hobby1"] ?>"></input></li>
             <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>

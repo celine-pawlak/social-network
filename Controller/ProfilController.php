@@ -55,17 +55,14 @@ class ProfilController extends AppController
 
     }
 
-    public function addTechnologies($technologies){
-      foreach($technologies as $technology) {
-        // s'il n'existe dans la table technologies, on le créé
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name = ?");
-        $query->execute([$technology]);
+    public function addTechnologies(){
 
-        if($query->fetchColumn() == 0) {
-          $query = $this->_db->prepare("INSERT INTO technologies(name) VALUES (?)");
-          $query->execute([$technology]);
-        }
+      $technologies = new User;
+      $posts = new Post;
 
-      }
+      $technologies->addTechnologies([$_POST["tech1"], $_POST["tech2"],$_POST["tech3"]]);
+
     }
+
+
 }

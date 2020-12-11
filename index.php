@@ -33,7 +33,7 @@ if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'inde
   $action = "addHobbies";
   $controller = '\App\Controller\ProfilController';
 }elseif($url[0] == "addTechnologies") {
-  $action = "addHobbies";
+  $action = "addTechnologies";
   $controller = '\App\Controller\ProfilController';
 }
 

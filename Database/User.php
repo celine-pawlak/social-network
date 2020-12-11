@@ -66,6 +66,27 @@ class User extends Database
       ];
     }
 
+    public function addTechnologies($technologies){
+      foreach($technologies as $technology) {
+        // s'il n'existe dans la table technologies, on le créé
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name = ?");
+        $query->execute([$technology]);
+
+        if($query->fetchColumn() == 0) {
+          $query = $this->_db->prepare("INSERT INTO technologies(name) VALUES (?)");
+          $query->execute([$technology]);
+        }
+
+        $query = $this->_db->prepare("DELETE FROM users_technologies WHERE users_id = ?");
+        $query->execute([$this->_id]);
+
+        foreach($technologies as $technology) {
+          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name = ?))");
+          $query->execute([$this->_id, $technology]);
+        }
+      }
+    }
+
     public function getTechnologies(){
       $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
       $query->execute([$this->_id]);
