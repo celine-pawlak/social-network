@@ -1,4 +1,15 @@
 $(document).ready(function(){
+    $(function () {
+        // Vérifie que le mail soit au format prenom.nom@laplateforme.io
+        $('#email').keyup(function () {
+            regexMailValide(this, 'nope', 'yep');
+        });
+        // Vérifie la sécurité du mot de passe
+        $('#password').keyup(function () {
+            regexPasswordValide(this, 'nope', 'yep');
+        });
+    });
+
     $('#submit_co').click(function(e) {
         e.preventDefault();
 
@@ -25,7 +36,7 @@ $(document).ready(function(){
                     localStorage.setItem('date_birth', user[1]['date_birth']);
 
                     // changement de view "fil d'actualité"
-                    
+                    pageConnexion();
                 } else {
                     console.log('erreur lors de la connexion');
                 }

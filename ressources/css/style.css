@@ -215,6 +215,14 @@
     box-shadow: none !important;
 }
 
+.nope {
+    border-color: red !important;
+}
+
+.yep {
+    border-color: rgb(3, 207, 3) !important;
+}
+
 /* CUSTOM */
 /* REACT */
 

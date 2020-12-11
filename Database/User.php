@@ -44,7 +44,7 @@ class User extends Database
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
         $query = $this->_db->prepare("INSERT INTO users(mail, last_name, first_name, date_birth, password) VALUES (?, ?, ?, ?, ?)");
-        $query->execute([$mail, $first_name, $last_name, $birthday, $password_hash]);
+        $query->execute([$mail, $last_name, $first_name, $birthday, $password_hash]);
 
         return 'Success';
     }

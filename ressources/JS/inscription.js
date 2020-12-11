@@ -1,4 +1,20 @@
 $(document).ready(function(){
+    $(function () {
+        // Vérifie que le mail soit au format prenom.nom@laplateforme.io
+        $('#email').keyup(function () {
+            regexMailValide(this, 'nope', 'yep');
+        });
+        // Vérifie la sécurité du mot de passe
+        $('#password').keyup(function () {
+            regexPasswordValide(this, 'nope', 'yep');
+        });
+        // Vérifie que les mots de passe correspondent
+        $('#conf_password').keyup(function () {
+            isTheSame(this, $('#password'), 'nope', 'yep');
+        });
+    });
+
+
     // S'inscrire
     $('#submit_ins').click(function(e){
         e.preventDefault();
@@ -8,8 +24,8 @@ $(document).ready(function(){
             {
                 action : 'insertUser',
                 mail : $('#email').val(),
-                first_name : $('#first_name').val(),
                 last_name : $('#last_name').val(),
+                first_name : $('#first_name').val(),
                 birthday : $('#birthday').val(),
                 password : $('#password').val(),
                 confirmation_password : $('#conf_password').val()
