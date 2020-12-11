@@ -19,7 +19,10 @@ class ProfilController extends AppController
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
         "posts" => $posts->getAllPosts(),
-        "hobbies" => $infosUser->getHobbies()
+        "hobbies" => $infosUser->getHobbies(),
+        "reacts" => $posts->getReacts(),
+        "technologies" => $infosUser->getTechnologies(),
+        "infosUser" => $infosUser->getInfosUser()
       ]);
     }
 
@@ -52,4 +55,17 @@ class ProfilController extends AppController
 
     }
 
+    public function addTechnologies($technologies){
+      foreach($technologies as $technology) {
+        // s'il n'existe dans la table technologies, on le créé
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name = ?");
+        $query->execute([$technology]);
+
+        if($query->fetchColumn() == 0) {
+          $query = $this->_db->prepare("INSERT INTO technologies(name) VALUES (?)");
+          $query->execute([$technology]);
+        }
+
+      }
+    }
 }

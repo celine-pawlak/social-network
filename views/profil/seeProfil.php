@@ -1,10 +1,12 @@
-<div class="cover_img"></div>
+<div class="cover_img">
+  <img src="<?= "ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
+</div>
 
 
 <div class="container" id="seeProfil">
   <div class="center-align">
-    <h1> Nom de l'user </h1>
-    <img src="ressources/img/talin.jpg" alt="Photo de profil" class="profile_img circle">
+    <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
+    <img src="<?= "ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
   <div class="row">
@@ -18,9 +20,9 @@
         <h2 class="blue-text bold-text"> Technologies </h2>
         <form class="form_tech" action="#" method="post">
           <ul>
-            <li><input type="text" name="" value=""></input></li>
-            <li><input type="text" name="" value=""></input></li>
-            <li><input type="text" name="" value=""></input></li>
+            <li><input type="text" name="tech1" value=""></input></li>
+            <li><input type="text" name="tech2" value=""></input></li>
+            <li><input type="text" name="tech3" value=""></input></li>
           </ul>
           <button type="submit" name="button">Submit</button>
         </form>
@@ -49,13 +51,20 @@
     </div>
   </div>
 
+  <?php foreach($reacts as $react):
+    echo $react['id'];
+    var_dump($react);
+
+    endforeach;
+    ?>
+
   <div class="row">
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
           <?php //var_dump($post); ?>
           <div class="col s1 m1">
             <img class="circle miniature_img" src="<?= "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
-            <p><?= $post["last_name"] . " " .$post["first_name"] ?></p>
+            <p><?= $post["first_name"] . " " .$post["last_name"] ?></p>
           </div>
 
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">

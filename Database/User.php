@@ -72,20 +72,4 @@ class User extends Database
       $data = $query->fetchAll();
       return $data;
     }
-
-    public function addTechnologies($technologies){
-      foreach($technologies as $technology) {
-        // s'il n'existe dans la table technologies, on le créé
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name = ?");
-        $query->execute([$technology]);
-
-        if($query->fetchColumn() == 0) {
-          $query = $this->_db->prepare("INSERT INTO technologies(name) VALUES (?)");
-          $query->execute([$technology]);
-        }
-
-      }
-    }
-
-
 }
