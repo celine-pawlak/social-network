@@ -28,4 +28,18 @@ $(function() {
     })
 
   })
+
+  $("#form_presentation").submit(function(e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: "updatePresentation",
+      type: "POST",
+      data: {
+        presentation: $("#update_presentation").val()
+      }
+
+    })
+
+  })
 })

@@ -97,4 +97,9 @@ class User extends Database
         "tech3" => $data[2]["name"]
       ];
     }
+
+    public function updatePresentation($presentation){
+      $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
+      $query->execute([$presentation, $this->_id]);
+    }
 }

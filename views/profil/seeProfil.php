@@ -12,7 +12,10 @@
   <div class="row">
     <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
       <h2 class="blue-text bold-text center-align"> Présentation </h2>
-      <p>Le texte de présentation devra être modifiable.</p>
+      <form id="form_presentation" method="post">
+        <textarea id="update_presentation" rows="8" cols="80" name="presentation" value="Présentation"></textarea>
+        <button type="submit" name="button">Submit</button>
+      </form>
     </div>
 
     <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">

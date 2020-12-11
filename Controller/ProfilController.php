@@ -44,8 +44,6 @@ class ProfilController extends AppController
     public function addHobbies(){
 
       $hobbies = new User;
-      $posts = new Post;
-
       $hobbies->addHobbies([$_POST["hobby1"], $_POST["hobby2"],$_POST["hobby3"]]);
 
     }
@@ -53,10 +51,14 @@ class ProfilController extends AppController
     public function addTechnologies(){
 
       $technologies = new User;
-      $posts = new Post;
-
       $technologies->addTechnologies([$_POST["tech1"], $_POST["tech2"],$_POST["tech3"]]);
 
+    }
+
+    public function updatePresentation(){
+      echo "presentation";
+      $presentation = new User;
+      $presentation->updatePresentation($_POST['presentation']);
     }
 
 
