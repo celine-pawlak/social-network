@@ -274,3 +274,7 @@ textarea:focus{
 .checked{
   color: #FFCA4B;
 }
+
+.display-none{
+  display: none;
+}

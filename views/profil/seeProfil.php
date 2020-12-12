@@ -9,7 +9,10 @@
     <img src="<?= "ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
-  <div class="row">
+  <a id="scale-infos" href="#!" class="btn btn-large">
+   Mes informations
+  </a>
+  <div class="row scale-transition scale-out" id="infos-toggle">
     <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
       <h2 class="blue-text bold-text center-align"> Présentation </h2>
 
