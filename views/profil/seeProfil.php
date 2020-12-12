@@ -59,13 +59,6 @@
     </div>
   </div>
 
-  <?php foreach($reacts as $react):
-    echo $react['id'];
-    var_dump($react);
-
-    endforeach;
-    ?>
-
   <div class="row">
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
@@ -76,7 +69,7 @@
           </div>
 
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
-            <p><?= $post['12'] ?> </p>
+            <p><?= $post['13'] ?> </p>
             <div class="post post_profile p-1 z-depth-1">
               <p class="right-align">
                 <i id="fa-heart" class="fas fa-heart"></i>
@@ -86,6 +79,12 @@
               </p>
               <p id="<?= "posts_" . $post['0'] ?>" class="">
                 <?= $post["content"] ?>
+
+                <?php foreach($reacts as $react):
+                  echo "<br> Ici se trouve l'id de la réaction: " . $react['posts_id'];
+                  //var_dump($react);
+                  endforeach;
+                  ?>
               </p>
             </div>
 
