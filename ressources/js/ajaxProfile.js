@@ -47,10 +47,10 @@ $(function() {
     if($("#infos-toggle").hasClass("scale-out")){
       $("#infos-toggle").removeClass("scale-out");
       $("#infos-toggle").addClass("scale-in");
-      $("#infos-toggle").addClass("display-none");
+      $("#infos-toggle").removeClass("display-none");
     }else{
       $("#infos-toggle").addClass("scale-in");
-      $("#infos-toggle").removeClass("display-none");
+      $("#infos-toggle").addClass("display-none");
       $("#infos-toggle").addClass("scale-out");
     }
   })
