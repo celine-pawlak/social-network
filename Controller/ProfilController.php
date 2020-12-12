@@ -22,7 +22,8 @@ class ProfilController extends AppController
         "hobbies" => $infosUser->getHobbies(),
         "reacts" => $posts->getReacts(),
         "technologies" => $infosUser->getTechnologies(),
-        "infosUser" => $infosUser->getInfosUser()
+        "infosUser" => $infosUser->getInfosUser(),
+        "presentation" => $infosUser->getPresentation()
       ]);
     }
 

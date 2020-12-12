@@ -230,7 +230,7 @@
   padding:3%;
 }
 .information_profile{
-  margin:5% 0;
+  margin:5%;
 }
 .information_profile > h2{
   font-size: 18px !important;
@@ -254,6 +254,9 @@
 }
 .form_profile > textarea{
   border: none;
+}
+#update_presentation{
+  border:none;
 }
 textarea:focus{
   outline: none;

@@ -40,7 +40,6 @@ class User extends Database
           $query = $this->_db->prepare("INSERT INTO hobbies(name) VALUES (?)");
           $query->execute([$hobby]);
         }
-
       }
 
       // on efface tous les attachements entre l'utilisateur et les hobby (DELETE FROM users_hobbies WHERE users_id = ?)
@@ -52,7 +51,6 @@ class User extends Database
         $query= $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name = ?))");
         $query->execute([$this->_id, $hobby]);
       }
-
     }
 
     public function getHobbies(){
@@ -101,5 +99,12 @@ class User extends Database
     public function updatePresentation($presentation){
       $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
       $query->execute([$presentation, $this->_id]);
+    }
+
+    public function getPresentation(){
+      $query = $this->_db->prepare("SELECT presentation FROM users WHERE id = ?");
+      $query->execute([$this->_id]);
+      $data = $query->fetch();
+      return $data;
     }
 }
