@@ -10,13 +10,13 @@ if (isset($_GET['url'])) {
     $url = explode('/', $_GET['url']);
 }
 
-if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {    
+if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     if (isset($_POST['action'])) {
         $controller = '\App\Controller\\'.$url[2];
         $action = $_POST['action'];
     }
-} else {    
-    if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {        
+} else {
+    if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
         $action = 'index';
         $controller = '\App\Controller\IndexController';
     } elseif ($url[0] == 'profil') {
