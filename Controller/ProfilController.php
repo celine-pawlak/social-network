@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Database\Post;
 use App\Database\User;
 
@@ -24,7 +25,11 @@ class ProfilController extends AppController
         "technologies" => $infosUser->getTechnologies(),
         "infosUser" => $infosUser->getInfosUser(),
         "presentation" => $infosUser->getPresentation()
-      ]);
+        ]);
+    }
+
+    public function setProfil(){
+        $this->render('profil.setProfil');
     }
 
     public function addPostForm() {
@@ -45,7 +50,6 @@ class ProfilController extends AppController
         "infosUser" => $infosUser->getInfosUser(),
         "presentation" => $infosUser->getPresentation()
       ]);
-
     }
 
     public function addHobbies(){
@@ -59,7 +63,6 @@ class ProfilController extends AppController
 
       $technologies = new User;
       $technologies->addTechnologies([$_POST["tech1"], $_POST["tech2"],$_POST["tech3"]]);
-
     }
 
     public function updatePresentation(){
@@ -67,6 +70,4 @@ class ProfilController extends AppController
       $presentation = new User;
       $presentation->updatePresentation($_POST['presentation']);
     }
-
-
 }

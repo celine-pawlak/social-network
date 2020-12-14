@@ -9,7 +9,7 @@ class Post extends Database
     private $_id;
     private $_content;
     private $_creationDate;
-    private $_idUser = 1; // Valeur temporaire à remplacer
+    private $_idUser = 7 ; // Récupérer l'id de l'user connecté
     private $_db;
 
     public function __construct()
@@ -33,10 +33,10 @@ class Post extends Database
       return $query->fetchAll();
     }
 
-    public function getReacts(){
+    public function getReacts($id){
       $query = $this->_db->prepare("SELECT * FROM users_reacts
         JOIN reacts on users_reacts.reacts_id = reacts.id WHERE users_reacts.users_id = ?");
-      $query->execute([$this->_idUser]);
+      $query->execute([$id]);
 
       return $query->fetchAll();
     }

@@ -98,6 +98,9 @@
 .border-radius-50px {
     border-radius: 50px;
 }
+.border-radius-50 {
+    border-radius: 50%;
+}
 
 .border-radius-70px {
     border-radius: 70px;
@@ -112,7 +115,10 @@
 }
 
 /* DISPLAYS */
-
+.d-none
+    {
+        display: none;
+    }
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -178,6 +184,9 @@
 .w-30 {
     width: 30%;
 }
+.w-3vw {
+    width: 3vw;
+}
 
 .w-200px {
     width: 200px;
@@ -214,7 +223,27 @@
     box-shadow: none !important;
 }
 
+.nope {
+    border-color: red !important;
+}
+
+.yep {
+    border-color: rgb(3, 207, 3) !important;
+}
+
 /* CUSTOM */
+
+/* REACT */
+
+/* FIN REACT */
+/* HEADER */
+.fa-power-off:hover
+    {
+        cursor: pointer;
+    }
+
+/*  */
+
 /* seeProfil */
 #seeProfil > .center-align > h1{
   font-size: 30px !important;
