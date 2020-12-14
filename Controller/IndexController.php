@@ -20,7 +20,7 @@ class IndexController extends AppController
     {
         // Si connecte
         // Action fil d'actualite
-        // $this->render('index.wall');
+        $this->render('index.wall');
 
         // Si non connecte
         // Action connexion
