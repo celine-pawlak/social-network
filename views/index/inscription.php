@@ -46,5 +46,3 @@
 <?php } else{
     header('Location: http://localhost/social-network/index');
 } ?>
-
-<script src="ressources/JS/inscription.js"></script>

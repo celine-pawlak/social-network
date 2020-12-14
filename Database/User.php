@@ -34,6 +34,14 @@ class User extends Database
         array_push($tab_session, 'connecté');
         array_push($tab_session, $thisUser);
 
+        $this->_id = $thisUser['id'];
+        $this->_mail = $thisUser['mail'];
+        $this->_last_name = $thisUser['last_name'];
+        $this->_first_name = $thisUser['first_name'];
+        $this->_picture_profil = $thisUser['picture_profil'];
+        $this->_picture_cover = $thisUser['picture_cover'];
+        $this->_date_birth = $thisUser['date_birth'];
+
         return $tab_session;
     }
 
@@ -44,7 +52,7 @@ class User extends Database
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
         $query = $this->_db->prepare("INSERT INTO users(mail, last_name, first_name, date_birth, password) VALUES (?, ?, ?, ?, ?)");
-        $query->execute([$mail, $first_name, $last_name, $birthday, $password_hash]);
+        $query->execute([$mail, $last_name, $first_name, $birthday, $password_hash]);
 
         return 'Success';
     }
