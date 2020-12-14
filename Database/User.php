@@ -34,6 +34,14 @@ class User extends Database
         array_push($tab_session, 'connecté');
         array_push($tab_session, $thisUser);
 
+        $this->_id = $thisUser['id'];
+        $this->_mail = $thisUser['mail'];
+        $this->_last_name = $thisUser['last_name'];
+        $this->_first_name = $thisUser['first_name'];
+        $this->_picture_profil = $thisUser['picture_profil'];
+        $this->_picture_cover = $thisUser['picture_cover'];
+        $this->_date_birth = $thisUser['date_birth'];
+
         return $tab_session;
     }
 

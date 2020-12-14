@@ -21,6 +21,7 @@
     <script src="ressources/JS/reaction.js"></script>
     <script src="ressources/JS/module_connexion.js"></script>
     <script src="ressources/JS/inscription.js"></script>
+    <script src="ressources/JS/profil.js"></script>
 </head>
 <body>
 <header class="flex-row justify-content-spacebetween">
