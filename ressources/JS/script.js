@@ -38,4 +38,21 @@ $(function ()
                       },
                   });
             });
+          $('#prof_h').click(function()
+            {
+              
+            });
     });
+function redirectHeader(page)
+    {
+      $.ajax(
+        {
+          url : 'App/Controller/IndexController',
+          type : 'post',
+          data : {action : page},
+          success : (data)=>
+            {
+              $('body').html(data);
+            },
+        });
+    }
