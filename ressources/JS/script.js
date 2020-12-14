@@ -11,15 +11,15 @@ $(function ()
               data : {action : 'search'},              
               success: (response) =>
                 {                                    
-                  var user = JSON.parse(response);
-                  var datauser = {};
+                  var user = JSON.parse(response);                  
+                  var dataUser = {};
                   for (var i = 0; i < user.length; i++) 
                     {
-                      datauser[user[i].first_name + ' ' + user[i].last_name] = datauser[user[i].picture_profil];
+                      dataUser[user[i].first_name + ' ' + user[i].last_name] = dataUser[user[i].picture_profil];
                     }                  
                   $('input.autocomplete').autocomplete(
                     {
-                    data: datauser,
+                      data: dataUser,
                     });      
                 },            
           });
