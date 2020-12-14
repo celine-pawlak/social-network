@@ -12,7 +12,7 @@
 </div>
 <div id="profil_header" class="<?php  ?>">
     <!-- A changer par le bon chemin (bdd) -->
-    <img src="<?php $_SESSION['user']['picture_profil'] ?>" alt="photo de profil" class="border-radius-50 w-3vw">
+    <img src="<?php //$_SESSION['user']['picture_profil'] ?>" alt="photo de profil" class="border-radius-50 w-3vw">
     <!-- Mettre plus grand le chevron -->
     <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="fas fa-chevron-down"></i></a>
     <ul id='dropdown1' class='dropdown-content'>
