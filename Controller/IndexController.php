@@ -118,5 +118,3 @@ class IndexController extends AppController
                 }
         }
 }
-
-

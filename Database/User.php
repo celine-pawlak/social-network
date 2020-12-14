@@ -97,4 +97,12 @@ class User extends Database
             $tableau = $requete->fetchAll(PDO::FETCH_ASSOC);
             return json_encode($tableau);
         }
+
+    public function showProfil($id_user){
+        $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
+        $query->execute([$id_user]);
+        $infos = $query->fetch();
+
+        return $infos;
+    }
 }

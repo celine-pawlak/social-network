@@ -17,6 +17,10 @@ class ProfilController extends AppController
     }
 
     public function setProfil(){
-        $this->render('profil.setProfil');
+        $id_user = $_SESSION['user']['id'];
+        $user = new User;
+        $infos_user = $user->showProfil($id_user);
+
+        $this->render('profil.setProfil', compact('infos_user'));
     }
 }
