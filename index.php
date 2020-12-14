@@ -46,8 +46,8 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     }elseif($url[0] == "updatePresentation") {
         $action = "updatePresentation";
         $controller = '\App\Controller\ProfilController';
-
-}
+    }
+  }
 
 $controller = new $controller;
 $controller->$action();
