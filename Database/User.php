@@ -6,7 +6,7 @@ namespace App\Database;
 use PDO;
 
 class User extends Database
-{ 
+{
     private $_id;
     private $_mail;
     private $_family_name;
@@ -102,14 +102,14 @@ class User extends Database
 
 
 
-    public function getInfosUser(){
+    public function getInfosUser($id){
       $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
-      $query->execute([$this->_id]);
+      $query->execute([$id]);
 
       return $query->fetchAll();
     }
 
-    public function addHobbies($hobbies){
+    public function addHobbies($hobbies, $id){
       // pour chaque hobby dans $hobbies
       foreach($hobbies as $hobby) {
         // s'il n'existe dans la table hobby, on le créé
@@ -124,18 +124,18 @@ class User extends Database
 
       // on efface tous les attachements entre l'utilisateur et les hobby (DELETE FROM users_hobbies WHERE users_id = ?)
       $query = $this->_db->prepare("DELETE FROM users_hobbies WHERE users_id = ?");
-      $query->execute([$this->_id]);
+      $query->execute([$id]);
 
       // on ajoute trois attachements entre les hobby et l'user
       foreach($hobbies as $hobby) {
         $query= $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name_hobby = ?))");
-        $query->execute([$this->_id, $hobby]);
+        $query->execute([$id, $hobby]);
       }
     }
 
-    public function getHobbies(){
+    public function getHobbies($id){
       $query = $this->_db->prepare("SELECT * FROM users_hobbies JOIN hobbies ON users_hobbies.hobbies_id = hobbies.id WHERE users_id = ?");
-      $query->execute([$this->_id]);
+      $query->execute([$id]);
       $data = $query->fetchAll();
       return [
         "hobby1" => $data[0]["name_hobby"],
@@ -144,7 +144,7 @@ class User extends Database
       ];
     }
 
-    public function addTechnologies($technologies){
+    public function addTechnologies($technologies, $id){
       foreach($technologies as $technology) {
         // s'il n'existe dans la table technologies, on le créé
         $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name_technology = ?");
@@ -156,18 +156,18 @@ class User extends Database
         }
 
         $query = $this->_db->prepare("DELETE FROM users_technologies WHERE users_id = ?");
-        $query->execute([$this->_id]);
+        $query->execute([$id]);
 
         foreach($technologies as $technology) {
           $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
-          $query->execute([$this->_id, $technology]);
+          $query->execute([$id, $technology]);
         }
       }
     }
 
-    public function getTechnologies(){
+    public function getTechnologies($id){
       $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
-      $query->execute([$this->_id]);
+      $query->execute([$id]);
       $data = $query->fetchAll();
       return [
         "tech1" => $data[0]["name_technology"],
@@ -176,14 +176,14 @@ class User extends Database
       ];
     }
 
-    public function updatePresentation($presentation){
+    public function updatePresentation($presentation, $id){
       $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
-      $query->execute([$presentation, $this->_id]);
+      $query->execute([$presentation, $id]);
     }
 
-    public function getPresentation(){
+    public function getPresentation($id){
       $query = $this->_db->prepare("SELECT presentation FROM users WHERE id = ?");
-      $query->execute([$this->_id]);
+      $query->execute([$id]);
       $data = $query->fetch();
       return $data;
     }
@@ -194,5 +194,3 @@ class User extends Database
             echo 'disconnect';
         }
 }
-
-    
