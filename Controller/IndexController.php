@@ -126,7 +126,7 @@ class IndexController extends AppController
                     $deco = new User;
                     $deco->deco();                                        
                 }
-        }
+        } 
 }
 
 
