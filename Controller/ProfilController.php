@@ -28,6 +28,7 @@ class ProfilController extends AppController
     }
 
     public function addPostForm() {
+      $infosUser = new User;
       // Si un formulaire a été envoyé, on ajoute la publication
       if(isset($_POST["post"])) {
         $post = new Post;
@@ -37,7 +38,12 @@ class ProfilController extends AppController
       $posts = new Post;
       // On affiche le profil
       $this->render('profil.seeProfil', [
-        "posts" => $posts->getAllPosts()
+        "posts" => $posts->getAllPosts(),
+        "hobbies" => $infosUser->getHobbies(),
+        "reacts" => $posts->getReacts(),
+        "technologies" => $infosUser->getTechnologies(),
+        "infosUser" => $infosUser->getInfosUser(),
+        "presentation" => $infosUser->getPresentation()
       ]);
 
     }

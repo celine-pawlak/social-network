@@ -33,11 +33,11 @@ class User extends Database
       // pour chaque hobby dans $hobbies
       foreach($hobbies as $hobby) {
         // s'il n'existe dans la table hobby, on le créé
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM hobbies WHERE name = ?");
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM hobbies WHERE name_hobby = ?");
         $query->execute([$hobby]);
 
         if($query->fetchColumn() == 0) {
-          $query = $this->_db->prepare("INSERT INTO hobbies(name) VALUES (?)");
+          $query = $this->_db->prepare("INSERT INTO hobbies(name_hobby) VALUES (?)");
           $query->execute([$hobby]);
         }
       }
@@ -48,7 +48,7 @@ class User extends Database
 
       // on ajoute trois attachements entre les hobby et l'user
       foreach($hobbies as $hobby) {
-        $query= $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name = ?))");
+        $query= $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name_hobby = ?))");
         $query->execute([$this->_id, $hobby]);
       }
     }
@@ -58,20 +58,20 @@ class User extends Database
       $query->execute([$this->_id]);
       $data = $query->fetchAll();
       return [
-        "hobby1" => $data[0]["name"],
-        "hobby2" => $data[1]["name"],
-        "hobby3" => $data[2]["name"]
+        "hobby1" => $data[0]["name_hobby"],
+        "hobby2" => $data[1]["name_hobby"],
+        "hobby3" => $data[2]["name_hobby"]
       ];
     }
 
     public function addTechnologies($technologies){
       foreach($technologies as $technology) {
         // s'il n'existe dans la table technologies, on le créé
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name = ?");
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name_technology = ?");
         $query->execute([$technology]);
 
         if($query->fetchColumn() == 0) {
-          $query = $this->_db->prepare("INSERT INTO technologies(name) VALUES (?)");
+          $query = $this->_db->prepare("INSERT INTO technologies(name_technology) VALUES (?)");
           $query->execute([$technology]);
         }
 
@@ -79,7 +79,7 @@ class User extends Database
         $query->execute([$this->_id]);
 
         foreach($technologies as $technology) {
-          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name = ?))");
+          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
           $query->execute([$this->_id, $technology]);
         }
       }
@@ -90,9 +90,9 @@ class User extends Database
       $query->execute([$this->_id]);
       $data = $query->fetchAll();
       return [
-        "tech1" => $data[0]["name"],
-        "tech2" => $data[1]["name"],
-        "tech3" => $data[2]["name"]
+        "tech1" => $data[0]["name_technology"],
+        "tech2" => $data[1]["name_technology"],
+        "tech3" => $data[2]["name_technology"]
       ];
     }
 
