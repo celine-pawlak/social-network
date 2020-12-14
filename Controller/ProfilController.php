@@ -20,7 +20,7 @@ class ProfilController extends AppController
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
         "posts" => $posts->getAllPosts(),
-        "hobbies" => $infosUser->getHobbies(),
+        "hobbies" => $infosUser->getHobbies(7),
         "reacts" => $posts->getReacts(),
         "technologies" => $infosUser->getTechnologies(),
         "infosUser" => $infosUser->getInfosUser(),
