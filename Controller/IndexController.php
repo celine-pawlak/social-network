@@ -17,7 +17,9 @@ class IndexController extends AppController
 
     public function index()
     {
+        echo 'tata';
         if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+            echo ('pouet');
             $this->render('index.wall');
         } else {
             $this->render('index.connexion');
@@ -113,8 +115,18 @@ class IndexController extends AppController
         {            
             if(isset($_POST['action']) && $_POST['action']=='search')
                 {
-                    $auto = new User;
-                    echo $auto->search();
+                    $search = new User;
+                    echo $search->search();
+                }
+        }
+    public function deco()
+        {
+            if(isset($_POST['action']) && $_POST['action']=='deco')
+                {
+                    $deco = new User;
+                    $deco->deco();
+                    echo 'toto';
+                    // $this->render('index.connexion');
                 }
         }
 }

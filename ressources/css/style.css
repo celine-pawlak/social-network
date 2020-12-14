@@ -110,7 +110,10 @@
 }
 
 /* DISPLAYS */
-
+.d-none
+    {
+        display: none;
+    }
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -227,6 +230,13 @@
 /* REACT */
 
 /* FIN REACT */
+/* HEADER */
+.fa-power-off:hover
+    {
+        cursor: pointer;
+    }
+
+/*  */
 
 
 

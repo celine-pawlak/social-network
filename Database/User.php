@@ -97,4 +97,9 @@ class User extends Database
             $tableau = $requete->fetchAll(PDO::FETCH_ASSOC);
             return json_encode($tableau);
         }
+    public function deco()
+        {
+            unset($_SESSION['user']);
+            echo 'disconnect';
+        }
 }

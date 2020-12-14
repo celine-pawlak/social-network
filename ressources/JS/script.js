@@ -1,5 +1,6 @@
 $(function ()
-    {                  
+    {       
+      console.log(localStorage);           
         // Dropdown header
         $('.dropdown-trigger').dropdown();
         // Search bar header                      
@@ -10,17 +11,31 @@ $(function ()
               data : {action : 'search'},              
               success: (response) =>
                 {                                    
-                  var products = JSON.parse(response);
-                  var dataProducts = {};
-                  for (var i = 0; i < products.length; i++) 
+                  var user = JSON.parse(response);
+                  var datauser = {};
+                  for (var i = 0; i < user.length; i++) 
                     {
-                      dataProducts[products[i].first_name + ' ' + products[i].last_name] = dataProducts[products[i].picture_profil];
-                    }
-                  console.log(dataProducts);
+                      datauser[user[i].first_name + ' ' + user[i].last_name] = datauser[user[i].picture_profil];
+                    }                  
                   $('input.autocomplete').autocomplete(
                     {
-                    data: dataProducts,
+                    data: datauser,
                     });      
                 },            
           });
+          // Bouton déco
+          $('.fa-power-off').click(function()
+            {
+              $.ajax(
+                  {
+                    url : 'App/Controller/IndexController',
+                    type : 'post',
+                    data : {action : 'deco'},
+                    success : (data) =>
+                      {                                                
+                        localStorage.clear();                        
+                        pageConnexion();                        
+                      },
+                  });
+            });
     });
