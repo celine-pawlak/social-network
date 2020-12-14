@@ -20,7 +20,7 @@ class Reaction extends Database
             {                            
                 $requete = $this->_db->query("SELECT * FROM reacts");
                 $emoji = $requete->fetchAll(PDO::FETCH_ASSOC);                
-                return json_encode($emoji);                
+                return $emoji;                
             }
         public function insertEmoji($id_user, $id_react, $id_bloc, $bloc)
             {

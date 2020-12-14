@@ -33,7 +33,7 @@ $(function ()
                     data : {action : 'deco'},
                     success : (data) =>
                       {                                                
-                        localStorage.clear();                        
+                        // localStorage.clear();                        
                         pageConnexion();                        
                       },
                   });

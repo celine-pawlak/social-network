@@ -10,7 +10,6 @@
         </div>
     </div>
 </div>
-<?php var_dump($_SESSION) ?>
 <div id="profil_header" class="<?= isset($_SESSION['user']['id']) ? '' : 'd-none'?>">
     <!-- A changer par le bon chemin (bdd) -->
     <img src="<?= $_SESSION['user']['picture_profil'] ?>" alt="photo de profil" class="border-radius-50 w-3vw">

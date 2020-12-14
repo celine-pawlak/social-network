@@ -96,7 +96,7 @@ class IndexController extends AppController
             if(isset($_POST['action']) && $_POST['action']=='getEmoji')
                 {
                     $reaction = new Reaction;
-                    echo $reaction->getEmoji();
+                    echo json_encode($reaction->getEmoji());
                 }
         }
     public function insertEmoji()
@@ -124,9 +124,7 @@ class IndexController extends AppController
             if(isset($_POST['action']) && $_POST['action']=='deco')
                 {
                     $deco = new User;
-                    $deco->deco();
-                    echo 'toto';
-                    // $this->render('index.connexion');
+                    $deco->deco();                                        
                 }
         }
 }
