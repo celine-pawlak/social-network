@@ -101,6 +101,7 @@ class User extends Database
         }
 
 
+
     public function getInfosUser(){
       $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
       $query->execute([$this->_id]);
@@ -186,4 +187,12 @@ class User extends Database
       $data = $query->fetch();
       return $data;
     }
+
+    public function deco()
+        {
+            unset($_SESSION['user']);
+            echo 'disconnect';
+        }
 }
+
+    
