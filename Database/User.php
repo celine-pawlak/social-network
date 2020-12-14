@@ -134,14 +134,32 @@ class User extends Database
     }
 
     public function getHobbies($id){
-      $query = $this->_db->prepare("SELECT * FROM users_hobbies JOIN hobbies ON users_hobbies.hobbies_id = hobbies.id WHERE users_id = ?");
+
+      # requête qui retourne le nombre de hobby dans $nb_hobbies
+      $query = $this->_db->prepare("SELECT COUNT(*) FROM users_hobbies WHERE users_id = ?");
       $query->execute([$id]);
-      $data = $query->fetchAll();
-      return [
-        "hobby1" => $data[0]["name_hobby"],
-        "hobby2" => $data[1]["name_hobby"],
-        "hobby3" => $data[2]["name_hobby"]
-      ];
+
+      $nb_hobbies = $query->fetchColumn();
+
+      if($nb_hobbies > 0) {
+        # Si il y a des hobbies rattaché à l'utilisateur
+        $query = $this->_db->prepare("SELECT * FROM users_hobbies JOIN hobbies ON users_hobbies.hobbies_id = hobbies.id WHERE users_id = ?");
+        $query->execute([$id]);
+        $data = $query->fetchAll();
+        $tableau = [
+          "hobby1" => $data[0]["name_hobby"],
+          "hobby2" => $data[1]["name_hobby"],
+          "hobby3" => $data[2]["name_hobby"]
+        ];
+      } else {
+        $tableau = [
+          "hobby1" => "",
+          "hobby2" => "",
+          "hobby3" => ""
+        ];
+      }
+      return $tableau;
+
     }
 
     public function addTechnologies($technologies, $id){
@@ -166,14 +184,29 @@ class User extends Database
     }
 
     public function getTechnologies($id){
+      $query = $this->_db->prepare("SELECT COUNT(*) FROM users_technologies WHERE users_id = ?");
+      $query->execute([$id]);
+
+      $nb_technologies = $query->fetchColumn();
+
+      if($nb_technologies > 0) {
       $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
       $query->execute([$id]);
       $data = $query->fetchAll();
-      return [
+      $tableau = [
         "tech1" => $data[0]["name_technology"],
         "tech2" => $data[1]["name_technology"],
         "tech3" => $data[2]["name_technology"]
       ];
+
+    }else{
+      $tableau = [
+        "tech1" => "",
+        "tech2" => "",
+        "tech3" => ""
+      ];
+    }
+    return $tableau;
     }
 
     public function updatePresentation($presentation, $id){
