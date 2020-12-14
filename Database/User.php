@@ -6,7 +6,7 @@ namespace App\Database;
 use PDO;
 
 class User extends Database
-{
+{ 
     private $_id;
     private $_mail;
     private $_family_name;
@@ -18,10 +18,12 @@ class User extends Database
     private $_technologies = [];
     private $_db;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->_db = parent::getPDO();
     }
+
 
     public function connexion($mail, $password){
         $query = $this->_db->prepare("SELECT id, mail, last_name, first_name, picture_profil, picture_cover, date_birth FROM users WHERE mail = ?");
@@ -97,4 +99,91 @@ class User extends Database
             $tableau = $requete->fetchAll(PDO::FETCH_ASSOC);
             return json_encode($tableau);
         }
+
+
+    public function getInfosUser(){
+      $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
+      $query->execute([$this->_id]);
+
+      return $query->fetchAll();
+    }
+
+    public function addHobbies($hobbies){
+      // pour chaque hobby dans $hobbies
+      foreach($hobbies as $hobby) {
+        // s'il n'existe dans la table hobby, on le créé
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM hobbies WHERE name_hobby = ?");
+        $query->execute([$hobby]);
+
+        if($query->fetchColumn() == 0) {
+          $query = $this->_db->prepare("INSERT INTO hobbies(name_hobby) VALUES (?)");
+          $query->execute([$hobby]);
+        }
+      }
+
+      // on efface tous les attachements entre l'utilisateur et les hobby (DELETE FROM users_hobbies WHERE users_id = ?)
+      $query = $this->_db->prepare("DELETE FROM users_hobbies WHERE users_id = ?");
+      $query->execute([$this->_id]);
+
+      // on ajoute trois attachements entre les hobby et l'user
+      foreach($hobbies as $hobby) {
+        $query= $this->_db->prepare("INSERT INTO users_hobbies(users_id, hobbies_id) VALUES(?, (SELECT id FROM hobbies WHERE name_hobby = ?))");
+        $query->execute([$this->_id, $hobby]);
+      }
+    }
+
+    public function getHobbies(){
+      $query = $this->_db->prepare("SELECT * FROM users_hobbies JOIN hobbies ON users_hobbies.hobbies_id = hobbies.id WHERE users_id = ?");
+      $query->execute([$this->_id]);
+      $data = $query->fetchAll();
+      return [
+        "hobby1" => $data[0]["name_hobby"],
+        "hobby2" => $data[1]["name_hobby"],
+        "hobby3" => $data[2]["name_hobby"]
+      ];
+    }
+
+    public function addTechnologies($technologies){
+      foreach($technologies as $technology) {
+        // s'il n'existe dans la table technologies, on le créé
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name_technology = ?");
+        $query->execute([$technology]);
+
+        if($query->fetchColumn() == 0) {
+          $query = $this->_db->prepare("INSERT INTO technologies(name_technology) VALUES (?)");
+          $query->execute([$technology]);
+        }
+
+        $query = $this->_db->prepare("DELETE FROM users_technologies WHERE users_id = ?");
+        $query->execute([$this->_id]);
+
+        foreach($technologies as $technology) {
+          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
+          $query->execute([$this->_id, $technology]);
+        }
+      }
+    }
+
+    public function getTechnologies(){
+      $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
+      $query->execute([$this->_id]);
+      $data = $query->fetchAll();
+      return [
+        "tech1" => $data[0]["name_technology"],
+        "tech2" => $data[1]["name_technology"],
+        "tech3" => $data[2]["name_technology"]
+      ];
+    }
+
+    public function updatePresentation($presentation){
+      $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
+      $query->execute([$presentation, $this->_id]);
+    }
+
+    public function getPresentation(){
+      $query = $this->_db->prepare("SELECT presentation FROM users WHERE id = ?");
+      $query->execute([$this->_id]);
+      $data = $query->fetch();
+      return $data;
+    }
 }

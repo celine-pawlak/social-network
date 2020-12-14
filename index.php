@@ -1,12 +1,15 @@
 <?php
 
-define('ROOT', getcwd());
+define('ROOT', getcwd()); // On assigne à la constante ROOT le dossier de travail courant grâce à la fonction getcwd()
+session_start();
+
 // Autoloader des Controller
 require ROOT . '/Autoloader.php';
 App\Autoloader::register();
 
 $url = '';
 if (isset($_GET['url'])) {
+
     $url = explode('/', $_GET['url']);
 }
 
@@ -31,10 +34,20 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     } elseif ($url[0] == 'messagerie/create') {
         $action = 'creermessagerie';
         $controller = '\App\Controller\MessagerieController';
-    }
+    }elseif($url[0] == "addPostForm") {
+        $action = "addPostForm";
+        $controller = '\App\Controller\ProfilController';
+    } elseif($url[0] == "addHobbies") {
+        $action = "addHobbies";
+        $controller = '\App\Controller\ProfilController';
+    }elseif($url[0] == "addTechnologies") {
+        $action = "addTechnologies";
+        $controller = '\App\Controller\ProfilController';
+    }elseif($url[0] == "updatePresentation") {
+        $action = "updatePresentation";
+        $controller = '\App\Controller\ProfilController';
+
 }
 
 $controller = new $controller;
 $controller->$action();
-
-App\Autoloader::register();
