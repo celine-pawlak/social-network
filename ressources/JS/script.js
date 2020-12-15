@@ -1,6 +1,5 @@
 $(function ()
-    {       
-      console.log(localStorage);           
+    {                    
         // Dropdown header
         $('.dropdown-trigger').dropdown();
         // Search bar header                      
@@ -32,16 +31,16 @@ $(function ()
                     type : 'post',
                     data : {action : 'deco'},
                     success : (data) =>
-                      {                                                
-                        // localStorage.clear();                        
+                      {                                                                      
+                        localStorage.clear();                        
                         pageConnexion();                        
                       },
                   });
             });
-          $('#prof_h').click(function(e)
+          $('.dropdown-content').click(function(e)
             {
               // e.preventDefault();
-              let test = $(this).attr('id');
+              let test = $(this).children().attr('id');
               console.log(test)
               // redirectHeader();
             });

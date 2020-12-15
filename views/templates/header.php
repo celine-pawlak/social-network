@@ -17,10 +17,10 @@
     <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="fas fa-chevron-down"></i></a>
     <ul id='dropdown1' class='dropdown-content'>
         <!-- Changer les liens -->
-        <li><a href="#!" id="profil_h">Profil</a></li>
+        <li><a href="profil?id=1" id="profil_h">Profil</a></li>
         <li><a href="#!" id="message_h">Messagerie</a></li>
         <li class="divider" tabindex="-1"></li>
-        <li><a href="#!" id="modif_h">Modifier profil</a></li>        
+        <li><a href="modifier_profil" id="modif_h">Modifier profil</a></li>        
     </ul>
     <i class="fas fa-power-off"></i>
 </div>

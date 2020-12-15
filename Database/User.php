@@ -223,10 +223,11 @@ class User extends Database
 
     public function deco()
         {
-            unset($_SESSION['user']);
-            echo 'disconnect';
+          session_destroy();
+          unset($_SESSION['user']);
+          echo 'disconnect';
         }
-}
+
     public function showProfil($id_user){
         $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
         $query->execute([$id_user]);
