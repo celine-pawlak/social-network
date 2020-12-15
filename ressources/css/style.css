@@ -26,6 +26,10 @@
 }
 
 /* MARGINS AND PADDINGS */
+.m-0
+    {
+        margin: 0 !important;
+    }
 .m-05 {
     margin: 0.5rem;
 }
@@ -241,7 +245,17 @@
     {
         cursor: pointer;
     }
-
+#profil_header
+    {
+        display: flex;
+        width: 80%;
+        justify-content: space-around;
+    }
+#pp_header
+    {
+        height: 10vh;
+        border-radius: 50%;
+    }
 /*  */
 
 /* seeProfil */
