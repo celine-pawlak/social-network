@@ -227,3 +227,11 @@ class User extends Database
             echo 'disconnect';
         }
 }
+    public function showProfil($id_user){
+        $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
+        $query->execute([$id_user]);
+        $infos = $query->fetch();
+
+        return $infos;
+    }
+}

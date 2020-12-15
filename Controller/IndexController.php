@@ -75,7 +75,6 @@ class IndexController extends AppController
                         $user_session = json_encode($return);
 
                         echo $user_session;
-                        $user->index();
                     } else {
                         array_push($this->errors, 'Vous n\'etes pas connecté');
                     }
