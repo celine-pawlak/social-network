@@ -220,12 +220,6 @@ class User extends Database
         return $data;
     }
 
-    public function deco(){
-        unset($_SESSION['user']);
-        echo 'disconnect';
-    }
-
-<<<<<<< HEAD
     public function deco()
         {
           session_destroy();
@@ -233,8 +227,7 @@ class User extends Database
           echo 'disconnect';
         }
 
-=======
->>>>>>> setProfil
+
     public function showProfil($id_user){
         $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
         $query->execute([$id_user]);
