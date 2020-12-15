@@ -1,6 +1,5 @@
 $(function ()
-    {       
-      console.log(localStorage);           
+    {                    
         // Dropdown header
         $('.dropdown-trigger').dropdown();
         // Search bar header                      
@@ -11,15 +10,15 @@ $(function ()
               data : {action : 'search'},              
               success: (response) =>
                 {                                    
-                  var user = JSON.parse(response);
-                  var datauser = {};
+                  var user = JSON.parse(response);                  
+                  var dataUser = {};
                   for (var i = 0; i < user.length; i++) 
                     {
-                      datauser[user[i].first_name + ' ' + user[i].last_name] = datauser[user[i].picture_profil];
+                      dataUser[user[i].first_name + ' ' + user[i].last_name] = dataUser[user[i].picture_profil];
                     }                  
                   $('input.autocomplete').autocomplete(
                     {
-                    data: datauser,
+                      data: dataUser,
                     });      
                 },            
           });
@@ -32,22 +31,25 @@ $(function ()
                     type : 'post',
                     data : {action : 'deco'},
                     success : (data) =>
-                      {                                                
-                        // localStorage.clear();                        
+                      {                                                                      
+                        localStorage.clear();                        
                         pageConnexion();                        
                       },
                   });
             });
-          $('#prof_h').click(function()
+          $('.dropdown-content').click(function(e)
             {
-              
+              // e.preventDefault();
+              let test = $(this).children().attr('id');
+              console.log(test)
+              // redirectHeader();
             });
     });
 function redirectHeader(page)
     {
       $.ajax(
         {
-          url : 'App/Controller/IndexController',
+          url : 'App/Controller/ProfilController',
           type : 'post',
           data : {action : page},
           success : (data)=>

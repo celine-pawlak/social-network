@@ -1,7 +1,7 @@
 <?php
 
 define('ROOT', getcwd()); // On assigne à la constante ROOT le dossier de travail courant grâce à la fonction getcwd()
-session_start();
+// session_start();
 
 // Autoloader des Controller
 require ROOT . '/Autoloader.php';
@@ -45,6 +45,9 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
         $controller = '\App\Controller\ProfilController';
     }elseif($url[0] == "updatePresentation") {
         $action = "updatePresentation";
+        $controller = '\App\Controller\ProfilController';    
+    }elseif($url[0] == "modifier_profil") {
+        $action = "setProfil";
         $controller = '\App\Controller\ProfilController';
     }
   }

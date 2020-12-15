@@ -36,7 +36,6 @@ $(document).ready(function(){
                     localStorage.setItem('date_birth', user[1]['date_birth']);
 
                     // changement de view "fil d'actualité"
-                    pageConnexion();
                 } else {
                     console.log('erreur lors de la connexion');
                 }

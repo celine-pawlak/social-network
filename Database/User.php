@@ -95,9 +95,9 @@ class User extends Database
 
     public function search()
         {
-            $requete = $this->_db->query("SELECT first_name, last_name FROM users");
+            $requete = $this->_db->query("SELECT first_name, last_name, id FROM users");
             $tableau = $requete->fetchAll(PDO::FETCH_ASSOC);
-            return json_encode($tableau);
+            return $tableau;
         }
 
 
@@ -134,7 +134,6 @@ class User extends Database
     }
 
     public function getHobbies($id){
-
       # requête qui retourne le nombre de hobby dans $nb_hobbies
       $query = $this->_db->prepare("SELECT COUNT(*) FROM users_hobbies WHERE users_id = ?");
       $query->execute([$id]);
@@ -177,53 +176,70 @@ class User extends Database
         $query->execute([$id]);
 
         foreach($technologies as $technology) {
-          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
-          $query->execute([$id, $technology]);
+            $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
+            $query->execute([$id, $technology]);
         }
       }
     }
 
     public function getTechnologies($id){
-      $query = $this->_db->prepare("SELECT COUNT(*) FROM users_technologies WHERE users_id = ?");
-      $query->execute([$id]);
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM users_technologies WHERE users_id = ?");
+        $query->execute([$id]);
 
-      $nb_technologies = $query->fetchColumn();
+        $nb_technologies = $query->fetchColumn();
 
-      if($nb_technologies > 0) {
-      $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
-      $query->execute([$id]);
-      $data = $query->fetchAll();
-      $tableau = [
-        "tech1" => $data[0]["name_technology"],
-        "tech2" => $data[1]["name_technology"],
-        "tech3" => $data[2]["name_technology"]
-      ];
+        if($nb_technologies > 0) {
+          $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
+          $query->execute([$id]);
+          $data = $query->fetchAll();
+          $tableau = [
+            "tech1" => $data[0]["name_technology"],
+            "tech2" => $data[1]["name_technology"],
+            "tech3" => $data[2]["name_technology"]
+          ];
 
-    }else{
-      $tableau = [
-        "tech1" => "",
-        "tech2" => "",
-        "tech3" => ""
-      ];
-    }
-    return $tableau;
+        }else{
+          $tableau = [
+            "tech1" => "",
+            "tech2" => "",
+            "tech3" => ""
+          ];
+        }
+        return $tableau;
     }
 
     public function updatePresentation($presentation, $id){
-      $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
-      $query->execute([$presentation, $id]);
+        $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
+        $query->execute([$presentation, $id]);
     }
 
     public function getPresentation($id){
-      $query = $this->_db->prepare("SELECT presentation FROM users WHERE id = ?");
-      $query->execute([$id]);
-      $data = $query->fetch();
-      return $data;
+        $query = $this->_db->prepare("SELECT presentation FROM users WHERE id = ?");
+        $query->execute([$id]);
+        $data = $query->fetch();
+        return $data;
     }
 
+    public function deco(){
+        unset($_SESSION['user']);
+        echo 'disconnect';
+    }
+
+<<<<<<< HEAD
     public function deco()
         {
-            unset($_SESSION['user']);
-            echo 'disconnect';
+          session_destroy();
+          unset($_SESSION['user']);
+          echo 'disconnect';
         }
+
+=======
+>>>>>>> setProfil
+    public function showProfil($id_user){
+        $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
+        $query->execute([$id_user]);
+        $infos = $query->fetch();
+
+        return $infos;
+    }
 }

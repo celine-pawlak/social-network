@@ -3,9 +3,11 @@ $(function() {
     e.preventDefault();
 
     $.ajax({
-      url: "addHobbies",
+      url:"Controller/ProfilController",
+      //url: "addHobbies",
       type: "POST",
       data: {
+        action : 'addHobbies',
         hobby1: $("input[name=hobby1]").val(),
         hobby2: $("input[name=hobby2]").val(),
         hobby3: $("input[name=hobby3]").val()

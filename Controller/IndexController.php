@@ -16,10 +16,8 @@ class IndexController extends AppController
     }
 
     public function index()
-    {
-        echo 'tata';
-        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-            echo ('pouet');
+    {        
+        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {            
             $this->render('index.wall');
         } else {
             $this->render('index.connexion');
@@ -75,7 +73,6 @@ class IndexController extends AppController
                         $user_session = json_encode($return);
 
                         echo $user_session;
-                        $user->index();
                     } else {
                         array_push($this->errors, 'Vous n\'etes pas connecté');
                     }
@@ -116,7 +113,7 @@ class IndexController extends AppController
             if(isset($_POST['action']) && $_POST['action']=='search')
                 {
                     $search = new User;
-                    echo $search->search();
+                    echo json_encode($search->search());
                 }
         }
     public function deco()
@@ -127,6 +124,21 @@ class IndexController extends AppController
                     $deco->deco();                                        
                 }
         } 
+    public function redirectHeader()
+        {
+            if(isset($_POST['action']) && $_POST['action']== '')
+                {
+                    
+                }
+            if(isset($_POST['action']) && $_POST['action']== '')
+                {
+
+                }
+            if(isset($_POST['action']) && $_POST['action']== '')
+                {
+
+                }
+        }
 }
 
 
