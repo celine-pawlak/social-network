@@ -134,7 +134,6 @@ class User extends Database
     }
 
     public function getHobbies($id){
-
       # requête qui retourne le nombre de hobby dans $nb_hobbies
       $query = $this->_db->prepare("SELECT COUNT(*) FROM users_hobbies WHERE users_id = ?");
       $query->execute([$id]);
@@ -177,8 +176,8 @@ class User extends Database
         $query->execute([$id]);
 
         foreach($technologies as $technology) {
-          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
-          $query->execute([$id, $technology]);
+            $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
+            $query->execute([$id, $technology]);
         }
       }
     }
