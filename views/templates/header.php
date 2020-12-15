@@ -11,13 +11,13 @@
     </div>
 </div>
 <div id="profil_header" class="<?= isset($_SESSION['user']['id']) ? '' : 'd-none'?>">
-    <!-- A changer par le bon chemin (bdd) -->
+    <!-- A changer par le bon chemin (bdd) -->    
     <img src="<?= $_SESSION['user']['picture_profil'] ?>" alt="photo de profil" class="border-radius-50 w-3vw">
     <!-- Mettre plus grand le chevron -->
     <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="fas fa-chevron-down"></i></a>
     <ul id='dropdown1' class='dropdown-content'>
         <!-- Changer les liens -->
-        <li><a href="profil?id=<?= $_SESSION['user']['id'] ?>'" id="profil_h">Profil</a></li>
+        <li><a href="profil?id=<?= $_SESSION['user']['id'] ?>" id="profil_h">Profil</a></li>
         <li><a href="messagerie" id="message_h">Messagerie</a></li>
         <li class="divider" tabindex="-1"></li>
         <li><a href="modifier_profil" id="modif_h">Modifier profil</a></li>        

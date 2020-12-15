@@ -32,8 +32,9 @@ $(function ()
                     data : {action : 'deco'},
                     success : (data) =>
                       {                                                                      
-                        localStorage.clear();                        
-                        pageConnexion();                        
+                        localStorage.clear();                             
+                        pageConnexion();       
+                        window.location = 'index.php';
                       },
                   });
             });
