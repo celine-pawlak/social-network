@@ -4,7 +4,6 @@
   <img src="<?= "ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
 </div>
 
-
 <div class="container" id="seeProfil">
   <div class="center-align">
     <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
