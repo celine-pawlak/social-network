@@ -6,8 +6,8 @@ $(function()
                 let element = $(this).closest('div').attr('id');
                 let id_bloc = element.split('_');      
                 let id = id_bloc[1]               
-                let bloc = id_bloc[0];                
-                getMoji(id, bloc);
+                let bloc = id_bloc[0];                                
+                getEmoji(id, bloc);
             })
         $(document).click(function()
             {                
@@ -15,7 +15,7 @@ $(function()
             })
     });
     
-    function getMoji(id_bloc, bloc)
+    function getEmoji(id_bloc, bloc)
         {            
             $.ajax(
                 {
@@ -23,8 +23,7 @@ $(function()
                     type : 'post',
                     data : {action : 'getEmoji'},
                     success : (data) =>
-                        {                             
-                            console.log(data)                           ;
+                        {                                   
                             let test = JSON.parse(data);                               
                             $('#'+bloc+'_'+id_bloc).append('<aside id="react_bloc"></aside>');                                                                          
                             $.map(test, function (a)

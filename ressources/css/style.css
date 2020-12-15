@@ -19,6 +19,11 @@
     background-color: #FFCA4B;
 }
 
+.background-lighter-grey {
+    background-color: #F9F9F9;
+    border-radius: 20px;
+}
+
 .yellow-text {
     color: #FFCA4B;
 }
@@ -182,6 +187,10 @@
     border-radius: 50px;
 }
 
+.border-radius-50 {
+    border-radius: 50%;
+}
+
 .border-radius-70px {
     border-radius: 70px;
 }
@@ -255,6 +264,9 @@
 }
 
 /* DISPLAYS */
+.d-none {
+    display: none;
+}
 
 .flex-row {
     display: flex;
@@ -319,7 +331,7 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
-.z-index-3{
+.z-index-3 {
     z-index: 3;
 }
 
@@ -344,6 +356,10 @@
 
 .w-30 {
     width: 30%;
+}
+
+.w-3vw {
+    width: 3vw;
 }
 
 .w-100 {
@@ -402,12 +418,20 @@
 }
 
 /* CURSOR */
-
 .clickable {
     cursor: pointer;
 }
 
+
 /* CUSTOM */
+.nope {
+    border-color: red !important;
+}
+
+.yep {
+    border-color: rgb(3, 207, 3) !important;
+}
+
 
 .likes_left, .likes_right {
     position: relative;
@@ -442,8 +466,87 @@
 }
 
 /* REACT */
-
 /* FIN REACT */
+/* HEADER */
+.fa-power-off:hover {
+    cursor: pointer;
+}
 
 
+/* seeProfil */
+#seeProfil > .center-align > h1 {
+    font-size: 30px !important;
+}
 
+#seeProfil > .row > .col > h2 {
+    font-size: 18px !important;
+}
+
+#info_border {
+    border-right: 2px solid #88C1D0;
+    padding-right: 10%;
+}
+
+#presentation_profile {
+    padding: 3%;
+}
+
+.information_profile {
+    margin: 5%;
+}
+
+.information_profile > h2 {
+    font-size: 18px !important;
+}
+
+.cover_img {
+    width: 100%;
+    height: 250px;
+}
+
+#cover_picture {
+    width: 100%;
+    height: 100%;
+}
+
+.profile_img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 5%;
+}
+
+.miniature_img {
+    width: 60px;
+    height: 60px;
+}
+
+.form_profile > textarea {
+    border: none;
+}
+
+#update_presentation {
+    border: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.form_profile > ::placeholder {
+    color: #888B97;
+}
+
+.post_profile {
+    background-color: white;
+    border-radius: 20px;
+    width: 80%;
+    margin: 5% auto;
+}
+
+.checked {
+    color: #FFCA4B;
+}
+
+.display-none {
+    display: none;
+}

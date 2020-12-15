@@ -1,3 +1,4 @@
+<?php //session_destroy(); ?>
 <p>Ceci est le HTML du fil d'actualité</p>
 <div id="posts_1" class="post">
     <p>NVzfZFQZFEQZ$</p>
