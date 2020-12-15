@@ -184,49 +184,48 @@ class User extends Database
     }
 
     public function getTechnologies($id){
-      $query = $this->_db->prepare("SELECT COUNT(*) FROM users_technologies WHERE users_id = ?");
-      $query->execute([$id]);
+        $query = $this->_db->prepare("SELECT COUNT(*) FROM users_technologies WHERE users_id = ?");
+        $query->execute([$id]);
 
-      $nb_technologies = $query->fetchColumn();
+        $nb_technologies = $query->fetchColumn();
 
-      if($nb_technologies > 0) {
-      $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
-      $query->execute([$id]);
-      $data = $query->fetchAll();
-      $tableau = [
-        "tech1" => $data[0]["name_technology"],
-        "tech2" => $data[1]["name_technology"],
-        "tech3" => $data[2]["name_technology"]
-      ];
+        if($nb_technologies > 0) {
+          $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
+          $query->execute([$id]);
+          $data = $query->fetchAll();
+          $tableau = [
+            "tech1" => $data[0]["name_technology"],
+            "tech2" => $data[1]["name_technology"],
+            "tech3" => $data[2]["name_technology"]
+          ];
 
-    }else{
-      $tableau = [
-        "tech1" => "",
-        "tech2" => "",
-        "tech3" => ""
-      ];
-    }
-    return $tableau;
+        }else{
+          $tableau = [
+            "tech1" => "",
+            "tech2" => "",
+            "tech3" => ""
+          ];
+        }
+        return $tableau;
     }
 
     public function updatePresentation($presentation, $id){
-      $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
-      $query->execute([$presentation, $id]);
+        $query = $this->_db->prepare("UPDATE users SET presentation = ? WHERE id = ?");
+        $query->execute([$presentation, $id]);
     }
 
     public function getPresentation($id){
-      $query = $this->_db->prepare("SELECT presentation FROM users WHERE id = ?");
-      $query->execute([$id]);
-      $data = $query->fetch();
-      return $data;
+        $query = $this->_db->prepare("SELECT presentation FROM users WHERE id = ?");
+        $query->execute([$id]);
+        $data = $query->fetch();
+        return $data;
     }
 
-    public function deco()
-        {
-            unset($_SESSION['user']);
-            echo 'disconnect';
-        }
-}
+    public function deco(){
+        unset($_SESSION['user']);
+        echo 'disconnect';
+    }
+
     public function showProfil($id_user){
         $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
         $query->execute([$id_user]);
