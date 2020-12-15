@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Database\Conversation;
 use App\Database\Message;
+use App\Database\Reaction;
 
 class MessagerieController extends AppController
 {
@@ -22,6 +23,7 @@ class MessagerieController extends AppController
         $allconversationsInformations = null;
         $last_messages = null;
         $conversations = new Conversation;
+        $reacts = new Reaction;
 
         $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);
         foreach ($allconversations as $key => $conversation) {
@@ -34,11 +36,17 @@ class MessagerieController extends AppController
             if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])){
                 $id_conversation = $_POST['seeConversation'];
             }
-            $messages = new Message();
+            $messages = new Message;
             $last_messages = $messages->getAllMessagesFromConversation($id_conversation);
+
+            foreach ($last_messages as $key => $message){
+                $last_messages[$key]['reactions'] = $reacts->getAllReactionsFromMessage($message['id']);
+            }
         }
 
-        $this->render('messagerie.messagerie', compact('allconversationsInformations', 'last_messages', 'idUser'));
+        $smileys = $reacts->getEmoji();
+
+        $this->render('messagerie.messagerie', compact('allconversationsInformations', 'last_messages', 'idUser', 'id_conversation', 'smileys'));
     }
 
     public function getConversationsInformations($allconversations, $idUser)

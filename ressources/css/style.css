@@ -1,4 +1,11 @@
 /* THEME COLORS */
+.no-background {
+    background: none;
+}
+
+.no-background-focus:focus {
+    background: none;
+}
 
 .background-blue-grey {
     background-color: #88C1D0;
@@ -6,6 +13,10 @@
 
 .background-white {
     background-color: #FFFFFF;
+}
+
+.background-yellow {
+    background-color: #FFCA4B;
 }
 
 .yellow-text {
@@ -16,11 +27,35 @@
     color: #888B97;
 }
 
+.grey-text {
+    color: #202126;
+}
+
 .blue-text {
     color: #275FA0 !important;
 }
 
+.box-shadow {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.43);
+}
+
+.hover-blue-grey:hover {
+    background-color: rgba(39, 95, 160, 0.54);
+}
+
 /* MARGINS AND PADDINGS */
+.m-0 {
+    margin: 0;
+}
+
+.m-01 {
+    margin: .1rem;
+}
+
+.m-02 {
+    margin: 0.2rem;
+}
+
 .m-05 {
     margin: 0.5rem;
 }
@@ -44,8 +79,24 @@
     margin-top: 1rem;
 }
 
+.ml-05 {
+    margin-left: 0.5rem;
+}
+
 .ml-3 {
     margin-left: 3rem;
+}
+
+.mr-05 {
+    margin-right: 0.5rem;
+}
+
+.p-01 {
+    padding: .1rem;
+}
+
+.p-025 {
+    padding: 0.25rem;
 }
 
 .p-05 {
@@ -84,12 +135,49 @@
     padding-top: 1rem;
 }
 
+.py-2 {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+}
+
 .pb-05 {
     padding-bottom: 0.5rem;
 }
 
+.pl-05 {
+    padding-left: .5rem;
+}
+
+.pr-05 {
+    padding-right: .5rem;
+}
+
+.pl-1 {
+    padding-left: 1rem;
+}
+
+.pr-1 {
+    padding-right: 1rem;
+}
+
 
 /* BORDERS */
+.no-border {
+    border: none;
+}
+
+.border-radius-10 {
+    border-radius: 10%;
+}
+
+.border-radius-30 {
+    border-radius: 30%;
+}
+
+.border-radius-50 {
+    border-radius: 50%;
+}
+
 .border-radius-50px {
     border-radius: 50px;
 }
@@ -104,6 +192,66 @@
 
 .border-bot-blue {
     border-bottom: 1px solid #275FA0;
+}
+
+/* POSITION */
+.absolute {
+    position: absolute;
+}
+
+.relative {
+    position: relative;
+}
+
+.position-all {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.position-top-outside {
+    bottom: 100%
+}
+
+.position-top {
+    top: 0;
+}
+
+.position-left {
+    left: 0;
+}
+
+.position-right {
+    right: 0;
+}
+
+.position-left-outside {
+    right: 100%;
+}
+
+.position-right-outside {
+    left: 100%;
+}
+
+.position-left-up {
+    left: 0;
+    top: -0.5rem;
+}
+
+.position-right-up {
+    right: 0;
+    top: -0.5rem;
+}
+
+.position-left-down {
+    left: 0;
+    bottom: -0.5rem;
+}
+
+.position-right-down {
+    right: 0;
+    bottom: -0.5rem;
 }
 
 /* DISPLAYS */
@@ -151,6 +299,30 @@
     align-self: flex-end;
 }
 
+.hover-child {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 150ms ease-in, visibility 150ms ease-in;
+    transition: opacity 150ms ease-in, visibility 150ms ease-in;
+}
+
+.hover-parent:hover > .hover-child {
+    visibility: visible;
+    opacity: 1;
+}
+
+.grid {
+    display: grid;
+}
+
+.column-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.z-index-3{
+    z-index: 3;
+}
+
 /* HEIGHTS AND WIDTHS */
 
 .max-width-content {
@@ -162,11 +334,11 @@
     min-height: 70vh;
 }
 
-.h-100{
+.h-100 {
     height: 100%;
 }
 
-.h-70vh{
+.h-70vh {
     height: 70vh;
 }
 
@@ -174,11 +346,23 @@
     width: 30%;
 }
 
+.w-100 {
+    width: 100%;
+}
+
 .w-200px {
     width: 200px;
 }
 
-.overflow-scroll-y{
+.w-230px {
+    width: 230px;
+}
+
+.w-max-content {
+    width: max-content;
+}
+
+.overflow-scroll-y {
     overflow-y: scroll;
 }
 
@@ -186,6 +370,14 @@
 
 .bold-text {
     font-weight: bold;
+}
+
+.font-smile-small {
+    font-size: small;
+}
+
+.no-word-break {
+    word-break: keep-all;
 }
 
 /*INHERITS*/
@@ -209,7 +401,46 @@
     box-shadow: none !important;
 }
 
+/* CURSOR */
+
+.clickable {
+    cursor: pointer;
+}
+
 /* CUSTOM */
+
+.likes_left, .likes_right {
+    position: relative;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, .3), 0 0.0625rem 0.125rem rgba(0, 0, 0, .2);
+    margin: 0;
+}
+
+.likes_left::before {
+    border-left: 0.5rem solid #fff;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid #fff;
+    border-bottom: 0.5rem solid transparent;
+    left: 10%;
+}
+
+.likes_right::before {
+    border-right: 0.5rem solid #fff;
+    border-left: 0.5rem solid transparent;
+    border-top: 0.5rem solid #fff;
+    border-bottom: 0.5rem solid transparent;
+    right: 10%;
+}
+
+.likes_right::before, .likes_left::before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -0.5rem;
+}
+
 /* REACT */
 
 /* FIN REACT */
