@@ -73,14 +73,17 @@ class ProfilController extends AppController
     public function addHobbies(){
 
       $hobbies = new User;
-      $hobbies->addHobbies([$_POST["hobby1"], $_POST["hobby2"],$_POST["hobby3"]]);
+      $hobbies->addHobbies([$_POST["hobby1"], $_POST["hobby2"],$_POST["hobby3"]], $_SESSION['user']['id']);
 
     }
 
     public function addTechnologies(){
 
+      var_dump($_POST);
+
       $technologies = new User;
-      $technologies->addTechnologies([$_POST["tech1"], $_POST["tech2"],$_POST["tech3"]]);
+      $technologies->addTechnologies([$_POST["tech1"], $_POST["tech2"],$_POST["tech3"]], $_SESSION['user']['id']);
+
     }
 
     public function updatePresentation(){
