@@ -1,7 +1,7 @@
 <?php
 
 define('ROOT', getcwd()); // On assigne à la constante ROOT le dossier de travail courant grâce à la fonction getcwd()
-session_start();
+// session_start();
 
 // Autoloader des Controller
 require ROOT . '/Autoloader.php';
