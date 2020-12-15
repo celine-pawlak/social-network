@@ -125,6 +125,21 @@ class IndexController extends AppController
                     $deco->deco();                                        
                 }
         } 
+    public function redirectHeader()
+        {
+            if(isset($_POST['action']) && $_POST['action']== '')
+                {
+                    
+                }
+            if(isset($_POST['action']) && $_POST['action']== '')
+                {
+
+                }
+            if(isset($_POST['action']) && $_POST['action']== '')
+                {
+
+                }
+        }
 }
 
 

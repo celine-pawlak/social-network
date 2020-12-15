@@ -38,16 +38,19 @@ $(function ()
                       },
                   });
             });
-          $('#prof_h').click(function()
+          $('#prof_h').click(function(e)
             {
-              
+              e.preventDefault();
+              let test = $(this).attr('id');
+              console.log(test)
+              // redirectHeader();
             });
     });
 function redirectHeader(page)
     {
       $.ajax(
         {
-          url : 'App/Controller/IndexController',
+          url : 'App/Controller/ProfilController',
           type : 'post',
           data : {action : page},
           success : (data)=>
