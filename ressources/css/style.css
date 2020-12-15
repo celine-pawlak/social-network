@@ -307,3 +307,17 @@ textarea:focus{
 .display-none{
   display: none;
 }
+
+
+/* SetProfil */
+.img_profil{
+    text-align: center;
+    margin-bottom: 10%;
+}
+.img_profil img{
+    margin: 5% auto;
+    display: block;
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+}

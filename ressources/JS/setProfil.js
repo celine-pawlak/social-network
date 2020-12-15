@@ -1,21 +1,23 @@
 $(document).ready(function(){
-      // Modification du profil
-  $("#profil").submit(function(e) {
+  // Modification du profil
+  $("#form_setprofil").submit(function(e) {
     e.preventDefault();
+
     $.ajax({
-      url: "ressources/php/modifier_profil.php",
+      url: "App/Controller/ProfilController",
       method: "POST",
-      data: new FormData(this),
+      data: {
+        action : 'updateProfil',
+        donnee : new FormData(this)
+      },
       contentType: false,
       cache: false,
       processData: false,
       success: function(data) {
-
+        console.log(data);
         if(data != "") {
-          $(".erreur").removeClass("hidden");
-          $(".erreur").text(data);
-        }
 
+        }
       }
     })
 

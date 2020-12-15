@@ -36,6 +36,11 @@ class ProfilController extends AppController
         $this->render('profil.setProfil', compact('infos_user'));
     }
 
+    public function updateProfil(){
+      echo 'toto';
+      // if(password_verify())
+    }
+
     public function addPostForm() {
       $infosUser = new User;
       // Si un formulaire a été envoyé, on ajoute la publication
