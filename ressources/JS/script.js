@@ -40,7 +40,7 @@ $(function ()
             });
           $('#prof_h').click(function(e)
             {
-              e.preventDefault();
+              // e.preventDefault();
               let test = $(this).attr('id');
               console.log(test)
               // redirectHeader();
