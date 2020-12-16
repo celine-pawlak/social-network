@@ -479,10 +479,6 @@
 .scrollbar-conversations::-webkit-scrollbar-thumb, .scrollbar-conversation::-webkit-scrollbar-thumb {
     background: #888;
 }
-
-
-/* REACT */
-/* FIN REACT */
 /* HEADER */
 .fa-power-off:hover
     {
@@ -624,3 +620,11 @@ textarea:focus {
 .display-none {
     display: none;
 }
+/* FIN SEE PROFIL */
+/* MESSAGERIE */
+#recherche_personne
+    {
+        margin: 0;
+        width: 25%;
+    }
+/* FIN MESSAGERIE */

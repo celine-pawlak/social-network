@@ -44,5 +44,11 @@ $(function ()
                         window.location = 'index.php';
                       },
                   });
-            });          
+            });     
+          //  Bouton créer conversation
+          $('#create_conversation').click(function(e)
+            {    
+              $('#bouton_conv').remove();       
+              $('#create_conversation').html("<div class='row' id='recherche_personne'><div class='col s12'><div class='input-field col s12 m-0'><input type='text' id='autocomplete-input' class='autocomplete' placeholder='Rechercher une personne...'></div></div></div>");              
+            });
     });
