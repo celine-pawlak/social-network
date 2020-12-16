@@ -6,11 +6,14 @@
     <div class="flex-row justify-content-spacearound">
         <!-- Liste conversations en cours -->
         <section id="all_conversations"
-                 class="overflow-scroll-y grey lighten-4 card border-radius-70px py-2 px-1 m-1 h-70vh">
+                 class="overflow-scroll-y scrollbar-conversations grey lighten-4 card border-radius-70px py-2 px-1 m-1 h-70vh">
             <?php if ($allconversationsInformations == null): ?>
                 <p>Vous n'avez pas de conversation</p>
             <?php else : ?>
                 <?php foreach ($allconversationsInformations as $conversationInformations) : ?>
+                    <?php if ($conversationInformations['conversation_id'] == $id_conversation) {
+                        $current_conversation = $conversationInformations;
+                    } ?>
                     <article class="flex-row align-items-center py-05 border-bot-blue w-230px relative">
                         <button id="allconversations_<?= $conversationInformations['conversation_id'] ?>"
                                 class="absolute position-all w-100 no-border no-background no-background-focus clickable"
@@ -30,19 +33,30 @@
             <?php endif; ?>
         </section>
         <!-- Conversation active -->
-        <section id="conversation_<?= $id_conversation ?>"
-                 class="grey lighten-4 card border-radius-70px flex-1 m-1 p-2 h-70vh">
-            <!-- Si pas de conversation -->
+        <section class="grey lighten-4 card border-radius-70px flex-1 m-1 p-2 h-70vh">
             <?php if ($last_messages == null): ?>
+            <!-- Si pas de conversation -->
             <div class="flex-column justify-content-center align-items-center h-100">
                 <img width="100px" src="ressources/img/default_conversation_image.png" alt="Logo de la Plateforme_">
-                <!-- Si conversation existante -->
                 <?php else : ?>
+                <!-- Si conversation existante -->
+                <div class="flex-row align-items-center">
+                    <img class="border-radius-100 mx-auto m-05 background-white"
+                         src="ressources/img/<?= $current_conversation['image'] ?>"
+                         alt="Image de la conversation"
+                         width="50px"
+                         height="50px">
+                    <div class="input-field flex-1">
+                        <input type="text" name="current_conversation_name" id="current_conversation_name" value="<?= $current_conversation['fullname'] ?>" <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'disabled' ?>>
+                        <label for="current_conversation_name">Nom de la conversation</label>
+                        <i class="material-icons tiny">edit</i>
+                    </div>
+                </div>
                 <div class="flex-column justify-content-spacebetween h-100">
-                    <div class="messages flex-column overflow-scroll-y h-100">
+                    <div class="messages flex-column overflow-scroll-y scrollbar-conversation h-100">
                         <!-- Messages -->
                         <?php foreach ($last_messages as $message): ?>
-                            <span class="light-grey-text mx-1 <?= ($message['users_id'] == $idUser) ? 'self-align-flexend' : '' ?>"><?= $message['creation_date'] ?></span>
+                            <span class="light-grey-text mx-1 <?= ($message['users_id'] == $idUser) ? 'self-align-flexend' : '' ?>"><?= strftime('%d/%m/%Y %R', strtotime($message['creation_date'])) ?></span>
                             <div class="hover-parent relative card border-radius-50px <?= ($message['users_id'] == $idUser) ? 'background-blue-grey flex-row-reverse' : 'background-white flex-row' ?>"
                                  id="messages_<?= $message['id'] ?>">
                                 <!-- Ajouter une réaction -->
@@ -50,7 +64,8 @@
                                     <div class="m-0 box-shadow background-white grey-text p-025 border-radius-30 no-border clickable relative hover-parent">
                                         <i class="fas fa-smile"></i><span>+</span>
                                         <div class="absolute position-top hover-child m-0 <?= ($message['users_id'] == $idUser) ? 'position-right-outside pl-05' : 'position-left-outside pr-05' ?>">
-                                            <section class="background-white border-radius-10 grid column-2 p-025 box-shadow z-index-3">
+                                            <section
+                                                    class="background-white border-radius-10 grid column-2 p-025 box-shadow z-index-3">
                                                 <?php foreach ($smileys as $smiley): ?>
                                                     <button class="clickable background-white no-border hover-blue-grey border-radius-50px m-02"
                                                             name="add_reaction_message"
@@ -108,10 +123,14 @@
                     </div>
                     <!-- Envoyer un message -->
                     <span class="px-1 flex-row justify-content-spacebetween align-items-center background-white border-radius-70px card">
-                        <label for="add_message">
-                            <input name="add_messsage" class="input-inherit my-05" placeholder="Votre message...">
+                        <label for="new_message_content" class="flex-1">
+                            <input id="new_message_content" name="new_message_content" class="input-inherit my-05"
+                                   placeholder="Votre message...">
                         </label>
-                        <i class="fas fa-paper-plane blue-text m-05"></i>
+                        <button id="add_message" name="add_message"
+                                class="no-border background-white clickable no-background-focus"
+                                value="<?= $id_conversation ?>"><i
+                                    class="fas fa-paper-plane blue-text m-05"></i></button>
                     </span>
                     <?php endif ?>
                 </div>

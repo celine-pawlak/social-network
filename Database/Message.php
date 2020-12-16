@@ -31,5 +31,20 @@ class Message extends Conversation
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Send a new message in an existing conversation
+     * @param $id_user
+     * @param $content
+     * @param $id_conversation
+     */
+    public function sendMessage($id_user, $content, $id_conversation){
+        $query = $this->_db->prepare("INSERT INTO messages (content, users_id, conversations_id) VALUES (:content, :user_id, :conversation_id)");
+        $query->execute([
+            ':content' => $content,
+            ':user_id' => $id_user,
+            ':conversation_id' => $id_conversation
+        ]);
+    }
+
 
 }
