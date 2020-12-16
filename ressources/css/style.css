@@ -472,12 +472,6 @@
 /* REACT */
 /* FIN REACT */
 /* HEADER */
-<<<<<<< HEAD
-.fa-power-off:hover {
-    cursor: pointer;
-}
-
-=======
 .fa-power-off:hover
     {
         cursor: pointer;
@@ -540,7 +534,6 @@ input[type=text]:not(.browser-default):focus:not([readonly]){
         color: #275FA0 !important;
     }
 /* FIN HEADER */
->>>>>>> header
 
 /* seeProfil */
 #seeProfil > .center-align > h1 {
