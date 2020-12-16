@@ -22,8 +22,8 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     if ($url == '' || $url[0] == 'index' || $url[0] == 'accueil' || $url[0] == 'index.php') {
         $action = 'index';
         $controller = '\App\Controller\IndexController';
-    } elseif ($url[0] == 'profil') {
-        $action = 'profil';
+    } elseif ($url[0] == 'monprofil') {
+        $action = 'monprofil';
         $controller = '\App\Controller\ProfilController';
     } elseif ($url[0] == 'wall') {
         $action = 'wall';
@@ -45,9 +45,12 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
         $controller = '\App\Controller\ProfilController';
     }elseif($url[0] == "updatePresentation") {
         $action = "updatePresentation";
-        $controller = '\App\Controller\ProfilController';    
+        $controller = '\App\Controller\ProfilController';
     }elseif($url[0] == "modifier_profil") {
         $action = "setProfil";
+        $controller = '\App\Controller\ProfilController';
+    }elseif($url[0] == "profil") {
+        $action = "profil";
         $controller = '\App\Controller\ProfilController';
     }
   }

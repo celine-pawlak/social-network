@@ -105,7 +105,7 @@ class User extends Database
     public function getInfosUser($id){
       $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
       $query->execute([$id]);
-
+      echo $id;
       return $query->fetchAll();
     }
 
@@ -162,50 +162,40 @@ class User extends Database
     }
 
     public function addTechnologies($technologies, $id){
+
+      $query = $this->_db->prepare("DELETE FROM users_technologies WHERE users_id = ?");
+      $query->execute([$id]);
+
       foreach($technologies as $technology) {
-        // s'il n'existe dans la table technologies, on le créé
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name_technology = ?");
-        $query->execute([$technology]);
 
-        if($query->fetchColumn() == 0) {
-          $query = $this->_db->prepare("INSERT INTO technologies(name_technology) VALUES (?)");
+        if($technology != "") {
+          // s'il n'existe dans la table technologies, on le créé
+          $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name_technology = ?");
           $query->execute([$technology]);
+
+          if($query->fetchColumn() == 0) {
+            $query = $this->_db->prepare("INSERT INTO technologies(name_technology) VALUES (?)");
+            $query->execute([$technology]);
+          }
+
+          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
+          $query->execute([$id, $technology]);
         }
 
-        $query = $this->_db->prepare("DELETE FROM users_technologies WHERE users_id = ?");
-        $query->execute([$id]);
-
-        foreach($technologies as $technology) {
-            $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
-            $query->execute([$id, $technology]);
-        }
       }
     }
 
     public function getTechnologies($id){
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM users_technologies WHERE users_id = ?");
-        $query->execute([$id]);
+      $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
+      $query->execute([$id]);
+      $data = $query->fetchAll();
 
-        $nb_technologies = $query->fetchColumn();
-
-        if($nb_technologies > 0) {
-          $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
-          $query->execute([$id]);
-          $data = $query->fetchAll();
-          $tableau = [
-            "tech1" => $data[0]["name_technology"],
-            "tech2" => $data[1]["name_technology"],
-            "tech3" => $data[2]["name_technology"]
-          ];
-
-        }else{
-          $tableau = [
-            "tech1" => "",
-            "tech2" => "",
-            "tech3" => ""
-          ];
-        }
-        return $tableau;
+      $tableau = [
+        "tech1" => isset($data[0]) ? $data[0]["name_technology"] : "",
+        "tech2" => isset($data[1]) ? $data[1]["name_technology"] : "",
+        "tech3" => isset($data[2]) ? $data[2]["name_technology"] : ""
+      ];
+      return $tableau;
     }
 
     public function updatePresentation($presentation, $id){
