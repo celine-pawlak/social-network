@@ -146,9 +146,9 @@ class User extends Database
         $query->execute([$id]);
         $data = $query->fetchAll();
         $tableau = [
-          "hobby1" => $data[0]["name_hobby"],
-          "hobby2" => $data[1]["name_hobby"],
-          "hobby3" => $data[2]["name_hobby"]
+          "hobby1" => isset($data[0]) ? $data[0]["name_hobby"] : "",
+          "hobby2" => isset($data[1]) ? $data[1]["name_hobby"] : "",
+          "hobby3" => isset($data[2]) ? $data[2]["name_hobby"] : "",
         ];
       } else {
         $tableau = [
@@ -213,7 +213,7 @@ class User extends Database
     public function deco()
         {
           session_destroy();
-          unset($_SESSION['user']);                    
+          unset($_SESSION['user']);
         }
 
     public function showProfil($id_user){
