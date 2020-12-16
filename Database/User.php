@@ -237,8 +237,35 @@ class User extends Database
         return $infos;
     }
 
-    public function updateFirstName(){
+    public function verifCurrentPassword($current_password){
+      $id_user = $_SESSION['user']['id'];
 
+      $query = $this->_db->prepare("SELECT password FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch();
+
+      if(password_verify($current_password, $result['password'])) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function updateFirstName($first_name){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("SELECT first_name FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch();
+
+      if($first_name != $result['first_name']) {
+        $query = $this->prepare("UPDATE users SET first_name = ? WHERE id = ?");
+        $query->execute([$first_name, $id_user]);
+
+        return 'updaté';
+      } else {
+        return false
+      }
     }
 
     public function updateLastName(){

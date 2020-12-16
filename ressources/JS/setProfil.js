@@ -3,26 +3,34 @@ $(document).ready(function(){
   $("#form_setprofil").submit(function(e) {
     e.preventDefault();
 
+    // console.log(this);
+
+    // var form_update = new FormData(this);
+    // console.log(form_update);
+
     $.ajax({
-      url: "App/Controller/ProfilController",
-      method: "POST",
-      data: {
+      url : 'App/Controller/ProfilController',
+      type : "POST",
+      data : {
         action : 'updateProfil',
-        donnee : new FormData(this)
+        first_name : $('#first_name').val(),
+        last_name : $('#last_name').val(),
+        password : $('#password').val(),
+        new_password : $('#new_password').val(),
+        conf_new_password : $('#conf_new_password').val()
       },
-      contentType: false,
-      cache: false,
-      processData: false,
-      success: function(data) {
+      // contentType: false,
+      // processData: false,
+      success : function(data) {
         console.log(data);
         if(data != "") {
 
         }
       }
-    })
+    });
 
-    if($("#avatar").val() != "") {
-      var changer_avatar = $("#avatar")[0].files[0].name;
+    if($("#update_avatar").val() != "") {
+      var changer_avatar = $("#aupdate_avatarvatar")[0].files[0].name;
 
       if(changer_avatar != "") {
         $("#image_avatar").attr("src", "img/" + changer_avatar);
