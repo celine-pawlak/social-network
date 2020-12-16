@@ -95,7 +95,7 @@ class User extends Database
 
     public function search()
         {
-            $requete = $this->_db->query("SELECT first_name, last_name, id FROM users");
+            $requete = $this->_db->query("SELECT first_name, last_name, id, picture_profil FROM users");
             $tableau = $requete->fetchAll(PDO::FETCH_ASSOC);
             return $tableau;
         }
