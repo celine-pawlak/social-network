@@ -48,7 +48,7 @@ $(function ()
           //  Bouton créer conversation
           $('#create_conversation').click(function(e)
             {    
-              $('#bouton_conv').remove();          
-              $('#create_conversation').html("<div class='row' id='recherche_personne'><div class='col s12'><div class='row m-0'><div class='input-field col s12 m-0'><input type='text' id='autocomplete-conv' class='autocomplete' placeholder='Rechercher une personne...'></div></div></div></div>");              
+              $('#bouton_conv').remove();                                 
+              $('#create_conversation').html("<div class='row' id='recherche_personne'><div class='col s12'><div class='row m-0'><div class='input-field col s12 m-0'><input type='text' id='autocomplete-conv' class='autocomplete' placeholder='Rechercher une personne...'/></div></div></div></div>");              
             });
     });
