@@ -95,7 +95,7 @@ class User extends Database
 
     public function search()
         {
-            $requete = $this->_db->query("SELECT first_name, last_name, id FROM users");
+            $requete = $this->_db->query("SELECT first_name, last_name, id, picture_profil FROM users");
             $tableau = $requete->fetchAll(PDO::FETCH_ASSOC);
             return $tableau;
         }
@@ -213,10 +213,8 @@ class User extends Database
     public function deco()
         {
           session_destroy();
-          unset($_SESSION['user']);
-          echo 'disconnect';
+          unset($_SESSION['user']);                    
         }
-
 
     public function showProfil($id_user){
         $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");

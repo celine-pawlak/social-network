@@ -121,7 +121,7 @@ class IndexController extends AppController
             if(isset($_POST['action']) && $_POST['action']=='deco')
                 {
                     $deco = new User;
-                    $deco->deco();                                        
+                    $deco->deco();                                           
                 }
         } 
     public function redirectHeader()
