@@ -36,8 +36,8 @@ class Reaction extends Database
                 $delete = $this->_db->prepare("DELETE FROM users_reacts WHERE users_id=? AND $nom_bloc=?");
                 $delete->execute([$id_user, $id_bloc]);
             } else {
-                $update = $this->_db->prepare("UPDATE users_reacts SET reacts_id=? WHERE $nom_bloc=?");
-                $update->execute([$id_react, $id_bloc]);
+                $update = $this->_db->prepare("UPDATE users_reacts SET reacts_id=? WHERE id=?");
+                $update->execute([$id_react, $hasReact['id']]);
             }
         } else {
             $requete = $this->_db->prepare("INSERT INTO users_reacts (users_id, reacts_id, $nom_bloc) VALUES (?, ?, ?)");
@@ -60,7 +60,6 @@ class Reaction extends Database
         $query->execute([':id_message' => $id_message]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
 }
 

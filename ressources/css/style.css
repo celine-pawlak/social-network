@@ -465,6 +465,18 @@
     bottom: -0.5rem;
 }
 
+.scrollbar-conversations::-webkit-scrollbar, .scrollbar-conversation::-webkit-scrollbar {
+    width: 10px;
+    overflow: hidden;
+}
+.scrollbar-conversations::-webkit-scrollbar-track, .scrollbar-conversation::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.scrollbar-conversations::-webkit-scrollbar-thumb, .scrollbar-conversation::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
 /* REACT */
 /* FIN REACT */
 /* HEADER */
