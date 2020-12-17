@@ -425,8 +425,6 @@
 .clickable {
     cursor: pointer;
 }
-
-
 /* CUSTOM */
 .nope {
     border-color: red !important;
@@ -479,6 +477,11 @@
 .scrollbar-conversations::-webkit-scrollbar-thumb, .scrollbar-conversation::-webkit-scrollbar-thumb {
     background: #888;
 }
+.bouton
+    {
+        background-color: #FFCA4B !important;
+        border-radius: 15px !important;
+    }
 /* HEADER */
 .fa-power-off:hover
     {
@@ -622,16 +625,20 @@ textarea:focus {
 }
 /* FIN SEE PROFIL */
 /* MESSAGERIE */
-#recherche_personne
+#pop-up-background 
     {
-        margin: 0;
-        width: 25%;
-    }
-    #pop-up-background {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         top: 0;
         bottom: 0;
         right: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.5);
+    }
+#pop-up-content
+    {
+        width: 30%;   
+        border-radius: 25px;     
     }
 /* FIN MESSAGERIE */
