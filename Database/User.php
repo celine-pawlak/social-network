@@ -223,7 +223,7 @@ class User extends Database
     public function deco()
         {
           session_destroy();
-          unset($_SESSION['user']);                    
+          unset($_SESSION['user']);
         }
 
 
@@ -263,7 +263,7 @@ class User extends Database
 
         return 'updaté';
       } else {
-        return false
+        return false;
       }
     }
 
