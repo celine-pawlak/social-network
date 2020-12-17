@@ -33,23 +33,68 @@
             <?php endif; ?>
         </section>
         <!-- Conversation active -->
-        <section class="grey lighten-4 card border-radius-70px flex-1 m-1 p-2 h-70vh">
-            <?php if ($last_messages == null): ?>
+        <section class="grey lighten-4 card border-radius-70px flex-1 m-1 px-2 pb-2 pt-6 h-70vh">
+            <?php if ($allconversationsInformations == null): ?>
             <!-- Si pas de conversation -->
-            <div class="flex-column justify-content-center align-items-center h-100">
+            <div class="flex-column justify-content-center align-items-center h-100 relative">
                 <img width="100px" src="ressources/img/default_conversation_image.png" alt="Logo de la Plateforme_">
                 <?php else : ?>
                 <!-- Si conversation existante -->
-                <div class="flex-row align-items-center">
-                    <img class="border-radius-100 mx-auto m-05 background-white"
-                         src="ressources/img/<?= $current_conversation['image'] ?>"
-                         alt="Image de la conversation"
-                         width="50px"
-                         height="50px">
-                    <div class="input-field flex-1">
-                        <input type="text" name="current_conversation_name" id="current_conversation_name" value="<?= $current_conversation['fullname'] ?>" <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'disabled' ?>>
-                        <label for="current_conversation_name">Nom de la conversation</label>
-                        <i class="material-icons tiny">edit</i>
+                <!-- Information conversation en cours -->
+                <div class="h-6rem flex-row align-items-center justify-content-spacebetween box-shadow absolute position-top z-index-4 w-100 background-lighter-grey px-1 pt-1 position-left border-top-radius-70px">
+                    <div class="flex-row align-items-center flex-1">
+                        <img class="border-radius-100 mx-auto m-05 background-white"
+                             src="ressources/img/<?= $current_conversation['image'] ?>"
+                             alt="Image de la conversation"
+                             width="50px"
+                             height="50px">
+                        <div class="input-field w-70 pb-0 m-0">
+                            <input class="font-smile-small m-0 blue-text bold-text" type="text"
+                                   name="new_conversation_name" id="new_conversation_name"
+                                   value="<?= $current_conversation['fullname'] ?>" <?= (($current_conversation['creator_id'] == $idUser) and ($current_conversation['members_number'] > 2)) ? '' : 'disabled' ?>>
+                            <label for="new_conversation_name"
+                                   class="<?= (($current_conversation['creator_id'] == $idUser) and ($current_conversation['members_number'] > 2)) ? '' : 'd-none' ?>">Nom
+                                de la conversation</label>
+                        </div>
+                        <button class="no-background-focus blue-text hover-yellow-text mx-1 background-lighter-grey clickable <?= (($current_conversation['creator_id'] == $idUser) and ($current_conversation['members_number'] > 2)) ? '' : 'd-none' ?> no-border"
+                                id="update_conversation_name" name="update_conversation_name" value="<?= $id_conversation ?>">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <div class="relative hover-parent mx-1"
+                         id="see_members">
+                        <span class="clickable bold-text blue-text"><i
+                                    class="fas fa-user-friends"></i><?= ($current_conversation['members_number'] > 2) ? ' ' . $current_conversation['members_number'] : '+' ?></span>
+                        <div class="absolute position-right hover-child pt-1">
+                            <div class="background-lighter-grey p-1 w-max-content box-shadow">
+                                <div class="flex-row align-items-center <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">
+                                    <label class="flex-1" for="new_member_id">
+                                        <input type="text" class="font-smile-small m-0 h-1rem" id="new_member_id"
+                                               name="new_member_id" placeholder="Ajouter...">
+                                    </label>
+                                    <button class="no-background-focus clickable background-lighter-grey no-border"
+                                            name="add_member_to_conversation"
+                                            id="add_member_to_conversation"
+                                            value="<?= $id_conversation ?>">
+                                        <i class="yellow-text fas fa-user-plus"></i>
+                                    </button>
+                                </div>
+                                <ul class="max-height-100vh overflow-scroll-y scrollbar-conversations <?= ($current_conversation['members_number'] > 2) ? '' : 'd-none' ?>">
+                                    <?php foreach ($current_conversation['members_informations'] as $user_informations): ?>
+                                        <li class="hover-blue-grey p-025 border-radius-50px">
+                                            <a class="flex-row align-items-center black-text" href="profil?id=<?= $user_informations['id'] ?>">
+                                                <img class="border-radius-100 mr-05 background-white"
+                                                     src="ressources/img/<?= $user_informations['picture_profil'] ?>"
+                                                     alt="Image de profil de <?= $user_informations['first_name'] ?> <?= $user_informations['last_name'] ?>"
+                                                     width="20px"
+                                                     height="20px">
+                                                <span class="font-smile-small"><?= $user_informations['first_name'] ?> <?= $user_informations['last_name'] ?></span>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="flex-column justify-content-spacebetween h-100">
@@ -122,7 +167,7 @@
                         <?php endforeach ?>
                     </div>
                     <!-- Envoyer un message -->
-                    <span class="px-1 flex-row justify-content-spacebetween align-items-center background-white border-radius-70px card">
+                    <span class="px-1 flex-row justify-content-spacebetween align-items-center background-white border-radius-70px card mb-0">
                         <label for="new_message_content" class="flex-1">
                             <input id="new_message_content" name="new_message_content" class="input-inherit my-05"
                                    placeholder="Votre message...">
@@ -130,7 +175,7 @@
                         <button id="add_message" name="add_message"
                                 class="no-border background-white clickable no-background-focus"
                                 value="<?= $id_conversation ?>"><i
-                                    class="fas fa-paper-plane blue-text m-05"></i></button>
+                                    class="fas fa-paper-plane blue-text hover-yellow-text m-05"></i></button>
                     </span>
                     <?php endif ?>
                 </div>
