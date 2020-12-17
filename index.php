@@ -1,7 +1,7 @@
 <?php
 
 define('ROOT', getcwd()); // On assigne à la constante ROOT le dossier de travail courant grâce à la fonction getcwd()
-define('URL', $_SERVER["HTTP_REFERER"]);
+define('URL', $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["SERVER_NAME"].str_replace('index.php','',$_SERVER['PHP_SELF']));
 
 // Autoloader des Controller
 require ROOT . '/Autoloader.php';
