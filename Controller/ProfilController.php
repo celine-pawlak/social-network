@@ -28,17 +28,19 @@ class ProfilController extends AppController
         ]);
     }
 
-    public function profil(){ // Profil des autres utilisateurs
+    public function profil($id){ // Profil des autres utilisateurs
+
       $posts = new Post;
       $infosUser = new User;
+
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
-        "posts" => $posts->getAllPosts(7),
-        "hobbies" => $infosUser->getHobbies(7),
-        "reacts" => $posts->getReacts(1),
-        "technologies" => $infosUser->getTechnologies(7),
-        "infosUser" => $infosUser->getInfosUser(7),
-        "presentation" => $infosUser->getPresentation(7)
+        "posts" => $posts->getAllPosts($id),
+        "hobbies" => $infosUser->getHobbies($id),
+        "reacts" => $posts->getReacts($id),
+        "technologies" => $infosUser->getTechnologies($id),
+        "infosUser" => $infosUser->getInfosUser($id),
+        "presentation" => $infosUser->getPresentation($id)
         ]);
     }
 
@@ -78,8 +80,6 @@ class ProfilController extends AppController
     }
 
     public function addTechnologies(){
-
-      var_dump($_POST);
 
       $technologies = new User;
       $technologies->addTechnologies([$_POST["tech1"], $_POST["tech2"],$_POST["tech3"]], $_SESSION['user']['id']);
