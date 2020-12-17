@@ -1,12 +1,11 @@
-<div id="create_conversation">
-        <button id="bouton_conv" class="ml-3 button-inherit"><i class="fas fa-plus-circle yellow-text"></i> Créer
-            une conversation
-        </button>
-    </div>
+<!-- Création conversation -->
+<div id="create_conversation" class="max-width-content">
+    <button id="bouton_conv" class="ml-3 button-inherit"><i class="fas fa-plus-circle yellow-text"></i> Créer
+        une conversation
+    </button>
+</div>
 
-<form id="messagerie" class="max-width-content" method="POST">
-    <!-- Création conversation -->
-  
+<form id="messagerie" class="max-width-content" method="POST">      
     <div class="flex-row justify-content-spacearound">
         <!-- Liste conversations en cours -->
         <section id="all_conversations"
