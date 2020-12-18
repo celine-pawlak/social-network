@@ -79,7 +79,7 @@ $(function ()
                         var groupeId = [creatorId];                        
                         for (var i = 0; i < user.length; i++) 
                           {
-                            dataUser[user[i].first_name + ' ' + user[i].last_name] = user[i].picture_profil;
+                            dataUser[user[i].first_name + ' ' + user[i].last_name] = 'ressources/img/'+user[i].picture_profil;
                             dataUserInfo[user[i].first_name + ' ' + user[i].last_name] = user[i];
                           }          
                           

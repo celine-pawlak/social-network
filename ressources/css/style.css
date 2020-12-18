@@ -631,6 +631,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
             {
                 height: 5vh;
             }
+        #pop-up-content
+            {
+                width: 50% !important;
+            }
     }
 @media screen and (max-width: 600px)
     {
@@ -647,6 +651,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
         #connect_header
             {
                 display: none;
+            }
+        #pop-up-content
+            {
+                width: 70% !important;
             }
     }
 /* FIN HEADER */
