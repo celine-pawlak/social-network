@@ -1,13 +1,13 @@
 <button id="modif_profil">Go to set your Profil</button>
 
 <div class="cover_img">
-  <img src="<?= "ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
+  <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
 </div>
 
 <div class="container" id="seeProfil">
   <div class="center-align">
     <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
-    <img src="<?= "ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
+    <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
 <div class="row center-align">
@@ -29,20 +29,26 @@
     <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
       <div class="information_profile" id="info_border">
         <h2 class="blue-text bold-text"> Technologies </h2>
+        <form class="form_tech" id="form_tech" method="post">
           <ul>
-            <li><?= $technologies["tech1"] ?></li>
-            <li><?= $technologies["tech2"] ?></li>
-            <li><?= $technologies["tech3"] ?></li>
+            <li><input type="text" name="tech1" value="<?= $technologies["tech1"] ?>"></input></li>
+            <li><input type="text" name="tech2" value="<?= $technologies["tech2"] ?>"></input></li>
+            <li><input type="text" name="tech3" value="<?= $technologies["tech3"] ?>"></input></li>
           </ul>
+          <button type="submit" name="button">Submit</button>
+        </form>
       </div>
 
       <div class="information_profile">
         <h2 class="blue-text bold-text"> Hobbies </h2>
+        <form class="form_hobbies" id="form_hobbies" method="post">
           <ul>
-            <li><?= $hobbies["hobby1"] ?></li>
-            <li><?= $hobbies["hobby2"] ?></li>
-            <li><?= $hobbies["hobby3"] ?></li>
+            <li><input type="text" name="hobby1" value="<?= $hobbies["hobby1"] ?>"></input></li>
+            <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>
+            <li><input type="text" name="hobby3" value="<?= $hobbies["hobby3"] ?>"></input></li>
           </ul>
+          <button type="submit" name="button">Submit</button>
+        </form>
 
       </div>
 
@@ -58,12 +64,13 @@
   </div>
 
   <div class="row">
+    <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
           <?php //var_dump($post); ?>
           <div class="col s1 m1">
-            <img class="circle miniature_img" src="<?= "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
-            <p><?= $post["first_name"] . " " .$post["last_name"] ?></p>
+            <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
+            <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
           </div>
 
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
@@ -75,7 +82,7 @@
                 <i id="fa-laugh-squint" class="fas fa-laugh-squint"></i>
                 <i id="fa-sign-language" class="fas fa-sign-language"></i>
               </p>
-              <p id="<?= "posts_" . $post['0'] ?>" class="">
+              <p id="<?= "posts_" . $post['0'] ?>" class="post_content">
                 <?= $post["content"] ?>
 
                 <?php foreach($reacts as $react):
@@ -84,7 +91,31 @@
                   endforeach;
                   ?>
               </p>
+
             </div>
+
+            <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
+              <div class="post comment_profile p-1 z-depth-1">
+                <div class="flex-row">
+                  <img class="circle miniature_img" src="<?= URL.'/ressources/img/'. $commentaire['picture'] ?>">
+                  <p class="bold-text ml-05"><?= $commentaire["first_name"] . " " . $commentaire["last_name"] ?></p>
+                </div>
+
+                <p><?= $commentaire["comment"] ?></p>
+                <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
+              </div>
+            <?php endforeach; ?>
+
+
+              <p>
+                <form class = "form_commentaire" method="post">
+                  <input type="hidden" name="id_user" value="<?= $id_user ?>">
+                  <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
+                  <input type="text" name="content" value="">
+                  <input type="submit" name="" value="Commenter">
+                </form>
+              </p>
+
 
           </div>
         <?php endforeach; ?>
