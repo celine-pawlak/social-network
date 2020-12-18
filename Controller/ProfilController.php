@@ -18,7 +18,7 @@ class ProfilController extends AppController
       $posts = new Post;
       $infosUser = new User;
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
-      $this->render('profil.seeProfil', [
+      $this->render('profil.seeMonProfil', [
         "posts" => $posts->getAllPosts($_SESSION['user']['id']),
         "hobbies" => $infosUser->getHobbies($_SESSION['user']['id']),
         "reacts" => $posts->getReacts($_SESSION['user']['id']),
