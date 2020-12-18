@@ -70,17 +70,19 @@
                                     class="fas fa-user-friends"></i><?= ($current_conversation['members_number'] > 2) ? ' ' . $current_conversation['members_number'] : '+' ?></span>
                         <div class="absolute position-right hover-child pt-1">
                             <div class="background-lighter-grey p-1 w-max-content box-shadow">
-                                <div class="flex-row align-items-center <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">
-                                    <label class="flex-1" for="new_member_id">
-                                        <input type="text" class="font-smile-small m-0 h-1rem" id="new_member_id"
-                                               name="new_member_id" placeholder="Ajouter...">
-                                    </label>
-                                    <button class="no-background-focus clickable background-lighter-grey no-border"
-                                            name="add_member_to_conversation"
-                                            id="add_member_to_conversation"
-                                            value="<?= $id_conversation ?>">
-                                        <i class="yellow-text fas fa-user-plus"></i>
-                                    </button>
+                                <div class="flex-column align-items-center input-field <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">                                    
+                                    <input type="text" class="font-smile-small m-0 h-1rem" id="new_member_id"
+                                            name="new_member_id" placeholder="Ajouter...">
+                                    <label for="new_member_id">Autocomplete</label> 
+                                    <div id="liste_membre_ajout">
+                                        <ul id="liste_membre"></ul>                             
+                                        <button class="no-background-focus clickable background-lighter-grey no-border"
+                                                name="add_member_to_conversation"
+                                                id="add_member_to_conversation"
+                                                value="<?= $id_conversation ?>">
+                                            <i class="yellow-text fas fa-user-plus"></i>
+                                        </button>
+                                    </div>      
                                 </div>
                                 <ul class="max-height-100vh overflow-scroll-y scrollbar-conversations <?= ($current_conversation['members_number'] > 2) ? '' : 'd-none' ?>">
                                     <?php foreach ($current_conversation['members_informations'] as $user_informations): ?>
