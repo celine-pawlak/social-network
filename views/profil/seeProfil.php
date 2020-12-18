@@ -68,7 +68,7 @@
         <?php foreach($posts as $post): ?>
           <?php //var_dump($post); ?>
           <div class="col s1 m1">
-            <img class="circle miniature_img" src="<?= "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
+            <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
             <p><?= $post["first_name"] . " " .$post["last_name"] ?></p>
           </div>
 
