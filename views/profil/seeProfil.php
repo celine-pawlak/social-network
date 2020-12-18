@@ -95,7 +95,8 @@
 
             <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
               <div class="post comment_profile p-1 z-depth-1">
-                <p class="bold-text"><?= $commentaire["user_id"] ?> (changer ici par pseudo)</p>
+                <img class="circle miniature_img" src="<?= URL.'/ressources/img/'. $commentaire['picture'] ?>">
+                <p class="bold-text"><?= $commentaire["first_name"] . " " . $commentaire["last_name"] ?></p>
                 <p><?= $commentaire["comment"] ?></p>
                 <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
               </div>
