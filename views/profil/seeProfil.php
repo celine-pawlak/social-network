@@ -69,7 +69,7 @@
           <?php //var_dump($post); ?>
           <div class="col s1 m1">
             <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
-            <p><?= $post["first_name"] . " " .$post["last_name"] ?></p>
+            <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
           </div>
 
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
@@ -90,14 +90,18 @@
                   endforeach;
                   ?>
               </p>
-              <p>
 
-                <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
-                  <p><?= $commentaire["comment"] ?></p>
-                  <p>le <?= $commentaire["date_creation"] ?></p>
-                  <p>par <?= $commentaire["user_id"] ?> (changer ici par pseudo)</p>
-                <?php endforeach; ?>
-              </p>
+            </div>
+
+            <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
+              <div class="post comment_profile p-1 z-depth-1">
+                <p class="bold-text"><?= $commentaire["user_id"] ?> (changer ici par pseudo)</p>
+                <p><?= $commentaire["comment"] ?></p>
+                <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
+              </div>
+            <?php endforeach; ?>
+
+
               <p>
                 <form class = "form_commentaire" method="post">
                   <input type="hidden" name="id_user" value="<?= $id_user ?>">
@@ -106,7 +110,7 @@
                   <input type="submit" name="" value="Commenter">
                 </form>
               </p>
-            </div>
+
 
           </div>
         <?php endforeach; ?>
