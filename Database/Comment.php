@@ -29,12 +29,11 @@ class Comment extends Post
         FROM comments
         JOIN users on comments.user_id = users.id
         WHERE comments.posts_id = ?
-        ORDER BY comments.creation_date DESC");
+        ORDER BY comments.creation_date ASC");
         $comments->execute([$post["id"]]);
 
         $sous_tableau = [];
         while($comment = $comments->fetch()) {
-          var_dump($comment); //Permet de voir le contenu de la jointure
           $sous_tableau[] = [
             "date_creation" => $comment["creation_date"],
             "comment" => $comment["content"],
@@ -62,7 +61,14 @@ class Comment extends Post
     public function addComment($content, $post_id, $user_id)
     {
       $query = $this->_db->prepare("INSERT INTO comments(content, creation_date, user_id, posts_id) VALUES (?, NOW(), ?, ?)");
-      $query->execute([$content, $post_id, $user_id]);
+      $query->execute([$content, $user_id, $post_id]);
+
+      $query = $this->_db->query("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i')
+      FROM comments
+      JOIN users on comments.user_id = users.id
+      WHERE comments.id = LAST_INSERT_ID()");
+      echo json_encode($query->fetch());
+
     }
 
     public function id()

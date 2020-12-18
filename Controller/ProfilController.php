@@ -54,7 +54,8 @@ class ProfilController extends AppController
 
     public function ajouterCommentaire() {
       $comment = new Comment;
-      $comment->addComment($_POST["content"], $_POST["id_post"], $_POST["id_user"]);
+      $response = $comment->addComment($_POST["content"], $_POST["id_post"], $_POST["id_user"]);
+      return json_encode($response);
     }
 
     public function setProfil(){

@@ -1,5 +1,3 @@
-
-
 <button id="modif_profil">Go to set your Profil</button>
 
 <div class="cover_img">
@@ -51,7 +49,6 @@
     <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
-          <?php //var_dump($post); ?>
           <div class="col s1 m1">
             <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
             <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
@@ -76,6 +73,7 @@
                   ?>
               </p>
             </div>
+            <div id="<?= 'commentaires_post_'.$post['0'] ?>">
 
             <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
               <div class="post comment_profile p-1 z-depth-1">
@@ -88,7 +86,8 @@
                 <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
               </div>
             <?php endforeach; ?>
-
+            </div>
+            
             <form class ="form_comment center-align" method="post">
               <input type="hidden" name="id_user" value="<?= $id_user ?>">
               <input type="hidden" name="id_post" value="<?= $post['0'] ?>">

@@ -24,7 +24,7 @@ $(function ()
                       onAutocomplete : function(e)
                         {
                           $('input.autocomplete').val('');
-                          window.location = "profil/"+dataUserId[e].id;                          
+                          window.location = "profil/"+dataUserId[e].id;
                         },
                     });
                 },
