@@ -1,6 +1,8 @@
 <?php
+session_start();
 
 define('ROOT', getcwd()); // On assigne à la constante ROOT le dossier de travail courant grâce à la fonction getcwd()
+// la constante URL contient "http://localhost/social-network/"
 define('URL', $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["SERVER_NAME"].str_replace('index.php','',$_SERVER['PHP_SELF']));
 
 // Autoloader des Controller
@@ -23,8 +25,14 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
         $action = 'index';
         $controller = '\App\Controller\IndexController';
     } elseif ($url[0] == 'monprofil') {
+      if(isset($_SESSION['user']['id'])){
         $action = 'monprofil';
         $controller = '\App\Controller\ProfilController';
+      }else{
+        $action = "index";
+        $controller = '\App\Controller\IndexController';
+      }
+
     } elseif ($url[0] == 'wall') {
         $action = 'wall';
         $controller = '\App\Controller\ProfilController';
