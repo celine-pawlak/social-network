@@ -12,18 +12,16 @@
 
 <div class="row center-align">
   <a id="scale-infos" href="#!" class="btn btn-large">
-   Mes informations
+   Plus d'informations
   </a>
 </div>
 
   <div class="row scale-transition scale-out display-none" id="infos-toggle">
     <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
       <h2 class="blue-text bold-text center-align"> Présentation </h2>
-
-      <form id="form_presentation" method="post">
-        <textarea id="update_presentation" rows="8" cols="80" name="presentation"><?= $presentation['presentation'] ?></textarea>
-        <button type="submit" name="button">Submit</button>
-      </form>
+      <p>
+        <?= $presentation['presentation'] ?>
+      </p>
     </div>
 
     <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
@@ -43,27 +41,18 @@
             <li><?= $hobbies["hobby2"] ?></li>
             <li><?= $hobbies["hobby3"] ?></li>
           </ul>
-
       </div>
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col s10 m10 offset-m1">
-      <form class="form_profile p-2 background-lighter-grey z-depth-1" action="addPostForm" method="post">
-        <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
-        <button class="btn-floating waves-effect waves-light" type="submit" name="button"><i class="material-icons">send</i></button>
-      </form>
     </div>
   </div>
 
   <div class="row">
+    <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
           <?php //var_dump($post); ?>
           <div class="col s1 m1">
-            <img class="circle miniature_img" src="<?= URL."ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
-            <p><?= $post["first_name"] . " " .$post["last_name"] ?></p>
+            <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
+            <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
           </div>
 
           <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
@@ -75,7 +64,7 @@
                 <i id="fa-laugh-squint" class="fas fa-laugh-squint"></i>
                 <i id="fa-sign-language" class="fas fa-sign-language"></i>
               </p>
-              <p id="<?= "posts_" . $post['0'] ?>" class="">
+              <p id="<?= "posts_" . $post['0'] ?>" class="post_content">
                 <?= $post["content"] ?>
 
                 <?php foreach($reacts as $react):
@@ -86,10 +75,26 @@
               </p>
             </div>
 
+            <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
+              <div class="post comment_profile p-1 z-depth-1">
+                <div class="flex-row">
+                  <img class="circle miniature_img" src="<?= URL.'/ressources/img/'. $commentaire['picture'] ?>">
+                  <p class="bold-text ml-05"><?= $commentaire["first_name"] . " " . $commentaire["last_name"] ?></p>
+                </div>
+
+                <p><?= $commentaire["comment"] ?></p>
+                <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
+              </div>
+            <?php endforeach; ?>
+
+            <form class = "form_commentaire" method="post">
+              <input type="hidden" name="id_user" value="<?= $id_user ?>">
+              <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
+              <input type="text" name="content" value="">
+              <input type="submit" class="btn" name="" value="Commenter">
+            </form>
           </div>
         <?php endforeach; ?>
-
-
     </div>
 
   </div>
