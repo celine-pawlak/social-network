@@ -43,7 +43,8 @@ class Conversation extends Database
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function usersFromConversationInformations($id_conversation){
+    public function usersFromConversationInformations($id_conversation)
+    {
         $query = $this->_db->prepare("
         SELECT users.id, users.first_name, users.last_name, users.picture_profil
         FROM users
@@ -52,6 +53,79 @@ class Conversation extends Database
         ORDER BY users.first_name");
         $query->execute(['conversationId' => $id_conversation]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function isCreator($id_user, $id_conversation)
+    {
+        $query = $this->_db->prepare("SELECT * FROM conversations WHERE creator_id = :creator_id AND id = :conversation_id");
+        $query->execute([
+            ':creator_id' => $id_user,
+            ':conversation_id' => $id_conversation
+        ]);
+        if (empty($query->fetchAll())) {
+            return false;
+        }
+        return true;
+    }
+
+    public function updateName($id_conversation, $new_conversation_name)
+    {
+        $query = $this->_db->prepare("UPDATE conversations SET name = :new_conversation_name WHERE id = :conversation_id");
+        $query->execute([
+            ':new_conversation_name' => $new_conversation_name,
+            ':conversation_id' => $id_conversation
+        ]);
+    }
+
+    public function isDuo($id_conversation)
+    {
+        $query = $this->_db->prepare("SELECT * FROM users_conversations WHERE conversations_id = :conversation_id");
+        $query->execute([
+            ':conversation_id' => $id_conversation
+        ]);
+        $conversation = $query->fetchAll();
+        if (count($conversation) > 2) {
+            return false;
+        }
+        return $conversation;
+    }
+
+    public function isMember($user_id, $id_conversation)
+    {
+        $query = $this->_db->prepare("SELECT * FROM users_conversations WHERE (conversations_id = :conversation_id AND users_id = :user_id)");
+        $query->execute([
+            ':conversation_id' => $id_conversation,
+            ':user_id' => $user_id
+        ]);
+        if (empty($query->fetchAll())) {
+            return false;
+        }
+        return true;
+    }
+
+    public function addMember($id_conversation, $new_member_id)
+    {
+        $query = $this->_db->prepare("INSERT INTO users_conversations (conversations_id, users_id) VALUES (:conversation_id, :user_id)");
+        $query->execute([
+            ':conversation_id' => $id_conversation,
+            ':user_id' => $new_member_id
+        ]);
+    }
+
+    public function newConversation($creator_id, $users_id)
+    {
+        $query = $this->_db->prepare("INSERT INTO conversations (creator_id) VALUES (:creator_id)");
+        $query->execute([
+            ':creator_id' => $creator_id
+        ]);
+        $latest_id = $this->_db->lastInsertId();
+        foreach ($users_id as $user_id) {
+            $query2 = $this->_db->prepare("INSERT INTO users_conversations (users_id, conversations_id) VALUES (:user_id, :conversation_id)");
+            $query2->execute([
+                ':user_id' => $user_id,
+                ':conversation_id' => $latest_id
+            ]);
+        }
     }
 
     public function id()

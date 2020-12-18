@@ -24,6 +24,6 @@
             <li class="divider" tabindex="-1"></li>
             <li><a href="modifier_profil">Modifier profil</a></li>        
         </ul>
-        <i class="fas fa-power-off"></i>
+        <i class="fas fa-power-off clickable"></i>
     </div>
 </section>

@@ -24,6 +24,54 @@ class MessagerieController extends AppController
         $last_messages = null;
         $conversations = new Conversation;
         $reacts = new Reaction;
+        $messages = new Message;
+        $id_conversation = null;
+
+
+        // Si ajout d'une reaction
+        if (isset($_POST['add_reaction_message']) && !empty($_POST['add_reaction_message'])) {
+            $reaction = explode('.', $_POST['add_reaction_message']);
+            $message_id = $reaction[0];
+            $react_id = $reaction[1];
+            $reacts->insertEmoji($idUser, $react_id, $message_id, 'messages');
+        }
+
+        // Si ajout d'un message
+        if (isset($_POST['add_message']) && !empty($_POST['add_message'])) {
+            $message_content = htmlspecialchars($_POST['new_message_content']);
+            $conversation_id = $_POST['add_message'];
+            $messages->sendMessage($idUser, $message_content, $conversation_id);
+        }
+
+        // Si modification du name
+        if (isset($_POST['update_conversation_name']) && !empty($_POST['update_conversation_name'])) {
+            $new_conversation_name = htmlspecialchars($_POST['new_conversation_name']);
+            $conversation_id = $_POST['update_conversation_name'];
+            if ($conversations->isCreator($idUser, $conversation_id)) {
+                $conversations->updateName($conversation_id, $new_conversation_name);
+            }
+        }
+
+        // Si ajout d'un membre
+        if (isset($_POST['add_member_to_conversation']) && !empty($_POST['add_member_to_conversation'])) {
+            $new_member_id = $_POST['new_member_id'];
+            $conversation_id = $_POST['add_member_to_conversation'];
+            // Si conversation duo créer nouvelle conversation
+            $new_group_members = $conversations->isDuo($conversation_id);
+            if ($new_group_members && (!$conversations->isMember($new_member_id, $conversation_id))) {
+                foreach ($new_group_members as $new_group_member) {
+                    $id_new_group_members[] = $new_group_member['users_id'];
+                }
+                $id_new_group_members[] = $new_member_id;
+                //nouvelle conversation avec les deux users + le nouveau
+                $conversations->newConversation($idUser, $id_new_group_members);
+            } else {
+                // Sinon ajouter membre
+                if ($conversations->isCreator($idUser, $conversation_id) && (!$conversations->isMember($new_member_id, $conversation_id))) {
+                    $conversations->addMember($conversation_id, $new_member_id);
+                }
+            }
+        }
 
         $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);
         foreach ($allconversations as $key => $conversation) {
@@ -31,15 +79,14 @@ class MessagerieController extends AppController
         }
         $allconversationsInformations = $this->getConversationsInformations($allconversations, $idUser);
 
-        if ($allconversationsInformations != null){
+        if ($allconversationsInformations != null) {
             $id_conversation = $allconversations[0]['conversation_id'];
-            if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])){
+            if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])) {
                 $id_conversation = $_POST['seeConversation'];
             }
-            $messages = new Message;
             $last_messages = $messages->getAllMessagesFromConversation($id_conversation);
 
-            foreach ($last_messages as $key => $message){
+            foreach ($last_messages as $key => $message) {
                 $last_messages[$key]['reactions'] = $reacts->getAllReactionsFromMessage($message['id']);
             }
         }
@@ -84,10 +131,13 @@ class MessagerieController extends AppController
             }
             $allconversationsInformations[] = [
                 'name' => strlen($name_conversation) > 30 ? substr($name_conversation, 0, 30) . '...' : $name_conversation,
+                'fullname' => $name_conversation,
                 'creator_id' => $conversation['creator_id'],
                 'image' => $image_conversation,
                 'last_message' => $conversation['message_content'],
                 'conversation_id' => $conversation['conversation_id'],
+                'members_number' => count($conversation['users_informations']),
+                'members_informations' => $conversation['users_informations']
             ];
         }
         return $allconversationsInformations;
