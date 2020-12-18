@@ -2,6 +2,8 @@ $(function ()
     {                    
         // Dropdown header
         $('.dropdown-trigger').dropdown();
+        // Responsive menu  
+        $('.sidenav').sidenav({edge: 'right'});
         // Search bar header                      
         $.ajax(
           {
@@ -15,7 +17,7 @@ $(function ()
                   var dataUserId = {};
                   for (var i = 0; i < user.length; i++) 
                     {
-                      dataUser[user[i].first_name + ' ' + user[i].last_name] = user[i].picture_profil;
+                      dataUser[user[i].first_name + ' ' + user[i].last_name] = 'ressources/img/'+user[i].picture_profil;
                       dataUserId[user[i].first_name + ' ' + user[i].last_name] = user[i];
                     }                                            
                   $('input.autocomplete').autocomplete(
@@ -48,7 +50,7 @@ $(function ()
           //  Bouton créer conversation
           $('#bouton_conv').click(function(e)
             {    
-              $('body').append("<section id='pop-up-background' class='z-index-3 absolute flex flex-column justify-center align-center'>" +
+              $('body').append("<section id='pop-up-background' class='z-index-5 absolute flex flex-column justify-center align-center'>" +
               "<div id='pop-up-content' class='m-1 background-white p-05'>" +              
               "<div class='row m-0' id='recherche_personne'>"+
               "<div class='col s12'>"+
@@ -90,6 +92,7 @@ $(function ()
                                   {
                                     $('#autocomplete-conv').val('');                                       
                                   }
+                                // C'est la que c'est envoyer
                                 else  
                                   {
                                     groupeId.push(dataUserInfo[e].id);                                       
@@ -100,6 +103,7 @@ $(function ()
                                         $(this).parent().remove();
                                         groupeId.splice($.inArray(dataUserInfo[e].id, groupeId), 1);                                        
                                       });
+                                    // Faire envoie ajax pour créer conversation
                                   }                              
                               },
                           });      
