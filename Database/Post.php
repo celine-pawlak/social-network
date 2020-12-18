@@ -29,7 +29,7 @@ class Post extends Database
       $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM post
         JOIN users on post.users_id = users.id WHERE users.id = ? ORDER BY post.id DESC");
       $query->execute([$id]);
-
+      //var_dump($query->fetchAll());
       return $query->fetchAll();
     }
 

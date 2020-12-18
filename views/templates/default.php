@@ -23,6 +23,7 @@
     <script src="<?= URL ?>/ressources/JS/module_connexion.js"></script>
     <script src="<?= URL ?>/ressources/JS/inscription.js"></script>
     <script src="<?= URL ?>/ressources/JS/profil.js"></script>
+    <script src="<?= URL ?>/ressources/JS/commentaire.js"></script>
     <script src="<?= URL ?>/ressources/JS/ajaxProfile.js"></script>
 </head>
 <body>

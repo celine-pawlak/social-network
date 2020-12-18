@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Database\Post;
 use App\Database\User;
+use App\Database\Comment;
 
 class ProfilController extends AppController
 {
@@ -19,6 +20,7 @@ class ProfilController extends AppController
       $infosUser = new User;
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeMonProfil', [
+        "id_user" => $_SESSION['user']['id'],
         "posts" => $posts->getAllPosts($_SESSION['user']['id']),
         "hobbies" => $infosUser->getHobbies($_SESSION['user']['id']),
         "reacts" => $posts->getReacts($_SESSION['user']['id']),
@@ -32,16 +34,24 @@ class ProfilController extends AppController
 
       $posts = new Post;
       $infosUser = new User;
+      $commentaires = new Comment;
 
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
+        "id_user" => $id,
         "posts" => $posts->getAllPosts($id),
         "hobbies" => $infosUser->getHobbies($id),
         "reacts" => $posts->getReacts($id),
         "technologies" => $infosUser->getTechnologies($id),
         "infosUser" => $infosUser->getInfosUser($id),
-        "presentation" => $infosUser->getPresentation($id)
+        "presentation" => $infosUser->getPresentation($id),
+        "commentaires" => $commentaires->getAllComment($id)
         ]);
+    }
+
+    public function ajouterCommentaire() {
+      $comment = new Comment;
+      $comment->addComment($_POST["content"], $_POST["id_post"], $_POST["id_user"]);
     }
 
     public function setProfil(){

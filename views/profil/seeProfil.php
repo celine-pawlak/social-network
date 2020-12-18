@@ -90,6 +90,22 @@
                   endforeach;
                   ?>
               </p>
+              <p>
+
+                <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
+                  <p><?= $commentaire["date_creation"] ?></p>
+                  <p>le <?= $commentaire["comment"] ?></p>
+                  <p>par <?= $commentaire["user_id"] ?> (changer ici par pseudo)</p>
+                <?php endforeach; ?>
+              </p>
+              <p>
+                <form id = "form_commentaire" method="post">
+                  <input type="hidden" name="id_user" value="<?= $id_user ?>">
+                  <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
+                  <input type="text" name="content" value="">
+                  <input type="submit" name="" value="Commenter">
+                </form>
+              </p>
             </div>
 
           </div>
