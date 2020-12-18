@@ -1,3 +1,5 @@
+
+
 <button id="modif_profil">Go to set your Profil</button>
 
 <div class="cover_img">
@@ -78,7 +80,7 @@
             <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
               <div class="post comment_profile p-1 z-depth-1">
                 <div class="flex-row">
-                  <img class="circle miniature_img" src="<?= URL.'/ressources/img/'. $commentaire['picture'] ?>">
+                  <img class="circle miniature_img" src="<?= URL.'ressources/img/'. $commentaire['picture'] ?>">
                   <p class="bold-text ml-05"><?= $commentaire["first_name"] . " " . $commentaire["last_name"] ?></p>
                 </div>
 

@@ -18,6 +18,8 @@ class ProfilController extends AppController
     public function monprofil(){
       $posts = new Post;
       $infosUser = new User;
+      $commentaires = new Comment;
+
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeMonProfil', [
         "id_user" => $_SESSION['user']['id'],
@@ -26,7 +28,8 @@ class ProfilController extends AppController
         "reacts" => $posts->getReacts($_SESSION['user']['id']),
         "technologies" => $infosUser->getTechnologies($_SESSION['user']['id']),
         "infosUser" => $infosUser->getInfosUser($_SESSION['user']['id']),
-        "presentation" => $infosUser->getPresentation($_SESSION['user']['id'])
+        "presentation" => $infosUser->getPresentation($_SESSION['user']['id']),
+        "commentaires" => $commentaires->getAllComment($_SESSION['user']['id'])
         ]);
     }
 

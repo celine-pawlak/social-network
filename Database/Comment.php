@@ -18,20 +18,23 @@ class Comment extends Post
     }
 
     public function getAllComment($user_id) {
-      // télécharger tous les posts de l'user
+      // récupère tous les posts de l'user
       $posts = $this->_db->prepare("SELECT * FROM post WHERE users_id = ?");
       $posts->execute([$user_id]);
 
-      // télécharger tous les commentaires de ces posts
       $tableau = [];
       while($post = $posts->fetch()) {
-        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM comments
-        JOIN users on comments.user_id = users.id WHERE users.id = ? ORDER BY comments.id DESC");
+        // récupère tous les commentaires de ces posts
+        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i')
+        FROM comments
+        JOIN users on comments.user_id = users.id
+        WHERE comments.posts_id = ?
+        ORDER BY comments.creation_date DESC");
         $comments->execute([$post["id"]]);
 
         $sous_tableau = [];
         while($comment = $comments->fetch()) {
-          //var_dump($comment); Permet de voir le contenu de la jointure
+          var_dump($comment); //Permet de voir le contenu de la jointure
           $sous_tableau[] = [
             "date_creation" => $comment["creation_date"],
             "comment" => $comment["content"],
