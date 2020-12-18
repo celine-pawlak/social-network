@@ -21,7 +21,8 @@ $(function ()
                     {
                       dataUser[user[i].first_name + ' ' + user[i].last_name] = 'ressources/img/'+user[i].picture_profil;
                       dataUserId[user[i].first_name + ' ' + user[i].last_name] = user[i];
-                    }                                            
+                    }                  
+                  // Autocomplete barre de recherche header
                   $('input.autocomplete').autocomplete(
                     {
                       data: dataUser,                      
@@ -56,6 +57,7 @@ $(function ()
                                       idMembre = '';                                        
                                     });                               
                                   // ici faire l'action
+                                  // id de la personne à ajouter = idMembre
                                 }                                                                                                             
                             }                              
                         },
@@ -112,8 +114,7 @@ $(function ()
                           {
                             dataUser[user[i].first_name + ' ' + user[i].last_name] = 'ressources/img/'+user[i].picture_profil;
                             dataUserInfo[user[i].first_name + ' ' + user[i].last_name] = user[i];
-                          }          
-                          
+                          }                                    
                         $('#autocomplete-conv').autocomplete(
                           {
                             data: dataUser,                      
@@ -122,8 +123,7 @@ $(function ()
                                 if(jQuery.inArray(dataUserInfo[e].id, groupeId) !== -1)                                 
                                   {
                                     $('#autocomplete-conv').val('');                                       
-                                  }
-                                // C'est la que c'est envoyer
+                                  }                                
                                 else  
                                   {
                                     groupeId.push(dataUserInfo[e].id);                                       
@@ -135,6 +135,8 @@ $(function ()
                                         groupeId.splice($.inArray(dataUserInfo[e].id, groupeId), 1);                                        
                                       });
                                     // Faire envoie ajax pour créer conversation
+                                    // id du créateur = creatorId
+                                    // tableau avec tous les id = groupeId
                                   }                              
                               },
                           });      
