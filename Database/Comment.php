@@ -25,14 +25,23 @@ class Comment extends Post
       // télécharger tous les commentaires de ces posts
       $tableau = [];
       while($post = $posts->fetch()) {
-        $comments = $this->_db->prepare("SELECT * FROM comments WHERE posts_id = ?");
+        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM comments WHERE posts_id = ?"); // faire une jointure avec users
         $comments->execute([$post["id"]]);
-        $tableau["post_".$post["id"]] = $comments->fetchAll();
+
+        $sous_tableau = [];
+        while($comment = $comments->fetch()) {
+          var_dump($comment);
+          $sous_tableau[] = [
+            "date_creation" => $comment["creation_date"],
+            "comment" => $comment["content"],
+            "user_id" => $comment["user_id"],
+            "date" => $comment[5]
+          ];
+        }
+        $tableau["post_".$post["id"]] = $sous_tableau;
       }
 
       return $tableau;
-
-
     }
 
     public function getCommentPost($post_id)
