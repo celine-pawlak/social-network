@@ -1,13 +1,13 @@
 <button id="modif_profil">Go to set your Profil</button>
 
 <div class="cover_img">
-  <img src="<?= "ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
+  <img src="<?= URL. "ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
 </div>
 
 <div class="container" id="seeProfil">
   <div class="center-align">
     <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
-    <img src="<?= "ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
+    <img src="<?= URL."ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
 <div class="row center-align">
@@ -62,7 +62,7 @@
         <?php foreach($posts as $post): ?>
           <?php //var_dump($post); ?>
           <div class="col s1 m1">
-            <img class="circle miniature_img" src="<?= "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
+            <img class="circle miniature_img" src="<?= URL."ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
             <p><?= $post["first_name"] . " " .$post["last_name"] ?></p>
           </div>
 
