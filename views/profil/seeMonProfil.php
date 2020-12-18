@@ -106,17 +106,12 @@
               </div>
             <?php endforeach; ?>
 
-
-              <p>
-                <form class = "form_commentaire" method="post">
-                  <input type="hidden" name="id_user" value="<?= $id_user ?>">
-                  <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
-                  <input type="text" name="content" value="">
-                  <input type="submit" name="" value="Commenter">
-                </form>
-              </p>
-
-
+            <form class = "form_commentaire" method="post">
+              <input type="hidden" name="id_user" value="<?= $id_user ?>">
+              <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
+              <input type="text" name="content" value="">
+              <input type="submit" class="btn" name="" value="Commenter">
+            </form>
           </div>
         <?php endforeach; ?>
 

@@ -87,7 +87,7 @@
               </div>
             <?php endforeach; ?>
 
-            <form class = "form_commentaire" method="post">
+            <form class ="form_comment center-align" method="post">
               <input type="hidden" name="id_user" value="<?= $id_user ?>">
               <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
               <input type="text" name="content" value="">
