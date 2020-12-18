@@ -1,13 +1,13 @@
 <button id="modif_profil">Go to set your Profil</button>
 
 <div class="cover_img">
-  <img src="<?= "ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
+  <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
 </div>
 
 <div class="container" id="seeProfil">
   <div class="center-align">
     <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
-    <img src="<?= "ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
+    <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
 <div class="row center-align">
@@ -93,13 +93,13 @@
               <p>
 
                 <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
-                  <p><?= $commentaire["date_creation"] ?></p>
-                  <p>le <?= $commentaire["comment"] ?></p>
+                  <p><?= $commentaire["comment"] ?></p>
+                  <p>le <?= $commentaire["date_creation"] ?></p>
                   <p>par <?= $commentaire["user_id"] ?> (changer ici par pseudo)</p>
                 <?php endforeach; ?>
               </p>
               <p>
-                <form id = "form_commentaire" method="post">
+                <form class = "form_commentaire" method="post">
                   <input type="hidden" name="id_user" value="<?= $id_user ?>">
                   <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
                   <input type="text" name="content" value="">
