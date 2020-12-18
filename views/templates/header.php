@@ -14,8 +14,10 @@
     </div>
     <!-- Partie profil -->
     <div id="profil_header">
-        <!-- Image de profil -->
-        <img src="<?= isset($_SESSION['user']) ? URL . "ressources/img/" . $_SESSION['user']['picture_profil'] : '' ?>" alt="photo de profil" id="pp_header">        
+        <!-- Image de profil : ajouter un lien qui mène à la page perso  -->
+        <a href="<?= URL."monprofil" ?>">
+          <img src="<?= isset($_SESSION['user']) ? URL . "ressources/img/" . $_SESSION['user']['picture_profil'] : '' ?>" alt="photo de profil" id="pp_header">
+        </a>
         <!-- Menu dropdown -->
         <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="fas fa-chevron-down blue-text"></i></a>
         <ul id='dropdown1' class='dropdown-content'>
