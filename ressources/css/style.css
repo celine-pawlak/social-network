@@ -617,12 +617,32 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
     color: #275FA0 !important;
 }
 /* Reponsive header */
+@media screen and (min-width: 601px) and (max-width: 1100px) 
+    {
+        #connect_header
+            {
+                width: 70%;
+            }
+        #barre_recherche
+            {
+                height: 8vh;                
+            }
+        #pp_header
+            {
+                height: 5vh;
+            }
+    }
 @media screen and (max-width: 600px)
     {
         #ilestpasdedans
             {
-                display : flex;
-                height: 10vh;
+                margin-top: 3vh;
+                margin-right: 2vw;
+                display : flex;                
+            }     
+        #barre_recherche
+            {
+                width: 70%;
             }
         #connect_header
             {
