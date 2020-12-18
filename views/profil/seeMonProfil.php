@@ -20,34 +20,34 @@
     <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
       <h2 class="blue-text bold-text center-align"> Présentation </h2>
 
-      <form id="form_presentation" method="post">
+      <form id="form_presentation" class="right-align" method="post">
         <textarea id="update_presentation" rows="8" cols="80" name="presentation"><?= $presentation['presentation'] ?></textarea>
-        <button type="submit" name="button">Submit</button>
+        <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
       </form>
     </div>
 
     <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
       <div class="information_profile" id="info_border">
         <h2 class="blue-text bold-text"> Technologies </h2>
-        <form class="form_tech" id="form_tech" method="post">
+        <form class="form_tech center-align" id="form_tech" method="post">
           <ul>
             <li><input type="text" name="tech1" value="<?= $technologies["tech1"] ?>"></input></li>
             <li><input type="text" name="tech2" value="<?= $technologies["tech2"] ?>"></input></li>
             <li><input type="text" name="tech3" value="<?= $technologies["tech3"] ?>"></input></li>
           </ul>
-          <button type="submit" name="button">Submit</button>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
         </form>
       </div>
 
       <div class="information_profile">
         <h2 class="blue-text bold-text"> Hobbies </h2>
-        <form class="form_hobbies" id="form_hobbies" method="post">
+        <form class="form_hobbies center-align" id="form_hobbies" method="post">
           <ul>
             <li><input type="text" name="hobby1" value="<?= $hobbies["hobby1"] ?>"></input></li>
             <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>
             <li><input type="text" name="hobby3" value="<?= $hobbies["hobby3"] ?>"></input></li>
           </ul>
-          <button type="submit" name="button">Submit</button>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
         </form>
 
       </div>
