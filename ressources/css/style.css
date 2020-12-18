@@ -755,3 +755,57 @@ textarea:focus {
         border-radius: 25px;     
     }
 /* FIN MESSAGERIE */
+
+/* Form inscription/connexion/modif */
+.formulaire{
+    border-radius: 15px !important;
+    padding-top: 3% !important;
+    padding-bottom: 3% !important;
+}
+
+.btn{
+    background-color: #88C1D0;
+}
+
+.bouton{
+    background-color: #FFCA4B !important;
+    border-radius: 15px !important;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label{
+    color:  #88C1D0 !important;
+    font-weight: bold;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]){
+    border-bottom: 1px solid #88C1D0 !important;
+    box-shadow: 0 1px 0 0 #88C1D0 !important;
+}
+
+#align_down {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* SetProfil */
+.img_profil{
+    text-align: center;
+    margin-bottom: 10%;
+}
+.img_profil img{
+    margin: 5% auto;
+    display: block;
+    width:100px;
+    height:100px;
+    border-radius: 50%;
+}
+
+#change_file:hover{
+    background-color:  #FFCA4B;
+}

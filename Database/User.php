@@ -24,7 +24,6 @@ class User extends Database
         $this->_db = parent::getPDO();
     }
 
-
     public function connexion($mail, $password){
         $query = $this->_db->prepare("SELECT id, mail, last_name, first_name, picture_profil, picture_cover, date_birth FROM users WHERE mail = ?");
         $query->execute([$mail]);
@@ -223,14 +222,101 @@ class User extends Database
     public function deco()
         {
           session_destroy();
-          unset($_SESSION['user']);                    
+          unset($_SESSION['user']);
         }
 
+
+    // Profil_modif
     public function showProfil($id_user){
         $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
         $query->execute([$id_user]);
         $infos = $query->fetch();
 
         return $infos;
+    }
+
+    public function verifCurrentPassword($current_password){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("SELECT password FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch();
+
+      if(password_verify($current_password, $result['password'])) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function sameInfo($info) {
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch(PDO::FETCH_ASSOC);
+
+      if(in_array($info, $result)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function updateImage($img_avatar) {
+      $id_user = $_SESSION['user']['id'];
+
+      $update_img = $this->_db->prepare("UPDATE users SET picture_profil = ? WHERE id = ?");
+      $update_img->execute([$img_avatar, $id_user]);
+    }
+
+    public function updateFirstName($first_name){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("UPDATE users SET first_name = ? WHERE id = ?");
+      $query->execute([$first_name, $id_user]);
+
+      return 'updaté';
+    }
+
+    public function updateLastName($last_name){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("UPDATE users SET last_name = ? WHERE id = ?");
+      $query->execute([$last_name, $id_user]);
+
+      return 'updaté';
+    }
+
+    public function updateMail($mail){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("UPDATE users SET mail = ? WHERE id = ?");
+      $query->execute([$mail, $id_user]);
+
+      return 'updaté';
+    }
+
+    public function updatePassword($new_password){
+      $id_user = $_SESSION['user']['id'];
+
+      $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+
+      $query = $this->_db->prepare("UPDATE users SET password = ? WHERE id = ?");
+      $query->execute([$password_hash, $id_user]);
+
+      return 'updaté';
+    }
+
+    public function switchPicture(){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("SELECT picture_profil FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch();
+
+      $picture_profil = $result['picture_profil'];
+
+      return $picture_profil;
     }
 }
