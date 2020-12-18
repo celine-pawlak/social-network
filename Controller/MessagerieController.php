@@ -18,7 +18,7 @@ class MessagerieController extends AppController
 
     public function messagerie()
     {
-        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+        $idUser = $_SESSION['user']['id'];  // A MODIFIER QUAND SESSION DEFINIE
 
         $allconversationsInformations = null;
         $last_messages = null;
@@ -48,12 +48,11 @@ class MessagerieController extends AppController
             $this->addMember($_POST['new_member_id'], $_POST['add_member_to_conversation'], $idUser);
         }
 
-        $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);
+        $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);        
         foreach ($allconversations as $key => $conversation) {
             $allconversations[$key]['users_informations'] = $conversations->usersFromConversationInformations($conversation['conversation_id']);
         }
-        $allconversationsInformations = $this->getConversationsInformations($allconversations, $idUser);
-
+        $allconversationsInformations = $this->getConversationsInformations($allconversations, $idUser);        
         if ($allconversationsInformations != null) {
             $id_conversation = $allconversations[0]['conversation_id'];
             if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])) {
