@@ -549,6 +549,7 @@ li, ul, ol{
 .scrollbar-conversations::-webkit-scrollbar-thumb, .scrollbar-conversation::-webkit-scrollbar-thumb {
     background: #888;
 }
+
 .bouton
     {
         background-color: #FFCA4B !important;
@@ -677,6 +678,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
     padding: 3%;
 }
 
+.h2_posts{
+  color:#275FA0 !important;
+  font-size: 18px !important;
+}
 .information_profile {
     margin: 5%;
 }
@@ -721,12 +726,23 @@ textarea:focus {
 .form_profile > ::placeholder {
     color: #888B97;
 }
-
+.form_comment{
+  margin:7% !important;
+}
 .post_profile {
     background-color: white;
     border-radius: 20px;
     width: 80%;
-    margin: 5% auto;
+    margin: 2% auto;
+}
+.post_content{
+  font-size: 20px;
+}
+.comment_profile {
+    background-color: white;
+    border-radius: 20px;
+    width: 80%;
+    margin: 2% auto 2% 20%;
 }
 
 .checked {

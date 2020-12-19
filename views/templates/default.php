@@ -8,8 +8,8 @@
     <title>Social Network</title>
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="ressources/css/style.css">
-    <link rel="stylesheet" href="ressources/css/form_co_ins.css">
+    <link rel="stylesheet" href="<?= URL ?>/ressources/css/style.css">
+    <link rel="stylesheet" href="<?= URL ?>/ressources/css/form_co_ins.css">
     <!-- ICONS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/68f3afb94b.js" crossorigin="anonymous"></script>
@@ -17,14 +17,17 @@
     <!-- JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="ressources/JS/function_input.js"></script>
-    <script src="ressources/JS/script.js"></script>
-    <script src="ressources/JS/reaction.js"></script>
-    <script src="ressources/JS/module_connexion.js"></script>
-    <script src="ressources/JS/inscription.js"></script>
-    <script src="ressources/JS/profil.js"></script>
-    <script src="ressources/JS/ajaxProfile.js"></script>
-    <script src="ressources/JS/setProfil.js"></script>
+
+    <script src="<?= URL ?>/ressources/JS/function_input.js"></script>
+    <script src="<?= URL ?>/ressources/JS/script.js"></script>
+    <script src="<?= URL ?>/ressources/JS/reaction.js"></script>
+    <script src="<?= URL ?>/ressources/JS/module_connexion.js"></script>
+    <script src="<?= URL ?>/ressources/JS/inscription.js"></script>
+    <script src="<?= URL ?>/ressources/JS/profil.js"></script>
+    <script src="<?= URL ?>/ressources/JS/commentaire.js"></script>
+    <script src="<?= URL ?>/ressources/JS/ajaxProfile.js"></script>
+    <script src="<?= URL ?>/ressources/JS/setProfil.js"></script>
+
 </head>
 <body>
 <header class="flex-row justify-content-spacebetween">
