@@ -7,7 +7,7 @@
  * @param b nom d'une autre classe
  */
 function regexMailValide(balise, a, b) {
-    var regex_mail = /^[a-z]{1,}\.+[a-z]{1,}@laplateforme.io$/g;
+    var regex_mail = /^[a-z]{1,}(\-[a-z]{1,})*\.+[a-z]{1,}(\-[a-z]{1,})*@laplateforme.io$/g;
     var valeur = $(balise).val();
 
     if (valeur.match(regex_mail))
