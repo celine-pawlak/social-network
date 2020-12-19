@@ -94,6 +94,7 @@
 
             </div>
 
+            <?php if(!empty($commentaires["post_".$post['0']])): ?>
             <div id="commentaires_post_<?= $post['0'] ?>">
             <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
               <div class="post comment_profile p-1 z-depth-1">
@@ -107,6 +108,7 @@
               </div>
             <?php endforeach; ?>
           </div>
+          <?php endif; ?>
 
             <form class = "form_comment" method="post">
               <input type="hidden" name="id_user" value="<?= $id_user ?>">

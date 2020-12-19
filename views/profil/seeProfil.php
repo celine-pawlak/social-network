@@ -73,8 +73,9 @@
                   ?>
               </p>
             </div>
-            <div id="<?= 'commentaires_post_'.$post['0'] ?>">
 
+            <?php if(!empty($commentaires["post_".$post['0']])): ?>
+            <div id="<?= 'commentaires_post_'.$post['0'] ?>">
             <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
               <div class="post comment_profile p-1 z-depth-1">
                 <div class="flex-row">
@@ -87,7 +88,9 @@
               </div>
             <?php endforeach; ?>
             </div>
-            
+
+            <?php endif; ?>
+
             <form class ="form_comment center-align" method="post">
               <input type="hidden" name="id_user" value="<?= $id_user ?>">
               <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
