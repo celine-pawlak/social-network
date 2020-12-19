@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Database;
-
+use \PDO;
 
 class Comment extends Post
 {
@@ -50,6 +50,39 @@ class Comment extends Post
       return $tableau;
     }
 
+    public function getAllCommentWall() {
+      // récupère tous les posts de l'user
+      $posts = $this->_db->prepare("SELECT * FROM comments JOIN post on comments.posts_id = post.id ORDER BY comments.creation_date ASC");
+      $posts->execute();
+
+      $tableau = [];
+      while($post = $posts->fetch()) {
+        // récupère tous les commentaires de ces posts
+        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i')
+        FROM comments
+        JOIN users on comments.user_id = users.id
+        WHERE comments.posts_id = ?
+        ORDER BY comments.creation_date ASC");
+        $comments->execute([$post["id"]]);
+
+        $sous_tableau = [];
+        while($comment = $comments->fetch()) {
+          $sous_tableau[] = [
+            "date_creation" => $comment["creation_date"],
+            "comment" => $comment["content"],
+            "user_id" => $comment["user_id"],
+            "date" => $comment[14], // index de la date formatée
+            "first_name" => $comment["first_name"],
+            "last_name" => $comment["last_name"],
+            "picture" => $comment["picture_profil"]
+          ];
+        }
+        $tableau["post_".$post["id"]] = $sous_tableau;
+      }
+
+      return $tableau;
+    }
+
     public function getCommentPost($post_id)
     {
       $query = $this->_db->prepare("SELECT * FROM comments WHERE posts_id = ? ORDER BY date_creation DESC");
@@ -57,6 +90,14 @@ class Comment extends Post
 
       return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /*public function getCommentWall()
+    {
+      $query = $this->_db->prepare("SELECT * FROM comments JOIN post on comments.posts_id = post.id ORDER BY comments.creation_date ASC");
+      $query->execute();
+
+      return $query->fetchAll(PDO::FETCH_ASSOC);
+    }*/
 
     public function addComment($content, $post_id, $user_id)
     {

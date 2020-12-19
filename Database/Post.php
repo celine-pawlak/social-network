@@ -3,6 +3,7 @@
 
 namespace App\Database;
 
+use \PDO;
 
 class Post extends Database
 {
@@ -33,10 +34,27 @@ class Post extends Database
       return $query->fetchAll();
     }
 
+    public function getAllPostsWall()
+    {
+      $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM post
+        JOIN users on post.users_id = users.id ORDER BY post.id DESC LIMIT 10");
+      $query->execute();
+
+      return $query->fetchAll();
+    }
+
     public function getReacts($id){
       $query = $this->_db->prepare("SELECT * FROM users_reacts
         JOIN reacts on users_reacts.reacts_id = reacts.id WHERE users_reacts.users_id = ?");
       $query->execute([$id]);
+
+      return $query->fetchAll();
+    }
+
+    public function getReactsWall(){
+      $query = $this->_db->prepare("SELECT * FROM users_reacts
+        JOIN reacts on users_reacts.reacts_id = reacts.id");
+      $query->execute();
 
       return $query->fetchAll();
     }

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Database\Reaction;
 use App\Database\User;
+use App\Database\Comment;
+use App\Database\Post;
 
 class IndexController extends AppController
 {
@@ -16,9 +18,19 @@ class IndexController extends AppController
     }
 
     public function index()
-    {        
-        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {            
-            $this->render('index.wall');
+    {
+      $posts = new Post;
+      $infosUser = new User;
+      $commentaires = new Comment;
+
+      if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+          $this->render('index.wall',
+          [
+            "id_user" => $_SESSION['user']['id'],
+            "posts" => $posts->getAllPostsWall(),
+            "reacts" => $posts->getReactsWall(),
+            "commentaires" => $commentaires->getAllCommentWall()
+          ]);
         } else {
             $this->render('index.connexion');
         }
@@ -97,7 +109,7 @@ class IndexController extends AppController
                 }
         }
     public function insertEmoji()
-        {            
+        {
             $id_user = 2; //A modifier par l'id de l'utilisateur
             if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
                 {
@@ -109,7 +121,7 @@ class IndexController extends AppController
                 }
         }
     public function search()
-        {            
+        {
             if(isset($_POST['action']) && $_POST['action']=='search')
                 {
                     $search = new User;
@@ -121,14 +133,14 @@ class IndexController extends AppController
             if(isset($_POST['action']) && $_POST['action']=='deco')
                 {
                     $deco = new User;
-                    $deco->deco();                                           
+                    $deco->deco();
                 }
-        } 
+        }
     public function redirectHeader()
         {
             if(isset($_POST['action']) && $_POST['action']== '')
                 {
-                    
+
                 }
             if(isset($_POST['action']) && $_POST['action']== '')
                 {
@@ -140,5 +152,3 @@ class IndexController extends AppController
                 }
         }
 }
-
-
