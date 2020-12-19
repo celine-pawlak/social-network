@@ -91,14 +91,6 @@ class Comment extends Post
       return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /*public function getCommentWall()
-    {
-      $query = $this->_db->prepare("SELECT * FROM comments JOIN post on comments.posts_id = post.id ORDER BY comments.creation_date ASC");
-      $query->execute();
-
-      return $query->fetchAll(PDO::FETCH_ASSOC);
-    }*/
-
     public function addComment($content, $post_id, $user_id)
     {
       $query = $this->_db->prepare("INSERT INTO comments(content, creation_date, user_id, posts_id) VALUES (?, NOW(), ?, ?)");

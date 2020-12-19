@@ -618,7 +618,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
     color: #275FA0 !important;
 }
 /* Reponsive header */
-@media screen and (min-width: 601px) and (max-width: 1100px) 
+@media screen and (min-width: 601px) and (max-width: 1100px)
     {
         #connect_header
             {
@@ -626,7 +626,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
             }
         #barre_recherche
             {
-                height: 8vh;                
+                height: 8vh;
             }
         #pp_header
             {
@@ -643,8 +643,8 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
             {
                 margin-top: 3vh;
                 margin-right: 2vw;
-                display : flex;                
-            }     
+                display : flex;
+            }
         #barre_recherche
             {
                 width: 70%;
@@ -726,9 +726,11 @@ textarea:focus {
 .form_profile > ::placeholder {
     color: #888B97;
 }
-.form_comment{
+
+.form_comment, .form_comment_wall{
   margin:7% !important;
 }
+
 .post_profile {
     background-color: white;
     border-radius: 20px;
@@ -754,7 +756,7 @@ textarea:focus {
 }
 /* FIN SEE PROFIL */
 /* MESSAGERIE */
-#pop-up-background 
+#pop-up-background
     {
         display: flex;
         align-items: center;
@@ -767,8 +769,8 @@ textarea:focus {
     }
 #pop-up-content
     {
-        width: 30%;   
-        border-radius: 25px;     
+        width: 30%;
+        border-radius: 25px;
     }
 /* FIN MESSAGERIE */
 
