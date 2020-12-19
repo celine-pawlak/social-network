@@ -1,4 +1,4 @@
-<a href="index.php"><h4 class="blue-text" id="titre_header">Social Network</h4></a>
+<a href="<?= URL ?>/index.php"><h4 class="blue-text" id="titre_header">Social Network</h4></a>
 
 <section id="connect_header" class="<?= isset($_SESSION['user']['id']) ? 'd-flex' : 'd-none'?>">
     <!-- Barre de recherche -->
@@ -30,7 +30,7 @@
         </ul>
 
         <i class="fas fa-power-off clickable"></i>
-    </div>    
+    </div>
 </section>
 <!-- Responsive -->
 <a href="#" id="ilestpasdedans" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -38,8 +38,8 @@
         <div class="row" id="barre_recherche">
             <div class="col s12">
                 <div class="row m-0">
-                    <div class="input-field col s12 m-0">                
-                        <input type="text" id="autocomplete-reponsive" class="autocomplete" placeholder="Rechercher une personne...">                    
+                    <div class="input-field col s12 m-0">
+                        <input type="text" id="autocomplete-reponsive" class="autocomplete" placeholder="Rechercher une personne...">
                         <!-- <i class="material-icons prefix">search</i> -->
                     </div>
                 </div>
@@ -47,15 +47,15 @@
         </div>
         <li class="divider" tabindex="-1"></li>
         <li>
-            <div class="user-view">      
+            <div class="user-view">
                 <img src="ressources/img/<?= $_SESSION['user']['picture_profil'] ?>" alt="photo de profil" id="pp_header">
                 <span class="name"><?= $_SESSION['user']['first_name'] ?></span>
                 <span class="email"><?= $_SESSION['user']['mail'] ?></span>
-            </div>    
-        </li>                
+            </div>
+        </li>
         <li class="divider" tabindex="-1"></li>
         <li><a href="profil?id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
         <li><a href="messagerie">Messagerie</a></li>
         <li class="divider" tabindex="-1"></li>
-        <li><a href="modifier_profil">Modifier profil</a></li>   
-    </ul>    
+        <li><a href="modifier_profil">Modifier profil</a></li>
+    </ul>
