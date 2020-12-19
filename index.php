@@ -63,6 +63,9 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     }elseif($url[0] == "ajouterCommentaire") {
         $action = "ajouterCommentaire";
         $controller = '\App\Controller\ProfilController';
+    }elseif($url[0] == "ajouterCommentaireWall") {
+        $action = "ajouterCommentaireWall";
+        $controller = '\App\Controller\IndexController';
     }elseif($url[0] == "profil") {
       if(isset($url[1])) {
         $action = "profil";

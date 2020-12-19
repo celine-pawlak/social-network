@@ -170,4 +170,10 @@ class IndexController extends AppController
           "commentaires" => $commentaires->getAllCommentWall()
         ]);
       }
+
+      public function ajouterCommentaireWall() {
+        $comment = new Comment;
+        $response = $comment->addComment($_POST["content"], $_POST["id_post"], $_POST["id_user"]);
+        return json_encode($response);
+      }
 }
