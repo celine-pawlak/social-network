@@ -4,7 +4,6 @@ $(function() {
 
     $.ajax({
       url:"Controller/ProfilController",
-      //url: "addHobbies",
       type: "POST",
       data: {
         action : 'addHobbies',
@@ -13,12 +12,10 @@ $(function() {
         hobby3: $("input[name=hobby3]").val()
       }
     })
-
   })
 
   $("#form_tech").submit(function(e) {
     e.preventDefault();
-
     $.ajax({
       url: "addTechnologies",
       type: "POST",
@@ -28,21 +25,17 @@ $(function() {
         tech3: $("input[name=tech3]").val()
       }
     })
-
   })
 
   $("#form_presentation").submit(function(e) {
     e.preventDefault();
-
     $.ajax({
       url: "updatePresentation",
       type: "POST",
       data: {
         presentation: $("#update_presentation").val()
       }
-
     })
-
   })
 
   $("#scale-infos").click(function(){
