@@ -1,4 +1,19 @@
 $(document).ready(function(){
+  $(function () {
+      // Vérifie que le mail soit au format prenom.nom@laplateforme.io
+      $('#email').keyup(function () {
+          regexMailValide(this, 'nope', 'yep');
+      });
+      // Vérifie la sécurité du mot de passe
+      $('#password').keyup(function () {
+          regexPasswordValide(this, 'nope', 'yep');
+      });
+      // Vérifie que les mots de passe correspondent
+      $('#conf_password').keyup(function () {
+          isTheSame(this, $('#password'), 'nope', 'yep');
+      });
+  });
+
   // Modification du profil
   $('#form_setprofil').submit(function(e){
     e.preventDefault();
