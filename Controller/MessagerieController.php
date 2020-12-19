@@ -18,7 +18,7 @@ class MessagerieController extends AppController
 
     public function messagerie()
     {
-        $idUser = 7;  // A MODIFIER QUAND SESSION DEFINIE
+        $idUser = $_SESSION['user']['id'];  // A MODIFIER QUAND SESSION DEFINIE
 
         $allconversationsInformations = null;
         $last_messages = null;
@@ -27,32 +27,40 @@ class MessagerieController extends AppController
         $messages = new Message;
         $id_conversation = null;
 
-        if (isset($_POST['add_reaction_message']) && !empty($_POST['add_reaction_message'])){
-            $reaction = explode('.',$_POST['add_reaction_message']);
-            $message_id = $reaction[0];
-            $react_id = $reaction[1];
-            $reacts->insertEmoji($idUser, $react_id, $message_id, 'messages');
-        }
-        if (isset($_POST['add_message']) && !empty($_POST['add_message'])){
-            $message_content = htmlspecialchars($_POST['new_message_content']);
-            $conversation_id = $_POST['add_message'];
-            $messages->sendMessage($idUser, $message_content, $conversation_id);
+
+        // Si ajout d'une reaction
+        if (isset($_POST['add_reaction_message']) && !empty($_POST['add_reaction_message'])) {
+            $this->addReaction($_POST['add_reaction_message'], $idUser);
         }
 
-        $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);
+        // Si ajout d'un message
+        if (isset($_POST['add_message']) && !empty($_POST['add_message'])) {
+            $this->addMessage($_POST['add_message'], $_POST['new_message_content'], $idUser);
+        }
+
+        // Si modification du name
+        if (isset($_POST['update_conversation_name']) && !empty($_POST['update_conversation_name'])) {
+            $this->updateConversationName($_POST['update_conversation_name'], $_POST['new_conversation_name'], $idUser);
+        }
+
+        // Si ajout d'un membre
+        if (isset($_POST['add_member_to_conversation']) && !empty($_POST['add_member_to_conversation'])) {
+            $this->addMember($_POST['new_member_id'], $_POST['add_member_to_conversation'], $idUser);
+        }
+
+        $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);        
         foreach ($allconversations as $key => $conversation) {
             $allconversations[$key]['users_informations'] = $conversations->usersFromConversationInformations($conversation['conversation_id']);
         }
-        $allconversationsInformations = $this->getConversationsInformations($allconversations, $idUser);
-
-        if ($allconversationsInformations != null){
+        $allconversationsInformations = $this->getConversationsInformations($allconversations, $idUser);        
+        if ($allconversationsInformations != null) {
             $id_conversation = $allconversations[0]['conversation_id'];
-            if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])){
+            if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])) {
                 $id_conversation = $_POST['seeConversation'];
             }
             $last_messages = $messages->getAllMessagesFromConversation($id_conversation);
 
-            foreach ($last_messages as $key => $message){
+            foreach ($last_messages as $key => $message) {
                 $last_messages[$key]['reactions'] = $reacts->getAllReactionsFromMessage($message['id']);
             }
         }
@@ -60,6 +68,62 @@ class MessagerieController extends AppController
         $smileys = $reacts->getEmoji();
 
         $this->render('messagerie.messagerie', compact('allconversationsInformations', 'last_messages', 'idUser', 'id_conversation', 'smileys'));
+    }
+
+    public function addReaction($message_and_react_id, $idUser)
+    {
+        $reacts = new Reaction;
+        $reaction = explode('.', $message_and_react_id);
+        $message_id = $reaction[0];
+        $react_id = $reaction[1];
+        $reacts->insertEmoji($idUser, $react_id, $message_id, 'messages');
+    }
+
+    public function addMessage($conversation_id, $content, $idUser)
+    {
+        $messages = new Message;
+        $message_content = htmlspecialchars($content);
+        $messages->sendMessage($idUser, $message_content, $conversation_id);
+    }
+
+    public function updateConversationName($conversation_id, $new_conversation_name, $idUser)
+    {
+        $conversations = new Conversation;
+        $conversation_name = htmlspecialchars($new_conversation_name);
+        if ($conversations->isCreator($idUser, $conversation_id)) {
+            $conversations->updateName($conversation_id, $conversation_name);
+        }
+    }
+
+    public function newConversation($id_new_group_members, $idUser)
+    {
+        if (count($id_new_group_members) == 1) {
+            if ($id_new_group_members[0] == $idUser) {
+                return;
+            }
+        }
+        $conversations = new Conversation;
+        $conversations->newConversation($idUser, $id_new_group_members);
+    }
+
+    public function addMember($new_member_id, $conversation_id, $idUser)
+    {
+        $conversations = new Conversation;
+        // Si conversation duo créer nouvelle conversation
+        $new_group_members = $conversations->isDuo($conversation_id);
+        if ($new_group_members && (!$conversations->isMember($new_member_id, $conversation_id))) {
+            foreach ($new_group_members as $new_group_member) {
+                $id_new_group_members[] = $new_group_member['users_id'];
+            }
+            $id_new_group_members[] = $new_member_id;
+            //nouvelle conversation avec les deux users + le nouveau
+            $this->newConversation($id_new_group_members, $idUser);
+        } else {
+            // Sinon ajouter membre
+            if ($conversations->isCreator($idUser, $conversation_id) && (!$conversations->isMember($new_member_id, $conversation_id))) {
+                $conversations->addMember($conversation_id, $new_member_id);
+            }
+        }
     }
 
     public function getConversationsInformations($allconversations, $idUser)
@@ -102,6 +166,8 @@ class MessagerieController extends AppController
                 'image' => $image_conversation,
                 'last_message' => $conversation['message_content'],
                 'conversation_id' => $conversation['conversation_id'],
+                'members_number' => count($conversation['users_informations']),
+                'members_informations' => $conversation['users_informations']
             ];
         }
         return $allconversationsInformations;

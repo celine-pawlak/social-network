@@ -69,7 +69,7 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
         $controller = '\App\Controller\IndexController';
       }
     }
-  }
+}
 
 $controller = new $controller;
 
