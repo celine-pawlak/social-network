@@ -45,6 +45,9 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     }elseif($url[0] == "addPostForm") {
         $action = "addPostForm";
         $controller = '\App\Controller\ProfilController';
+    }elseif($url[0] == "addPostFormWall") {
+        $action = "addPostFormWall";
+        $controller = '\App\Controller\IndexController';
     } elseif($url[0] == "addHobbies") {
         $action = "addHobbies";
         $controller = '\App\Controller\ProfilController';
