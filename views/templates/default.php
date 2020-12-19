@@ -37,7 +37,7 @@
     <?= $content ?>
 </main>
 <footer>
-    <p>Ceci est le footer</p>
+    <p>Social Network - Développé par Céline Pawlak, Martin Bozon, Maxime Siegl & Cécile Wojnowski</p>
 </footer>
 </body>
 </html>

@@ -827,3 +827,13 @@ input[type=password]:not(.browser-default):focus:not([readonly]){
 #change_file:hover{
     background-color:  #FFCA4B;
 }
+
+/*** Footer ***/
+
+footer{
+  background-color: #F9F9F9;
+  padding:2% 0 2% 5%;
+  font-weight: bold;
+  color: #888B97;
+  margin-top:5%;
+}
