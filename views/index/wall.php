@@ -57,7 +57,7 @@
 
       <?php endif; ?>
 
-          <form class = "form_comment_wall" method="post">
+          <form class = "form_comment_wall center-align" method="post">
             <input type="hidden" name="id_user" value="<?= $id_user ?>">
             <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
             <input type="text" name="content" value="">
