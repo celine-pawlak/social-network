@@ -39,7 +39,11 @@
             <div class="col s12">
                 <div class="row m-0">
                     <div class="input-field col s12 m-0">
+<<<<<<< HEAD
                         <input type="text" id="autocomplete-reponsive" class="autocomplete" placeholder="Rechercher une personne...">
+=======
+                        <input type="text" id="autocomplete-reponsive" class="autocomplete" placeholder="Rechercher une personne...">                    
+>>>>>>> regex/mdpoublié
                         <!-- <i class="material-icons prefix">search</i> -->
                     </div>
                 </div>

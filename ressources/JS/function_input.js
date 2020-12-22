@@ -7,7 +7,7 @@
  * @param b nom d'une autre classe
  */
 function regexMailValide(balise, a, b) {
-    var regex_mail = /^[a-z]{1,}\.+[a-z]{1,}@laplateforme.io$/g;
+    var regex_mail = /^[a-z]{1,}(\-[a-z]{1,})*\.+[a-z]{1,}(\-[a-z]{1,})*@laplateforme.io$/g;
     var valeur = $(balise).val();
 
     if (valeur.match(regex_mail))
@@ -58,16 +58,3 @@ function isTheSame(balise, verif, a, b) {
         $(balise).removeClass(a).addClass(b);
     }
 }
-
-
-
-
-
-// // verif php mail bon format
-// if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-z]{1,}\.+[a-z]{1,}@laplateforme.io$/', $mail)) {
-// array_push($errors, "Le mail n'est pas au bon format (prenom.nom@laplateforme.io)");
-// }
-// // verif php pw et cf_pw identiques
-// if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,30}/', $password)) {
-//     array_push($errors, "Le mot de passe n'est pas assez sécurisé");
-// }

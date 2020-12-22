@@ -257,6 +257,9 @@ class User extends Database
 
       $update_img = $this->_db->prepare("UPDATE users SET picture_profil = ? WHERE id = ?");
       $update_img->execute([$img_avatar, $id_user]);
+
+      $_SESSION['user']['picture_profil'] = $img_avatar;
+      $this->_picture_profil = $img_avatar;
     }
 
     public function updateFirstName($first_name){
@@ -265,6 +268,8 @@ class User extends Database
       $query = $this->_db->prepare("UPDATE users SET first_name = ? WHERE id = ?");
       $query->execute([$first_name, $id_user]);
 
+      $_SESSION['user']['first_name'] = $first_name;
+      $this->_first_name = $first_name;
       return 'updaté';
     }
 
@@ -274,6 +279,8 @@ class User extends Database
       $query = $this->_db->prepare("UPDATE users SET last_name = ? WHERE id = ?");
       $query->execute([$last_name, $id_user]);
 
+      $_SESSION['user']['last_name'] = $last_name;
+      $this->_last_name = $last_name;
       return 'updaté';
     }
 
@@ -283,6 +290,8 @@ class User extends Database
       $query = $this->_db->prepare("UPDATE users SET mail = ? WHERE id = ?");
       $query->execute([$mail, $id_user]);
 
+      $_SESSION['user']['mail'] = $mail;
+      $this->_mail = $mail;
       return 'updaté';
     }
 
@@ -294,6 +303,7 @@ class User extends Database
       $query = $this->_db->prepare("UPDATE users SET password = ? WHERE id = ?");
       $query->execute([$password_hash, $id_user]);
 
+      $this->password = $new_password;
       return 'updaté';
     }
 
@@ -307,5 +317,16 @@ class User extends Database
       $picture_profil = $result['picture_profil'];
 
       return $picture_profil;
+    }
+
+    public function passwordReset($mail, $new_password){
+
+      $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+
+      $query = $this->_db->prepare("UPDATE users SET password = ? WHERE mail = ?");
+      $query->execute([$password_hash, $mail]);
+
+      $this->password = $new_password;
+      return 'updaté';
     }
 }
