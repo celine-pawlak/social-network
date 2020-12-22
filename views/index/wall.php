@@ -20,8 +20,7 @@
         </div>
         
         <div id="posts_<?= $post['id']?>" class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
-          <p><?= $post['date_post'] ?> </p>
-          <button class="react">test</button>
+          <p><?= $post['date_post'] ?> </p>          
           <div class="post post_profile p-1 z-depth-1">
             <!-- <p class="right-align">
               <i id="fa-heart" class="fas fa-heart"></i>
@@ -40,7 +39,7 @@
             </p>
 
           </div>
-
+          <button class="react">test</button>
           <?php if(!empty($commentaires["post_".$post['0']])): ?>
 
           <div id="commentaires_post_<?= $post['0'] ?>">
