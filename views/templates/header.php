@@ -33,7 +33,7 @@
     </div>
 </section>
 <!-- Responsive -->
-<a href="#" id="ilestpasdedans" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+<a href="#" id="ilestpasdedans" data-target="slide-out" class="sidenav-trigger <?= isset($_SESSION['user']['id']) ? 'd-flex' : 'd-none'?>"><i class="material-icons">menu</i></a>
 <ul id="slide-out" class="sidenav">
         <div class="row" id="barre_recherche">
             <div class="col s12">

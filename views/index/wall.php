@@ -19,7 +19,7 @@
           <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
         </div>
         
-        <div id="posts_<?= $post['id']?>" class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
+        <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
           <p><?= $post['date_post'] ?> </p>          
           <div class="post post_profile p-1 z-depth-1">
             <!-- <p class="right-align">
@@ -28,18 +28,20 @@
               <i id="fa-laugh-squint" class="fas fa-laugh-squint"></i>
               <i id="fa-sign-language" class="fas fa-sign-language"></i>
             </p> -->
-            <p id="<?= "posts_" . $post['0'] ?>" class="post_content">
+            <p class="post_content">
               <?= $post["content"] ?>
 
-              <?php foreach($reacts as $react):
-                echo "<br> Ici se trouve l'id de la réaction: " . $react['posts_id'];
-                //var_dump($react);
+              <?php foreach($reacts as $react):                
+                // var_dump($react);
                 endforeach;
                 ?>
             </p>
 
           </div>
-          <button class="react">test</button>
+          <div id="posts_<?= $post['id']?>" class="d-row">
+            <button class="react">test</button>
+            <div id="reaction_post_<?= $post['id']?>"></div>            
+          </div>
           <?php if(!empty($commentaires["post_".$post['0']])): ?>
 
           <div id="commentaires_post_<?= $post['0'] ?>">

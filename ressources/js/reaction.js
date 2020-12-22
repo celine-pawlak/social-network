@@ -52,8 +52,14 @@ $(function()
                     type : 'post',
                     data : {action : 'insertEmoji', id_react : id_react, id_bloc : id_bloc, bloc : bloc},
                     success : (data) =>
-                        {
-                            console.log(data);
+                        {                            
+                            let reaction = JSON.parse(data);                            
+                            $.map(reaction, function (e)
+                                {
+                                    console.log(e.emoji);
+                                    $('#reaction_post_'+id_bloc).append('<i class="'+e.emoji+'"/>');
+                                });
+
                         }
                 });
         }

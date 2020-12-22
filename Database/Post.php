@@ -42,7 +42,7 @@ class Post extends Database
 
     public function getReacts($id){
       $query = $this->_db->prepare("SELECT * FROM users_reacts
-        JOIN reacts on users_reacts.reacts_id = reacts.id WHERE users_reacts.users_id = ?");
+      JOIN reacts on users_reacts.reacts_id = reacts.id WHERE users_reacts.posts_id = ?");
       $query->execute([$id]);
 
       return $query->fetchAll();
