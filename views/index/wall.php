@@ -11,22 +11,24 @@
 <div class="row">
   <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
   <div class="col s10 m10 offset-m1">
+    <?php //var_dump($posts); ?>
       <?php foreach($posts as $post): ?>
-        <?php //var_dump($post); ?>
+        <?php //var_dump($post['id']); ?>
         <div class="col s1 m1">
           <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
           <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
         </div>
-
-        <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
-          <p><?= $post['13'] ?> </p>
+        
+        <div id="posts_<?= $post['id']?>" class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
+          <p><?= $post['date_post'] ?> </p>
+          <button class="react">test</button>
           <div class="post post_profile p-1 z-depth-1">
-            <p class="right-align">
+            <!-- <p class="right-align">
               <i id="fa-heart" class="fas fa-heart"></i>
               <i id="fa-thumbs-up" class="fas fa-thumbs-up"></i>
               <i id="fa-laugh-squint" class="fas fa-laugh-squint"></i>
               <i id="fa-sign-language" class="fas fa-sign-language"></i>
-            </p>
+            </p> -->
             <p id="<?= "posts_" . $post['0'] ?>" class="post_content">
               <?= $post["content"] ?>
 

@@ -33,8 +33,8 @@ class Post extends Database
 
     public function getAllPostsWall()
     {
-      $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM post
-        JOIN users on post.users_id = users.id ORDER BY post.id DESC LIMIT 10");
+      $query = $this->_db->prepare("SELECT post.*, users.last_name, users.first_name, users.picture_profil, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') as date_post FROM post
+      JOIN users on post.users_id = users.id ORDER BY post.id DESC LIMIT 10");
       $query->execute();
 
       return $query->fetchAll();

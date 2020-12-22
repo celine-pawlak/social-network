@@ -1,12 +1,16 @@
 $(function()
     {          
         $('.react').click(function()
-            {
+            {                
                 // let id_bloc = $(this).attr('id');
                 let element = $(this).closest('div').attr('id');
-                let id_bloc = element.split('_');      
-                let id = id_bloc[1]               
-                let bloc = id_bloc[0];                                
+                console.log(element);
+                let id_bloc = element.split('_');    
+                console.log(id_bloc);  
+                let id = id_bloc[1]            
+                console.log( id);   
+                let bloc = id_bloc[0];        
+                console.log(bloc);                        
                 getEmoji(id, bloc);
             })
         $(document).click(function()
@@ -23,7 +27,7 @@ $(function()
                     type : 'post',
                     data : {action : 'getEmoji'},
                     success : (data) =>
-                        {                                   
+                        {                                  
                             let test = JSON.parse(data);                               
                             $('#'+bloc+'_'+id_bloc).append('<aside id="react_bloc"></aside>');                                                                          
                             $.map(test, function (a)
