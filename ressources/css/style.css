@@ -737,8 +737,9 @@ textarea:focus {
     display: none;
 }
 /* FIN SEE PROFIL */
+
 /* MESSAGERIE */
-#pop-up-background 
+#pop-up-background
     {
         display: flex;
         align-items: center;
@@ -751,47 +752,106 @@ textarea:focus {
     }
 #pop-up-content
     {
-        width: 30%;   
-        border-radius: 25px;     
+        width: 30%;
+        border-radius: 25px;
     }
 /* FIN MESSAGERIE */
 
 /* Form inscription/connexion/modif */
-.formulaire{
-    border-radius: 15px !important;
-    padding-top: 3% !important;
-    padding-bottom: 3% !important;
+@media screen and (min-width: 601px) and (max-width: 1100px) {
+    .formulaire{
+        border-radius: 15px !important;
+        padding-top: 3% !important;
+        padding-bottom: 3% !important;
+    }
+
+    .btn{
+        background-color: #88C1D0;
+    }
+
+    .bouton{
+        background-color: #FFCA4B !important;
+        border-radius: 15px !important;
+    }
+
+    input[type=text]:not(.browser-default):focus:not([readonly])+label,
+    input[type=email]:not(.browser-default):focus:not([readonly])+label,
+    input[type=password]:not(.browser-default):focus:not([readonly])+label{
+        color:  #88C1D0 !important;
+    }
+
+    input[type=text]:not(.browser-default):focus:not([readonly]),
+    input[type=email]:not(.browser-default):focus:not([readonly]),
+    input[type=password]:not(.browser-default):focus:not([readonly]){
+        border-bottom: 1px solid #88C1D0 !important;
+        box-shadow: 0 1px 0 0 #88C1D0 !important;
+    }
+
+    #align_down {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .erreurs{
+        background-color: rgba(224, 57, 57, 0.8);
+        text-align: center;
+        color: white;
+        border: 1px solid black;
+        border-radius: 15px;
+    }
 }
 
-.btn{
-    background-color: #88C1D0;
-}
+@media screen and (max-width: 600px) {
+    .redirection{
+        text-align: center;
+    }
 
-.bouton{
-    background-color: #FFCA4B !important;
-    border-radius: 15px !important;
-}
+    .formulaire{
+        border-radius: 15px !important;
+        padding-top: 3% !important;
+        padding-bottom: 3% !important;
+    }
 
-input[type=text]:not(.browser-default):focus:not([readonly])+label,
-input[type=email]:not(.browser-default):focus:not([readonly])+label,
-input[type=password]:not(.browser-default):focus:not([readonly])+label{
-    color:  #88C1D0 !important;
-    font-weight: bold;
-}
+    .btn{
+        background-color: #88C1D0;
+    }
 
-input[type=text]:not(.browser-default):focus:not([readonly]),
-input[type=email]:not(.browser-default):focus:not([readonly]),
-input[type=password]:not(.browser-default):focus:not([readonly]){
-    border-bottom: 1px solid #88C1D0 !important;
-    box-shadow: 0 1px 0 0 #88C1D0 !important;
-}
+    .bouton{
+        background-color: #FFCA4B !important;
+        border-radius: 15px !important;
+    }
 
-#align_down {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    input[type=text]:not(.browser-default):focus:not([readonly])+label,
+    input[type=email]:not(.browser-default):focus:not([readonly])+label,
+    input[type=password]:not(.browser-default):focus:not([readonly])+label{
+        color:  #88C1D0 !important;
+    }
+
+    input[type=text]:not(.browser-default):focus:not([readonly]),
+    input[type=email]:not(.browser-default):focus:not([readonly]),
+    input[type=password]:not(.browser-default):focus:not([readonly]){
+        border-bottom: 1px solid #88C1D0 !important;
+        box-shadow: 0 1px 0 0 #88C1D0 !important;
+    }
+
+    #align_down {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .erreurs{
+        background-color: rgba(224, 57, 57, 0.8);
+        text-align: center;
+        color: white;
+        border: 1px solid black;
+        border-radius: 15px;
+    }
 }
+/* FIN DE FORMAULAIRE INSC/CO/RESET/MODIF */
 
 /* SetProfil */
 .img_profil{

@@ -16,8 +16,8 @@ class IndexController extends AppController
     }
 
     public function index()
-    {        
-        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {            
+    {
+        if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
             $this->render('index.wall');
         } else {
             $this->render('index.connexion');
@@ -38,53 +38,75 @@ class IndexController extends AppController
             $password = $_POST['password'];
             $conf_pw = $_POST['confirmation_password'];
 
-            $user = new User;
-
-            if ($user->isExist($mail) == true) {
-                if($user->isSamepassword($password, $conf_pw) == true) {
-                    $user->inscription($mail, $prenom, $nom, $birthday, $password);
-                    echo 'Success';
-                } else {
-                    array_push($this->errors, 'Les mots de passe ne sont pas identiques');
-                }
+            if (!filter_var($mail, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-z]{1,}\.+[a-z]{1,}@laplateforme.io$/', $mail)) {
+                array_push($errors, "Le mail n'est pas au bon format (prenom.nom@laplateforme.io)");
             } else {
-                array_push($this->errors, 'Login déjà existant');
-            }
+                if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,30}/', $password)) {
+                    array_push($errors, "Le mot de passe n'est pas assez sécurisé");
+                } else {
+                    $user = new User;
 
+                    if ($user->isExist($mail) == true) {
+                        if($user->isSamepassword($password, $conf_pw) == true) {
+                            $user->inscription($mail, $prenom, $nom, $birthday, $password);
+                            echo 'Success';
+                        } else {
+                            array_push($this->errors, 'Les mots de passe ne sont pas identiques');
+                        }
+                    } else {
+                        array_push($this->errors, 'Login déjà existant');
+                    }
+                }
+            }
         } else {
             array_push($this->errors, 'Informations incomplètes');
         }
-        $erreurs_str = implode(",", $this->errors);
-        echo $erreurs_str;
+
+        if(!empty($this->errors)) {
+            $erreurs_str = implode(",", $this->errors);
+            echo json_encode($erreurs_str);
+        }
     }
 
     public function seConnecter(){
-        if(isset($_POST['mail']) && isset($_POST['password'])) {
+        if(isset($_POST['mail']) && !empty($_POST['mail']) && isset($_POST['password']) && !empty($_POST['password'])) {
             $mail = $_POST['mail'];
             $password = $_POST['password'];
 
-            $user = new User;
-
-            if($user->isExist($mail) == false){
-                if($user->isGoodpassword($mail, $password) == true){
-                    $return = $user->connexion($mail, $password);
-
-                    if($return[0] == 'connecté') {
-                        $user_session = json_encode($return);
-
-                        echo $user_session;
-                    } else {
-                        array_push($this->errors, 'Vous n\'etes pas connecté');
-                    }
-                } else {
-                    array_push($this->errors, 'Le mot de passe entré ne correspond pas à nos données');
-                }
+            if (!filter_var($mail, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-z]{1,}\.+[a-z]{1,}@laplateforme.io$/', $mail)) {
+                array_push($errors, "Le mail n'est pas au bon format (prenom.nom@laplateforme.io)");
             } else {
-                array_push($this->errors, 'Cet email est inconnu');
-            }
+                if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,30}/', $password)) {
+                    array_push($errors, "Le mot de passe n'est pas assez sécurisé");
+                } else {
+                    $user = new User;
 
+                    if($user->isExist($mail) == false){
+                        if($user->isGoodpassword($mail, $password) == true){
+                            $return = $user->connexion($mail, $password);
+
+                            if($return[0] == 'connecté') {
+                                $user_session = json_encode($return);
+
+                                echo $user_session;
+                            } else {
+                                array_push($this->errors, 'Vous n\'etes pas connecté');
+                            }
+                        } else {
+                            array_push($this->errors, 'Le mot de passe est incorrect');
+                        }
+                    } else {
+                        array_push($this->errors, 'Cet email est inconnu');
+                    }
+                }
+            }
         } else {
-            array_push($this->errors, 'Informations incomplètes');
+            array_push($this->errors, 'Entrer correctement vos informations');
+        }
+
+        if(!empty($this->errors)) {
+            $erreurs_str = implode(",", $this->errors);
+            echo json_encode($erreurs_str);
         }
     }
 
@@ -97,7 +119,7 @@ class IndexController extends AppController
                 }
         }
     public function insertEmoji()
-        {            
+        {
             $id_user = 2; //A modifier par l'id de l'utilisateur
             if(isset($_POST['action']) && $_POST['action']=='insertEmoji')
                 {
@@ -109,7 +131,7 @@ class IndexController extends AppController
                 }
         }
     public function search()
-        {            
+        {
             if(isset($_POST['action']) && $_POST['action']=='search')
                 {
                     $search = new User;
@@ -121,14 +143,14 @@ class IndexController extends AppController
             if(isset($_POST['action']) && $_POST['action']=='deco')
                 {
                     $deco = new User;
-                    $deco->deco();                                           
+                    $deco->deco();
                 }
-        } 
+        }
     public function redirectHeader()
         {
             if(isset($_POST['action']) && $_POST['action']== '')
                 {
-                    
+
                 }
             if(isset($_POST['action']) && $_POST['action']== '')
                 {
@@ -139,6 +161,36 @@ class IndexController extends AppController
 
                 }
         }
+
+    public function forgotPassword(){
+        $this->render('index.reset');
+    }
+
+    public function resetPassword(){
+        if(isset($_POST['mail'], $_POST['reset_password'], $_POST['conf_reset_password'])){
+            $mail = $_POST['mail'];
+            $password = $_POST['reset_password'];
+            $conf_password = $_POST['conf_reset_password'];
+
+            $user = new User;
+            if($user->isExist($mail) == false){
+                if($user->isSamepassword($password, $conf_password) == true){
+                    if($user->passwordReset($mail, $password) == 'updaté'){
+                        echo 'Success';
+                    }
+                } else{
+                    array_push($this->errors, 'Les mots de passes ne sont pas identiques');
+                }
+            } else{
+                array_push($this->errors, 'Identifiants inexistants');
+            }
+
+            if(!empty($this->errors)) {
+                $erreurs_str = implode(",", $this->errors);
+                echo json_encode($erreurs_str);
+            }
+        }
+    }
 }
 
 

@@ -269,8 +269,8 @@ class User extends Database
       $update_img = $this->_db->prepare("UPDATE users SET picture_profil = ? WHERE id = ?");
       $update_img->execute([$img_avatar, $id_user]);
 
-      $_SESSION['user']['picture_profil'] = $picture_profil;
-      $this->_picture_profil = $picture_profil;
+      $_SESSION['user']['picture_profil'] = $img_avatar;
+      $this->_picture_profil = $img_avatar;
     }
 
     public function updateFirstName($first_name){
@@ -328,5 +328,16 @@ class User extends Database
       $picture_profil = $result['picture_profil'];
 
       return $picture_profil;
+    }
+
+    public function passwordReset($mail, $new_password){
+
+      $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+
+      $query = $this->_db->prepare("UPDATE users SET password = ? WHERE mail = ?");
+      $query->execute([$password_hash, $mail]);
+
+      $this->password = $new_password;
+      return 'updaté';
     }
 }

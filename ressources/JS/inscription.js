@@ -36,7 +36,9 @@ $(document).ready(function(){
                     console.log('success');
                     pageConnexion();
                 } else {
-                    console.log('Failed ajax');
+                    $('.erreurs').removeClass('d-none');
+                    $('.erreurs').html('<p class="write_error"></p>');
+                    $('.write_error').append(data);
                 }
             }
         );

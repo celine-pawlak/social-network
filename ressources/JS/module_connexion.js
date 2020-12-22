@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    $(function () {
         // Vérifie que le mail soit au format prenom.nom@laplateforme.io
         $('#email').keyup(function () {
             regexMailValide(this, 'nope', 'yep');
@@ -8,7 +7,37 @@ $(document).ready(function(){
         $('#password').keyup(function () {
             regexPasswordValide(this, 'nope', 'yep');
         });
-    });
+        // Verifie que les mdp sont identiques
+        $('#conf_password').keyup(function(){
+            var mdp = $('#password').val();
+            isTheSame(this, mdp, 'nope', 'yep');
+        });
+
+        // verif reset
+        $('#reset_password').keyup(function () {
+            regexPasswordValide(this, 'nope', 'yep');
+        });
+
+        $('#conf_reset_password').keyup(function(){
+            var conf_reset = $('#conf_reset_password');
+            var mdp_reset = $('#reset_password');
+
+            isTheSame(conf_reset, mdp_reset, 'nope', 'yep');
+        });
+
+    $('#oublier').click(function(e){
+        e.preventDefault();
+
+        $.post(
+            'App/Controller/IndexController',
+            {action : 'forgotPassword'},
+            function(data){
+                if(data != ''){
+                    $('body').html(data);
+                }
+            }
+        )
+    })
 
     $('#submit_co').click(function(e) {
         e.preventDefault();
@@ -21,12 +50,8 @@ $(document).ready(function(){
                 password : $('#password').val()
             },
             function(data){
-                console.log(data);
                 var user = JSON.parse(data);
-                console.log(user);
                 if(user[0] == 'connecté') {
-                    console.log('cest good jonny');
-
                     localStorage.setItem('id', user[1]['id']);
                     localStorage.setItem('mail', user[1]['mail']);
                     localStorage.setItem('last_name', user[1]['last_name']);
@@ -35,15 +60,15 @@ $(document).ready(function(){
                     localStorage.setItem('picture_cover', user[1]['picture_cover']);
                     localStorage.setItem('date_birth', user[1]['date_birth']);
 
-                    // changement de view "fil d'actualité"
                     pageConnexion();
                 } else {
-                    console.log('erreur lors de la connexion');
+                    $('.erreurs').removeClass('d-none');
+                    $('.erreurs').html('<p class="write_error"></p>');
+                    $('.write_error').append(data);
                 }
             }
         );
     });
-
 
     $('#page_inscription').click(function(){
         $.post(
@@ -61,4 +86,26 @@ $(document).ready(function(){
             }
         );
     });
+
+    $('#submit_reset').click(function(e){
+        e.preventDefault();
+
+        $.post(
+            'App/Controller/IndexController',
+            {
+                action : 'resetPassword',
+                mail : $('#email').val(),
+                reset_password : $('#reset_password').val(),
+                conf_reset_password : $('#conf_reset_password').val(),
+            },
+            function(data){
+                console.log(data);
+                if(data == 'Success'){
+                    pageConnexion();
+                } else {
+                    console.log(data);
+                }
+            }
+        )
+    })
 })

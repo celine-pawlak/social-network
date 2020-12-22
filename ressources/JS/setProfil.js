@@ -42,6 +42,7 @@ $(document).ready(function(){
 
             if(changer_avatar != "") {
               $("#image_avatar").attr("src", "ressources/img/" + changer_avatar);
+              $('#pp_header').attr("src", "ressources/img/" + changer_avatar);
             }
           }
 
