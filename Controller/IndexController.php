@@ -205,7 +205,7 @@ class IndexController extends AppController
             }
         }
     }
-}
+
 
       public function addPostFormWall() {
         $infosUser = new User;

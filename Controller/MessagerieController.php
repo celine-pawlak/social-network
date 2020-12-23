@@ -48,6 +48,9 @@ class MessagerieController extends AppController
             if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])) {
                 $id_conversation = $_POST['seeConversation'];
             }
+            if (isset($_POST['id_conversation']) && !empty($_POST['id_conversation'])) {
+                $id_conversation = $_POST['id_conversation'];
+            }
             $last_messages = $messages->getAllMessagesFromConversation($id_conversation);
 
             foreach ($last_messages as $key => $message) {
