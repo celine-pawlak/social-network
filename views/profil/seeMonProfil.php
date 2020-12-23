@@ -1,47 +1,65 @@
 <button id="modif_profil">Go to set your Profil</button>
 
 <div class="cover_img">
-  <img src="<?= URL. "ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
+  <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
 </div>
 
 <div class="container" id="seeProfil">
   <div class="center-align">
     <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
-    <img src="<?= URL."ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
+    <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
 <div class="row center-align">
   <a id="scale-infos" href="#!" class="btn btn-large">
-   Plus d'informations
+   Mes informations
   </a>
 </div>
 
   <div class="row scale-transition scale-out display-none" id="infos-toggle">
     <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
       <h2 class="blue-text bold-text center-align"> Présentation </h2>
-      <p>
-        <?= $presentation['presentation'] ?>
-      </p>
+
+      <form id="form_presentation" class="right-align" method="post">
+        <textarea id="update_presentation" rows="8" cols="80" name="presentation"><?= $presentation['presentation'] ?></textarea>
+        <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
+      </form>
     </div>
 
     <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
       <div class="information_profile" id="info_border">
         <h2 class="blue-text bold-text"> Technologies </h2>
+        <form class="form_tech center-align" id="form_tech" method="post">
           <ul>
-            <li><?= $technologies["tech1"] ?></li>
-            <li><?= $technologies["tech2"] ?></li>
-            <li><?= $technologies["tech3"] ?></li>
+            <li><input type="text" name="tech1" value="<?= $technologies["tech1"] ?>"></input></li>
+            <li><input type="text" name="tech2" value="<?= $technologies["tech2"] ?>"></input></li>
+            <li><input type="text" name="tech3" value="<?= $technologies["tech3"] ?>"></input></li>
           </ul>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
+        </form>
       </div>
 
       <div class="information_profile">
         <h2 class="blue-text bold-text"> Hobbies </h2>
+        <form class="form_hobbies center-align" id="form_hobbies" method="post">
           <ul>
-            <li><?= $hobbies["hobby1"] ?></li>
-            <li><?= $hobbies["hobby2"] ?></li>
-            <li><?= $hobbies["hobby3"] ?></li>
+            <li><input type="text" name="hobby1" value="<?= $hobbies["hobby1"] ?>"></input></li>
+            <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>
+            <li><input type="text" name="hobby3" value="<?= $hobbies["hobby3"] ?>"></input></li>
           </ul>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
+        </form>
+
       </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s10 m10 offset-m1">
+      <form class="form_profile p-2 background-lighter-grey z-depth-1" action="addPostForm" method="post">
+        <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
+        <button class="btn-floating waves-effect waves-light" type="submit" name="button"><i class="material-icons">send</i></button>
+      </form>
     </div>
   </div>
 
@@ -49,6 +67,7 @@
     <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
+          <?php //var_dump($post); ?>
           <div class="col s1 m1">
             <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
             <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
@@ -72,14 +91,15 @@
                   endforeach;
                   ?>
               </p>
+
             </div>
 
             <?php if(!empty($commentaires["post_".$post['0']])): ?>
-            <div id="<?= 'commentaires_post_'.$post['0'] ?>">
+            <div id="commentaires_post_<?= $post['0'] ?>">
             <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
               <div class="post comment_profile p-1 z-depth-1">
                 <div class="flex-row">
-                  <img class="circle miniature_img" src="<?= URL.'ressources/img/'. $commentaire['picture'] ?>">
+                  <img class="circle miniature_img" src="<?= URL.'/ressources/img/'. $commentaire['picture'] ?>">
                   <p class="bold-text ml-05"><?= $commentaire["first_name"] . " " . $commentaire["last_name"] ?></p>
                 </div>
 
@@ -87,11 +107,10 @@
                 <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
               </div>
             <?php endforeach; ?>
-            </div>
+          </div>
+          <?php endif; ?>
 
-            <?php endif; ?>
-
-            <form class ="form_comment center-align" method="post">
+            <form class = "form_comment center-align" method="post">
               <input type="hidden" name="id_user" value="<?= $id_user ?>">
               <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
               <input type="text" name="content" value="">
@@ -99,6 +118,8 @@
             </form>
           </div>
         <?php endforeach; ?>
+
+
     </div>
 
   </div>

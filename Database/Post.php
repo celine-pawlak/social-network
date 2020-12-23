@@ -1,15 +1,13 @@
 <?php
-
-
 namespace App\Database;
-
+use \PDO;
 
 class Post extends Database
 {
     private $_id;
     private $_content;
     private $_creationDate;
-    private $_idUser = 7 ; // Récupérer l'id de l'user connecté
+    private $_idUser;
     private $_db;
 
     public function __construct()
@@ -18,25 +16,42 @@ class Post extends Database
         $this->_db = parent::getPDO();
     }
 
-    public function addPost($content)
+    public function addPost($content, $id)
     {
       $query = $this->_db->prepare("INSERT INTO post(content, creation_date, users_id) VALUES (?, NOW(), ?)");
-      $query->execute([$content, $this->_idUser]);
+      $query->execute([$content, $id]);
     }
 
-    public function getAllPosts()
+    public function getAllPosts($id)
     {
       $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM post
         JOIN users on post.users_id = users.id WHERE users.id = ? ORDER BY post.id DESC");
-      $query->execute([$this->_idUser]);
+      $query->execute([$id]);
+
+      return $query->fetchAll();
+    }
+
+    public function getAllPostsWall()
+    {
+      $query = $this->_db->prepare("SELECT post.*, users.last_name, users.first_name, users.picture_profil, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') as date_post FROM post
+      JOIN users on post.users_id = users.id ORDER BY post.id DESC LIMIT 10");
+      $query->execute();
 
       return $query->fetchAll();
     }
 
     public function getReacts($id){
       $query = $this->_db->prepare("SELECT * FROM users_reacts
-        JOIN reacts on users_reacts.reacts_id = reacts.id WHERE users_reacts.users_id = ?");
+      JOIN reacts on users_reacts.reacts_id = reacts.id WHERE users_reacts.posts_id = ?");
       $query->execute([$id]);
+
+      return $query->fetchAll();
+    }
+
+    public function getReactsWall(){
+      $query = $this->_db->prepare("SELECT * FROM users_reacts
+        JOIN reacts on users_reacts.reacts_id = reacts.id");
+      $query->execute();
 
       return $query->fetchAll();
     }

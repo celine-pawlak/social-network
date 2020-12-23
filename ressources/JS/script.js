@@ -1,33 +1,75 @@
 $(function ()
-    {                    
+
+    {                          
         // Dropdown header
         $('.dropdown-trigger').dropdown();
+        // Responsive menu  
+        $('.sidenav').sidenav({edge: 'right'});
         // Search bar header                      
+
         $.ajax(
           {
               url : 'App/Controller/IndexController',
               type : 'post',
-              data : {action : 'search'},              
+              data : {action : 'search'},
               success: (response) =>
-                {                                    
-                  var user = JSON.parse(response);                       
+                {
+                  var user = JSON.parse(response);
                   var dataUser = {};
                   var dataUserId = {};
+
+                  let idCreator = localStorage.id;  
+                  let idMembre = '';
                   for (var i = 0; i < user.length; i++) 
+
                     {
-                      dataUser[user[i].first_name + ' ' + user[i].last_name] = user[i].picture_profil;
+                      dataUser[user[i].first_name + ' ' + user[i].last_name] = 'ressources/img/'+user[i].picture_profil;
                       dataUserId[user[i].first_name + ' ' + user[i].last_name] = user[i];
-                    }                                            
+
+                    }                  
+                  // Autocomplete barre de recherche header
+
                   $('input.autocomplete').autocomplete(
                     {
-                      data: dataUser,                      
+                      data: dataUser,
                       onAutocomplete : function(e)
                         {
                           $('input.autocomplete').val('');
-                          window.location = "profil?id="+dataUserId[e].id;                          
+                          window.location = "profil/"+dataUserId[e].id;
                         },
                     });      
+                  //Ajout membre conversation
+                  $('#new_member_id').autocomplete(
+                    {
+                      data:dataUser,
+                      onAutocomplete : function(e)
+                        {                                                                             
+                          if(dataUserId[e].id === idCreator)                                 
+                            {
+                              $('#new_member_id').val('');                               
+                            }                            
+                          else  
+                            {
+                              if(idMembre === '')
+                                {
+                                  console.log('ajout')
+                                  idMembre = dataUserId[e].id;
+                                  console.log(idMembre);
+                                  $('#new_member_id').val('');    
+                                  $('#liste_membre').append('<li id='+dataUserId[e].id+'>'+dataUserId[e].first_name+' '+dataUserId[e].last_name+' <i class="fas fa-times"></i></li>');                                    
+                                  $('.fa-times').click(function()
+                                    {                                        
+                                      $(this).parent().remove();
+                                      idMembre = '';                                        
+                                    });                               
+                                  // ici faire l'action
+                                  // id de la personne à ajouter = idMembre
+                                }                                                                                                             
+                            }                              
+                        },
+                    });                   
                 },            
+
           });
           // Bouton déco
           $('.fa-power-off').click(function()
@@ -38,17 +80,18 @@ $(function ()
                     type : 'post',
                     data : {action : 'deco'},
                     success : (data) =>
-                      {                                                                      
-                        localStorage.clear();                             
-                        pageConnexion();       
+                      {
+                        localStorage.clear();
+                        pageConnexion();
                         window.location = 'index.php';
                       },
                   });
+
             });     
           //  Bouton créer conversation
           $('#bouton_conv').click(function(e)
             {    
-              $('body').append("<section id='pop-up-background' class='z-index-3 absolute flex flex-column justify-center align-center'>" +
+              $('body').append("<section id='pop-up-background' class='z-index-5 absolute flex flex-column justify-center align-center'>" +
               "<div id='pop-up-content' class='m-1 background-white p-05'>" +              
               "<div class='row m-0' id='recherche_personne'>"+
               "<div class='col s12'>"+
@@ -77,10 +120,9 @@ $(function ()
                         var groupeId = [creatorId];                        
                         for (var i = 0; i < user.length; i++) 
                           {
-                            dataUser[user[i].first_name + ' ' + user[i].last_name] = user[i].picture_profil;
+                            dataUser[user[i].first_name + ' ' + user[i].last_name] = 'ressources/img/'+user[i].picture_profil;
                             dataUserInfo[user[i].first_name + ' ' + user[i].last_name] = user[i];
-                          }          
-                          
+                          }                                    
                         $('#autocomplete-conv').autocomplete(
                           {
                             data: dataUser,                      
@@ -89,7 +131,7 @@ $(function ()
                                 if(jQuery.inArray(dataUserInfo[e].id, groupeId) !== -1)                                 
                                   {
                                     $('#autocomplete-conv').val('');                                       
-                                  }
+                                  }                                
                                 else  
                                   {
                                     groupeId.push(dataUserInfo[e].id);                                       
@@ -100,6 +142,9 @@ $(function ()
                                         $(this).parent().remove();
                                         groupeId.splice($.inArray(dataUserInfo[e].id, groupeId), 1);                                        
                                       });
+                                    // Faire envoie ajax pour créer conversation
+                                    // id du créateur = creatorId
+                                    // tableau avec tous les id = groupeId
                                   }                              
                               },
                           });      
@@ -112,5 +157,5 @@ $(function ()
                       modal.remove();
                   }
               };
-            });
+            });      
     });

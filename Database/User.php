@@ -24,7 +24,6 @@ class User extends Database
         $this->_db = parent::getPDO();
     }
 
-
     public function connexion($mail, $password){
         $query = $this->_db->prepare("SELECT id, mail, last_name, first_name, picture_profil, picture_cover, date_birth FROM users WHERE mail = ?");
         $query->execute([$mail]);
@@ -105,7 +104,6 @@ class User extends Database
     public function getInfosUser($id){
       $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
       $query->execute([$id]);
-
       return $query->fetchAll();
     }
 
@@ -146,9 +144,9 @@ class User extends Database
         $query->execute([$id]);
         $data = $query->fetchAll();
         $tableau = [
-          "hobby1" => $data[0]["name_hobby"],
-          "hobby2" => $data[1]["name_hobby"],
-          "hobby3" => $data[2]["name_hobby"]
+          "hobby1" => isset($data[0]) ? $data[0]["name_hobby"] : "",
+          "hobby2" => isset($data[1]) ? $data[1]["name_hobby"] : "",
+          "hobby3" => isset($data[2]) ? $data[2]["name_hobby"] : "",
         ];
       } else {
         $tableau = [
@@ -162,50 +160,40 @@ class User extends Database
     }
 
     public function addTechnologies($technologies, $id){
+
+      $query = $this->_db->prepare("DELETE FROM users_technologies WHERE users_id = ?");
+      $query->execute([$id]);
+
       foreach($technologies as $technology) {
-        // s'il n'existe dans la table technologies, on le créé
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name_technology = ?");
-        $query->execute([$technology]);
 
-        if($query->fetchColumn() == 0) {
-          $query = $this->_db->prepare("INSERT INTO technologies(name_technology) VALUES (?)");
+        if($technology != "") {
+          // s'il n'existe dans la table technologies, on le créé
+          $query = $this->_db->prepare("SELECT COUNT(*) FROM technologies WHERE name_technology = ?");
           $query->execute([$technology]);
+
+          if($query->fetchColumn() == 0) {
+            $query = $this->_db->prepare("INSERT INTO technologies(name_technology) VALUES (?)");
+            $query->execute([$technology]);
+          }
+
+          $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
+          $query->execute([$id, $technology]);
         }
 
-        $query = $this->_db->prepare("DELETE FROM users_technologies WHERE users_id = ?");
-        $query->execute([$id]);
-
-        foreach($technologies as $technology) {
-            $query= $this->_db->prepare("INSERT INTO users_technologies(users_id, technologies_id) VALUES(?, (SELECT id FROM technologies WHERE name_technology = ?))");
-            $query->execute([$id, $technology]);
-        }
       }
     }
 
     public function getTechnologies($id){
-        $query = $this->_db->prepare("SELECT COUNT(*) FROM users_technologies WHERE users_id = ?");
-        $query->execute([$id]);
+      $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
+      $query->execute([$id]);
+      $data = $query->fetchAll();
 
-        $nb_technologies = $query->fetchColumn();
-
-        if($nb_technologies > 0) {
-          $query = $this->_db->prepare("SELECT * FROM users_technologies JOIN technologies ON users_technologies.technologies_id = technologies.id WHERE users_id = ?");
-          $query->execute([$id]);
-          $data = $query->fetchAll();
-          $tableau = [
-            "tech1" => $data[0]["name_technology"],
-            "tech2" => $data[1]["name_technology"],
-            "tech3" => $data[2]["name_technology"]
-          ];
-
-        }else{
-          $tableau = [
-            "tech1" => "",
-            "tech2" => "",
-            "tech3" => ""
-          ];
-        }
-        return $tableau;
+      $tableau = [
+        "tech1" => isset($data[0]) ? $data[0]["name_technology"] : "",
+        "tech2" => isset($data[1]) ? $data[1]["name_technology"] : "",
+        "tech3" => isset($data[2]) ? $data[2]["name_technology"] : ""
+      ];
+      return $tableau;
     }
 
     public function updatePresentation($presentation, $id){
@@ -223,14 +211,122 @@ class User extends Database
     public function deco()
         {
           session_destroy();
-          unset($_SESSION['user']);                    
+          unset($_SESSION['user']);
         }
 
+
+    // Profil_modif
     public function showProfil($id_user){
         $query = $this->_db->prepare("SELECT * FROM users WHERE id = ? ");
         $query->execute([$id_user]);
         $infos = $query->fetch();
 
         return $infos;
+    }
+
+    public function verifCurrentPassword($current_password){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("SELECT password FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch();
+
+      if(password_verify($current_password, $result['password'])) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function sameInfo($info) {
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch(PDO::FETCH_ASSOC);
+
+      if(in_array($info, $result)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function updateImage($img_avatar) {
+      $id_user = $_SESSION['user']['id'];
+
+      $update_img = $this->_db->prepare("UPDATE users SET picture_profil = ? WHERE id = ?");
+      $update_img->execute([$img_avatar, $id_user]);
+
+      $_SESSION['user']['picture_profil'] = $img_avatar;
+      $this->_picture_profil = $img_avatar;
+    }
+
+    public function updateFirstName($first_name){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("UPDATE users SET first_name = ? WHERE id = ?");
+      $query->execute([$first_name, $id_user]);
+
+      $_SESSION['user']['first_name'] = $first_name;
+      $this->_first_name = $first_name;
+      return 'updaté';
+    }
+
+    public function updateLastName($last_name){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("UPDATE users SET last_name = ? WHERE id = ?");
+      $query->execute([$last_name, $id_user]);
+
+      $_SESSION['user']['last_name'] = $last_name;
+      $this->_last_name = $last_name;
+      return 'updaté';
+    }
+
+    public function updateMail($mail){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("UPDATE users SET mail = ? WHERE id = ?");
+      $query->execute([$mail, $id_user]);
+
+      $_SESSION['user']['mail'] = $mail;
+      $this->_mail = $mail;
+      return 'updaté';
+    }
+
+    public function updatePassword($new_password){
+      $id_user = $_SESSION['user']['id'];
+
+      $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+
+      $query = $this->_db->prepare("UPDATE users SET password = ? WHERE id = ?");
+      $query->execute([$password_hash, $id_user]);
+
+      $this->password = $new_password;
+      return 'updaté';
+    }
+
+    public function switchPicture(){
+      $id_user = $_SESSION['user']['id'];
+
+      $query = $this->_db->prepare("SELECT picture_profil FROM users WHERE id = ?");
+      $query->execute([$id_user]);
+      $result = $query->fetch();
+
+      $picture_profil = $result['picture_profil'];
+
+      return $picture_profil;
+    }
+
+    public function passwordReset($mail, $new_password){
+
+      $password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+
+      $query = $this->_db->prepare("UPDATE users SET password = ? WHERE mail = ?");
+      $query->execute([$password_hash, $mail]);
+
+      $this->password = $new_password;
+      return 'updaté';
     }
 }

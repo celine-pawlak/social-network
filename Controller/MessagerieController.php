@@ -94,7 +94,7 @@ class MessagerieController extends AppController
         if (isset($_POST['add_member_to_conversation']) && !empty($_POST['add_member_to_conversation'])) {
             $this->addMember($_POST['new_member_id'], $_POST['add_member_to_conversation'], $idUser);
         }
-
+        
         $this->render('messagerie.messagerie', compact('allconversationsInformations', 'last_messages', 'idUser', 'id_conversation', 'smileys'));
     }
 
