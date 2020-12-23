@@ -101,7 +101,7 @@
                     </div>
                 </div>
                 <div class="flex-column justify-content-spacebetween h-100">
-                    <div class="messages flex-column overflow-scroll-y scrollbar-conversation h-100">
+                    <div id="all_messages" class="messages flex-column overflow-scroll-y scrollbar-conversation h-100">
                         <!-- Messages -->
                         <?php foreach ($last_messages as $message): ?>
                             <span class="light-grey-text mx-1 <?= ($message['users_id'] == $idUser) ? 'self-align-flexend' : '' ?>"><?= strftime('%d/%m/%Y %R', strtotime($message['creation_date'])) ?></span>

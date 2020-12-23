@@ -16,8 +16,18 @@ class MessagerieController extends AppController
         parent::__construct();
     }
 
-    public function messagerie()
-    {
+    public function postMessage(){
+        // Si contenu non vide
+        if(!empty($_POST['content'])){
+            $this->addMessage($_POST['id_conversation'], $_POST['content'], $_POST['id_user']);
+        }
+    }
+
+    public function getMessages(){
+        echo json_encode($this->getlastmessages());
+    }
+
+    public function getlastmessages(){
         $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
 
         $allconversationsInformations = null;
@@ -26,27 +36,6 @@ class MessagerieController extends AppController
         $reacts = new Reaction;
         $messages = new Message;
         $id_conversation = null;
-
-
-        // Si ajout d'une reaction
-        if (isset($_POST['add_reaction_message']) && !empty($_POST['add_reaction_message'])) {
-            $this->addReaction($_POST['add_reaction_message'], $idUser);
-        }
-
-        // Si ajout d'un message
-        if (isset($_POST['add_message']) && !empty($_POST['add_message'])) {
-            $this->addMessage($_POST['add_message'], $_POST['new_message_content'], $idUser);
-        }
-
-        // Si modification du name
-        if (isset($_POST['update_conversation_name']) && !empty($_POST['update_conversation_name'])) {
-            $this->updateConversationName($_POST['update_conversation_name'], $_POST['new_conversation_name'], $idUser);
-        }
-
-        // Si ajout d'un membre
-        if (isset($_POST['add_member_to_conversation']) && !empty($_POST['add_member_to_conversation'])) {
-            $this->addMember($_POST['new_member_id'], $_POST['add_member_to_conversation'], $idUser);
-        }
 
         $allconversations = $conversations->allConversationsWithLastMessageSent($idUser);
         foreach ($allconversations as $key => $conversation) {
@@ -68,6 +57,44 @@ class MessagerieController extends AppController
 
         $smileys = $reacts->getEmoji();
 
+        return [
+            'allconversationsInformations' => $allconversationsInformations,
+            'last_messages' => $last_messages,
+            'id_conversation' => $id_conversation,
+            'smileys' => $smileys
+        ];
+    }
+
+    public function messagerie()
+    {
+        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+
+        $get_last_messages = $this->getlastmessages();
+        $allconversationsInformations = $get_last_messages['allconversationsInformations'];
+        $last_messages = $get_last_messages['last_messages'];
+        $id_conversation = $get_last_messages['id_conversation'];
+        $smileys = $get_last_messages['smileys'];
+
+        // Si ajout d'une reaction
+        if (isset($_POST['add_reaction_message']) && !empty($_POST['add_reaction_message'])) {
+            $this->addReaction($_POST['add_reaction_message'], $idUser);
+        }
+
+        // Si ajout d'un message
+        if (isset($_POST['add_message']) && !empty($_POST['add_message'])) {
+            $this->addMessage($_POST['add_message'], $_POST['new_message_content'], $idUser);
+        }
+
+        // Si modification du name
+        if (isset($_POST['update_conversation_name']) && !empty($_POST['update_conversation_name'])) {
+            $this->updateConversationName($_POST['update_conversation_name'], $_POST['new_conversation_name'], $idUser);
+        }
+
+        // Si ajout d'un membre
+        if (isset($_POST['add_member_to_conversation']) && !empty($_POST['add_member_to_conversation'])) {
+            $this->addMember($_POST['new_member_id'], $_POST['add_member_to_conversation'], $idUser);
+        }
+
         $this->render('messagerie.messagerie', compact('allconversationsInformations', 'last_messages', 'idUser', 'id_conversation', 'smileys'));
     }
 
@@ -84,7 +111,7 @@ class MessagerieController extends AppController
     {
         $messages = new Message;
         $message_content = htmlspecialchars($content);
-        $messages->sendMessage($idUser, $message_content, $conversation_id);
+        return $messages->sendMessage($idUser, $message_content, $conversation_id);
     }
 
     public function updateConversationName($conversation_id, $new_conversation_name, $idUser)

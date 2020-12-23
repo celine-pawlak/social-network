@@ -24,6 +24,7 @@
     <script src="ressources/JS/inscription.js"></script>
     <script src="ressources/JS/profil.js"></script>
     <script src="ressources/js/ajaxProfile.js"></script>
+    <script src="ressources/js/messagerie.js"></script>
 </head>
 <body>
 <header class="flex-row justify-content-spacebetween">

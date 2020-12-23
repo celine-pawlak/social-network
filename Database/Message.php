@@ -44,6 +44,13 @@ class Message extends Conversation
             ':user_id' => $id_user,
             ':conversation_id' => $id_conversation
         ]);
+        return [
+            'content' => $content,
+            'users_id' => $id_user,
+            'id_conversations' => $id_conversation,
+            'id' => $this->_db->lastInsertId(),
+            'creation_date' => date("Y-m-d H:i:s")
+        ];
     }
 
 
