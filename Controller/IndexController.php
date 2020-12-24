@@ -231,4 +231,9 @@ class IndexController extends AppController
         $response = $comment->addComment($_POST["content"], $_POST["id_post"], $_POST["id_user"]);
         return json_encode($response);
       }
+    public function getPostEmoji()
+      {
+          $react = new Post;
+          echo json_encode($react->getReactsWall());          
+      }
 }
