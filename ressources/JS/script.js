@@ -6,7 +6,6 @@ $(function ()
         // Responsive menu  
         $('.sidenav').sidenav({edge: 'right'});
         // Search bar header                      
-
         $.ajax(
           {
               url : 'App/Controller/IndexController',
@@ -70,7 +69,7 @@ $(function ()
                     });                   
                 },            
 
-          });
+          });                    
           // Bouton déco
           $('.fa-power-off').click(function()
             {
@@ -159,3 +158,4 @@ $(function ()
               };
             });      
     });
+
