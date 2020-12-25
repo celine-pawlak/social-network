@@ -20,6 +20,7 @@ class MessagerieController extends AppController
         // Si contenu non vide
         if(!empty($_POST['content'])){
             $this->addMessage($_POST['id_conversation'], $_POST['content'], $_POST['id_user']);
+            echo json_encode(true);
         }
     }
 

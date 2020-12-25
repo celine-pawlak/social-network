@@ -142,7 +142,7 @@
                                             } ?>
                                         <?php endforeach; ?>
                                         <?php foreach ($emojis_count as $emoji_key => $emoji): ?>
-                                            <button class="box-shadow background-yellow p-025 border-radius-30 no-border clickable relative hover-parent"
+                                            <button class="box-shadow background-yellow p-025 border-radius-30 no-border clickable relative m-01 hover-parent"
                                                     name="add_reaction_message"
                                                     value="<?= $message['id'] ?>.<?= $emoji['id'] ?>">
                                                 <div class="absolute position-top-outside hover-child m-0 <?= ($message['users_id'] == $idUser) ? 'position-left' : 'position-right' ?>">
