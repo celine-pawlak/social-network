@@ -11,8 +11,13 @@ function doesReactionExist(emojis, reactionEmoji, reaction) {
     return test;
 }
 
-function getMessages() {
-    let idConversation = $('#add_message').val();
+function getAllConversationsLastInformations(conversationsInformations) {
+    console.log(conversationsInformations);
+
+}
+
+function getMessages(conversationId) {
+
     var idUser = localStorage.id;
     $.ajax({
         url: "App/Controller/MessagerieController",
@@ -20,11 +25,45 @@ function getMessages() {
         dataType: 'json',
         data: {
             action: 'getMessages',
-            id_conversation: idConversation
+            id_conversation: conversationId
         },
         success: function (result) {
+            $('#add_message').val(conversationId);
+            result.allconversationsInformations.map(function (conversationInformation) {
+                if (conversationInformation.conversation_id == conversationId) {
+                    currentConversation = conversationInformation;
+                }
+            })
+            $('#conversation_image').attr('src', 'ressources/img/' + currentConversation.image + '');
+            $('#new_conversation_name').val(currentConversation.fullname);
+            if ((currentConversation.members_number > 2) && (currentConversation.creator_id == idUser)) {
+                $('#new_conversation_name').prop("disabled", false);
+                $('#label_new_conversation').removeClass('d-none');
+                $('#update_conversation_name').removeClass('d-none');
+                $('#members_list').removeClass('d-none').html(currentConversation.members_informations.map(function (user_information){
+                    return '<li class="hover-blue-grey p-025 border-radius-50px">\n' +
+                        '  <a class="flex-row align-items-center black-text" href="profil?id='+ user_information.id +'">\n' +
+                        '    <img class="border-radius-100 mr-05 background-white"\n' +
+                        '         src="ressources/img/'+ user_information.picture_profil +'"\n' +
+                        '         alt="Image de profil de '+ user_information.first_name +' '+ user_information.last_name +'"\n' +
+                        '         width="20px"\n' +
+                        '         height="20px">\n' +
+                        '    <span class="font-smile-small">'+ user_information.first_name +' '+ user_information.last_name +'</span>\n' +
+                        '  </a>\n' +
+                        '</li>'}).join(''));
+                $('#members_informations').html(' ' + currentConversation.members_number);
+            } else {
+                $('#new_conversation_name').prop("disabled", true);
+                $('#label_new_conversation').addClass('d-none');
+                $('#update_conversation_name').addClass('d-none');
+                $('#members_list').addClass('d-none');
+                $('#members_informations').html('+');
+
+            }
+            $('#update_conversation_name').val(currentConversation.conversation_id);
+
+
             const htmlmessages = result.last_messages.map(function (message) {
-                console.log(message.id);
                 const htmladdreaction = result.smileys.map(function (smiley) {
                     return '<button class="clickable background-white no-border hover-blue-grey border-radius-50px m-02"\n' +
                         '  name="add_reaction_message"\n' +
@@ -106,6 +145,7 @@ function getMessages() {
             $('#all_messages').html(htmlmessages);
             // Scroll bar down
             $("#all_messages").scrollTop($("#all_messages")[0].scrollHeight);
+            getAllConversationsLastInformations(result.allconversationsInformations)
         }
     });
 }
@@ -126,9 +166,8 @@ function postMessage() {
         },
         dataType: 'json',
         success: function (result) {
-            console.log(result);
             $('#new_message_content').val('').focus();
-            getMessages();
+            getMessages(idConversation);
         }
     });
 }
@@ -139,7 +178,17 @@ $(function () {
         event.preventDefault();
     })
 
-    getMessages();
+    var currentConversationId = $('#add_message').val();
+    getMessages(currentConversationId);
+
+    //Changer conversation
+    $('#all_conversations').on('click', 'article', function (event) {
+        let conversationId = $(this).children('button')[0].id;
+        currentConversationId = conversationId.slice(17);
+        getMessages(currentConversationId);
+    })
+
+
     $('#add_message').click(postMessage);
 
     // Nouveau message
@@ -148,6 +197,7 @@ $(function () {
             postMessage();
         }
     })
+
 
     // Smiley
 
