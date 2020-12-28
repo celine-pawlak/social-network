@@ -26,7 +26,8 @@ class Message extends Conversation
             FROM messages
             LEFT JOIN users ON messages.users_id = users.id
             WHERE conversations_id = :conversation_id
-            LIMIT 15");
+            ORDER BY `creation_date`
+            ");
         $query->execute([':conversation_id' => $id_conversation]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

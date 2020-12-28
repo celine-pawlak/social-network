@@ -53,7 +53,7 @@ class Post extends Database
         JOIN reacts on users_reacts.reacts_id = reacts.id");
       $query->execute();
 
-      return $query->fetchAll();
+      return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**

@@ -25,6 +25,9 @@ class Reaction extends Database
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Insert / met à jour / Supprime en base de données une reaction pour un bloc
+     */
     public function insertEmoji($id_user, $id_react, $id_bloc, $bloc)
     {
         $nom_bloc = $bloc . '_id';
@@ -60,6 +63,12 @@ class Reaction extends Database
         $query->execute([':id_message' => $id_message]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-
+  
+    public function countReaction($id)
+        {
+            $query=$this->_db->prepare("SELECT COUNT(id) FROM users_reacts WHERE posts_id = ?");
+            $query->execute([$id]);
+            return $query;
+        }
 }
 

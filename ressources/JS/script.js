@@ -70,7 +70,7 @@ $(function ()
                     });                   
                 },            
 
-          });
+          });                    
           // Bouton déco
           $('.fa-power-off').click(function()
             {
@@ -159,3 +159,4 @@ $(function ()
               };
             });      
     });
+

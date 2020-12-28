@@ -29,18 +29,22 @@
               <i id="fa-sign-language" class="fas fa-sign-language"></i>
             </p> -->
             <p class="post_content">
-              <?= $post["content"] ?>
-
-              <?php foreach($reacts as $react):                
-                // var_dump($react);
-                endforeach;
-                ?>
+              <?= $post["content"] ?>                          
             </p>
 
           </div>
           <div id="posts_<?= $post['id']?>" class="d-row">
             <button class="react">test</button>
-            <div id="reaction_post_<?= $post['id']?>"></div>            
+            <div id="reaction_post_<?= $post['id']?>">
+              <?php foreach($reacts as $react):    
+                if($react['posts_id'] == $post['id'])            
+                  {
+                    ?>
+                    <i class="<?= $react['emoji'];?>"></i>
+                    <?php
+                  }
+                endforeach;?>
+            </div>            
           </div>
           <?php if(!empty($commentaires["post_".$post['0']])): ?>
 

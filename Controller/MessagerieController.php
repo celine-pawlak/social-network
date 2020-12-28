@@ -20,6 +20,7 @@ class MessagerieController extends AppController
         // Si contenu non vide
         if(!empty($_POST['content'])){
             $this->addMessage($_POST['id_conversation'], $_POST['content'], $_POST['id_user']);
+            echo json_encode(true);
         }
     }
 
@@ -47,6 +48,9 @@ class MessagerieController extends AppController
             $id_conversation = $allconversations[0]['conversation_id'];
             if (isset($_POST['seeConversation']) && !empty($_POST['seeConversation'])) {
                 $id_conversation = $_POST['seeConversation'];
+            }
+            if (isset($_POST['id_conversation']) && !empty($_POST['id_conversation'])) {
+                $id_conversation = $_POST['id_conversation'];
             }
             $last_messages = $messages->getAllMessagesFromConversation($id_conversation);
 

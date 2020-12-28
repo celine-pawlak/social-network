@@ -61,6 +61,7 @@
                                    name="new_conversation_name" id="new_conversation_name"
                                    value="<?= $current_conversation['fullname'] ?>" <?= (($current_conversation['creator_id'] == $idUser) and ($current_conversation['members_number'] > 2)) ? '' : 'disabled' ?>>
                             <label for="new_conversation_name"
+                                   id="label_new_conversation"
                                    class="<?= (($current_conversation['creator_id'] == $idUser) and ($current_conversation['members_number'] > 2)) ? '' : 'd-none' ?>">Nom
                                 de la conversation</label>
                         </div>
@@ -71,8 +72,10 @@
                     </div>
                     <div class="relative hover-parent mx-1"
                          id="see_members">
-                        <span class="clickable bold-text blue-text"><i
-                                    class="fas fa-user-friends"></i><?= ($current_conversation['members_number'] > 2) ? ' ' . $current_conversation['members_number'] : '+' ?></span>
+                        <span class="clickable bold-text blue-text">
+                            <i class="fas fa-user-friends"></i>
+                            <span id="members_informations"><?= ($current_conversation['members_number'] > 2) ? ' ' . $current_conversation['members_number'] : '+' ?></span>
+                        </span>
                         <div class="absolute position-right hover-child pt-1">
                             <div class="background-lighter-grey p-1 w-max-content box-shadow">
                                 <div class="flex-column align-items-center input-field <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">                                    
@@ -89,7 +92,7 @@
                                         </button>
                                     </div>      
                                 </div>
-                                <ul class="max-height-100vh overflow-scroll-y scrollbar-conversations <?= ($current_conversation['members_number'] > 2) ? '' : 'd-none' ?>">
+                                <ul id="members_list" class="max-height-100vh overflow-scroll-y scrollbar-conversations <?= ($current_conversation['members_number'] > 2) ? '' : 'd-none' ?>">
                                     <?php foreach ($current_conversation['members_informations'] as $user_informations): ?>
                                         <li class="hover-blue-grey p-025 border-radius-50px">
                                             <a class="flex-row align-items-center black-text" href="profil?id=<?= $user_informations['id'] ?>">
@@ -147,7 +150,7 @@
                                             } ?>
                                         <?php endforeach; ?>
                                         <?php foreach ($emojis_count as $emoji_key => $emoji): ?>
-                                            <button class="box-shadow background-yellow p-025 border-radius-30 no-border clickable relative hover-parent"
+                                            <button class="box-shadow background-yellow p-025 border-radius-30 no-border clickable relative m-01 hover-parent"
                                                     name="add_reaction_message"
                                                     value="<?= $message['id'] ?>.<?= $emoji['id'] ?>">
                                                 <div class="absolute position-top-outside hover-child m-0 <?= ($message['users_id'] == $idUser) ? 'position-left' : 'position-right' ?>">
