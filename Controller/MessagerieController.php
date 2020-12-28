@@ -201,5 +201,6 @@ class MessagerieController extends AppController
         return $allconversationsInformations;
     }
 
+    
 
 }

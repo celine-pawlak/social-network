@@ -1,11 +1,11 @@
 $(function ()
 
-    {                          
+    {
         // Dropdown header
         $('.dropdown-trigger').dropdown();
-        // Responsive menu  
+        // Responsive menu
         $('.sidenav').sidenav({edge: 'right'});
-        // Search bar header                      
+        // Search bar header
 
         $.ajax(
           {
@@ -18,15 +18,15 @@ $(function ()
                   var dataUser = {};
                   var dataUserId = {};
 
-                  let idCreator = localStorage.id;  
+                  let idCreator = localStorage.id;
                   let idMembre = '';
-                  for (var i = 0; i < user.length; i++) 
+                  for (var i = 0; i < user.length; i++)
 
                     {
                       dataUser[user[i].first_name + ' ' + user[i].last_name] = 'ressources/img/'+user[i].picture_profil;
                       dataUserId[user[i].first_name + ' ' + user[i].last_name] = user[i];
 
-                    }                  
+                    }
                   // Autocomplete barre de recherche header
 
                   $('input.autocomplete').autocomplete(

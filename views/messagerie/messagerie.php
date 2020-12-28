@@ -5,7 +5,7 @@
     </button>
 </div>
 
-<form id="messagerie" class="max-width-content" method="POST">      
+<form id="messagerie" class="max-width-content" method="POST">
     <div class="flex-row justify-content-spacearound">
         <!-- Liste conversations en cours -->
         <section id="all_conversations"
@@ -50,7 +50,12 @@
                              src="ressources/img/<?= $current_conversation['image'] ?>"
                              alt="Image de la conversation"
                              width="50px"
-                             height="50px">
+                             height="50px"
+                             id="conv_avatar">
+                             <div id="change_file" class="btn">
+                                <span>Modifier</span>
+                                <input type="file" id="update_avatar_conv" name="avatar" accept="image/png, image/jpeg" value="" style='color:lightgrey'>
+                            </div>
                         <div class="input-field w-70 pb-0 m-0">
                             <input class="font-smile-small m-0 blue-text bold-text" type="text"
                                    name="new_conversation_name" id="new_conversation_name"
