@@ -1,20 +1,103 @@
 function doesReactionExist(emojis, reactionEmoji, reaction) {
-    let test = false;
+    let response = false;
     emojis.map(function (react) {
         if ((typeof react[reactionEmoji] !== 'undefined') && (react[reactionEmoji].length !== 0)) {
             react[reactionEmoji].counting++;
             react[reactionEmoji].phrase.push(reaction.first_name + ' ' + reaction.last_name + ' ' + reaction.type);
             react[reactionEmoji].id = reaction.id;
-            test = true;
+            response = true;
         }
     });
-    return test;
+    return response;
 }
 
-function getAllConversationsLastInformations(conversationsInformations) {
-    console.log(conversationsInformations);
-
+function getAllConversationsLastInformations(allConversationsInformations) {
+    if (typeof allConversationsInformations != 'undefined') {
+        var htmlAllConversations = allConversationsInformations.map(function (conversationInformations) {
+            return '<article class="flex-row align-items-center py-05 border-bot-blue w-230px relative">\n' +
+                '  <button id="allconversations_' + conversationInformations.conversation_id + '"\n' +
+                '          class="absolute position-all w-100 no-border no-background no-background-focus clickable"\n' +
+                '          name="seeConversation"\n' +
+                '          value="' + conversationInformations.conversation_id + '"></button>\n' +
+                '   <img class="border-radius-100 mx-auto m-05 background-white"\n' +
+                '        src="ressources/img/' + conversationInformations.image + '"\n' +
+                '        alt="Image de la conversation"\n' +
+                '        width="50px"\n' +
+                '        height="50px">\n' +
+                '   <div class="flex-column">\n' +
+                '      <span class="bold-text">' + conversationInformations.name + '</span>\n' +
+                '      <span class="light-grey-text">' + conversationInformations.last_message + '</span>\n' +
+                '   </div>\n' +
+                '</article>'
+        }).join('');
+    } else {
+        var htmlAllConversations = '<p>Vous n\'avez pas de conversation</p>';
+    }
+    $('#all_conversations').html(htmlAllConversations);
 }
+
+$(document).on('click', 'button[name=\'add_reaction_message\']', function () {
+    var messageAndReactID = $(this).val();
+    var idUser = localStorage.id;
+
+    $.ajax({
+        url: "App/Controller/MessagerieController",
+        method: 'post',
+        dataType: 'json',
+        data: {
+            action: 'addReactionJS',
+            id_user: idUser,
+            message_and_react_id: messageAndReactID
+        },
+        success: function (result) {
+            var emojisCount = [];
+            result.reactions.map(function (reaction) {
+                var reactionEmoji = reaction.emoji;
+
+                if (doesReactionExist(emojisCount, reactionEmoji, reaction)) {
+                } else {
+                    emojisCount.push(
+                        {
+                            [reactionEmoji]: {
+                                counting: 1,
+                                phrase: [reaction.first_name + ' ' + reaction.last_name + ' ' + reaction.type],
+                                id: reaction.id
+                            }
+                        });
+                }
+            });
+
+            var htmlseeReaction = emojisCount.map(function (emoji) {
+
+                var htmlPhrases = Object.values(emoji)[0].phrase.map(function (phrase) {
+                    return '<span> ' + phrase + ' </span><br>'
+                }).join('');
+
+                for (var property in emoji) {
+                    var emojiClassName = property;
+                }
+
+                return '<button class="box-shadow background-yellow p-025 border-radius-30 no-border clickable relative hover-parent m-01"\n' +
+                    'name="add_reaction_message"\n' +
+                    'value="' + result.messageInformations.id + '.' + Object.values(emoji)[0].id + '">\n' +
+                    '  <div class="absolute position-top-outside hover-child m-0 ' + (result.messageInformations.users_id == idUser ? 'position-left' : 'position-right') + '">\n' +
+                    '    <p class="w-max-content font-smile-small background-white ' + (result.messageInformations.users_id == idUser ? 'likes_left' : 'likes_right') + '">\n' +
+                    '    ' + htmlPhrases + ' \n' +
+                    '    </p>\n' +
+                    '  </div>\n' +
+                    '  <i class="' + emojiClassName + '"></i> ' +
+                    '  <span> ' + Object.values(emoji)[0].counting + '</span>\n' +
+                    '</button>'
+            }).join('');
+
+            var messageHtml = $('#messages_' + result.messageInformations.id + '>.reactions');
+            messageHtml.html(htmlseeReaction);
+
+        }
+    });
+
+})
+
 
 function getMessages(conversationId) {
 
@@ -40,17 +123,18 @@ function getMessages(conversationId) {
                 $('#new_conversation_name').prop("disabled", false);
                 $('#label_new_conversation').removeClass('d-none');
                 $('#update_conversation_name').removeClass('d-none');
-                $('#members_list').removeClass('d-none').html(currentConversation.members_informations.map(function (user_information){
+                $('#members_list').removeClass('d-none').html(currentConversation.members_informations.map(function (user_information) {
                     return '<li class="hover-blue-grey p-025 border-radius-50px">\n' +
-                        '  <a class="flex-row align-items-center black-text" href="profil?id='+ user_information.id +'">\n' +
+                        '  <a class="flex-row align-items-center black-text" href="profil?id=' + user_information.id + '">\n' +
                         '    <img class="border-radius-100 mr-05 background-white"\n' +
-                        '         src="ressources/img/'+ user_information.picture_profil +'"\n' +
-                        '         alt="Image de profil de '+ user_information.first_name +' '+ user_information.last_name +'"\n' +
+                        '         src="ressources/img/' + user_information.picture_profil + '"\n' +
+                        '         alt="Image de profil de ' + user_information.first_name + ' ' + user_information.last_name + '"\n' +
                         '         width="20px"\n' +
                         '         height="20px">\n' +
-                        '    <span class="font-smile-small">'+ user_information.first_name +' '+ user_information.last_name +'</span>\n' +
+                        '    <span class="font-smile-small">' + user_information.first_name + ' ' + user_information.last_name + '</span>\n' +
                         '  </a>\n' +
-                        '</li>'}).join(''));
+                        '</li>'
+                }).join(''));
                 $('#members_informations').html(' ' + currentConversation.members_number);
             } else {
                 $('#new_conversation_name').prop("disabled", true);
@@ -88,10 +172,6 @@ function getMessages(conversationId) {
                     }
                 });
 
-                emojisCount.map(function (emoji) {
-
-                });
-
                 var htmlseeReaction = emojisCount.map(function (emoji) {
 
                     var htmlPhrases = Object.values(emoji)[0].phrase.map(function (phrase) {
@@ -121,13 +201,13 @@ function getMessages(conversationId) {
                     '      <div class="m-0 box-shadow background-white grey-text p-025 border-radius-30 no-border clickable relative hover-parent">\n' +
                     '        <i class="fas fa-smile"></i><span>+</span>\n' +
                     '        <div class="absolute position-top hover-child m-0 ' + (message.users_id == idUser ? 'position-right-outside pl-05' : 'position-left-outside pr-05') + '">\n' +
-                    '          <section class="background-white border-radius-10 grid column-2 p-025 box-shadow z-index-3">\n' +
+                    '          <section class="reactions background-white border-radius-10 grid column-2 p-025 box-shadow z-index-3">\n' +
                     '          ' + htmladdreaction + '\n' +
                     '          </section>\n' +
                     '        </div>\n' +
                     '      </div>\n' +
                     '    </div>\n' +
-                    '  <div class="absolute ' + (message.users_id == idUser ? 'position-left-down ml-05' : 'position-right-down mr-05') + '">\n' +
+                    '  <div class="reactions absolute ' + (message.users_id == idUser ? 'position-left-down ml-05' : 'position-right-down mr-05') + '">\n' +
                     '   ' + htmlseeReaction + '\n' +
                     '  </div>\n' +
                     '  <img class="border-radius-100 m-05"\n' +
@@ -145,7 +225,7 @@ function getMessages(conversationId) {
             $('#all_messages').html(htmlmessages);
             // Scroll bar down
             $("#all_messages").scrollTop($("#all_messages")[0].scrollHeight);
-            getAllConversationsLastInformations(result.allconversationsInformations)
+            getAllConversationsLastInformations(result.allconversationsInformations);
         }
     });
 }
@@ -210,5 +290,4 @@ $(function () {
     // Nouvelle conversation
 
 
-    // + 20 messages si scroll top
 });

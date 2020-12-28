@@ -119,7 +119,7 @@
                                         <i class="fas fa-smile"></i><span>+</span>
                                         <div class="absolute position-top hover-child m-0 <?= ($message['users_id'] == $idUser) ? 'position-right-outside pl-05' : 'position-left-outside pr-05' ?>">
                                             <section
-                                                    class="background-white border-radius-10 grid column-2 p-025 box-shadow z-index-3">
+                                                    class="reactions background-white border-radius-10 grid column-2 p-025 box-shadow z-index-3">
                                                 <?php foreach ($smileys as $smiley): ?>
                                                     <button class="clickable background-white no-border hover-blue-grey border-radius-50px m-02"
                                                             name="add_reaction_message"
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <!-- Voir les réactions -->
-                                <div class="absolute <?= ($message['users_id'] == $idUser) ? 'position-left-down ml-05' : 'position-right-down mr-05' ?>">
+                                <div class="reactions absolute <?= ($message['users_id'] == $idUser) ? 'position-left-down ml-05' : 'position-right-down mr-05' ?>">
                                     <?php if (!empty($message['reactions'])): ?>
                                         <?php foreach ($message['reactions'] as $reaction): ?>
                                             <?php if (isset($emojis_count) && array_key_exists($reaction['emoji'], $emojis_count)) {

@@ -54,5 +54,13 @@ class Message extends Conversation
         ];
     }
 
+    public function getMessageInformations($id_message){
+        $query = $this->_db->prepare("SELECT * FROM messages WHERE id = :idMessage");
+        $query->execute([
+            ':idMessage' => $id_message
+        ]);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
 
 }

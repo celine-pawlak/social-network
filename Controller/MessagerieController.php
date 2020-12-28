@@ -16,19 +16,22 @@ class MessagerieController extends AppController
         parent::__construct();
     }
 
-    public function postMessage(){
+    public function postMessage()
+    {
         // Si contenu non vide
-        if(!empty($_POST['content'])){
+        if (!empty($_POST['content'])) {
             $this->addMessage($_POST['id_conversation'], $_POST['content'], $_POST['id_user']);
             echo json_encode(true);
         }
     }
 
-    public function getMessages(){
+    public function getMessages()
+    {
         echo json_encode($this->getlastmessages());
     }
 
-    public function getlastmessages(){
+    public function getlastmessages()
+    {
         $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
 
         $allconversationsInformations = null;
@@ -98,7 +101,7 @@ class MessagerieController extends AppController
         if (isset($_POST['add_member_to_conversation']) && !empty($_POST['add_member_to_conversation'])) {
             $this->addMember($_POST['new_member_id'], $_POST['add_member_to_conversation'], $idUser);
         }
-        
+
         $this->render('messagerie.messagerie', compact('allconversationsInformations', 'last_messages', 'idUser', 'id_conversation', 'smileys'));
     }
 
@@ -110,6 +113,20 @@ class MessagerieController extends AppController
         $react_id = $reaction[1];
         $reacts->insertEmoji($idUser, $react_id, $message_id, 'messages');
     }
+
+    public function addReactionJS()
+    {
+        $this->addReaction($_POST['message_and_react_id'], $_POST['id_user']);
+        $reaction = explode('.', $_POST['message_and_react_id']);
+        $message_id = $reaction[0];
+        $reacts = new Reaction;
+        $message = new Message;
+        echo json_encode([
+            'reactions' => $reacts->getAllReactionsFromMessage($message_id),
+            'messageInformations' => $message->getMessageInformations($message_id)
+        ]);
+    }
+
 
     public function addMessage($conversation_id, $content, $idUser)
     {
