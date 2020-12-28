@@ -85,3 +85,5 @@ if(isset($url[1])) {
 } else {
   $controller->$action();
 }
+
+?>

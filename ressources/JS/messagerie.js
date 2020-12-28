@@ -254,8 +254,22 @@ function postMessage() {
 
 $(function () {
     localStorage.setItem("id", 3);
+
     $('form').submit(function (event) {
         event.preventDefault();
+
+        var avatar_conv = new FormData(document.getElementById('messagerie'));
+        avatar_conv.append('action', 'avatarConversation');
+
+        $.ajax({
+            url : "App/Contender/MessagerieController",
+            method : "POST",
+            data: {},
+            Type : "json",
+            success: function(){
+
+            }
+        })
     })
 
     var currentConversationId = $('#add_message').val();

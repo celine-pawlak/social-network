@@ -48,9 +48,9 @@
         <li class="divider" tabindex="-1"></li>
         <li>
             <div class="user-view">
-                <img src="ressources/img/<?= $_SESSION['user']['picture_profil'] ?>" alt="photo de profil" id="pp_header">
-                <span class="name"><?= $_SESSION['user']['first_name'] ?></span>
-                <span class="email"><?= $_SESSION['user']['mail'] ?></span>
+                <img src="ressources/img/<?= isset($_SESSION['user']['picture_profil']) ? 'd-flex' : 'd-none' ?>" alt="photo de profil" id="pp_header">
+                <span class="name"><?= isset($_SESSION['user']['first_name']) ? 'd-flex' : 'd-none' ?></span>
+                <span class="email"><?= isset($_SESSION['user']['mail']) ? 'd-flex' : 'd-none' ?></span>
             </div>
         </li>
         <li class="divider" tabindex="-1"></li>
