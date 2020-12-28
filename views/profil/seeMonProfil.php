@@ -1,5 +1,3 @@
-<button id="modif_profil">Go to set your Profil</button>
-
 <div class="cover_img">
   <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_cover'] ?>" alt="Photo de couverture" id="cover_picture">
 </div>

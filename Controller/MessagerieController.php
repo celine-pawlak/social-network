@@ -205,6 +205,8 @@ class MessagerieController extends AppController
         return $allconversationsInformations;
     }
 
-    
+    public function updateImgConversation() {
+        
+    }
 
 }
