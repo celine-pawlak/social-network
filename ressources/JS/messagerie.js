@@ -1,3 +1,31 @@
+function editNameConversation(currentConversationId) {
+    var newConversationName = $('#new_conversation_name').val();
+    $.ajax({
+        url: "App/Controller/MessagerieController",
+        method: "POST",
+        data: {
+            action: 'updateConversationNameJS',
+            conversation_id: currentConversationId,
+            new_conversation_name: newConversationName
+        },
+        Type: "json",
+        success: function (result) {
+            console.log(result)
+            if (result == 'true') {
+                $('#new_conversation_name').addClass('green-text').removeClass('blue-text');
+                setTimeout(function(){
+                    $('#new_conversation_name').removeClass('green-text').addClass('blue-text');
+                }, 2000);
+            } else {
+                $('#new_conversation_name').addClass('red-text').removeClass('blue-text');
+                setTimeout(function(){
+                    $('#new_conversation_name').removeClass('red-text').addClass('blue-text');
+                }, 2000);
+            }
+        }
+    })
+}
+
 function doesReactionExist(emojis, reactionEmoji, reaction) {
     let response = false;
     emojis.map(function (react) {
@@ -262,11 +290,11 @@ $(function () {
         avatar_conv.append('action', 'avatarConversation');
 
         $.ajax({
-            url : "App/Contender/MessagerieController",
-            method : "POST",
+            url: "App/Contender/MessagerieController",
+            method: "POST",
             data: {},
-            Type : "json",
-            success: function(){
+            Type: "json",
+            success: function () {
 
             }
         })
@@ -292,10 +320,17 @@ $(function () {
         }
     })
 
-
-    // Smiley
-
     // Edit name conversation
+
+    $('#new_conversation_name').focus().keypress(function (e) {
+        if (e.keyCode == 13) {
+            editNameConversation(currentConversationId);
+        }
+    })
+    $('#update_conversation_name').click(function () {
+        editNameConversation(currentConversationId);
+    });
+    //Faire la meme chose avec click sur #update_conversation_name
 
     // Edit image conversation ???
 

@@ -44,6 +44,16 @@ li, ul, ol{
 
 .blue-text {
     color: #275FA0 !important;
+    transition: 0.2s ease-in-out;
+}
+
+.green-text {
+    color: #48a043 !important;
+    transition: 0.2s ease-in-out;
+}
+.red-text {
+    color: #a00d26 !important;
+    transition: 0.2s ease-in-out;
 }
 
 .box-shadow {

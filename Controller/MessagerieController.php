@@ -135,12 +135,25 @@ class MessagerieController extends AppController
         return $messages->sendMessage($idUser, $message_content, $conversation_id);
     }
 
+    public function updateConversationNameJS(){
+        $conversation_id = $_POST['conversation_id'];
+        $new_conversation_name = $_POST['new_conversation_name'];
+        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+
+        if ($this->updateConversationName($conversation_id, $new_conversation_name, $idUser)){
+            echo json_encode(true);
+        }
+    }
+
     public function updateConversationName($conversation_id, $new_conversation_name, $idUser)
     {
-        $conversations = new Conversation;
-        $conversation_name = htmlspecialchars($new_conversation_name);
-        if ($conversations->isCreator($idUser, $conversation_id)) {
-            $conversations->updateName($conversation_id, $conversation_name);
+        if(!empty($new_conversation_name)){
+            $conversations = new Conversation;
+            $conversation_name = htmlspecialchars($new_conversation_name);
+            if ($conversations->isCreator($idUser, $conversation_id)) {
+                $conversations->updateName($conversation_id, $conversation_name);
+                return true;
+            }
         }
     }
 
