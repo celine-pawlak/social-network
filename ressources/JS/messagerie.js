@@ -283,22 +283,22 @@ function postMessage() {
 $(function () {
     localStorage.setItem("id", 3);
 
-    $('form').submit(function (event) {
-        event.preventDefault();
+    // $('form').submit(function (event) {
+    //     event.preventDefault();
 
-        var avatar_conv = new FormData(document.getElementById('messagerie'));
-        avatar_conv.append('action', 'avatarConversation');
+    //     var avatar_conv = new FormData(document.getElementById('messagerie'));
+    //     avatar_conv.append('action', 'avatarConversation');
 
-        $.ajax({
-            url: "App/Contender/MessagerieController",
-            method: "POST",
-            data: {},
-            Type: "json",
-            success: function () {
+    //     $.ajax({
+    //         url: "App/Contender/MessagerieController",
+    //         method: "POST",
+    //         data: {},
+    //         Type: "json",
+    //         success: function () {
 
-            }
-        })
-    })
+    //         }
+    //     })
+    // })
 
     var currentConversationId = $('#add_message').val();
     getMessages(currentConversationId);
@@ -320,6 +320,39 @@ $(function () {
         }
     })
 
+    // update de l'image de conversation
+    $('#modal_avatar').hide();
+    $('#img_conv').click(function(){
+        $('#modal_avatar').show();
+    });
+
+    $('#validation_avatar_conv').click(function(e){
+        e.preventDefault();
+
+        var img_conv = new FormData(document.getElementById('form_avatar_conv'));
+        img_conv.append('action', 'updateImgConversation');
+        $.ajax({
+            url :'App/Controller/MessagerieController',
+            type: "POST",
+            data : img_conv,
+            success : function(data){
+                var img_conv_avatar = $('<img id="img_conv_modal" src="">');
+                img_conv_avatar.append($('#modal_avatar'));
+
+                if($("#img_conv_modal").val() != "") {
+                    var changer_avatar = $("#img_conv_modal")[0].files[0].name;
+
+                    if(changer_avatar != "") {
+                        $("#image_avatar").attr("src", "ressources/img/" + changer_avatar);
+                        $('#pp_header').attr("src", "ressources/img/" + changer_avatar);
+                      }
+                }
+            }
+        })
+    });
+
+    // Smiley
+
     // Edit name conversation
 
     $('#new_conversation_name').focus().keypress(function (e) {
@@ -338,5 +371,5 @@ $(function () {
 
     // Nouvelle conversation
 
-
-});
+    // + 20 messages si scroll top
+})

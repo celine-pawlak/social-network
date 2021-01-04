@@ -9,7 +9,7 @@
     <div class="flex-row justify-content-spacearound">
         <!-- Liste conversations en cours -->
         <section id="all_conversations"
-                 class="overflow-scroll-y scrollbar-conversations grey lighten-4 card border-radius-70px py-2 px-1 m-1 h-70vh">
+                class="overflow-scroll-y scrollbar-conversations grey lighten-4 card border-radius-70px py-2 px-1 m-1 h-70vh">
             <?php if ($allconversationsInformations == null): ?>
                 <p>Vous n'avez pas de conversation</p>
             <?php else : ?>
@@ -23,10 +23,21 @@
                                 name="seeConversation"
                                 value="<?= $conversationInformations['conversation_id'] ?>"></button>
                         <img class="border-radius-100 mx-auto m-05 background-white"
-                             src="ressources/img/<?= $conversationInformations['image'] ?>"
-                             alt="Image de la conversation"
-                             width="50px"
-                             height="50px">
+                            src="ressources/img/<?= $conversationInformations['image'] ?>"
+                            alt="Image de la conversation"
+                            width="50px"
+                            height="50px"
+                            id="img_conv">
+                        <div id="modal_avatar">
+                                <div id="change_file" class="btn">
+                                    <span>Modifier</span>
+                                    <input type="file" id="avatar_conv" name="avatar_conv" accept="image/png, image/jpeg" value="" style='color:lightgrey'>
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input id="fichier" class="file-path validate" type="text">
+                                </div>
+                                <button id="validation_avatar_conv">Modifier</button>
+                        </div>
                         <div class="flex-column">
                             <span class="bold-text"><?= $conversationInformations['name'] ?></span>
                             <span class="light-grey-text"><?= $conversationInformations['last_message'] ?></span>

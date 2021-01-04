@@ -168,6 +168,17 @@ class MessagerieController extends AppController
         $conversations->newConversation($idUser, $id_new_group_members);
     }
 
+    public function newConversationBIS($id_new_group_members, $idUser)
+    {
+        if ($id_new_group_members == 1) {
+            if ($id_new_group_members[0] == $idUser) {
+                return;
+            }
+        }
+        $conversations = new Conversation;
+        $conversations->newConversation($idUser, $id_new_group_members);
+    }
+
     public function addMember($new_member_id, $conversation_id, $idUser)
     {
         $conversations = new Conversation;
@@ -235,6 +246,8 @@ class MessagerieController extends AppController
         return $allconversationsInformations;
     }
 
-    
+    public function updateImgConversation() {
+        
+    }
 
 }
