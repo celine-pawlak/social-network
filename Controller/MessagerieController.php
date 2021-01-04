@@ -135,19 +135,20 @@ class MessagerieController extends AppController
         return $messages->sendMessage($idUser, $message_content, $conversation_id);
     }
 
-    public function updateConversationNameJS(){
+    public function updateConversationNameJS()
+    {
         $conversation_id = $_POST['conversation_id'];
         $new_conversation_name = $_POST['new_conversation_name'];
         $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
 
-        if ($this->updateConversationName($conversation_id, $new_conversation_name, $idUser)){
+        if ($this->updateConversationName($conversation_id, $new_conversation_name, $idUser)) {
             echo json_encode(true);
         }
     }
 
     public function updateConversationName($conversation_id, $new_conversation_name, $idUser)
     {
-        if(!empty($new_conversation_name)){
+        if (!empty($new_conversation_name)) {
             $conversations = new Conversation;
             $conversation_name = htmlspecialchars($new_conversation_name);
             if ($conversations->isCreator($idUser, $conversation_id)) {
@@ -159,24 +160,18 @@ class MessagerieController extends AppController
 
     public function newConversation($id_new_group_members, $idUser)
     {
-        if (count($id_new_group_members) == 1) {
-            if ($id_new_group_members[0] == $idUser) {
-                return;
-            }
+        if (count($id_new_group_members) > 1 && $id_new_group_members != $idUser) {
+            $conversations = new Conversation;
+            return $conversations->newConversation($idUser, $id_new_group_members);
         }
-        $conversations = new Conversation;
-        $conversations->newConversation($idUser, $id_new_group_members);
+        return false;
     }
 
-    public function newConversationBIS($id_new_group_members, $idUser)
+    public function newConversationBIS()
     {
-        if ($id_new_group_members == 1) {
-            if ($id_new_group_members[0] == $idUser) {
-                return;
-            }
-        }
-        $conversations = new Conversation;
-        $conversations->newConversation($idUser, $id_new_group_members);
+        $id_new_group_members = $_POST['members_id'];
+        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+        echo json_encode($this->newConversation($id_new_group_members, $idUser));
     }
 
     public function addMember($new_member_id, $conversation_id, $idUser)
@@ -246,8 +241,9 @@ class MessagerieController extends AppController
         return $allconversationsInformations;
     }
 
-    public function updateImgConversation() {
-        
+    public function updateImgConversation()
+    {
+
     }
 
 }

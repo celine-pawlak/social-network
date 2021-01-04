@@ -126,6 +126,7 @@ class Conversation extends Database
                 ':conversation_id' => $latest_id
             ]);
         }
+        return $latest_id;
     }
 
     public function id()
