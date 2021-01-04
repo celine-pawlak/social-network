@@ -1,3 +1,8 @@
+<?php
+    if(!isset($_SESSION['user']) || empty($_SESSION)){
+        header('Location: index.php');
+    }
+?>
 <!-- Création conversation -->
 <div id="create_conversation" class="max-width-content">
     <button id="bouton_conv" class="ml-3 button-inherit"><i class="fas fa-plus-circle yellow-text"></i> Créer
