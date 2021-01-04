@@ -146,18 +146,13 @@ $(function ()
 
                                     // Faire envoie ajax pour créer conversation
                                     $('#creer_conv').click(function(){
-                                      var collaborateur = [];
-                                      var collab = $('.collab');
-                                      for (let j = 0; j < collab.length; j++){
-                                        collaborateur.push(collab[j]);
-                                      }
-                                      console.log(collaborateur);
+                                      var count = $('#liste_personne').length;
 
                                       $.post(
                                         'App/Controller/MessagerieController',
                                         {
-                                          action : 'newConversation',
-                                          collaborateur : collaborateur,
+                                          action : 'newConversationBIS',
+                                          count_member : count,
                                           id : localStorage.id
                                         },
                                         function(data){
