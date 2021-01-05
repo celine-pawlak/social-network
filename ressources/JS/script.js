@@ -146,19 +146,20 @@ $(function ()
 
                                     // Faire envoie ajax pour créer conversation
                                     $('#creer_conv').click(function(){
-                                      var count = $('#liste_personne').length;
+                                      console.log('test');
+                                    //   var count = $('#liste_personne').length;
 
-                                      $.post(
-                                        'App/Controller/MessagerieController',
-                                        {
-                                          action : 'newConversationBIS',
-                                          count_member : count,
-                                          id : localStorage.id
-                                        },
-                                        function(data){
-                                          console.log(data);
-                                        }
-                                      )
+                                    //   $.post(
+                                    //     'App/Controller/MessagerieController',
+                                    //     {
+                                    //       action : 'newConversationBIS',
+                                    //       count_member : count,
+                                    //       id : localStorage.id
+                                    //     },
+                                    //     function(data){
+                                    //       console.log(data);
+                                    //     }
+                                    //   )
                                     });
                                     // id du créateur = creatorId
                                     // tableau avec tous les id = groupeId
