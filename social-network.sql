@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 14 déc. 2020 à 09:00
+-- Généré le :  mar. 05 jan. 2021 à 14:07
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -48,7 +48,8 @@ DROP TABLE IF EXISTS `conversations`;
 CREATE TABLE IF NOT EXISTS `conversations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `creator_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT 'default_conv.png',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -117,7 +118,21 @@ CREATE TABLE IF NOT EXISTS `post` (
   `creation_date` datetime NOT NULL DEFAULT current_timestamp(),
   `users_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `post`
+--
+
+INSERT INTO `post` (`id`, `content`, `creation_date`, `users_id`) VALUES
+(1, '', '2020-12-15 12:10:43', 7),
+(2, 'test', '2020-12-15 12:10:49', 7),
+(3, 'test', '2020-12-15 12:11:11', 7),
+(4, 'testons', '2020-12-15 14:05:56', 7),
+(5, 'testons', '2020-12-15 14:07:54', 7),
+(6, 'tester', '2020-12-15 14:07:58', 7),
+(7, 'test', '2020-12-15 14:10:58', 8),
+(8, 'nouveau test', '2020-12-15 14:11:03', 8);
 
 -- --------------------------------------------------------
 
@@ -144,14 +159,29 @@ CREATE TABLE IF NOT EXISTS `technologies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name_technology` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `technologies`
 --
 
 INSERT INTO `technologies` (`id`, `name_technology`) VALUES
-(1, 'html');
+(1, 'html'),
+(2, 'PHP'),
+(3, 'dd'),
+(4, ''),
+(5, 'c'),
+(6, 'ffff'),
+(7, 'ddddd'),
+(8, 'dddddcc'),
+(9, 'd'),
+(10, 'zzz'),
+(11, 'ddd'),
+(12, 'dddd'),
+(13, 'jjjjj'),
+(14, 'rrrr'),
+(15, 'eee'),
+(16, 'ccc');
 
 -- --------------------------------------------------------
 
@@ -169,15 +199,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `picture_cover` varchar(255) DEFAULT 'ressources/img/defaultcover.png',
   `date_birth` date NOT NULL,
   `password` varchar(255) NOT NULL,
+  `presentation` text DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `mail`, `last_name`, `first_name`, `picture_profil`, `picture_cover`, `date_birth`, `password`) VALUES
-(5, 'maxime.siegl@laplateforme.io', 'Maxime', 'Siegl', NULL, NULL, '1994-02-28', '$2y$10$s4ARRSsVIMaGPON7U0hJ0eDkS46DiJyWL6J91bC4R985qaiuM3Q6q');
+INSERT INTO `users` (`id`, `mail`, `last_name`, `first_name`, `picture_profil`, `picture_cover`, `date_birth`, `password`, `presentation`) VALUES
+(5, 'maxime.siegl@laplateforme.io', 'Maxime', 'Siegl', 'arthur.jpg', 'defaultcover.png', '1994-02-28', '$2y$10$s4ARRSsVIMaGPON7U0hJ0eDkS46DiJyWL6J91bC4R985qaiuM3Q6q', ''),
+(7, 'cecile.wojnowski@laplateforme.io', 'Wojnowski', 'Cécile', 'default.png', 'defaultcover.png', '2020-12-17', '$2y$10$7qNQVuV.5OQeWByq/kgTSuiu1sLA9fnlBcHqnvHG1wtZgBaM5uw1e', ''),
+(8, 'test.test@laplateforme.io', 'Test', 'Testeur', 'default.png', 'defaultcover.png', '2020-12-26', '$2y$10$T35stOlFpeCgxKrX8fe6keeLMngDYdSEpqdZ2WcMVV7Gp/wpbtcD6', ''),
+(9, 'admin.admin@laplateforme.io', 'Admin', 'Admin', 'avatarfilm.png', 'ressources/img/defaultcover.png', '2020-12-01', '$2y$10$b.yy.X.qYwHGSn8S4kEvsuigeU7ZBATPjoMvcLFZuH4d9Y1qsKTvG', NULL);
 
 -- --------------------------------------------------------
 
@@ -243,14 +277,17 @@ CREATE TABLE IF NOT EXISTS `users_technologies` (
   `users_id` int(11) NOT NULL,
   `technologies_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `users_technologies`
 --
 
 INSERT INTO `users_technologies` (`id`, `users_id`, `technologies_id`) VALUES
-(1, 5, 1);
+(1, 5, 1),
+(47, 8, 15),
+(46, 8, 11),
+(48, 8, 16);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
