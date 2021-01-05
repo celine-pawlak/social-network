@@ -33,16 +33,6 @@
                             width="50px"
                             height="50px"
                             id="img_conv">
-                        <div id="modal_avatar">
-                                <div id="change_file" class="btn">
-                                    <span>Modifier</span>
-                                    <input type="file" id="avatar_conv" name="avatar_conv" accept="image/png, image/jpeg" value="" style='color:lightgrey'>
-                                </div>
-                                <div class="file-path-wrapper">
-                                    <input id="fichier" class="file-path validate" type="text">
-                                </div>
-                                <button id="validation_avatar_conv">Modifier</button>
-                        </div>
                         <div class="flex-column">
                             <span class="bold-text"><?= $conversationInformations['name'] ?></span>
                             <span class="light-grey-text"><?= $conversationInformations['last_message'] ?></span>
@@ -67,11 +57,7 @@
                              alt="Image de la conversation"
                              width="50px"
                              height="50px"
-                             id="conv_avatar">
-                             <div id="change_file" class="btn">
-                                <span>Modifier</span>
-                                <input type="file" id="update_avatar_conv" name="avatar" accept="image/png, image/jpeg" value="" style='color:lightgrey'>
-                            </div>
+                             id="conversation_image">
                         <div class="input-field w-70 pb-0 m-0">
                             <input class="font-smile-small m-0 blue-text bold-text" type="text"
                                    name="new_conversation_name" id="new_conversation_name"
