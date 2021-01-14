@@ -15,7 +15,8 @@
         </div>
         <!-- Partie profil -->
         <div id="profil_header" class="<?= isset($_SESSION['user']) ? '' : 'd-none' ?>">
-
+            <!-- Lien Messagerie -->
+            <a href="messagerie"><i class="fas fa-comment"></i></a>
             <!-- Image de profil : ajouter un lien qui mène à la page perso  -->
             <a href="monprofil">
                 <img src="<?= isset($_SESSION['user']) ? "ressources/img/" . $_SESSION['user']['picture_profil'] : '' ?>"
@@ -26,8 +27,7 @@
             <a class='dropdown-trigger' href='#' data-target='dropdown1'><i
                         class="fas fa-chevron-down blue-text"></i></a>
             <ul id='dropdown1' class='dropdown-content'>
-                <li><a href="profil?id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
-                <li><a href="messagerie">Messagerie</a></li>
+                <li><a href="monprofil">Profil</a></li>                
                 <li class="divider" tabindex="-1"></li>
                 <li><a href="modifier_profil">Modifier profil</a></li>
             </ul>
