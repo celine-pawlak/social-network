@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 05 jan. 2021 à 14:07
--- Version du serveur :  10.4.10-MariaDB
--- Version de PHP :  7.3.12
+-- Généré le : jeu. 14 jan. 2021 à 13:37
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `social-network`
+-- Base de données : `social-network`
 --
 
 -- --------------------------------------------------------
@@ -32,11 +31,19 @@ DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL,
-  `creation_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `creation_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL,
   `posts_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `comments`
+--
+
+INSERT INTO `comments` (`id`, `content`, `creation_date`, `user_id`, `posts_id`) VALUES
+(1, 'aze', '2021-01-14 14:28:23', 10, 8),
+(2, 'aze', '2021-01-14 14:28:24', 10, 8);
 
 -- --------------------------------------------------------
 
@@ -83,7 +90,7 @@ DROP TABLE IF EXISTS `messages`;
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL,
-  `creation_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `creation_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `users_id` int(11) NOT NULL,
   `conversations_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -98,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
 DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE IF NOT EXISTS `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `is_read` tinyint(1) NOT NULL DEFAULT 0,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0',
   `users_id` int(11) NOT NULL,
   `conversation_id` int(11) NOT NULL,
   `comments_id` int(11) NOT NULL,
@@ -115,7 +122,7 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(255) NOT NULL,
-  `creation_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `creation_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `users_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
@@ -195,13 +202,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mail` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `first_name` varchar(255) NOT NULL,
-  `picture_profil` varchar(255) DEFAULT 'ressources/img/default.png',
-  `picture_cover` varchar(255) DEFAULT 'ressources/img/defaultcover.png',
+  `picture_profil` varchar(255) DEFAULT 'default.png',
+  `picture_cover` varchar(255) DEFAULT 'defaultcover.png',
   `date_birth` date NOT NULL,
   `password` varchar(255) NOT NULL,
-  `presentation` text DEFAULT NULL,
+  `presentation` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `users`
@@ -211,7 +218,8 @@ INSERT INTO `users` (`id`, `mail`, `last_name`, `first_name`, `picture_profil`, 
 (5, 'maxime.siegl@laplateforme.io', 'Maxime', 'Siegl', 'arthur.jpg', 'defaultcover.png', '1994-02-28', '$2y$10$s4ARRSsVIMaGPON7U0hJ0eDkS46DiJyWL6J91bC4R985qaiuM3Q6q', ''),
 (7, 'cecile.wojnowski@laplateforme.io', 'Wojnowski', 'Cécile', 'default.png', 'defaultcover.png', '2020-12-17', '$2y$10$7qNQVuV.5OQeWByq/kgTSuiu1sLA9fnlBcHqnvHG1wtZgBaM5uw1e', ''),
 (8, 'test.test@laplateforme.io', 'Test', 'Testeur', 'default.png', 'defaultcover.png', '2020-12-26', '$2y$10$T35stOlFpeCgxKrX8fe6keeLMngDYdSEpqdZ2WcMVV7Gp/wpbtcD6', ''),
-(9, 'admin.admin@laplateforme.io', 'Admin', 'Admin', 'avatarfilm.png', 'ressources/img/defaultcover.png', '2020-12-01', '$2y$10$b.yy.X.qYwHGSn8S4kEvsuigeU7ZBATPjoMvcLFZuH4d9Y1qsKTvG', NULL);
+(9, 'admin.admin@laplateforme.io', 'Admin', 'Admin', 'avatarfilm.png', 'defaultcover.png', '2020-12-01', '$2y$10$b.yy.X.qYwHGSn8S4kEvsuigeU7ZBATPjoMvcLFZuH4d9Y1qsKTvG', NULL),
+(10, 'celine.pawlak@laplateforme.io', 'Pawlak', 'Céline', 'default.png', 'defaultcover.png', '1995-12-26', '$2y$10$pelMbS5P2je/Iz4j7uS3POpBfddEafEC2v6n38nXG.m2fOBeW44dy', NULL);
 
 -- --------------------------------------------------------
 
