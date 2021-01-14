@@ -3,7 +3,7 @@
 ?>
 <div id="info_perso" class="row container">
     <h3>Informations Personnelles</h3>
-    <form method="POST" enctype="multipart/form-data" id="form_setprofil" class="col l12 s12 card formulaire">
+    <form action="" method="POST" enctype="multipart/form-data" id="form_setprofil" class="col l12 s12 card formulaire">
         <div id="align_down" class="row" id="avatar_last_first_name">
             <div class="file-field input-field col s3 img_profil">
                 <img src="ressources/img/<?php echo $infos_user['picture_profil']; ?>" alt="Photo de profil" id="image_avatar">
