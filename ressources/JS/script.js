@@ -159,25 +159,25 @@ $(function () {
         };
     });
     // Bloquage de l'envoie du formulaire
-    $(".form_profile").submit(function(e) 
-        {
-            e.preventDefault();
-        });
+    // $(".form_profile").submit(function(e) 
+    //     {
+    //         e.preventDefault();
+    //     });
     // Bouton ajout publication
-    $('#add_post').click(function(e)
-        {
-            e.preventDefault();
-            var content_post = $('#textarea_post').val();        
-            $.ajax(
-                {
-                    url: 'App/Controller/IndexController',
-                    type: 'post',
-                    data: {post : content_post, action : 'jsAddPostFormWall'},
-                    success: (data)=>
-                        {
-                            console.log(data);
-                        }
-                });
-        });
+    // $('#add_post').click(function(e)
+    //     {
+    //         e.preventDefault();
+    //         var content_post = $('#textarea_post').val();        
+    //         $.ajax(
+    //             {
+    //                 url: 'App/Controller/IndexController',
+    //                 type: 'post',
+    //                 data: {post : content_post, action : 'AddPostFormWall'},
+    //                 success: (data)=>
+    //                     {
+    //                         console.log(data);
+    //                     }
+    //             });
+    //     });
 });
 

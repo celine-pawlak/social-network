@@ -20,6 +20,8 @@ class Post extends Database
     {
       $query = $this->_db->prepare("INSERT INTO post(content, creation_date, users_id) VALUES (?, NOW(), ?)");
       $query->execute([$content, $id]);
+      $last_id = $query->lastInsertId();
+      return 
     }
 
     public function getAllPosts($id)
@@ -54,7 +56,7 @@ class Post extends Database
       $query->execute();
 
       return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
+    }    
 
     /**
      * Getter Post ID

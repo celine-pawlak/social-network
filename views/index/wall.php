@@ -14,7 +14,7 @@
 <div class="flex-column">
     <h2 class="h2_posts bold-text text-center">Les dernières publications</h2>
 
-    <div class="flex-column">
+    <div class="flex-column" id="squik">
         <?php foreach ($posts as $post): ?>
             <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
                 <!-- Author of post -->

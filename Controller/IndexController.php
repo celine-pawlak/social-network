@@ -213,36 +213,11 @@ class IndexController extends AppController
         // Si un formulaire a été envoyé, on ajoute la publication
         if(isset($_POST["post"]) && !empty($_POST['post'])) {
             $post = new Post;
-            $post->addPost($_POST["post"], $_SESSION['user']['id']);
-            
+            var_dump($post->addPost($_POST["post"], $_SESSION['user']['id']));
+            // echo json_encode($post->addPost($_POST["post"], $_SESSION['user']['id']));            
         }
-
-        $this->render('index.wall',
-        [
-            "id_user" => $_SESSION['user']['id'],
-            "posts" => $posts->getAllPostsWall(),
-            "reacts" => $posts->getReactsWall(),
-            "commentaires" => $commentaires->getAllCommentWall()
-        ]);
+      
     }
-    public function jsAddPostFormWall()
-        {
-            $infosUser = new User;
-            $posts = new Post;
-            $commentaires = new Comment;
-            // Si un formulaire a été envoyé, on ajoute la publication
-            if(isset($_POST["post"]) && !empty($_POST['post'])) {
-                $post = new Post;
-                $post->addPost($_POST["post"], $_SESSION['user']['id']);
-                
-            }
-            echo json_encode([
-                "id_user" => $_SESSION['user']['id'],
-                "posts" => $posts->getAllPostsWall(),
-                "reacts" => $posts->getReactsWall(),
-                "commentaires" => $commentaires->getAllCommentWall()
-            ]);
-        }
 
       public function ajouterCommentaireWall() {
         $comment = new Comment;
@@ -253,21 +228,5 @@ class IndexController extends AppController
       {
           $react = new Post;
           echo json_encode($react->getReactsWall());          
-      }
-    
-    public function getWallPost()
-        {
-            $post = new Post;
-            return $post->getAllPostsWall();
-        }
-    public function getWallReact()
-        {
-            $post = new Post;
-            return $post->getReactsWall();
-        }
-    public function getWallComment()
-        {
-            $commentaires = new Comment;
-            return $commentaires->getAllCommentWall();
-        }
+      }    
 }
