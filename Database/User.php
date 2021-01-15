@@ -349,5 +349,11 @@ class User extends Database
         // return $po;
         return $this->getAge($date['date_birth']);
       }
-    
+    public function isUser($id)
+      {
+        $query = $this->_db->prepare("SELECT COUNT(id) as count FROM users WHERE id=?");
+        $query->execute([$id]);
+        $isUser = $query->fetch();
+        return $isUser['count'];
+      }
 }

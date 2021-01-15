@@ -20,7 +20,7 @@
             <!-- Lien Messagerie -->
             <a href="messagerie"><i class="fas fa-comment"></i></a>
             <!-- Image de profil : ajouter un lien qui mène à la page perso  -->
-            <a href="monprofil" class="flex-row align-items-center z-index-3">
+            <a href="profil&id=<?= $_SESSION['user']['id'] ?>" class="flex-row align-items-center z-index-3">
                 <img class="avatar"
                      src="<?= isset($_SESSION['user']) ? "ressources/img/" . $_SESSION['user']['picture_profil'] : '' ?>"
                      alt="photo de profil" id="pp_header">
@@ -32,7 +32,7 @@
                 <i class="fas fa-sort-down blue-text z-index-3"></i>
             </a>
             <ul id='dropdown1' class='dropdown-content'>
-                <li><a class="semi-bold-text blue-text" href="profil?id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
+                <li><a class="semi-bold-text blue-text" href="profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
                 <li class="divider" tabindex="-1"></li>
                 <li><a class="semi-bold-text blue-text" href="modifier_profil">Modifier profil</a></li>
             </ul>
@@ -66,7 +66,7 @@
             </div>
         </li>
         <li class="divider" tabindex="-1"></li>
-        <li><a href="profil?id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
+        <li><a href="profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
         <li><a href="messagerie">Messagerie</a></li>
         <li class="divider" tabindex="-1"></li>
         <li><a href="modifier_profil">Modifier profil</a></li>

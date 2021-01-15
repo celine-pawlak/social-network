@@ -13,7 +13,6 @@ $url = '';
 if (isset($_GET['url'])) {
     $url = explode('/', $_GET['url']);
 }
-var_dump($url);
 
 if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     if (isset($_POST['action'])) {
