@@ -11,8 +11,29 @@
     </div>
 </div>
 
-<div class="flex-column">
-    <h2 class="h2_posts bold-text text-center">Les dernières publications</h2>
+<div class="row">
+  <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
+  <div class="col s10 m10 offset-m1">
+    <?php //var_dump($posts); ?>
+      <?php foreach($posts as $post): ?>
+        <?php //var_dump($post['id']); ?>
+        <div class="col s1 m1">
+        <a href="profil&id=<?php echo $post['users_id'] ?>"><img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil"></a>
+          <a href="profil&id<?php echo $post['users_id'] ?>"><p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p></a>
+        </div>
+        
+        <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
+          <p><?= $post['date_post'] ?> </p>          
+          <div class="post post_profile p-1 z-depth-1">
+            <!-- <p class="right-align">
+              <i id="fa-heart" class="fas fa-heart"></i>
+              <i id="fa-thumbs-up" class="fas fa-thumbs-up"></i>
+              <i id="fa-laugh-squint" class="fas fa-laugh-squint"></i>
+              <i id="fa-sign-language" class="fas fa-sign-language"></i>
+            </p> -->
+            <p class="post_content">
+              <?= $post["content"] ?>                          
+            </p>
 
     <div class="flex-column">
         <?php foreach ($posts as $post): ?>
