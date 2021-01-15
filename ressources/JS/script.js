@@ -2,7 +2,7 @@ $(function () {
     // Dropdown header
     $('.dropdown-trigger').dropdown();
     // Responsive menu
-    $('.sidenav').sidenav({edge: 'right'});
+    $('.sidenav').sidenav({edge: 'left'});
     // Search bar header
 
     $.ajax(
