@@ -22,7 +22,7 @@ class IndexController extends AppController
       $posts = new Post;
       $infosUser = new User;
       $commentaires = new Comment;
-
+      var_dump($_GET);
       if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
           $this->render('index.wall',
           [

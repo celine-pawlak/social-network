@@ -39,12 +39,13 @@ class ProfilController extends AppController
         ]);
     }
 
-    public function profil($id){ // Profil des autres utilisateurs
-
+    public function profil(){ // Profil des autres utilisateurs      
       $posts = new Post;
       $infosUser = new User;
       $commentaires = new Comment;
-
+      $id = $_GET['id'];
+      // Vérif si id existe ou redirection
+      // Verif si id = session id => this mon profil
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
         "id_user" => $id,
