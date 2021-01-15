@@ -2,7 +2,7 @@
   <h2 class="h2_posts bold-text center-align">Fil d'actualités</h2>
   <div class="col s8 m8 offset-m2">
     <form class="form_profile p-2 background-lighter-grey z-depth-1" action="addPostFormWall" method="post">
-      <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
+      <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..." id="textarea_post"></textarea>
       <button class="btn-floating waves-effect waves-light" type="submit" id="add_post"><i class="material-icons">send</i></button>
     </form>
   </div>
