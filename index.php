@@ -65,15 +65,15 @@ if ($url!= '' && $url[0] == 'App' && $url[1] == 'Controller') {
     }elseif($url[0] == "ajouterCommentaireWall") {
         $action = "ajouterCommentaireWall";
         $controller = '\App\Controller\IndexController';
-    }elseif($url[0] == "profil") {          
+    }elseif($url[0] == "profil") {
         $action = "profil";
-        $controller = '\App\Controller\ProfilController';      
+        $controller = '\App\Controller\ProfilController';
     }
     else {
       $action = 'index';
       $controller = '\App\Controller\IndexController';
     }
-}
+  }
 
 $controller = new $controller;
 

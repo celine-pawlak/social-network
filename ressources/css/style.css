@@ -38,6 +38,9 @@ body {
 .yellow-text {
     color: #FFCA4B;
 }
+.black-text {
+    color: black;
+}
 
 .white-text {
     color: #f1f1f1 !important;
@@ -111,12 +114,24 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
 
 .mx-1 {
     margin-left: 1rem;
     margin-right: 1rem;
 }
+.mx-2 {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
 
+.my-0 {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
 .my-05 {
     margin-bottom: 0.5rem !important;
     margin-top: 0.5rem !important;
@@ -130,6 +145,9 @@ body {
 .ml-05 {
     margin-left: 0.5rem;
 }
+.ml-1 {
+    margin-left: 1rem;
+}
 
 .ml-3 {
     margin-left: 3rem;
@@ -139,8 +157,15 @@ body {
     margin-right: 0.5rem;
 }
 
+.mt-05{
+    margin-top: .5rem;
+}
+
 .mb-0 {
     margin-bottom: 0;
+}
+.mb-1 {
+    margin-bottom: 1rem;
 }
 
 .p-01 {
@@ -222,7 +247,7 @@ body {
 }
 
 .pl-05 {
-    padding-left: .5rem;
+    padding-left: .5rem !important;
 }
 
 .pr-05 {
@@ -252,6 +277,9 @@ body {
 
 .border-radius-10 {
     border-radius: 10%;
+}
+.border-radius-10px {
+    border-radius: 10px;
 }
 
 .border-radius-25px {
@@ -351,6 +379,15 @@ body {
 }
 
 /* DISPLAYS */
+
+.no-resize{
+    resize: none;
+}
+
+.content-fit-height{
+    height: fit-content !important;
+}
+
 .text-center {
     text-align: center;
 }
@@ -399,6 +436,9 @@ body {
 
 .justify-content-center {
     justify-content: center;
+}
+.justify-content-flexend {
+    justify-content: flex-end;
 }
 
 .flex-1 {
@@ -530,8 +570,15 @@ body {
     font-size: small !important;
 }
 
+.font-normal {
+    font-size: 16px !important;
+}
+
 .no-word-break {
     word-break: keep-all;
+}
+.word-break-all {
+    word-break: break-all;
 }
 
 /*INHERITS*/
@@ -562,6 +609,15 @@ body {
 
 /* CUSTOM */
 
+.author_of_post{
+    right:105%;
+}
+
+.all_posts{
+    width: 700px;
+    height: 100px;
+    transition: 0.2s ease-in-out;
+}
 
 #dropdown1{
     top:65px !important;
@@ -577,7 +633,7 @@ body {
     border-color: rgb(3, 207, 3) !important;
 }
 
-#pp_header {
+#pp_header, .author_image{
     height: 40px;
     width: auto;
     border-radius: 50%;
@@ -643,13 +699,6 @@ body {
     display: none;
 }
 
-#profil_header {
-    display: flex;
-    align-items: center;
-    margin-right: 2vw;
-    /* justify-content: center; */
-}
-
 .fa-power-off {
     margin-left: 1vw;
     font-size: large;
@@ -657,6 +706,10 @@ body {
 
 .fa-power-off:hover {
     color: #CF2600;
+}
+
+.fa-comments{
+    font-size: 35px;
 }
 
 .fa-sort-down {
@@ -681,6 +734,11 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
 /* Reponsive header */
 @media screen and (min-width: 601px) and (max-width: 1100px) {
 
+
+    .all_posts{
+        width: 400px;
+    }
+
     #name_on_header{
         display: none;
     }
@@ -691,7 +749,7 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
         left: inherit !important;
     }
 
-    #pp_header {
+    #pp_header{
         height: 5vh;
     }
 
@@ -708,6 +766,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
 }
 
 @media screen and (max-width: 600px) {
+
+    .all_posts{
+        width: 250px;
+    }
 
     #name_on_header{
         display: none;
@@ -778,13 +840,10 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
 }
 
 .miniature_img {
-    width: 60px;
-    height: 60px;
+    width: 35px;
+    height: 35px;
 }
 
-.form_profile > textarea {
-    border: none;
-}
 
 #update_presentation {
     border: none;
@@ -792,32 +851,6 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
 
 textarea:focus {
     outline: none;
-}
-
-.form_profile > ::placeholder {
-    color: #888B97;
-}
-
-.form_comment, .form_comment_wall {
-    margin: 7% !important;
-}
-
-.post_profile {
-    background-color: white;
-    border-radius: 20px;
-    width: 80%;
-    margin: 2% auto;
-}
-
-.post_content {
-    font-size: 20px;
-}
-
-.comment_profile {
-    background-color: white;
-    border-radius: 20px;
-    width: 80%;
-    margin: 2% auto 2% 20%;
 }
 
 .checked {
@@ -964,12 +997,3 @@ textarea:focus {
     background-color: #FFCA4B;
 }
 
-/*** Footer ***/
-
-footer {
-    background-color: #F9F9F9;
-    padding: 2% 0 2% 5%;
-    font-weight: bold;
-    color: #888B97;
-    margin-top: 5%;
-}

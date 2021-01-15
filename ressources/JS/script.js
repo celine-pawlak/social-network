@@ -1,4 +1,10 @@
+function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = (25+element.scrollHeight)+"px";
+}
+
 $(function () {
+
     // Dropdown header
     $('.dropdown-trigger').dropdown();
     // Responsive menu
@@ -29,7 +35,7 @@ $(function () {
                         data: dataUser,
                         onAutocomplete: function (e) {
                             $('input.autocomplete').val('');
-                            window.location = "profil/" + dataUserId[e].id;
+                            window.location = "profil?id=" + dataUserId[e].id;
                         },
                     });
                 //Ajout membre conversation
@@ -58,7 +64,7 @@ $(function () {
 
         });
     // Bouton déco
-    $('.fa-power-off').click(function () {
+    $('#deconnexion').click(function () {
         $.ajax(
             {
                 url: 'App/Controller/IndexController',

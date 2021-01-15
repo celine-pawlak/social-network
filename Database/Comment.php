@@ -25,7 +25,7 @@ class Comment extends Post
       $tableau = [];
       while($post = $posts->fetch()) {
         // récupère tous les commentaires de ces posts
-        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i')
+        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i')
         FROM comments
         JOIN users on comments.user_id = users.id
         WHERE comments.posts_id = ?
@@ -58,7 +58,7 @@ class Comment extends Post
       $tableau = [];
       while($post = $posts->fetch()) {
         // récupère tous les commentaires de ces posts
-        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i')
+        $comments = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i')
         FROM comments
         JOIN users on comments.user_id = users.id
         WHERE comments.posts_id = ?
@@ -96,7 +96,7 @@ class Comment extends Post
       $query = $this->_db->prepare("INSERT INTO comments(content, creation_date, user_id, posts_id) VALUES (?, NOW(), ?, ?)");
       $query->execute([$content, $user_id, $post_id]);
 
-      $query = $this->_db->query("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i')
+      $query = $this->_db->query("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i')
       FROM comments
       JOIN users on comments.user_id = users.id
       WHERE comments.id = LAST_INSERT_ID()");

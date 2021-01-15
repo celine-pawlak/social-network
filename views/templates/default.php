@@ -33,13 +33,13 @@
     <?php include 'header.php'; ?>
 </header>
 <main class="flex-1 flex-column background-lighter-grey">
-    <div class="max-width-content background-white box-shadow">
+    <div class="max-width-content background-white box-shadow h-100 w-100 flex-1 flex-column">
         <?= $content ?>
     </div>
 
 </main>
-<footer>
-    <p class="text-center mx-auto">Social Network - Développé par Céline Pawlak, Martin Bozon, Maxime Siegl & Cécile Wojnowski</p>
+<footer class="background-lighter-grey box-shadow">
+    <p class="text-center mx-auto bold-text grey-text">Social Network - Développé par Céline Pawlak, Martin Bozon, Maxime Siegl & Cécile Wojnowski</p>
 </footer>
 </body>
 </html>

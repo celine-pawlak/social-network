@@ -39,12 +39,12 @@ class ProfilController extends AppController
         ]);
     }
 
-    public function profil(){ // Profil des autres utilisateurs      
+    public function profil(){ // Profil des autres utilisateurs
       $posts = new Post;
       $infosUser = new User;
-      $commentaires = new Comment;      
+      $commentaires = new Comment;
       $id = $_GET['id'];
-      
+
       // Vérif si id existe ou redirection
       if($infosUser->isUser($id) == 0)
         {                   
@@ -56,6 +56,7 @@ class ProfilController extends AppController
           $this->monprofil();
           die;
         }
+
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
         "id_user" => $id,
@@ -131,6 +132,7 @@ class ProfilController extends AppController
 
 
         $update_user = new User;
+        $recup_update = [];
 
         if($update_user->verifCurrentPassword($current_password) == true) {
           if(($img_avatar != "") && ($update_user->sameInfo($img_avatar) != true)) {
@@ -141,14 +143,14 @@ class ProfilController extends AppController
             move_uploaded_file($sourcePath,$targetPath);
 
             $update_user->updateImage($img_avatar);
-            echo 'move';
+            array_push($recup_update, 'move');
           } else {
             array_push($this->errors, 'probleme lors de l\'update');
           }
 
           if(($first_name != "") && ($update_user->sameInfo($first_name) == false)) {
             if($update_user->updateFirstname($first_name) == 'updaté') {
-              echo 'Success';
+              array_push($recup_update, 'prénom updaté');
             } else {
               array_push($this->errors, 'probleme lors de l\'update');
             }
@@ -156,7 +158,7 @@ class ProfilController extends AppController
 
           if(($last_name != "") && ($update_user->sameInfo($last_name) == false)) {
             if($update_user->updateLastName($last_name) == 'updaté') {
-              echo 'Success';
+              array_push($recup_update, 'nom de famille updaté');
             } else {
               array_push($this->errors, 'probleme lors de l\'update');
             }
@@ -164,7 +166,7 @@ class ProfilController extends AppController
 
           if(($mail != "") && ($update_user->sameInfo($mail) == false)) {
             if($update_user->updateMail($mail) == 'updaté') {
-              echo 'Success';
+              array_push($recup_update, 'mail updaté');
             } else {
               array_push($this->errors, 'probleme lors de l\'update');
             }
@@ -172,7 +174,7 @@ class ProfilController extends AppController
 
           if($new_password != "" && $conf_new_password != "" && $new_password == $conf_new_password) {
             if ($update_user->updatePassword($new_password) == 'updaté') {
-              echo 'Success';
+              array_push($recup_update, 'new mdp');
             } else {
               array_push($this->errors, 'probleme lors de l\'update');
             }
@@ -184,6 +186,8 @@ class ProfilController extends AppController
       } else {
         array_push($this->errors, 'le POST est vide');
       }
+      $result = json_encode($recup_update);
+      echo $result;
     }
 
     public function addPostForm() {
@@ -231,10 +235,10 @@ class ProfilController extends AppController
         return $picture_profil;
       }
     }
-
+    
     public function getAge($id)
-      {
-        $user = new User;
-        var_dump($user->getAge($id));
-      }
+    {
+      $user = new User;
+      var_dump($user->getAge($id));
+    }
 }

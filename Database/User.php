@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Database;
 
 use PDO;
@@ -329,7 +328,7 @@ class User extends Database
       $this->password = $new_password;
       return 'updaté';
     }
-   
+
     public function getAge($date)
       {
         $age = date('Y') - date('Y', strtotime($date));
@@ -346,11 +345,12 @@ class User extends Database
         $date = $query->fetch();            
         return $this->getAge($date['date_birth']);
       }
+
     public function isUser($id)
-      {
-        $query = $this->_db->prepare("SELECT COUNT(id) as count FROM users WHERE id=?");
-        $query->execute([$id]);
-        $isUser = $query->fetch();
-        return $isUser['count'];
-      }
+    {
+      $query = $this->_db->prepare("SELECT COUNT(id) as count FROM users WHERE id=?");
+      $query->execute([$id]);
+      $isUser = $query->fetch();
+      return $isUser['count'];
+    }
 }

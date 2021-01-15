@@ -1,4 +1,4 @@
-<form id="form_connexion" class="border-radius-50px self-align-center max-width-content m-auto h-100 background-lighter-grey box-shadow">
+<form id="form_connexion" class="border-radius-50px m-auto background-lighter-grey box-shadow">
     <div class="erreurs d-none">
     </div>
     <div class="row">

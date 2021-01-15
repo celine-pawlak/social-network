@@ -14,6 +14,12 @@ $(document).ready(function(){
       });
   });
 
+  // actualisation de l'avatar instantanément
+  $('#fichier').change(function(){
+    var avatar_tmp = $('#fichier').val();
+    $("#image_avatar").attr("src", "ressources/img/" + avatar_tmp);
+  });
+
   // Modification du profil
   $('#form_setprofil').submit(function(e){
     e.preventDefault();
@@ -35,8 +41,11 @@ $(document).ready(function(){
       cache: false,
       processData: false,
       success: function(data) {
-        console.log(data);
         if(data != "") {
+          if(data.includes("new mdp") == true){
+            alert('Vous avez modifié votre mot de passe !');
+          }
+
           if($("#update_avatar").val() != "") {
             var changer_avatar = $("#update_avatar")[0].files[0].name;
 
