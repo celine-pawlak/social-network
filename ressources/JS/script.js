@@ -58,7 +58,7 @@ $(function () {
 
         });
     // Bouton déco
-    $('.fa-power-off').click(function () {
+    $('#deconnexion').click(function () {
         $.ajax(
             {
                 url: 'App/Controller/IndexController',

@@ -1,10 +1,10 @@
 <div class="max-width-content">
     <section id="connect_header" class="flex-row align-items-center justify-content-spacebetween w-100">
-        <a href="/social-network" class="<?= isset($_SESSION['user']) ? '' : 'flex-1' ?>">
+        <a href="/social-network" class="<?= isset($_SESSION['user']) ? '' : 'flex-1' ?> flex-1">
             <h4 class="text-center white-text my-1" id="titre_header">Social Network</h4>
         </a>
         <!-- Barre de recherche -->
-        <div class="z-index-3 box-shadow border-radius-25px background-white barre_recherche_header <?= isset($_SESSION['user']) ? '' : 'd-none' ?>"
+        <div class="flex-1 z-index-3 box-shadow border-radius-25px background-white barre_recherche_header <?= isset($_SESSION['user']) ? '' : 'd-none' ?>"
              id="barre_recherche">
             <div class="flex-row input-field m-0 h-100 align-items-center">
                 <input class="grey-text autocomplete flex-row align-items-center pl-1 w-100 h-100 m-0 no-border no-border-focus"
@@ -16,9 +16,10 @@
         </div>
         <!-- Partie profil -->
 
-        <div id="profil_header" class="flex-row align-items-center <?= isset($_SESSION['user']) ? '' : 'd-none' ?>">
+        <div id="profil_header"
+             class="flex-1 flex-row align-items-center justify-content-flexend <?= isset($_SESSION['user']) ? '' : 'd-none' ?>">
             <!-- Lien Messagerie -->
-            <a href="messagerie"><i class="fas fa-comment"></i></a>
+            <a href="messagerie" class="mx-2"><i class="fas fa-comments yellow-text"></i></a>
             <!-- Image de profil : ajouter un lien qui mène à la page perso  -->
             <a href="monprofil" class="flex-row align-items-center z-index-3">
                 <img class="avatar"
@@ -33,11 +34,16 @@
             </a>
             <ul id='dropdown1' class='dropdown-content'>
                 <li><a class="semi-bold-text blue-text" href="profil?id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
-                <li class="divider" tabindex="-1"></li>
                 <li><a class="semi-bold-text blue-text" href="modifier_profil">Modifier profil</a></li>
+                <li class="divider" tabindex="-1"></li>
+                <li id="deconnexion">
+                    <a class="semi-bold-text yellow-text" href="#">
+                        <i class="fas fa-power-off clickable yellow-text m-0"></i>Se déconnecter
+                    </a>
+                </li>
             </ul>
 
-            <i class="fas fa-power-off clickable yellow-text pl-2 z-index-3"></i>
+
         </div>
     </section>
     <!-- Responsive -->

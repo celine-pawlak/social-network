@@ -24,7 +24,7 @@ class Post extends Database
 
     public function getAllPosts($id)
     {
-      $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') FROM post
+      $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i') FROM post
         JOIN users on post.users_id = users.id WHERE users.id = ? ORDER BY post.id DESC");
       $query->execute([$id]);
 
@@ -33,7 +33,7 @@ class Post extends Database
 
     public function getAllPostsWall()
     {
-      $query = $this->_db->prepare("SELECT post.*, users.last_name, users.first_name, users.picture_profil, DATE_FORMAT(creation_date, 'Posté le %d/%m/%Y à %H:%i') as date_post FROM post
+      $query = $this->_db->prepare("SELECT post.*, users.last_name, users.first_name, users.picture_profil, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i') as date_post FROM post
       JOIN users on post.users_id = users.id ORDER BY post.id DESC LIMIT 10");
       $query->execute();
 
