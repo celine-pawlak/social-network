@@ -29,11 +29,14 @@
     <script src="<?= URL ?>/ressources/JS/setProfil.js"></script>
 </head>
 <body>
-<header class="flex-row justify-content-spacebetween background-lighter-grey">
+<header class="background-blue-grey box-shadow z-index-3">
     <?php include 'header.php'; ?>
 </header>
-<main class="flex-1 flex-column">
-    <?= $content ?>
+<main class="flex-1 flex-column background-lighter-grey">
+    <div class="max-width-content background-white box-shadow">
+        <?= $content ?>
+    </div>
+
 </main>
 <footer>
     <p class="text-center mx-auto">Social Network - Développé par Céline Pawlak, Martin Bozon, Maxime Siegl & Cécile Wojnowski</p>
