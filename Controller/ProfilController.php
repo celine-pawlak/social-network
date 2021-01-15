@@ -34,16 +34,28 @@ class ProfilController extends AppController
         "technologies" => $infosUser->getTechnologies($_SESSION['user']['id']),
         "infosUser" => $infosUser->getInfosUser($_SESSION['user']['id']),
         "presentation" => $infosUser->getPresentation($_SESSION['user']['id']),
-        "commentaires" => $commentaires->getAllComment($_SESSION['user']['id'])
+        "commentaires" => $commentaires->getAllComment($_SESSION['user']['id']),
+        "age" => $infosUser->getDate($_SESSION['user']['id'])
         ]);
     }
 
-    public function profil($id){ // Profil des autres utilisateurs
-
+    public function profil(){ // Profil des autres utilisateurs      
       $posts = new Post;
       $infosUser = new User;
-      $commentaires = new Comment;
-
+      $commentaires = new Comment;      
+      $id = $_GET['id'];
+      
+      // Vérif si id existe ou redirection
+      if($infosUser->isUser($id) == 0)
+        {                   
+          header("Location:index.php");
+        }
+      // Verif si id = session id => this mon profil
+      if($id == $_SESSION['user']['id'])
+        {
+          $this->monprofil();
+          die;
+        }
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
         "id_user" => $id,
@@ -53,7 +65,8 @@ class ProfilController extends AppController
         "technologies" => $infosUser->getTechnologies($id),
         "infosUser" => $infosUser->getInfosUser($id),
         "presentation" => $infosUser->getPresentation($id),
-        "commentaires" => $commentaires->getAllComment($id)
+        "commentaires" => $commentaires->getAllComment($id),
+        "age" => $infosUser->getDate($id)
         ]);
     }
 
@@ -218,4 +231,10 @@ class ProfilController extends AppController
         return $picture_profil;
       }
     }
+
+    public function getAge($id)
+      {
+        $user = new User;
+        var_dump($user->getAge($id));
+      }
 }
