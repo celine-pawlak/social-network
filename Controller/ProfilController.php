@@ -39,11 +39,23 @@ class ProfilController extends AppController
         ]);
     }
 
-    public function profil($id){ // Profil des autres utilisateurs
-
+    public function profil(){ // Profil des autres utilisateurs
       $posts = new Post;
       $infosUser = new User;
       $commentaires = new Comment;
+      $id = $_GET['id'];
+
+      // Vérif si id existe ou redirection
+      if($infosUser->isUser($id) == 0)
+        {                   
+          header("Location:index.php");
+        }
+      // Verif si id = session id => this mon profil
+      if($id == $_SESSION['user']['id'])
+        {
+          $this->monprofil();
+          die;
+        }
 
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeProfil', [
@@ -224,9 +236,11 @@ class ProfilController extends AppController
       }
     }
 
+
+    
     public function getAge($id)
-      {
-        $user = new User;
-        var_dump($user->getAge($id));
-      }
+    {
+      $user = new User;
+      var_dump($user->getAge($id));
+    }
 }

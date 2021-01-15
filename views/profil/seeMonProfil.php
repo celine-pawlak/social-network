@@ -4,7 +4,7 @@
 <div class="container" id="seeProfil">
   <div class="center-align">
     <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
-    <p><?php echo $age?> ans</p>
+    <p> <?php echo $age?> ans </p>
     <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
