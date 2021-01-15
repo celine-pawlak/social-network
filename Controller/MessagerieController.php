@@ -32,7 +32,7 @@ class MessagerieController extends AppController
 
     public function getlastmessages()
     {
-        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+        $idUser = $_SESSION['user']['id'];
 
         $allconversationsInformations = null;
         $last_messages = null;
@@ -74,7 +74,7 @@ class MessagerieController extends AppController
 
     public function messagerie()
     {
-        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+        $idUser = $_SESSION['user']['id'];
 
         $get_last_messages = $this->getlastmessages();
         $allconversationsInformations = $get_last_messages['allconversationsInformations'];
@@ -139,7 +139,7 @@ class MessagerieController extends AppController
     {
         $conversation_id = $_POST['conversation_id'];
         $new_conversation_name = $_POST['new_conversation_name'];
-        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+        $idUser = $_SESSION['user']['id'];
 
         if ($this->updateConversationName($conversation_id, $new_conversation_name, $idUser)) {
             echo json_encode(true);
@@ -170,7 +170,7 @@ class MessagerieController extends AppController
     public function newConversationBIS()
     {
         $id_new_group_members = $_POST['members_id'];
-        $idUser = 3;  // A MODIFIER QUAND SESSION DEFINIE
+        $idUser = $_SESSION['user']['id'];
         echo json_encode($this->newConversation($id_new_group_members, $idUser));
     }
 
@@ -240,10 +240,4 @@ class MessagerieController extends AppController
         }
         return $allconversationsInformations;
     }
-
-    public function updateImgConversation()
-    {
-
-    }
-
 }
