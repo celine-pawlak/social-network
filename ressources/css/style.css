@@ -128,6 +128,10 @@ body {
     margin-right: 2rem;
 }
 
+.my-0 {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
 .my-05 {
     margin-bottom: 0.5rem !important;
     margin-top: 0.5rem !important;
@@ -243,7 +247,7 @@ body {
 }
 
 .pl-05 {
-    padding-left: .5rem;
+    padding-left: .5rem !important;
 }
 
 .pr-05 {
@@ -375,6 +379,10 @@ body {
 }
 
 /* DISPLAYS */
+
+.no-resize{
+    resize: none;
+}
 
 .content-fit-height{
     height: fit-content !important;
@@ -843,14 +851,6 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
 
 textarea:focus {
     outline: none;
-}
-
-.form_comment, .form_comment_wall {
-    margin: 7% !important;
-}
-
-.post_content {
-    font-size: 20px;
 }
 
 .checked {
