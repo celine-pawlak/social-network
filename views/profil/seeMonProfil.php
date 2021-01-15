@@ -5,6 +5,7 @@
 <div class="container" id="seeProfil">
   <div class="center-align">
     <h1> <?php echo $infosUser[0]['first_name'] . " " . $infosUser[0]['last_name']; ?> </h1>
+    <p> <?php echo $age?> ans </p>
     <img src="<?= URL."/ressources/img/". $infosUser[0]['picture_profil'] ?>" alt="Photo de profil" class="profile_img circle">
   </div>
 
@@ -56,7 +57,7 @@
     <div class="col s10 m10 offset-m1">
       <form class="form_profile p-2 background-lighter-grey z-depth-1" action="addPostForm" method="post">
         <textarea class="background-lighter-grey" name="post" placeholder=" Ecrire une publication..."></textarea>
-        <button class="btn-floating waves-effect waves-light" type="submit" name="button"><i class="material-icons">send</i></button>
+        <button class="btn-floating waves-effect waves-light" type="submit" id="add_post"><i class="material-icons">send</i></button>
       </form>
     </div>
   </div>

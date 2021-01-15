@@ -97,7 +97,7 @@
                                 <ul id="members_list" class="max-height-100vh overflow-scroll-y scrollbar-conversations <?= ($current_conversation['members_number'] > 2) ? '' : 'd-none' ?>">
                                     <?php foreach ($current_conversation['members_informations'] as $user_informations): ?>
                                         <li class="hover-blue-grey p-025 border-radius-50px">
-                                            <a class="flex-row align-items-center black-text" href="profil?id=<?= $user_informations['id'] ?>">
+                                            <a class="flex-row align-items-center black-text" href="profil&id=<?= $user_informations['id'] ?>">
                                                 <img class="border-radius-100 mr-05 background-white"
                                                      src="ressources/img/<?= $user_informations['picture_profil'] ?>"
                                                      alt="Image de profil de <?= $user_informations['first_name'] ?> <?= $user_informations['last_name'] ?>"
