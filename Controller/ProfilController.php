@@ -34,7 +34,8 @@ class ProfilController extends AppController
         "technologies" => $infosUser->getTechnologies($_SESSION['user']['id']),
         "infosUser" => $infosUser->getInfosUser($_SESSION['user']['id']),
         "presentation" => $infosUser->getPresentation($_SESSION['user']['id']),
-        "commentaires" => $commentaires->getAllComment($_SESSION['user']['id'])
+        "commentaires" => $commentaires->getAllComment($_SESSION['user']['id']),
+        "age" => $infosUser->getDate($_SESSION['user']['id'])
         ]);
     }
 
@@ -65,7 +66,8 @@ class ProfilController extends AppController
         "technologies" => $infosUser->getTechnologies($id),
         "infosUser" => $infosUser->getInfosUser($id),
         "presentation" => $infosUser->getPresentation($id),
-        "commentaires" => $commentaires->getAllComment($id)
+        "commentaires" => $commentaires->getAllComment($id),
+        "age" => $infosUser->getDate($id)
         ]);
     }
 
