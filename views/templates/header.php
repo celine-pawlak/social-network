@@ -15,8 +15,10 @@
             </div>
         </div>
         <!-- Partie profil -->
-        <div id="profil_header" class="flex-row align-items-center <?= isset($_SESSION['user']) ? '' : 'd-none' ?>">
 
+        <div id="profil_header" class="flex-row align-items-center <?= isset($_SESSION['user']) ? '' : 'd-none' ?>">
+            <!-- Lien Messagerie -->
+            <a href="messagerie"><i class="fas fa-comment"></i></a>
             <!-- Image de profil : ajouter un lien qui mène à la page perso  -->
             <a href="monprofil" class="flex-row align-items-center z-index-3">
                 <img class="avatar"
@@ -31,7 +33,6 @@
             </a>
             <ul id='dropdown1' class='dropdown-content'>
                 <li><a class="semi-bold-text blue-text" href="profil?id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>
-                <li><a href="messagerie">Messagerie</a></li>
                 <li class="divider" tabindex="-1"></li>
                 <li><a class="semi-bold-text blue-text" href="modifier_profil">Modifier profil</a></li>
             </ul>

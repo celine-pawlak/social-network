@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ab9aa680-a37f-4428-a786-050c4987ec9f" name="Default Changelist" comment="" />
+    <list default="true" id="ab9aa680-a37f-4428-a786-050c4987ec9f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/views/index/wall.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/index/wall.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/profil/setProfil.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/profil/setProfil.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/templates/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/templates/header.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,10 +32,42 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1n6F8e14qaxQpFr96rwJlI2qAUm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ab9aa680-a37f-4428-a786-050c4987ec9f" name="Default Changelist" comment="" />
+      <created>1610702478729</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1610702478729</updated>
+      <workItem from="1610702480959" duration="29000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2660" y="274" key="FileChooserDialogImpl" timestamp="1610702508064">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2660" y="274" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1610702508064" />
   </component>
 </project>
