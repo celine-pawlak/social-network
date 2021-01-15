@@ -142,8 +142,7 @@ $(function () {
                             function(data){
                                 $('#pop-up-background').remove();
                                 localStorage.setItem('currentConversationId', JSON.parse(data));
-                                getMessages(JSON.parse(data));
-                                console.log(localStorage.getItem('currentConversationId'));
+                                getMessages(localStorage.getItem('currentConversationId'));
                             }
                         )
                     });

@@ -1,13 +1,25 @@
+function showComments(){
+  var id_post = $(this)[0].id.replace("see_comments_from", "commentaires");
+  $('#'+id_post+'').show();
+  $('#'+$(this)[0].id).hide();
+  $('#'+$(this)[0].id.replace("see","hide")).show();
+}
+
+function hideComments(){
+  var id_post = $(this)[0].id.replace("hide_comments_from", "commentaires");
+  $('#'+id_post+'').hide();
+  $('#'+$(this)[0].id).hide();
+  $('#'+$(this)[0].id.replace("hide","see")).show();
+}
+
 $(function() {
 
   $('.commentaires_posts').hide();
-  $('.show-comments').click(function(){
-    var id_post = this.id.replace("see_comments_from", "commentaires");
-    $('#'+id_post+'').show();
-    //hide de nouveau
-    //changer l'html de p et son id
-    
-  })
+  $('.hide-comments').hide();
+
+  $('.messages_show_or_hide').on('click', '.show-comments', showComments);
+  $('.messages_show_or_hide').on('click', '.hide-comments', hideComments);
+
 
   $("form.form_comment").submit(function(e) {
 
