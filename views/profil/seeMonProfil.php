@@ -55,8 +55,8 @@
   </div>
   <div class="row">
     <div class="col s10 m10 offset-m1">
-      <form class="form_profile p-2 background-lighter-grey z-depth-1" action="addPostForm" method="POST">
-        <textarea class="background-lighter-grey" id="post_profil" name="post_profil" placeholder=" Ecrire une publication..."></textarea>
+      <form class="form_profile pl-2 pr-1 py-1 background-lighter-grey z-depth-1 border-radius-25px flex-row all_posts" action="addPostForm" method="POST">
+        <textarea class="h-100 flex-1 background-lighter-grey no-border blue-text no-resize" id="post_profil" name="post_profil" placeholder=" Ecrire une publication..."></textarea>
         <button class="btn-floating waves-effect waves-light" type="submit" id="add_post_profil"><i class="material-icons">send</i></button>
       </form>
     </div>
