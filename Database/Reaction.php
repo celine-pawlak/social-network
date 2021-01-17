@@ -31,13 +31,19 @@ class Reaction extends Database
     public function insertEmoji($id_user, $id_react, $id_bloc, $bloc)
     {
         $nom_bloc = $bloc . '_id';
-        $req = $this->_db->prepare("SELECT * FROM users_reacts WHERE users_id=? AND $nom_bloc=?");
-        $req->execute([$id_user, $id_bloc]);
+        $req = $this->_db->prepare("SELECT * FROM users_reacts WHERE (users_id = :user_id AND $nom_bloc = :id_bloc)");
+        $req->execute([
+            ':user_id' => $id_user,
+            ':id_bloc' =>$id_bloc
+        ]);
         $hasReact = $req->fetch(PDO::FETCH_ASSOC);
         if (!empty($hasReact)) {
             if ($hasReact['reacts_id'] == $id_react) {
-                $delete = $this->_db->prepare("DELETE FROM users_reacts WHERE users_id=? AND $nom_bloc=?");
-                $delete->execute([$id_user, $id_bloc]);
+                $id_users_react = $hasReact['id'];
+                $delete = $this->_db->prepare("DELETE FROM users_reacts WHERE id = :id_users_reacts");
+                $delete->execute([
+                    ':id_users_reacts' => $id_users_react
+                ]);
             } else {
                 $update = $this->_db->prepare("UPDATE users_reacts SET reacts_id=? WHERE id=?");
                 $update->execute([$id_react, $hasReact['id']]);

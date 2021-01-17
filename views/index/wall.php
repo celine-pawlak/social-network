@@ -104,7 +104,6 @@
                             <p class="clickable grey-text m-1 font-smile-small text-right hide-comments"
                                id="hide_comments_from_post_<?= $post['0'] ?>">Cacher
                                 les commentaires <i class="fas fa-chevron-up"></i></p>
-
                         </div>
                         <div class="mb-1 px-05 self-align-flexend w-90 commentaires_posts"
                              id="commentaires_post_<?= $post['0'] ?>">
@@ -122,6 +121,8 @@
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                    <?php else: ?>
+                    <p  class="grey-text m-1 font-smile-small text-right">Aucun commentaire</p>
                     <?php endif; ?>
 
                     <form class="form_comment_wall center-align px-1 flex-row self-align-flexend w-90" method="post">
