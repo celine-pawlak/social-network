@@ -25,7 +25,6 @@ class IndexController extends AppController
 
         if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 
-
             $id_user = $_SESSION['user']['id'];
             $posts = $posts->getAllPostsWall();
             $reacts = new Reaction;

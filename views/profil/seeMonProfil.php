@@ -63,16 +63,23 @@
   </div>
 
   <div class="row">
-    <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
+    <h2 class="h2_posts bold-text center-align">Mes dernières publications</h2>
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
           <?php //var_dump($post); ?>
-          <div class="col s1 m1">
-            <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
-            <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
+
+        <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
+
+          <div class="flex-column align-items-center justify-content-center absolute author_of_post">
+              <a href="profil&id=<?php echo $post['users_id'] ?>"><img class="circle author_image"
+                                                                        src="<?= URL . "ressources/img/" . $post['picture_profil'] ?>"
+                                                                        alt="Photo de profil"></a>
+              <a href="profil&id=<?php echo $post['users_id'] ?>"><p
+                          class="m-0 text-center bold-text font-smile-small"><?= $post["first_name"] . " " . $post["last_name"] ?></p>
+              </a>
           </div>
 
-          <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
+          <div class="p-05 content-fit-height mb-1 flex-column">
             <p class="ml-1 mt-05 mb-1 grey-text font-smile-small"><?= $post['13'] ?> </p>
             <div class="post post_profile border-radius-10px box-shadow background-blue-grey black-text mx-1 p-1">
               <p class="right-align">
@@ -128,10 +135,11 @@
                     </div>
                     <button type="submit" class="btn btn-small btn-floating waves-effect waves-light">
                         <input type="hidden" name="" value="Commenter">
-                        <i class="material-icons btn" id="add_post">send</i>
+                        <i class="material-icons" id="add_post">send</i>
                     </button>
                 </form>
           </div>
+        </div>
         <?php endforeach; ?>
 
 
