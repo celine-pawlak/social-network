@@ -21,6 +21,7 @@ function editNameConversation(currentConversationId) {
                     $('#new_conversation_name').removeClass('red-text').addClass('blue-text');
                 }, 2000);
             }
+            getMessages(currentConversationId);
         }
     })
 }
@@ -154,7 +155,7 @@ function getMessages(conversationId) {
                         $('#update_conversation_name').removeClass('d-none');
                         $('#members_list').removeClass('d-none').html(currentConversation.members_informations.map(function (user_information) {
                             return '<li class="hover-blue-grey p-025 border-radius-50px">\n' +
-                                '  <a class="flex-row align-items-center black-text" href="profil?id=' + user_information.id + '">\n' +
+                                '  <a class="flex-row align-items-center black-text" href="profil&id=' + user_information.id + '">\n' +
                                 '    <img class="border-radius-100 mr-05 background-white"\n' +
                                 '         src="ressources/img/' + user_information.picture_profil + '"\n' +
                                 '         alt="Image de profil de ' + user_information.first_name + ' ' + user_information.last_name + '"\n' +

@@ -20,7 +20,7 @@ body {
 }
 
 .background-blue-grey {
-    background-color: #88C1D0;
+    background-color: #88C1D0 !important;
 }
 
 .background-white {
@@ -103,7 +103,7 @@ body {
 }
 
 .m-05 {
-    margin: 0.5rem;
+    margin: 0.5rem !important;
 }
 
 .m-1 {
@@ -389,6 +389,9 @@ body {
 
 .content-fit-height{
     height: fit-content !important;
+}
+.content-fit-width{
+    width: fit-content !important;
 }
 
 .text-center {
