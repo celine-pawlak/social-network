@@ -1,3 +1,16 @@
+function doesReactionExist(emojis, reactionEmoji, reaction) {
+    let response = false;
+    emojis.map(function (react) {
+        if ((typeof react[reactionEmoji] !== 'undefined') && (react[reactionEmoji].length !== 0)) {
+            react[reactionEmoji].counting++;
+            react[reactionEmoji].phrase.push(reaction.first_name + ' ' + reaction.last_name + ' ' + reaction.type);
+            react[reactionEmoji].id = reaction.id;
+            response = true;
+        }
+    });
+    return response;
+}
+
 function textAreaAdjust(element) {
     element.style.height = "1px";
     element.style.height = (25 + element.scrollHeight) + "px";
@@ -199,6 +212,71 @@ $(function () {
                 }
             });
     });
+
+    // Ajout réaction post
+    $(document).on('click', 'button[name=\'add_reaction_post\']', function () {
+        var postAndReactID = $(this).val();
+        var idUser = localStorage.id;
+
+        $.ajax({
+            url: "App/Controller/IndexController",
+            method: 'post',
+            dataType: 'json',
+            data: {
+                action: 'addReactionPostJS',
+                id_user: idUser,
+                post_and_react_id: postAndReactID
+            },
+            success: function (result) {
+                console.log(result);
+                var emojisCount = [];
+                result.reactions.map(function (reaction) {
+                    var reactionEmoji = reaction.emoji;
+
+                    if (doesReactionExist(emojisCount, reactionEmoji, reaction)) {
+                    } else {
+                        emojisCount.push(
+                            {
+                                [reactionEmoji]: {
+                                    counting: 1,
+                                    phrase: [reaction.first_name + ' ' + reaction.last_name + ' ' + reaction.type],
+                                    id: reaction.id
+                                }
+                            });
+                    }
+                });
+
+                var htmlseeReaction = emojisCount.map(function (emoji) {
+
+                    var htmlPhrases = Object.values(emoji)[0].phrase.map(function (phrase) {
+                        return '<span> ' + phrase + ' </span><br>'
+                    }).join('');
+
+                    for (var property in emoji) {
+                        var emojiClassName = property;
+                    }
+
+                    return '<button class="box-shadow background-yellow p-025 border-radius-30 no-border clickable relative hover-parent m-01"\n' +
+                        'name="add_reaction_post"\n' +
+                        'value="' + result.postInformations.id + '.' + Object.values(emoji)[0].id + '">\n' +
+                        '  <div class="absolute position-top-outside hover-child m-0 position-right">\n' +
+                        '    <p class="w-max-content font-smile-small background-white likes_right">\n' +
+                        '    ' + htmlPhrases + ' \n' +
+                        '    </p>\n' +
+                        '  </div>\n' +
+                        '  <i class="' + emojiClassName + '"></i> ' +
+                        '  <span> ' + Object.values(emoji)[0].counting + '</span>\n' +
+                        '</button>'
+                }).join('');
+
+                var messageHtml = $('#posts_' + result.postInformations.id + '>.reactions');
+                messageHtml.html(htmlseeReaction);
+
+            }
+        });
+
+    })
+
 });
 
 

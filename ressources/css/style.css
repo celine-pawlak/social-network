@@ -914,6 +914,10 @@ textarea:focus {
     width: 60%;
 }
 
+.btn-floating{
+    background-color: #88C1D0 !important;
+}
+
 /* FIN MESSAGERIE */
 
 /* Form inscription/connexion/modif */

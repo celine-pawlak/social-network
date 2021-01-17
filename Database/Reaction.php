@@ -63,6 +63,21 @@ class Reaction extends Database
         $query->execute([':id_message' => $id_message]);
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    /**
+     * Get user and reaction informations from a post
+     * @param $id_post
+     * @return array
+     */
+    public function getAllReactionsFromPost($id_post)
+    {
+        $query = $this->_db->prepare("SELECT users_reacts.id as react_id, reacts.id, reacts.type, reacts.emoji, users_reacts.posts_id, users_reacts.users_id as user_id, users.first_name, users.last_name, users.picture_profil
+            FROM reacts
+            LEFT JOIN users_reacts ON reacts.id = users_reacts.reacts_id
+            LEFT JOIN users ON users_reacts.users_id = users.id
+            WHERE users_reacts.posts_id = :id_post");
+        $query->execute([':id_post' => $id_post]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
   
     public function countReaction($id)
         {

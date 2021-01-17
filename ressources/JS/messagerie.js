@@ -64,6 +64,8 @@ function getAllConversationsLastInformations(allConversationsInformations) {
     $('#all_conversations').html(htmlAllConversations);
 }
 
+
+
 $(document).on('click', 'button[name=\'add_reaction_message\']', function () {
     var messageAndReactID = $(this).val();
     var idUser = localStorage.id;

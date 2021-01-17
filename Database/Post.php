@@ -22,6 +22,12 @@ class Post extends Database
       $query->execute([$content, $id]);          
     }
 
+    public function getPost($post_id){
+        $query = $this->_db->prepare("SELECT * FROM post WHERE id = :postId");
+        $query->execute([':postId' => $post_id]);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getAllPosts($id)
     {
       $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i') FROM post
