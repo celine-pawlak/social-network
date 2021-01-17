@@ -25,7 +25,7 @@
     <script src="<?= URL ?>/ressources/JS/profil.js"></script>
     <script src="<?= URL ?>/ressources/JS/commentaire.js"></script>
     <script src="<?= URL ?>/ressources/JS/ajaxProfile.js"></script>
-    <script src="ressources/js/messagerie.js"></script>
+    <!-- <script src="ressources/js/messagerie.js"></script> -->
     <script src="<?= URL ?>/ressources/JS/setProfil.js"></script>
 </head>
 <body>
