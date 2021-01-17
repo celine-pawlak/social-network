@@ -4,8 +4,8 @@ if (!isset($_SESSION['user']) || empty($_SESSION)) {
 }
 ?>
 <!-- Création conversation -->
-<div id="create_conversation" class="max-width-content">
-    <button id="bouton_conv" class="ml-3 button-inherit"><i class="fas fa-plus-circle yellow-text"></i> Créer
+<div id="create_conversation" class="flex-row justify-content-center align-items-center">
+    <button id="bouton_conv" class="m-1 button-inherit background-lighter-grey p-025 border-radius-10px clickable box-shadow"><i class="fas fa-plus-circle yellow-text"></i> Créer
         une conversation
     </button>
 </div>
@@ -35,7 +35,7 @@ if (!isset($_SESSION['user']) || empty($_SESSION)) {
                              id="img_conv">
                         <div class="flex-column flex-1">
                             <span class="bold-text"><?= $conversationInformations['name'] ?></span>
-                            <span class="light-grey-text"><?= $conversationInformations['last_message'] ?></span>
+                            <span class="light-grey-text"><?= (empty($conversationInformations['last_message'])) ? 'Aucun message' :  $conversationInformations['last_message']?></span>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -50,9 +50,9 @@ if (!isset($_SESSION['user']) || empty($_SESSION)) {
                 <?php else : ?>
                 <!-- Si conversation existante -->
                 <!-- Information conversation en cours -->
-                <div class="h-6rem flex-row align-items-center justify-content-spacebetween box-shadow absolute position-top z-index-4 w-100 background-lighter-grey px-1 pt-1 position-left border-top-radius-70px">
+                <div class="h-6rem flex-row align-items-center justify-content-spacebetween box-shadow absolute position-top z-index-2 w-100 background-lighter-grey px-1 pt-1 position-left border-top-radius-70px">
                     <div class="flex-row align-items-center flex-1">
-                        <img class="border-radius-100 mx-auto m-05 background-white"
+                        <img class="border-radius-100 m-05 background-white"
                              src="ressources/img/<?= $current_conversation['image'] ?>"
                              alt="Image de la conversation"
                              width="50px"
@@ -81,10 +81,10 @@ if (!isset($_SESSION['user']) || empty($_SESSION)) {
                         </span>
                         <div class="absolute position-right hover-child pt-1 ">
                             <div class="background-lighter-grey p-1 w-max-content box-shadow border-radius-25px z-index-5">
-                                <div class="flex-column align-items-center input-field <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">
-                                    <input type="text" class="font-smile-small m-0 h-1rem" id="new_member_id"
+                                <div class="m-0 lex-column align-items-center input-field <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">
+                                    <input type="text" class="font-smile-small m-0" id="new_member_id"
                                            name="new_member_id" placeholder="Ajouter...">
-                                    <label for="new_member_id">Autocomplete</label>
+                                    <label for="new_member_id"></label>
                                     <div id="liste_membre_ajout" class="flex-column">
                                         <ul id="liste_membre"></ul>
                                         <button class="box-shadow bold-text white-text clickable p-05 border-radius-10px background-blue-grey no-background-focus clickable background-lighter-grey no-border"

@@ -34,7 +34,7 @@ $(function () {
                         data: dataUser,
                         onAutocomplete: function (e) {
                             $('input.autocomplete').val('');
-                            window.location = "profil?id=" + dataUserId[e].id;
+                            window.location = "profil&id=" + dataUserId[e].id;
                         },
                     });
                 //Ajout membre conversation

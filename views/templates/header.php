@@ -4,7 +4,7 @@
             <h4 class="text-center white-text my-1" id="titre_header">Social Network</h4>
         </a>
         <!-- Barre de recherche -->
-        <div class="flex-1 z-index-3 box-shadow border-radius-25px background-white barre_recherche_header <?= isset($_SESSION['user']) ? '' : 'd-none' ?>"
+        <div class="flex-1 z-index-6 box-shadow border-radius-25px background-white barre_recherche_header <?= isset($_SESSION['user']) ? '' : 'd-none' ?>"
              id="barre_recherche">
             <div class="flex-row input-field m-0 h-100 align-items-center">
                 <input class="grey-text autocomplete flex-row align-items-center pl-1 w-100 h-100 m-0 no-border no-border-focus"
@@ -21,7 +21,7 @@
             <!-- Lien Messagerie -->
             <a href="messagerie" class="mx-2"><i class="fas fa-comments yellow-text"></i></a>
             <!-- Image de profil : ajouter un lien qui mène à la page perso  -->
-            <a href="profil&id=<?= $_SESSION['user']['id'] ?>" class="flex-row align-items-center z-index-3">
+            <a href="profil&id=<?= $_SESSION['user']['id'] ?>" class="flex-row align-items-center z-index-6">
                 <img class="avatar"
                      src="<?= isset($_SESSION['user']) ? "ressources/img/" . $_SESSION['user']['picture_profil'] : '' ?>"
                      alt="photo de profil" id="pp_header">
@@ -30,7 +30,7 @@
 
             <!-- Menu dropdown -->
             <a class='dropdown-trigger flex-row justify-content-center' href='#' data-target='dropdown1'>
-                <i class="fas fa-sort-down blue-text z-index-3"></i>
+                <i class="fas fa-sort-down blue-text"></i>
             </a>
             <ul id='dropdown1' class='dropdown-content'>
                 <li><a class="semi-bold-text blue-text" href="profil&id=<?= $_SESSION['user']['id'] ?>">Profil</a></li>

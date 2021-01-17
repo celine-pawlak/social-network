@@ -47,14 +47,14 @@ function getAllConversationsLastInformations(allConversationsInformations) {
                 '          class="absolute position-all w-100 no-border no-background no-background-focus clickable"\n' +
                 '          name="seeConversation"\n' +
                 '          value="' + conversationInformations.conversation_id + '"></button>\n' +
-                '   <img class="border-radius-100 mx-auto m-05 background-white"\n' +
+                '   <img class="border-radius-100 m-05 background-white"\n' +
                 '        src="ressources/img/' + conversationInformations.image + '"\n' +
                 '        alt="Image de la conversation"\n' +
                 '        width="50px"\n' +
                 '        height="50px">\n' +
                 '   <div class="flex-column">\n' +
                 '      <span class="bold-text">' + conversationInformations.name + '</span>\n' +
-                '      <span class="light-grey-text">' + conversationInformations.last_message + '</span>\n' +
+                '      <span class="light-grey-text">' + (conversationInformations.last_message == null ? 'Aucun message': conversationInformations.last_message) + '</span>\n' +
                 '   </div>\n' +
                 '</article>'
         }).join('');

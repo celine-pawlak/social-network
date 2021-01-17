@@ -17,7 +17,7 @@
         </div>-->
     </div>
     <div class="flex-column">
-        <button id="submit_co" class="mx-auto w-50 btn waves-effect waves-light col s6 offset-s3 bouton" type="submit">Se Connecter
+        <button id="submit_co" class="mx-auto w-200px btn waves-effect waves-light col s6 offset-s3 bouton" type="submit">Se Connecter
             <i class="material-icons right">send</i>
         </button>
         <p class="col s8 offset-s5 redirection text-center">Pas encore inscrit ? <span id="page_inscription" class="clickable">Cliquez Ici</span>
