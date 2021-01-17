@@ -103,7 +103,7 @@ class User extends Database
     public function getInfosUser($id){
       $query = $this->_db->prepare("SELECT * FROM users WHERE id = ?");
       $query->execute([$id]);
-      return $query->fetchAll();
+      return $query->fetch();
     }
 
     public function addHobbies($hobbies, $id){
