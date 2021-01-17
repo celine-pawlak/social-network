@@ -1069,3 +1069,7 @@ textarea:focus {
 .hover_yellow:hover {
     background-color: #FFCA4B;
 }
+
+#titre_setprofil{
+    font-size: 30px !important;
+}
