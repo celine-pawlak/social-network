@@ -185,13 +185,20 @@ class MessagerieController extends AppController
             }
             $id_new_group_members[] = $new_member_id;
             //nouvelle conversation avec les deux users + le nouveau
-            $this->newConversation($id_new_group_members, $idUser);
+            return ($this->newConversation($id_new_group_members, $idUser));
         } else {
             // Sinon ajouter membre
             if ($conversations->isCreator($idUser, $conversation_id) && (!$conversations->isMember($new_member_id, $conversation_id))) {
-                $conversations->addMember($conversation_id, $new_member_id);
+                return ($conversations->addMember($conversation_id, $new_member_id));
             }
         }
+    }
+
+    public function addMemberJS(){
+        $new_member_id = $_POST['new_member_id'];
+        $conversation_id = $_POST['conversation_id'];
+        $idUser = $_SESSION['user']['id'];
+        echo json_encode($this->addMember($new_member_id, $conversation_id, $idUser));
     }
 
     public function getConversationsInformations($allconversations, $idUser)

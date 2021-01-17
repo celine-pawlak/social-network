@@ -216,10 +216,11 @@ class IndexController extends AppController
     }
 
       public function ajouterCommentaireWall() {
-        $comment = new Comment;
-        $response = $comment->addComment($_POST["content"], $_POST["id_post"], $_POST["id_user"]);
-        return json_encode($response);
+        if (!empty($_POST["content"]) AND !ctype_space($_POST["content"])){$comment = new Comment;
+            $response = $comment->addComment($_POST["content"], $_POST["id_post"], $_POST["id_user"]);
+            return json_encode($response);}
       }
+
     public function getPostEmoji()
       {
           $react = new Post;

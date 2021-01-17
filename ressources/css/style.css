@@ -20,7 +20,7 @@ body {
 }
 
 .background-blue-grey {
-    background-color: #88C1D0;
+    background-color: #88C1D0 !important;
 }
 
 .background-white {
@@ -74,7 +74,7 @@ body {
 }
 
 .hover-blue-grey:hover {
-    background-color: rgba(39, 95, 160, 0.54);
+    background-color: #88C1D0;
 }
 
 .hover-yellow-text {
@@ -103,7 +103,7 @@ body {
 }
 
 .m-05 {
-    margin: 0.5rem;
+    margin: 0.5rem !important;
 }
 
 .m-1 {
@@ -111,8 +111,8 @@ body {
 }
 
 .mx-auto {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 .my-auto {
     margin-top: auto;
@@ -390,6 +390,9 @@ body {
 .content-fit-height{
     height: fit-content !important;
 }
+.content-fit-width{
+    width: fit-content !important;
+}
 
 .text-center {
     text-align: center;
@@ -476,16 +479,22 @@ body {
     grid-template-columns: repeat(2, 1fr);
 }
 
+.z-index-2 {
+    z-index: 2 !important;
+}
 .z-index-3 {
     z-index: 3 !important;
 }
 
 .z-index-4 {
-    z-index: 4;
+    z-index: 4 !important;
 }
 
 .z-index-5 {
-    z-index: 5;
+    z-index: 5 !important;
+}
+.z-index-6 {
+    z-index: 6 !important;
 }
 
 /* HEIGHTS AND WIDTHS */
@@ -504,8 +513,11 @@ body {
     min-height: 70vh;
 }
 
+.h-05rem {
+    height: .5rem !important;
+}
 .h-1rem {
-    height: 1rem;
+    height: 1rem !important;
 }
 
 .h-6rem {
@@ -611,6 +623,17 @@ body {
 }
 
 /* CUSTOM */
+
+.dropdown-content{
+    font-size: 14px !important;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+.dropdown-content >li {
+    word-break: keep-all;
+
+}
 
 .author_of_post{
     right:105%;
@@ -728,10 +751,14 @@ input[type=text]:not(.browser-default):focus:not([readonly]) {
 
 .autocomplete-content {
     border-radius: 25px !important;
+    width: fit-content !important;
+    min-width: 100%;
 }
 
 .autocomplete-content li span {
     color: #275FA0 !important;
+    font-size: 14px;
+    word-break: keep-all;
 }
 
 /* Reponsive header */
@@ -883,14 +910,18 @@ textarea:focus {
     border-radius: 25px;
 }
 
-#form_connexion {
-    width: 500px;
+#form_connexion{
+    width: 60%;
 }
 
 /* FIN MESSAGERIE */
 
 /* Form inscription/connexion/modif */
 @media screen and (min-width: 601px) and (max-width: 1100px) {
+    #form_connexion{
+        width: 90%;
+    }
+
     .max-width-content {
         max-width: 600px;
     }
@@ -934,6 +965,10 @@ textarea:focus {
 }
 
 @media screen and (max-width: 600px) {
+    #form_connexion{
+        width: 90%;
+    }
+
     .max-width-content {
         max-width: 300px;
     }

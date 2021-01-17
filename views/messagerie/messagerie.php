@@ -1,20 +1,20 @@
 <?php
-    if(!isset($_SESSION['user']) || empty($_SESSION)){
-        header('Location: index.php');
-    }
+if (!isset($_SESSION['user']) || empty($_SESSION)) {
+    header('Location: index.php');
+}
 ?>
 <!-- Création conversation -->
-<div id="create_conversation" class="max-width-content">
-    <button id="bouton_conv" class="ml-3 button-inherit"><i class="fas fa-plus-circle yellow-text"></i> Créer
+<div id="create_conversation" class="flex-row justify-content-center align-items-center">
+    <button id="bouton_conv" class="m-1 button-inherit background-lighter-grey p-025 border-radius-10px clickable box-shadow"><i class="fas fa-plus-circle yellow-text"></i> Créer
         une conversation
     </button>
 </div>
 
-<form id="messagerie" class="max-width-content" method="POST">
+<form id="messagerie" class="" method="POST">
     <div class="flex-row justify-content-spacearound">
         <!-- Liste conversations en cours -->
         <section id="all_conversations"
-                class="overflow-scroll-y scrollbar-conversations grey lighten-4 card border-radius-70px py-2 px-1 m-1 h-70vh">
+                 class="overflow-scroll-y scrollbar-conversations grey lighten-4 card border-radius-70px py-2 px-1 m-1 h-70vh">
             <?php if ($allconversationsInformations == null): ?>
                 <p>Vous n'avez pas de conversation</p>
             <?php else : ?>
@@ -27,15 +27,15 @@
                                 class="absolute position-all w-100 no-border no-background no-background-focus clickable"
                                 name="seeConversation"
                                 value="<?= $conversationInformations['conversation_id'] ?>"></button>
-                        <img class="border-radius-100 mx-auto m-05 background-white"
-                            src="ressources/img/<?= $conversationInformations['image'] ?>"
-                            alt="Image de la conversation"
-                            width="50px"
-                            height="50px"
-                            id="img_conv">
-                        <div class="flex-column">
+                        <img class="border-radius-100 m-05 background-white"
+                             src="ressources/img/<?= $conversationInformations['image'] ?>"
+                             alt="Image de la conversation"
+                             width="50px"
+                             height="50px"
+                             id="img_conv">
+                        <div class="flex-column flex-1">
                             <span class="bold-text"><?= $conversationInformations['name'] ?></span>
-                            <span class="light-grey-text"><?= $conversationInformations['last_message'] ?></span>
+                            <span class="light-grey-text"><?= (empty($conversationInformations['last_message'])) ? 'Aucun message' :  $conversationInformations['last_message']?></span>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -50,9 +50,9 @@
                 <?php else : ?>
                 <!-- Si conversation existante -->
                 <!-- Information conversation en cours -->
-                <div class="h-6rem flex-row align-items-center justify-content-spacebetween box-shadow absolute position-top z-index-4 w-100 background-lighter-grey px-1 pt-1 position-left border-top-radius-70px">
+                <div class="h-6rem flex-row align-items-center justify-content-spacebetween box-shadow absolute position-top z-index-2 w-100 background-lighter-grey px-1 pt-1 position-left border-top-radius-70px">
                     <div class="flex-row align-items-center flex-1">
-                        <img class="border-radius-100 mx-auto m-05 background-white"
+                        <img class="border-radius-100 m-05 background-white"
                              src="ressources/img/<?= $current_conversation['image'] ?>"
                              alt="Image de la conversation"
                              width="50px"
@@ -68,7 +68,8 @@
                                 de la conversation</label>
                         </div>
                         <button class="no-background-focus blue-text hover-yellow-text mx-1 background-lighter-grey clickable <?= (($current_conversation['creator_id'] == $idUser) and ($current_conversation['members_number'] > 2)) ? '' : 'd-none' ?> no-border"
-                                id="update_conversation_name" name="update_conversation_name" value="<?= $id_conversation ?>">
+                                id="update_conversation_name" name="update_conversation_name"
+                                value="<?= $id_conversation ?>">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
@@ -78,26 +79,28 @@
                             <i class="fas fa-user-friends"></i>
                             <span id="members_informations"><?= ($current_conversation['members_number'] > 2) ? ' ' . $current_conversation['members_number'] : '+' ?></span>
                         </span>
-                        <div class="absolute position-right hover-child pt-1">
-                            <div class="background-lighter-grey p-1 w-max-content box-shadow">
-                                <div class="flex-column align-items-center input-field <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">                                    
-                                    <input type="text" class="font-smile-small m-0 h-1rem" id="new_member_id"
-                                            name="new_member_id" placeholder="Ajouter...">
-                                    <label for="new_member_id">Autocomplete</label> 
-                                    <div id="liste_membre_ajout">
-                                        <ul id="liste_membre"></ul>                             
-                                        <button class="no-background-focus clickable background-lighter-grey no-border"
+                        <div class="absolute position-right hover-child pt-1 ">
+                            <div class="background-lighter-grey p-1 w-max-content box-shadow border-radius-25px z-index-5">
+                                <div class="m-0 lex-column align-items-center input-field <?= ($current_conversation['creator_id'] == $idUser) ? '' : 'd-none' ?>">
+                                    <input type="text" class="font-smile-small m-0" id="new_member_id"
+                                           name="new_member_id" placeholder="Ajouter...">
+                                    <label for="new_member_id"></label>
+                                    <div id="liste_membre_ajout" class="flex-column">
+                                        <ul id="liste_membre"></ul>
+                                        <button class="box-shadow bold-text white-text clickable p-05 border-radius-10px background-blue-grey no-background-focus clickable background-lighter-grey no-border"
                                                 name="add_member_to_conversation"
                                                 id="add_member_to_conversation"
-                                                value="<?= $id_conversation ?>">
+                                                value="<?= $id_conversation ?>">Ajouter
                                             <i class="yellow-text fas fa-user-plus"></i>
                                         </button>
-                                    </div>      
+                                    </div>
                                 </div>
-                                <ul id="members_list" class="max-height-100vh overflow-scroll-y scrollbar-conversations <?= ($current_conversation['members_number'] > 2) ? '' : 'd-none' ?>">
+                                <ul id="members_list"
+                                    class="max-height-100vh overflow-scroll-y scrollbar-conversations <?= ($current_conversation['members_number'] > 2) ? '' : 'd-none' ?>">
                                     <?php foreach ($current_conversation['members_informations'] as $user_informations): ?>
                                         <li class="hover-blue-grey p-025 border-radius-50px">
-                                            <a class="flex-row align-items-center black-text" href="profil&id=<?= $user_informations['id'] ?>">
+                                            <a class="flex-row align-items-center black-text"
+                                               href="profil&id=<?= $user_informations['id'] ?>">
                                                 <img class="border-radius-100 mr-05 background-white"
                                                      src="ressources/img/<?= $user_informations['picture_profil'] ?>"
                                                      alt="Image de profil de <?= $user_informations['first_name'] ?> <?= $user_informations['last_name'] ?>"

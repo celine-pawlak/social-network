@@ -1,6 +1,6 @@
 function textAreaAdjust(element) {
     element.style.height = "1px";
-    element.style.height = (25+element.scrollHeight)+"px";
+    element.style.height = (25 + element.scrollHeight) + "px";
 }
 
 $(function () {
@@ -29,7 +29,6 @@ $(function () {
 
                 }
                 // Autocomplete barre de recherche header
-
                 $('input.autocomplete').autocomplete(
                     {
                         data: dataUser,
@@ -49,21 +48,45 @@ $(function () {
                                 if (idMembre === '') {
                                     idMembre = dataUserId[e].id;
                                     $('#new_member_id').val('');
-                                    $('#liste_membre').append('<li id=' + dataUserId[e].id + '>' + dataUserId[e].first_name + ' ' + dataUserId[e].last_name + ' <i class="fas fa-times"></i></li>');
+                                    $('#liste_membre').append('<li id=' + dataUserId[e].id + '>' + dataUserId[e].first_name + ' ' + dataUserId[e].last_name + ' <i class="clickable fas fa-times"></i></li>');
                                     $('.fa-times').click(function () {
                                         $(this).parent().remove();
                                         idMembre = '';
                                     });
+                                    console.log(idMembre);
+
                                     // ici faire l'action
                                     // id de la personne à ajouter = idMembre
-                                }
-                            }
-                        },
-                    });
-            },
+                                } else {
+                                    idMembre = dataUserId[e].id;
+                                    $('#liste_membre').children().html('<li id=' + dataUserId[e].id + '>' + dataUserId[e].first_name + ' ' + dataUserId[e].last_name + ' <i class="clickable fas fa-times"></i></li>');
+                                    console.log(idMembre);
 
+                                }
+                                $('#add_member_to_conversation').click(function () {
+                                    $.ajax(
+                                        {
+                                            url: 'App/Controller/MessagerieController',
+                                            type: 'POST',
+                                            data: {
+                                                action: 'addMemberJS',
+                                                new_member_id: idMembre,
+                                                conversation_id: localStorage.getItem('currentConversationId')
+                                            },
+                                            success: (data) => {
+                                                localStorage.setItem('currentConversationId', JSON.parse(data));
+                                                getMessages(localStorage.getItem('currentConversationId'));
+                                            }
+                                        });
+
+                                });
+                            }
+                        }
+                    });
+            }
         });
-    // Bouton déco
+
+// Bouton déco
     $('#deconnexion').click(function () {
         $.ajax(
             {
@@ -78,7 +101,7 @@ $(function () {
             });
 
     });
-    //  Bouton créer conversation
+//  Bouton créer conversation
     $('#bouton_conv').click(function (e) {
         $('body').append("<section id='pop-up-background' class='z-index-5 absolute flex flex-column justify-center align-center'>" +
             "<div id='pop-up-content' class='m-1 background-white p-05'>" +
@@ -136,10 +159,10 @@ $(function () {
                         $.post(
                             'App/Controller/MessagerieController',
                             {
-                                action : 'newConversationBIS',
-                                members_id : groupeId,
+                                action: 'newConversationBIS',
+                                members_id: groupeId,
                             },
-                            function(data){
+                            function (data) {
                                 $('#pop-up-background').remove();
                                 localStorage.setItem('currentConversationId', JSON.parse(data));
                                 getMessages(localStorage.getItem('currentConversationId'));
@@ -157,26 +180,25 @@ $(function () {
             }
         };
     });
+
     // Bloquage de l'envoie du formulaire
-    $(".form_profile").submit(function(e) 
-        {
-            e.preventDefault();
-        });
+    $(".form_profile").submit(function (e) {
+        e.preventDefault();
+    });
     // Bouton ajout publication
-    $('#add_post').click(function(e)
-        {
-            e.preventDefault();
-            var content_post = $('#textarea_post').val();                  
-            $.ajax(
-                {
-                    url: 'App/Controller/IndexController',
-                    type: 'post',
-                    data: {post : content_post, action : 'AddPostFormWall'},
-                    success: (data)=>
-                        {
-                            window.location = 'index';
-                        }
-                });
-        });
+    $('#add_post').click(function (e) {
+        e.preventDefault();
+        var content_post = $('#textarea_post').val();
+        $.ajax(
+            {
+                url: 'App/Controller/IndexController',
+                type: 'post',
+                data: {post: content_post, action: 'AddPostFormWall'},
+                success: (data) => {
+                    window.location = 'index';
+                }
+            });
+    });
 });
+
 

@@ -110,6 +110,7 @@ class Conversation extends Database
             ':conversation_id' => $id_conversation,
             ':user_id' => $new_member_id
         ]);
+        return $id_conversation;
     }
 
     public function newConversation($creator_id, $users_id)

@@ -21,6 +21,7 @@ function editNameConversation(currentConversationId) {
                     $('#new_conversation_name').removeClass('red-text').addClass('blue-text');
                 }, 2000);
             }
+            getMessages(currentConversationId);
         }
     })
 }
@@ -46,14 +47,14 @@ function getAllConversationsLastInformations(allConversationsInformations) {
                 '          class="absolute position-all w-100 no-border no-background no-background-focus clickable"\n' +
                 '          name="seeConversation"\n' +
                 '          value="' + conversationInformations.conversation_id + '"></button>\n' +
-                '   <img class="border-radius-100 mx-auto m-05 background-white"\n' +
+                '   <img class="border-radius-100 m-05 background-white"\n' +
                 '        src="ressources/img/' + conversationInformations.image + '"\n' +
                 '        alt="Image de la conversation"\n' +
                 '        width="50px"\n' +
                 '        height="50px">\n' +
                 '   <div class="flex-column">\n' +
                 '      <span class="bold-text">' + conversationInformations.name + '</span>\n' +
-                '      <span class="light-grey-text">' + conversationInformations.last_message + '</span>\n' +
+                '      <span class="light-grey-text">' + (conversationInformations.last_message == null ? 'Aucun message': conversationInformations.last_message) + '</span>\n' +
                 '   </div>\n' +
                 '</article>'
         }).join('');
@@ -154,7 +155,7 @@ function getMessages(conversationId) {
                         $('#update_conversation_name').removeClass('d-none');
                         $('#members_list').removeClass('d-none').html(currentConversation.members_informations.map(function (user_information) {
                             return '<li class="hover-blue-grey p-025 border-radius-50px">\n' +
-                                '  <a class="flex-row align-items-center black-text" href="profil?id=' + user_information.id + '">\n' +
+                                '  <a class="flex-row align-items-center black-text" href="profil&id=' + user_information.id + '">\n' +
                                 '    <img class="border-radius-100 mr-05 background-white"\n' +
                                 '         src="ressources/img/' + user_information.picture_profil + '"\n' +
                                 '         alt="Image de profil de ' + user_information.first_name + ' ' + user_information.last_name + '"\n' +
