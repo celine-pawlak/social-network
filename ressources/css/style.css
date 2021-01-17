@@ -1061,3 +1061,11 @@ textarea:focus {
     font-weight: bold;
     margin: 2%;
 }
+
+.tab_profil_radius {
+    border-radius: 15px;
+}
+
+.hover_yellow:hover {
+    background-color: #FFCA4B;
+}

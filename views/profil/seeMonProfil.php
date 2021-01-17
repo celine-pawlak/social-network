@@ -16,16 +16,16 @@
 </div>
 
   <div class="row scale-transition scale-out display-none" id="infos-toggle">
-    <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
+    <div class="col s5 m5 background-lighter-grey z-depth-1 tab_profil_radius my-1" id="presentation_profile">
       <h2 class="blue-text bold-text center-align"> Présentation </h2>
 
       <form id="form_presentation" class="right-align" method="post">
         <textarea id="update_presentation" rows="8" cols="80" name="presentation"><?= $presentation['presentation'] ?></textarea>
-        <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
+        <button type="submit" class="btn-floating" name="button"><i class="material-icons right hover_yellow">send</i></button>
       </form>
     </div>
 
-    <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
+    <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound tab_profil_radius my-1">
       <div class="information_profile" id="info_border">
         <h2 class="blue-text bold-text"> Technologies </h2>
         <form class="form_tech center-align" id="form_tech" method="post">
@@ -34,7 +34,7 @@
             <li><input type="text" name="tech2" value="<?= $technologies["tech2"] ?>"></input></li>
             <li><input type="text" name="tech3" value="<?= $technologies["tech3"] ?>"></input></li>
           </ul>
-          <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right hover_yellow">send</i></button>
         </form>
       </div>
 
@@ -46,7 +46,7 @@
             <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>
             <li><input type="text" name="hobby3" value="<?= $hobbies["hobby3"] ?>"></input></li>
           </ul>
-          <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i></button>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right hover_yellow">send</i></button>
         </form>
 
       </div>
@@ -57,7 +57,7 @@
     <div class="col s10 m10 offset-m1">
       <form class="form_profile pl-2 pr-1 py-1 background-lighter-grey z-depth-1 border-radius-25px flex-row all_posts" action="addPostForm" method="POST">
         <textarea class="h-100 flex-1 background-lighter-grey no-border blue-text no-resize" id="post_profil" name="post_profil" placeholder=" Ecrire une publication..."></textarea>
-        <button class="btn-floating waves-effect waves-light" type="submit" id="add_post_profil"><i class="material-icons">send</i></button>
+        <button class="btn-floating waves-effect waves-light" type="submit" id="add_post_profil"><i class="material-icons hover_yellow">send</i></button>
       </form>
     </div>
   </div>
@@ -69,7 +69,6 @@
           <?php //var_dump($post); ?>
 
         <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
-
           <div class="flex-column align-items-center justify-content-center absolute author_of_post">
               <a href="profil&id=<?php echo $post['users_id'] ?>"><img class="circle author_image"
                                                                         src="<?= URL . "ressources/img/" . $post['picture_profil'] ?>"
@@ -135,7 +134,7 @@
                     </div>
                     <button type="submit" class="btn btn-small btn-floating waves-effect waves-light">
                         <input type="hidden" name="" value="Commenter">
-                        <i class="material-icons" id="add_post">send</i>
+                        <i class="material-icons" id="add_post hover_yellow">send</i>
                     </button>
                 </form>
           </div>
