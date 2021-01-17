@@ -1,4 +1,10 @@
+function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = (25+element.scrollHeight)+"px";
+}
+
 $(function () {
+
     // Dropdown header
     $('.dropdown-trigger').dropdown();
     // Responsive menu
@@ -136,8 +142,7 @@ $(function () {
                             function(data){
                                 $('#pop-up-background').remove();
                                 localStorage.setItem('currentConversationId', JSON.parse(data));
-                                getMessages(JSON.parse(data));
-                                console.log(localStorage.getItem('currentConversationId'));
+                                getMessages(localStorage.getItem('currentConversationId'));
                             }
                         )
                     });
@@ -152,5 +157,26 @@ $(function () {
             }
         };
     });
+    // Bloquage de l'envoie du formulaire
+    $(".form_profile").submit(function(e) 
+        {
+            e.preventDefault();
+        });
+    // Bouton ajout publication
+    $('#add_post').click(function(e)
+        {
+            e.preventDefault();
+            var content_post = $('#textarea_post').val();                  
+            $.ajax(
+                {
+                    url: 'App/Controller/IndexController',
+                    type: 'post',
+                    data: {post : content_post, action : 'AddPostFormWall'},
+                    success: (data)=>
+                        {
+                            window.location = 'index';
+                        }
+                });
+        });
 });
 

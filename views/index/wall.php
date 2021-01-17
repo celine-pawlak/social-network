@@ -1,10 +1,10 @@
 <div class="row">
-    <h2 class="h2_posts bold-text center-align">Fil d'actualités</h2>
+    <h2 class="h2_posts bold-text center-align">Nouvelle publication</h2>
     <div class="">
         <form class="form_profile pl-2 pr-1 py-1 background-lighter-grey z-depth-1 border-radius-25px flex-row all_posts"
               action="addPostFormWall" method="post">
-            <textarea class="h-100 flex-1 background-lighter-grey no-border blue-text" name="post"
-                      placeholder="Ecrire une publication..."></textarea>
+            <textarea class="h-100 flex-1 background-lighter-grey no-border blue-text no-resize" name="post"
+                      placeholder="Ecrire une publication..." id="textarea_post" onkeyup="textAreaAdjust(this)"></textarea>
             <button class="my-auto btn-floating waves-effect waves-light" type="submit" name="button"><i
                         class="material-icons" id="add_post">send</i></button>
         </form>
@@ -14,7 +14,7 @@
 <div class="flex-column">
     <h2 class="h2_posts bold-text text-center">Les dernières publications</h2>
 
-    <div class="flex-column">
+    <div class="flex-column" id="squik">
         <?php foreach ($posts as $post): ?>
             <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
                 <!-- Author of post -->
@@ -58,7 +58,15 @@
                 <!--                </div>-->
                 <!--            </div>-->
                 <?php if (!empty($commentaires["post_" . $post['0']])): ?>
-                    <div class="px-05 self-align-flexend w-90" id="commentaires_post_<?= $post['0'] ?>">
+                    <div class="messages_show_or_hide">
+                        <p class="clickable grey-text mb-1 font-smile-small text-right mx-1 mt-0 show-comments" id="see_comments_from_post_<?= $post['0'] ?>">Voir
+                            les commentaires (<?= count($commentaires["post_" . $post['0']]) ?>) <i class="fas fa-chevron-down"></i></p>
+                        <p class="clickable grey-text mb-1 font-smile-small text-right mx-1 mt-0 hide-comments" id="hide_comments_from_post_<?= $post['0'] ?>">Cacher
+                            les commentaires <i class="fas fa-chevron-up"></i></p>
+
+                    </div>
+                    <div class="mb-1 px-05 self-align-flexend w-90 commentaires_posts"
+                         id="commentaires_post_<?= $post['0'] ?>">
                         <?php foreach ($commentaires["post_" . $post['0']] as $commentaire): ?>
                             <div class="post comment_profile border-radius-10px box-shadow background-white black-text m-1 p-05 flex-row  ml-1">
                                 <img class="circle miniature_img self-align-center"
@@ -75,15 +83,21 @@
                     </div>
                 <?php endif; ?>
 
-                <form class="form_comment_wall center-align" method="post">
-                    <input type="hidden" name="id_user" value="<?= $id_user ?>">
-                    <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
-                    <input type="text" name="content" value="">
-                    <input type="submit" class="btn" name="" value="Commenter">
+                <form class="form_comment_wall center-align px-1 flex-row self-align-flexend w-90" method="post">
+                    <div class="flex-1">
+                        <input type="hidden" name="id_user" value="<?= $id_user ?>">
+                        <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
+                        <textarea id="comment_post_<?= $post['0'] ?>" class="py-05 w-90 no-border mx-1 no-resize"
+                                  type="text" name="content" placeholder="Commenter..."
+                                  onkeyup="textAreaAdjust(this)"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-small btn-floating waves-effect waves-light">
+                        <input type="hidden" name="" value="Commenter">
+                        <i class="material-icons " id="add_post">send</i>
+                    </button>
                 </form>
 
             </div>
         <?php endforeach; ?>
-
     </div>
 </div>

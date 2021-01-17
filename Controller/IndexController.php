@@ -206,23 +206,13 @@ class IndexController extends AppController
         }
     }
 
-    public function addPostFormWall() {
-        $infosUser = new User;
-        $posts = new Post;
-        $commentaires = new Comment;
+    public function addPostFormWall() {     
         // Si un formulaire a été envoyé, on ajoute la publication
-        if(isset($_POST["post"])) {
-            $post = new Post;
-            $post->addPost($_POST["post"], $_SESSION['user']['id']);
+        if(isset($_POST["post"]) && !empty($_POST['post'])) {
+            $post = new Post;            
+            $post->addPost($_POST["post"], $_SESSION['user']['id']);                 
         }
-
-        $this->render('index.wall',
-        [
-            "id_user" => $_SESSION['user']['id'],
-            "posts" => $posts->getAllPostsWall(),
-            "reacts" => $posts->getReactsWall(),
-            "commentaires" => $commentaires->getAllCommentWall()
-        ]);
+      
     }
 
       public function ajouterCommentaireWall() {
@@ -234,5 +224,5 @@ class IndexController extends AppController
       {
           $react = new Post;
           echo json_encode($react->getReactsWall());          
-      }
+      }    
 }
