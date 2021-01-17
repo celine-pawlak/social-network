@@ -861,6 +861,13 @@ textarea:focus {
     display: none;
 }
 
+#scale-infos {
+    border-radius: 20px;
+}
+
+#scale-infos:hover {
+    background-color: #FFCA4B;
+}
 /* FIN SEE PROFIL */
 
 /* MESSAGERIE */
@@ -980,16 +987,19 @@ textarea:focus {
 /* FIN DE FORMAULAIRE INSC/CO/RESET/MODIF */
 
 /* SetProfil */
+#form_setprofil {
+    padding: 3%;
+}
+
 .img_profil {
     text-align: center;
-    margin-bottom: 10%;
 }
 
 .img_profil img {
     margin: 5% auto;
     display: block;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
 
@@ -997,3 +1007,15 @@ textarea:focus {
     background-color: #FFCA4B;
 }
 
+#change_file {
+    border-radius: 15px;
+}
+
+#recommandation {
+    text-align: center;
+    background-color: #88C1D0;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    margin: 2%;
+}
