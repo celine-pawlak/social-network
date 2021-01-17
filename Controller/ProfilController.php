@@ -25,6 +25,7 @@ class ProfilController extends AppController
       $infosUser = new User;
       $commentaires = new Comment;
 
+
       // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
       $this->render('profil.seeMonProfil', [
         "id_user" => $_SESSION['user']['id'],
