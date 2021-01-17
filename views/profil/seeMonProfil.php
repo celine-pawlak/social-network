@@ -18,74 +18,69 @@
     </div>
 
     <div class="row scale-transition scale-out display-none" id="infos-toggle">
-        <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
-            <h2 class="blue-text bold-text center-align"> Présentation </h2>
+    <div class="col s5 m5 background-lighter-grey z-depth-1 tab_profil_radius my-1" id="presentation_profile">
+      <h2 class="blue-text bold-text center-align"> Présentation </h2>
 
             <form id="form_presentation" class="right-align" method="post">
                 <textarea id="update_presentation" rows="8" cols="80"
                           name="presentation"><?= $presentation['presentation'] ?></textarea>
-                <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i>
+                <button type="submit" class="btn-floating" name="button"><i class="material-icons right hover_yellow">send</i>
                 </button>
             </form>
         </div>
 
-        <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
-            <div class="information_profile" id="info_border">
-                <h2 class="blue-text bold-text"> Technologies </h2>
-                <form class="form_tech center-align" id="form_tech" method="post">
-                    <ul>
-                        <li><input type="text" name="tech1" value="<?= $technologies["tech1"] ?>"></input></li>
-                        <li><input type="text" name="tech2" value="<?= $technologies["tech2"] ?>"></input></li>
-                        <li><input type="text" name="tech3" value="<?= $technologies["tech3"] ?>"></input></li>
-                    </ul>
-                    <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i>
-                    </button>
-                </form>
-            </div>
+<div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound tab_profil_radius my-1">
+      <div class="information_profile" id="info_border">
+        <h2 class="blue-text bold-text"> Technologies </h2>
+        <form class="form_tech center-align" id="form_tech" method="post">
+          <ul>
+            <li><input type="text" name="tech1" value="<?= $technologies["tech1"] ?>"></input></li>
+            <li><input type="text" name="tech2" value="<?= $technologies["tech2"] ?>"></input></li>
+            <li><input type="text" name="tech3" value="<?= $technologies["tech3"] ?>"></input></li>
+          </ul>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right hover_yellow">send</i></button>
+        </form>
+      </div>
 
-            <div class="information_profile">
-                <h2 class="blue-text bold-text"> Hobbies </h2>
-                <form class="form_hobbies center-align" id="form_hobbies" method="post">
-                    <ul>
-                        <li><input type="text" name="hobby1" value="<?= $hobbies["hobby1"] ?>"></input></li>
-                        <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>
-                        <li><input type="text" name="hobby3" value="<?= $hobbies["hobby3"] ?>"></input></li>
-                    </ul>
-                    <button type="submit" class="btn-floating" name="button"><i class="material-icons right">send</i>
-                    </button>
-                </form>
+      <div class="information_profile">
+        <h2 class="blue-text bold-text"> Hobbies </h2>
+        <form class="form_hobbies center-align" id="form_hobbies" method="post">
+          <ul>
+            <li><input type="text" name="hobby1" value="<?= $hobbies["hobby1"] ?>"></input></li>
+            <li><input type="text" name="hobby2" value="<?= $hobbies["hobby2"] ?>"></input></li>
+            <li><input type="text" name="hobby3" value="<?= $hobbies["hobby3"] ?>"></input></li>
+          </ul>
+          <button type="submit" class="btn-floating" name="button"><i class="material-icons right hover_yellow">send</i></button>
+        </form>
 
-            </div>
+      </div>
 
-        </div>
     </div>
-    <div class="row">
-        <div class="col s10 m10 offset-m1">
-            <form class="form_profile pl-2 pr-1 py-1 background-lighter-grey z-depth-1 border-radius-25px flex-row all_posts"
-                  action="addPostForm" method="POST">
-                <textarea class="h-100 flex-1 background-lighter-grey no-border blue-text no-resize" id="post_profil"
-                          name="post_profil" placeholder=" Ecrire une publication..."></textarea>
-                <button class="btn-floating waves-effect waves-light" type="submit" id="add_post_profil"><i
-                            class="material-icons">send</i></button>
-            </form>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col s10 m10 offset-m1">
+      <form class="form_profile pl-2 pr-1 py-1 background-lighter-grey z-depth-1 border-radius-25px flex-row all_posts" action="addPostForm" method="POST">
+        <textarea class="h-100 flex-1 background-lighter-grey no-border blue-text no-resize" id="post_profil" name="post_profil" placeholder=" Ecrire une publication..."></textarea>
+        <button class="btn-floating waves-effect waves-light" type="submit" id="add_post_profil"><i class="material-icons hover_yellow">send</i></button>
+      </form>
     </div>
-    <div class="row">
-        <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
-        <div class="flex-column">
-            <?php foreach ($posts
+  </div>
 
-                           as $post): ?>
-                <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
-                    <!-- Author of post -->
-                    <div class="flex-column align-items-center justify-content-center absolute author_of_post">
-                        <a href="profil&id=<?php echo $post['users_id'] ?>"><img class="circle author_image"
-                                                                                 src="<?= URL . "ressources/img/" . $post['picture_profil'] ?>"
-                                                                                 alt="Photo de profil"></a>
-                        <a href="profil&id=<?php echo $post['users_id'] ?>"><p
-                                    class="m-0 text-center bold-text font-smile-small"><?= $post["first_name"] . " " . $post["last_name"] ?></p>
-                        </a>
-                    </div>
+  <div class="row">
+    <h2 class="h2_posts bold-text center-align">Mes dernières publications</h2>
+    <div class="col s10 m10 offset-m1">
+        <?php foreach($posts as $post): ?>
+          <?php //var_dump($post); ?>
+
+        <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
+          <div class="flex-column align-items-center justify-content-center absolute author_of_post">
+              <a href="profil&id=<?php echo $post['users_id'] ?>"><img class="circle author_image"
+                                                                        src="<?= URL . "ressources/img/" . $post['picture_profil'] ?>"
+                                                                        alt="Photo de profil"></a>
+              <a href="profil&id=<?php echo $post['users_id'] ?>"><p
+                          class="m-0 text-center bold-text font-smile-small"><?= $post["first_name"] . " " . $post["last_name"] ?></p>
+              </a>
+          </div>
 
                     <!-- post content -->
                     <div class="p-05 content-fit-height mb-1 flex-column">
