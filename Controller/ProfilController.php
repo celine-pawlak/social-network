@@ -193,9 +193,12 @@ class ProfilController extends AppController
     public function addPostForm() {
       $infosUser = new User;
       // Si un formulaire a été envoyé, on ajoute la publication
-      if(isset($_POST["post"]) && !empty($_POST['post'])) {
+      if(isset($_POST["post_profil"]) && !empty($_POST['post_profil'])) {
         $post = new Post;
-        $post->addPost($_POST["post"], $_SESSION['user']['id']);
+        $content = $_POST["post_profil"];
+        $user_id = $_SESSION['user']['id'];
+        $post->addPost($content, $user_id);
+        echo 'Success';
       }
 
       // $posts = new Post;
@@ -208,6 +211,14 @@ class ProfilController extends AppController
       //   "infosUser" => $infosUser->getInfosUser($_SESSION['user']['id']),
       //   "presentation" => $infosUser->getPresentation($_SESSION['user']['id'])
       // ]);
+    }
+
+    public function rechargePosts(){
+      if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+        $post = new Post;
+        $id = $_SESSION['user']['id'];
+        $post->getAllPosts($id);
+      }
     }
 
     public function addHobbies(){
