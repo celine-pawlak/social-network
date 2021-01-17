@@ -4,7 +4,7 @@
         <form class="form_profile pl-2 pr-1 py-1 background-lighter-grey z-depth-1 border-radius-25px flex-row all_posts"
               action="addPostFormWall" method="post">
             <textarea class="h-100 flex-1 background-lighter-grey no-border blue-text no-resize" name="post"
-                      placeholder="Ecrire une publication..." onkeyup="textAreaAdjust(this)"></textarea>
+                      placeholder="Ecrire une publication..." id="textarea_post" onkeyup="textAreaAdjust(this)"></textarea>
             <button class="my-auto btn-floating waves-effect waves-light" type="submit" name="button"><i
                         class="material-icons" id="add_post">send</i></button>
         </form>

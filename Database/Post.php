@@ -19,9 +19,7 @@ class Post extends Database
     public function addPost($content, $id)
     {
       $query = $this->_db->prepare("INSERT INTO post(content, creation_date, users_id) VALUES (?, NOW(), ?)");
-      $query->execute([$content, $id]);
-      $last_id = $query->lastInsertId();
-      return 
+      $query->execute([$content, $id]);          
     }
 
     public function getAllPosts($id)

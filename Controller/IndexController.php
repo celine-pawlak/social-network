@@ -206,15 +206,11 @@ class IndexController extends AppController
         }
     }
 
-    public function addPostFormWall() {
-        $infosUser = new User;
-        $posts = new Post;
-        $commentaires = new Comment;
+    public function addPostFormWall() {     
         // Si un formulaire a été envoyé, on ajoute la publication
         if(isset($_POST["post"]) && !empty($_POST['post'])) {
-            $post = new Post;
-            var_dump($post->addPost($_POST["post"], $_SESSION['user']['id']));
-            // echo json_encode($post->addPost($_POST["post"], $_SESSION['user']['id']));            
+            $post = new Post;            
+            $post->addPost($_POST["post"], $_SESSION['user']['id']);                 
         }
       
     }
