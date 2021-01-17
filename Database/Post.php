@@ -30,7 +30,7 @@ class Post extends Database
 
     public function getAllPosts($id)
     {
-      $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i') FROM post
+      $query = $this->_db->prepare("SELECT *, DATE_FORMAT(creation_date, '%d/%m/%Y %Hh%i') as creation_date FROM post
         JOIN users on post.users_id = users.id WHERE users.id = ? ORDER BY post.id DESC");
       $query->execute([$id]);
 

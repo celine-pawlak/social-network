@@ -16,14 +16,14 @@
 </div>
 
   <div class="row scale-transition scale-out display-none" id="infos-toggle">
-    <div class="col s5 m5 background-lighter-grey z-depth-1 tab_profil_radius" id="presentation_profile">
+    <div class="col s5 m5 background-lighter-grey z-depth-1" id="presentation_profile">
       <h2 class="blue-text bold-text center-align"> Présentation </h2>
       <p>
         <?= $presentation['presentation'] ?>
       </p>
     </div>
 
-    <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound tab_profil_radius my-1">
+    <div class="col s5 m5 offset-m2 background-lighter-grey z-depth-1 flex-row justify-content-spacearound">
       <div class="information_profile" id="info_border">
         <h2 class="blue-text bold-text"> Technologies </h2>
           <ul>
@@ -48,71 +48,55 @@
     <h2 class="h2_posts bold-text center-align">Les dernières publications</h2>
     <div class="col s10 m10 offset-m1">
         <?php foreach($posts as $post): ?>
+          <div class="col s1 m1">
+            <img class="circle miniature_img" src="<?= URL . "ressources/img/". $post['picture_profil'] ?>" alt="Photo de profil">
+            <p class="bold-text"><?= $post["first_name"] . " " .$post["last_name"] ?></p>
+          </div>
 
-          <div class="flex-column relative background-lighter-grey border-radius-25px all_posts mx-auto content-fit-height box-shadow my-1">
-            <div class="flex-column align-items-center justify-content-center absolute author_of_post">
-                <a href="profil&id=<?php echo $post['users_id'] ?>"><img class="circle author_image"
-                                                                          src="<?= URL . "ressources/img/" . $post['picture_profil'] ?>"
-                                                                          alt="Photo de profil"></a>
-                <a href="profil&id=<?php echo $post['users_id'] ?>"><p
-                            class="m-0 text-center bold-text font-smile-small"><?= $post["first_name"] . " " . $post["last_name"] ?></p>
-                </a>
+          <div class="col s9 m9 offset-m1 z-depth-1 background-lighter-grey m-1">
+            <p><?= $post['13'] ?> </p>
+            <div class="post post_profile p-1 z-depth-1">
+              <p class="right-align">
+                <i id="fa-heart" class="fas fa-heart"></i>
+                <i id="fa-thumbs-up" class="fas fa-thumbs-up"></i>
+                <i id="fa-laugh-squint" class="fas fa-laugh-squint"></i>
+                <i id="fa-sign-language" class="fas fa-sign-language"></i>
+              </p>
+              <p id="<?= "posts_" . $post['0'] ?>" class="post_content">
+                <?= $post["content"] ?>
+
+                <?php foreach($reacts as $react):
+                  echo "<br> Ici se trouve l'id de la réaction: " . $react['posts_id'];
+                  //var_dump($react);
+                  endforeach;
+                  ?>
+              </p>
             </div>
 
-            <div class="p-05 content-fit-height mb-1 flex-column">
-              <p class="ml-1 mt-05 mb-1 grey-text font-smile-small"><?= $post['13'] ?> </p>
-              <div class="post post_profile border-radius-10px box-shadow background-blue-grey black-text mx-1 p-1">
-                <p class="right-align">
-                  <i id="fa-heart" class="fas fa-heart"></i>
-                  <i id="fa-thumbs-up" class="fas fa-thumbs-up"></i>
-                  <i id="fa-laugh-squint" class="fas fa-laugh-squint"></i>
-                  <i id="fa-sign-language" class="fas fa-sign-language"></i>
-                </p>
-                <p id="<?= "posts_" . $post['0'] ?>" class="post_content">
-                  <?= $post["content"] ?>
-
-                  <?php foreach($reacts as $react):
-                    echo "<br> Ici se trouve l'id de la réaction: " . $react['posts_id'];
-                    //var_dump($react);
-                    endforeach;
-                    ?>
-                </p>
-              </div>
-
-              <?php if(!empty($commentaires["post_".$post['0']])): ?>
-                <div class="messages_show_or_hide">
-                          <p class="clickable grey-text mb-1 font-smile-small text-right mx-1 mt-0 show-comments" id="see_comments_from_post_<?= $post['0'] ?>">Voir
-                              les commentaires (<?= count($commentaires["post_" . $post['0']]) ?>) <i class="fas fa-chevron-down"></i></p>
-                          <p class="clickable grey-text mb-1 font-smile-small text-right mx-1 mt-0 hide-comments" id="hide_comments_from_post_<?= $post['0'] ?>">Cacher
-                              les commentaires <i class="fas fa-chevron-up"></i></p>
-
-                      </div>
-
-              <div id="<?= 'commentaires_post_'.$post['0'] ?>" class="mb-1 px-05 self-align-flexend w-90 commentaires_posts">
-              <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
-                <div class="post comment_profile border-radius-10px box-shadow background-white black-text m-1 p-05 flex-row  ml-1">
+            <?php if(!empty($commentaires["post_".$post['0']])): ?>
+            <div id="<?= 'commentaires_post_'.$post['0'] ?>">
+            <?php foreach($commentaires["post_".$post['0']] as $commentaire): ?>
+              <div class="post comment_profile p-1 z-depth-1">
+                <div class="flex-row">
                   <img class="circle miniature_img" src="<?= URL.'ressources/img/'. $commentaire['picture'] ?>">
-                  <div class="flex-1 flex-column">
-                    <div class="flex-row justify-content-spacebetween">
-                      <p class="bold-text ml-05"><?= $commentaire["first_name"] . " " . $commentaire["last_name"] ?></p>
-                      <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
-                    </div>
-                    <p class="pl-05 m-0 content-fit-height word-break-all"><?= $commentaire["comment"] ?></p>
-                  </div>
+                  <p class="bold-text ml-05"><?= $commentaire["first_name"] . " " . $commentaire["last_name"] ?></p>
                 </div>
-              <?php endforeach; ?>
+
+                <p><?= $commentaire["comment"] ?></p>
+                <p class="grey-text right-align"><?= $commentaire["date"] ?></p>
               </div>
-
-              <?php endif; ?>
-
-              <form class ="form_comment center-align px-1 flex-row self-align-flexend w-90" method="post">
-                <input type="hidden" name="id_user" value="<?= $id_user ?>">
-                <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
-                <input type="text" name="content" value="">
-                <input type="submit" class="btn" name="" value="Commenter">
-              </form>
+            <?php endforeach; ?>
             </div>
-          </div>  
+
+            <?php endif; ?>
+
+            <form class ="form_comment center-align" method="post">
+              <input type="hidden" name="id_user" value="<?= $id_user ?>">
+              <input type="hidden" name="id_post" value="<?= $post['0'] ?>">
+              <input type="text" name="content" value="">
+              <input type="submit" class="btn" name="" value="Commenter">
+            </form>
+          </div>
         <?php endforeach; ?>
     </div>
 

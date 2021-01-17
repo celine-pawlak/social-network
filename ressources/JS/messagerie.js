@@ -289,8 +289,8 @@ function postMessage() {
 }
 
 $(function () {
-    $('form').submit(function (event) {
-        event.preventDefault();
+    $("#messagerie").submit(function (e) {
+        e.preventDefault();
     });
 
     localStorage.setItem('currentConversationId', $('#add_message').val());

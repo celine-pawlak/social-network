@@ -141,5 +141,6 @@
 
                 </div>
             </div>
+            <?php $emojis_count = []; ?>
         <?php endforeach; ?>
     </div>
