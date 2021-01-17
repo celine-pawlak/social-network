@@ -342,10 +342,7 @@ class User extends Database
       {
         $query = $this->_db->prepare("SELECT date_birth FROM users WHERE id=?");
         $query->execute([$id]);
-        $date = $query->fetch();        
-        // return date('Y', $date['date_birth']);
-        // $po = strftime('%Y/%m/%d', strtotime($date['date_birth']));
-        // return $po;
+        $date = $query->fetch();            
         return $this->getAge($date['date_birth']);
       }
 
