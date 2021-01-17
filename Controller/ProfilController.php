@@ -62,30 +62,45 @@ class ProfilController extends AppController
         $posts = new Post;
         $infosUser = new User;
         $commentaires = new Comment;
-        $id = $_GET['id'];
+        $id_user = $_GET['id'];
+        $reacts = new Reaction;
+
+        $posts = $posts->getAllPosts($id_user);
+        foreach ($posts as $key => $post) {
+            $posts[$key]['reactions'] = $reacts->getAllReactionsFromPost($post[0]);
+        }
+
+        $hobbies = $infosUser->getHobbies($id_user);
+        $smileys = $reacts->getEmoji();
+        $technologies = $infosUser->getTechnologies($id_user);
+        $userInformations = $infosUser->getInfosUser($id_user);
+        $presentation = $infosUser->getPresentation($id_user);
+        $commentaires = $commentaires->getAllComment($id_user);
+        $age = $infosUser->getDate($id_user);
+
 
         // Vérif si id existe ou redirection
-        if ($infosUser->isUser($id) == 0) {
+        if ($infosUser->isUser($id_user) == 0) {
             header("Location:index.php");
         }
         // Verif si id = session id => this mon profil
-        if ($id == $_SESSION['user']['id']) {
+        if ($id_user == $_SESSION['user']['id']) {
             $this->monprofil();
             die;
         }
 
         // méthode d'affichage des vues, reçoit en entrée le nom de la vue et les données
-        $this->render('profil.seeProfil', [
-            "id_user" => $id,
-            "posts" => $posts->getAllPosts($id),
-            "hobbies" => $infosUser->getHobbies($id),
-            "reacts" => $posts->getReacts($id),
-            "technologies" => $infosUser->getTechnologies($id),
-            "infosUser" => $infosUser->getInfosUser($id),
-            "presentation" => $infosUser->getPresentation($id),
-            "commentaires" => $commentaires->getAllComment($id),
-            "age" => $infosUser->getDate($id)
-        ]);
+        $this->render('profil.seeProfil', compact(
+            'id_user',
+            'posts',
+            'hobbies',
+            'smileys',
+            'technologies',
+            'userInformations',
+            'presentation',
+            'commentaires',
+            'age'
+        ));
     }
 
     public function ajouterCommentaire()
