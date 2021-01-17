@@ -49,4 +49,22 @@ $(function() {
       $("#infos-toggle").addClass("scale-out");
     }
   })
+
+  $('#add_post_profil').click(function(e){
+    e.preventDefault();
+
+    $.post(
+      'App/Controller/ProfilController',
+      {
+        action : 'addPostForm',
+        post_profil : $('#post_profil').val()
+      },
+      function(data){
+        if(data == 'Success'){
+          $('#post_profil').val('');
+          window.location = 'index';
+        }
+      }
+    )
+  })
 })
