@@ -21,7 +21,7 @@ class ProfilController extends AppController
     {
         parent::__construct();
     }
-
+    
     public function monprofil()
     {
         $posts = new Post;
