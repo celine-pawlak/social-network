@@ -2,7 +2,7 @@
     if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 ?>
 <div id="info_perso" class="row container">
-    <h3 class="text-center">Informations Personnelles</h3>
+    <h1 id="titre_setprofil" class="text-center">Informations Personnelles</h1>
     <form action="" method="POST" enctype="multipart/form-data" id="form_setprofil" class="col l12 s12 card formulaire">
         <div id="" class="row" id="avatar_last_first_name">
             <div class="file-field input-field col s12 m8 l6 offset-l3 offset-m2 img_profil">
