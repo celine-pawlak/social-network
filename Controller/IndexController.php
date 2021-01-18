@@ -51,8 +51,8 @@ class IndexController extends AppController
         if (isset($_POST['mail']) && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['birthday']) && isset($_POST['password']) && isset($_POST['confirmation_password'])) {
 
             $mail = $_POST['mail'];
-            $prenom = htmlspecialchars($_POST['first_name']);
-            $nom = htmlspecialchars($_POST['last_name']);
+            $prenom = htmlspecialchars(ucfirst(strtolower($_POST['first_name'])));
+            $nom = htmlspecialchars(ucfirst(strtolower($_POST['last_name'])));
             $birthday = $_POST['birthday'];
             $password = $_POST['password'];
             $conf_pw = $_POST['confirmation_password'];

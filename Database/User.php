@@ -46,8 +46,8 @@ class User extends Database
     }
 
     public function inscription($mail, $prenom, $nom, $birthday, $password){
-        $first_name = ucfirst(strtolower($prenom));
-        $last_name = ucfirst(strtolower($nom));
+        $first_name = $prenom;
+        $last_name = $nom;
 
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 

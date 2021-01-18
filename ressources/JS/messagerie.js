@@ -294,13 +294,17 @@ $(function () {
     });
 
     localStorage.setItem('currentConversationId', $('#add_message').val());
-    getMessages(localStorage.getItem('currentConversationId'));
 
-    setInterval(
-        function (){
-            getMessages(localStorage.getItem('currentConversationId'));
-        }
-        , 3000);
+    if (typeof localStorage.getItem('currentConversationId') ==! 'undefined'){
+        setInterval(
+            function (){
+                getMessages(localStorage.getItem('currentConversationId'));
+            }
+            , 3000);
+    }
+
+
+
 
     //Changer conversation
     $('#all_conversations').on('click', 'article', function (event) {
